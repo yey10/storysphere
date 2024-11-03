@@ -29,7 +29,7 @@ class UserController extends Controller
 
             if ($request->has('role')) {
                 $query->whereHas('roles', function($q) use ($request){
-                    $q->where('id_rol', $request->role);
+                    $q->where('roles.id_rol', $request->role);
                 });
             }
 
@@ -56,6 +56,25 @@ class UserController extends Controller
 
     }
 
+    //obtener todos los usuarios
+    public function show(User $user){
+
+        try{
+
+            $user = User::findOrFail($user);
+            return response()->json(['user' => $user], 200);
+
+
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            // Captura de excepciones cuando no se encuentra el modelo
+            return response()->json(['error' => 'Usuario no encontrado'], 404);
+        } catch (\Exception $e) {
+            // Captura de cualquier otro tipo de excepciones
+            return response()->json(['error' => 'Error inesperado: ' . $e->getMessage()], 500);
+        }
+
+
+    }
     //Metodo para actualizar perfil de usuario, (admins y users)
 
     public function updateProfile(Request $request, $id){

@@ -8,9 +8,10 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Models\Role;
 use App\Models\Story;
+use App\Models\Comment;
 class User extends Authenticatable
 {
-    use HasFactory, HasApiTokens, Notifiable; // Incluye el trait HasApiTokens aquí
+    use HasFactory, HasApiTokens, Notifiable; 
 
     // Los campos que son rellenables ($fillable) para proteger los datos contra asignaciones masivas.
     // Los campos ocultos ($hidden), como la contraseña, para que no se envíen en respuestas JSON por seguridad.
@@ -41,13 +42,13 @@ class User extends Authenticatable
     }
 
 
-/*
+
 
     public function comments()
     {
         return $this->hasMany(Comment::class, 'id_user', 'id_user');
     }
-
+/*
           public function likes()
     {
         return $this->hasMany(Like::class, 'id_user');

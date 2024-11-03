@@ -10,11 +10,11 @@ class Role extends Model
 {
     use HasFactory;
 
-    // Asegúrate de que el nombre de la tabla sea correcto
+
     protected $table = 'roles'; // Nombre de la tabla
 
     // Establece la clave primaria
-    protected $primaryKey = 'id_rol'; // Mantén esto como 'id_rol' si es el campo autoincremental
+    protected $primaryKey = 'id_rol'; 
 
     // Si no estás utilizando timestamps, establece esto en false
     public $timestamps = false;
@@ -30,5 +30,5 @@ class Role extends Model
         return $this->belongsToMany(User::class, 'role_user', 'id_rol', 'id_user');
     }
 
-    // Otros métodos o propiedades personalizadas pueden ir aquí
+    
 }

@@ -48,7 +48,7 @@ class StoryController extends Controller
             $user = Auth::user();
 
             if(!$user){
-                return response()->json(['message' => 'El usuario no existe'], 404);    
+                return response()->json(['message' => 'El usuario no está autenticado'], 404);    
             }
     
             // Crear la historia y asignar el usuario que la creó
@@ -91,44 +91,42 @@ class StoryController extends Controller
     }
 
 
-    public function update(Request $request, Story $story) 
+    public function update(Request $request, Story $story)
     {
-        try{
+        try {
+
 
             // Verifica si el usuario es el administrador o el propietario de la historia
-
-            if (Auth::user()->id_rol !== 'admin' || $story->id_user !== Auth::id()) {
-                return  response()->json(['message' => 'No tienes permiso para editar esta historia'], 403);
+            $user = Auth::user();
+            $isAdmin = $user->roles->contains(function ($role) {
+                return $role->name_rol === 'admin'; // Asegúrate de que 'name_rol' es el campo correcto
+            });
+    
+            // Verifica si el usuario es el administrador o el propietario de la historia
+            if (!$isAdmin && $story->id_user !== $user->id_user) {
+                return response()->json(['message' => 'No tienes permiso para editar esta historia'], 403);
             }
-            
-            //Validar los datos de la historia
 
+            // Validar los datos de la historia
             $validatedData = $request->validate([
                 'title' => 'required|string|max:255',
                 'content' => 'required|string',
                 'state' => 'required|boolean',
                 'categories' => 'nullable|array',
                 'categories.*' => 'exists:categories,id_category'
-                            
             ]);
 
-            //Actualizar la historia
-
+            // Actualizar la historia
             $story->update($validatedData);
 
-            //Si se envian categorias, actualizarlas
-
-            if(isset($validatedData['categories'])){
-
+            // Si se envían categorías, actualizarlas
+            if (isset($validatedData['categories'])) {
                 $story->categories()->sync($validatedData['categories']);
-
-            }else{
-                    $story->categories()->detach();
+            } else {
+                $story->categories()->detach();
             }
 
             return response()->json(['message' => 'Historia actualizada con éxito', 'story' => $story], 200);
-
-
         } catch (\Illuminate\Database\QueryException $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         } catch (\Exception $e) {
@@ -136,19 +134,17 @@ class StoryController extends Controller
         }
     }
 
-
     public function destroy($id)
     {
         try {
-        
-            $story =  Story::findOrFail($id);
+            $story = Story::findOrFail($id);
+            $user = Auth::user();
 
             // Verifica si el usuario es el administrador o el propietario de la historia
-
-                if (Auth::user()->id_rol !== 'admin' || $story->id_user !== Auth::id()) {
-                return   response()->json(['message' => 'No tienes permiso para eliminar esta historia'], 403);
+            if (Auth::user()->id_rol !== 'admin' || $story->id_user !== Auth::id()) {
+                return response()->json(['message' => 'No tienes permiso para eliminar esta historia'], 403);
             }
-            
+
             $story->delete();
             return response()->json(['message' => 'Historia eliminada con éxito'], 200);
         } catch (\Illuminate\Database\QueryException $e) {
@@ -157,7 +153,6 @@ class StoryController extends Controller
             return response()->json(['error' => 'Error inesperado: ' . $e->getMessage()], 500);
         }
     }
-
 
     //MÉTODOS ADICIONALES
 

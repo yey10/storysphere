@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
+use App\Models\Comment;
+use App\Models\Category;
 
 class Story extends Model
 {
@@ -28,16 +31,21 @@ class Story extends Model
     {
         return  $this->belongsToMany(Category::class, 'category_story', 'id_story', 'id_category');
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'id_story', 'id_story');
+    }
+
+
+
 /*
     public function statistics()
     {
         return $this->hasOne(StatisticStory::class, 'id_story');
     }
 
-    public function comments()
-    {
-        return $this->hasMany(Comment::class, 'id_story');
-    }
+   
 
     public function  likes()
     {
