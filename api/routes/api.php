@@ -5,12 +5,7 @@ use App\Http\Controllers\User\AuthController;
 use App\Http\Controllers\Stories\StoryController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Interactions\CommentController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
-/*Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');*/
 
 //Rutas para autenticación
 Route::post('/register', [AuthController::class,  'register']);  // register new user
@@ -19,6 +14,18 @@ Route::post('/login', [AuthController::class, 'login']); //Loguear user
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']); // Cerrar sesión
 });
+
+//Rutas para los usuarios
+
+Route::middleware('auth:sanctum')->group(function(){
+    Route::get('/users', [UserController::class, 'index']); // obtener todos los usuarios
+    Route::get('/users/{id}', [UserController::class, 'show']); // obtener datos del usuario
+    Route::get('users/profile', [UserController::class, 'profile']); //obtener perfil
+    Route::put('users/{id}/profile', [UserController::class, 'updateProfile']); //actualizar
+    Route::delete('users/{id}', [UserController::class, 'deleteAccount']); //eliminar cuenta
+    Route::put('users/{id}/role', [UserController::class, 'updateRole']);
+});
+
 
 
 //Rutas para creacion de historias
@@ -33,15 +40,6 @@ Route::middleware('auth:sanctum')->get('users/{user}/stories', [StoryController:
 Route::middleware('auth:sanctum')->get('users/{id}/owner', [StoryController::class, 'getStoryOwner']);
 
 
-//Rutas para los usuarios
-
-Route::middleware('auth:sanctum')->group(function(){
-    Route::get('/users', [UserController::class, 'show']); // obtener todos los usuarios
-    Route::get('/users/{id}', [UserController::class, 'index']); // obtener datos del usuario
-    Route::put('users/{id}', [UserController::class, 'updateProfile']); //actualizar perfil
-    Route::delete('users/{id}', [UserController::class, 'deleteAccount']); //eliminar cuenta
-    Route::put('users/{id}/role', [UserController::class, 'updateRole']);
-});
 
 
 //Rutas para los comentarios

@@ -4,114 +4,70 @@ namespace App\Http\Controllers\User;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
+use App\Services\User\UserService;
 use App\Http\Controllers\Controller;
 
 
 class UserController extends Controller
 {
+    protected $userService;
+
+
+    public function __construct(UserService $userService)
+    {
+        $this->userService = $userService;
+    }
     
     //metodo para obtener todos los usuarios (filtros)
-
     public function index(Request $request){
 
         try {
-            //consulta base
-            $query = User::query();
-
-            //filtrar por nombre
-
-            if ($request->has('name')) {
-                $query->where('name', 'like', '%' . $request->name . '%');
-            }
-
-            //filtrar por rol
-
-            if ($request->has('role')) {
-                $query->whereHas('roles', function($q) use ($request){
-                    $q->where('roles.id_rol', $request->role);
-                });
-            }
-
-            //filtrar por email
-
-            if ($request->has('email')) {
-                $query->where('email', 'like', '%' . $request->email . '%');
-            }
-
-            $users = $query->get();
-
-            return response()->json(['users' => $users], 200);
-
-
-        } catch (\Illuminate\Database\QueryException $e) {
-            // Capturar cualquier error relacionado con la base de datos
-            return response()->json(['error' => $e->getMessage()], 500);
+           $users = $this->userService->getAllUsers($request);
+           return response()->json(['users' => $users], 200);
         } catch (\Exception $e) {
-            // Capturar cualquier otro tipo de error
             return response()->json(['error' => 'Error inesperado: ' . $e->getMessage()], 500);
         }
 
-
-
     }
 
-    //obtener todos los usuarios
-    public function show(User $user){
+    //obtener por id 
+    public function show( $id){
 
         try{
 
-            $user = User::findOrFail($user);
+            $user = $this->userService->getUserById($id);
             return response()->json(['user' => $user], 200);
 
-
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            // Captura de excepciones cuando no se encuentra el modelo
             return response()->json(['error' => 'Usuario no encontrado'], 404);
         } catch (\Exception $e) {
-            // Captura de cualquier otro tipo de excepciones
             return response()->json(['error' => 'Error inesperado: ' . $e->getMessage()], 500);
         }
 
-
     }
+
+    public function profile()
+    {
+        try {
+            $user = $this->userService->getUserProfile();
+            return response()->json(['user' => $user], 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Error inesperado: ' . $e->getMessage()], 500);
+        }
+    }
+
+
+
     //Metodo para actualizar perfil de usuario, (admins y users)
 
     public function updateProfile(Request $request, $id){
         try {
-            
-            $authUser = Auth::user(); //usuario autenticado
+            $authUser = Auth::user();
+            $user = $this->userService->updateUserProfile($authUser, $id, $request->all());
+            return response()->json(['message' => 'Perfil actualizado con éxito','user' => $user], 200);
 
-            $user = User::findOrfail($id); // usuario cuyo perfil se actualizara
-              // Depuración para verificar los valores
-            dd([
-                'authUser_id' => $authUser->id_user,
-                'authUser_role' => $authUser->id_rol,
-                'user_to_delete_id' => $user->id_user
-            ]);
-
-            // Verificar si el usuario autenticado es el dueño del perfil o es un administrador
-
-            if ($authUser->id_user !== $user->id_user &&  $authUser->id_rol !== 1) {
-                return response()->json(['message' => 'No tienes permiso para realizar esta acción'],403);
-            }
-
-            //validar los datos del perfil
-
-            $validatedData = $request->validate([
-                'name' => 'required|string|max:255',
-                'email' => 'required|string|email|max:255|unique:users,email,'.$user->id_user,
-                'biography' =>  'required|string',
-            ]);
-
-            //actualizar el perfil
-
-            $user->update($validatedData);
-
-        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            return response()->json(['error' => 'Usuario no encontrado'], 404);
-        } catch (\Illuminate\Database\QueryException $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json(['error' => $e->errors()], 422);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Error inesperado: ' . $e->getMessage()], 500);
         }
@@ -121,58 +77,27 @@ class UserController extends Controller
     //eliminar cuenta
     public function deleteAccount($id){
 
-
         try {
-            $authUser = Auth::user(); //usuario autenticado
-            $user = User::findOrfail($id); // usuario cuyo perfil se actualizara
-    
-            if ($authUser->id_user !== $user->id_user ||  $authUser->id_rol !== 1) {
-                return response()->json(['message' => 'No tienes permiso para realizar esta acción'],403);
-            }
-    
-            $user->delete();
-
+            $authUser = Auth::user();
+            $this->userService->deleteUserAccount($authUser, $id);
             return response()->json(['message' => 'Cuenta eliminada con éxito'], 200);
-
-        } catch (\Illuminate\Database\QueryException $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            return response()->json(['error' => 'Usuario no encontrado'], 404);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Error inesperado: ' . $e->getMessage()], 500);
         }
-      
-
-
-
+    
     }
 
 
     //metodo para actualizar rol
     public function updateRole(Request $request, $id){
         try {
-            //obtenemos el usuario autenticado
-
             $admin = Auth::user();
-
-            if ($admin->id_user !== 1) {
-                return response()->json(['message' => 'No tienes permiso para actualizar roles'], 403);
-            }
-
-            $user = User::findOrFail($id);
-
-            $validatedData = $request->validate([
-                'id_rol' => 'required|exists:rol,id_rol',
-            ]);
-
-            $user->update(['id_rol' => $validatedData['id_rol']]);
-
-            return response()->json(['message' => 'Rol actualizado con éxito', 'user' => $user], 200);
-
-
-
-        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            return response()->json(['error' => 'Usuario no encontrado'], 404);
-        } catch (\Illuminate\Database\QueryException $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
+            $user = $this->userService->updateUserRole($admin, $id, $request->all());
+            return response()->json(['message' => 'Rol actualizado con éxito','user' => $user],200);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json(['error' => $e->errors()], 422);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Error inesperado: ' . $e->getMessage()], 500);
         }
