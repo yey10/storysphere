@@ -3,6 +3,7 @@
 namespace App\Services\User;
 
 use App\Models\User;
+use App\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -30,11 +31,18 @@ class AuthService
             'profile_photo' => $profile_photo,
         ]);
 
-        //Asignar roles al usuario
-        $user->roles()->attach($data['roles'] ?? [1]); //Se asigna el rol 1 (user) por defecto
-        return $user;
+       // Validar y asignar roles
+        $allowedRoles = Role::pluck('id_rol')->toArray(); // IDs válidos
+        $roles = array_intersect($data['roles'] ?? [1], $allowedRoles); // Filtrar roles válidos
+        
+        if (empty($roles)) {
+            $roles = [1]; // Si no hay roles válidos, asignar 'user'
+        }
 
-    }
+        $user->roles()->attach($roles);
+            return $user;
+
+        }
 
     public function login($data)
     {

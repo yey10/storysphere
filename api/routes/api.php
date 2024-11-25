@@ -7,43 +7,41 @@ use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Interactions\CommentController;
 use Illuminate\Support\Facades\Route;
 
-//Rutas para autenticación
-Route::post('/register', [AuthController::class,  'register']);  // register new user
-Route::post('/login', [AuthController::class, 'login']); //Loguear user
-
-Route::middleware('auth:sanctum')->group(function () {
-    Route::post('/logout', [AuthController::class, 'logout']); // Cerrar sesión
+// Rutas para autenticación
+Route::controller(AuthController::class)->group(function () {
+    Route::post('/register', 'register'); // Registrar nuevo usuario
+    Route::post('/login', 'login'); // Loguear usuario
+    Route::middleware('auth:sanctum')->post('/logout', 'logout'); // Cerrar sesión
 });
 
-//Rutas para los usuarios
-
-Route::middleware('auth:sanctum')->group(function(){
-    Route::get('/users', [UserController::class, 'index']); // obtener todos los usuarios
-    Route::get('/users/{id}', [UserController::class, 'show']); // obtener datos del usuario
-    Route::get('users/profile', [UserController::class, 'profile']); //obtener perfil
-    Route::put('users/{id}/profile', [UserController::class, 'updateProfile']); //actualizar
-    Route::delete('users/{id}', [UserController::class, 'deleteAccount']); //eliminar cuenta
-    Route::put('users/{id}/role', [UserController::class, 'updateRole']);
+// Rutas para usuarios
+Route::prefix('users')->middleware('auth:sanctum')->controller(UserController::class)->group(function () {
+    Route::get('/', 'index'); // Obtener todos los usuarios
+    Route::get('/{id}', 'show'); // Obtener datos del usuario
+    Route::get('/profile', 'profile'); // Obtener perfil
+    Route::put('/{id}/profile', 'updateProfile'); // Actualizar perfil
+    Route::delete('/{id}', 'deleteAccount'); // Eliminar cuenta
+    Route::put('/{id}/role', 'updateRole'); // Actualizar rol
+    Route::get('/{user}/stories', [StoryController::class, 'getUserStories']); // Historias de un usuario
+    Route::get('/{user}/comments', [CommentController::class, 'getUserComments']); // Comentarios de un usuario
 });
 
+// Rutas para historias
+Route::prefix('stories')->group(function () {
+// Rutas públicas
+Route::get('/', [StoryController::class, 'index']); // Obtener todas las historias
+Route::get('/{id}', [StoryController::class, 'show']); // Obtener datos
 
-
-//Rutas para creacion de historias
-Route::apiResource('stories', StoryController::class)->only(['index', 'show' ]);  //rutas publicas
-Route::middleware(['auth:sanctum'])->group(function () {
-    Route::apiResource('stories', StoryController::class)->only(['store', 'update', 'destroy']); //rutas protegidas (se necesita autenticación)
+    Route::middleware('auth:sanctum')->group(function () {
+    // Rutas protegidas
+        Route::post('/', [StoryController::class, 'store']); // Crear nueva historia
+        Route::put('/{story}', [StoryController::class, 'update']); // Actualizar
+        Route::delete('/{story}', [StoryController::class, 'destroy']); // Eliminar
+        Route::get('{id}/owner', [StoryController::class, 'getStoryOwner']); // Obtener dueño de una historia
+    });
 });
-
-//Obtener historias de un usuario
-Route::middleware('auth:sanctum')->get('users/{user}/stories', [StoryController::class, 'getUserStories']);
-//Obtener dueño de una historia
-Route::middleware('auth:sanctum')->get('users/{id}/owner', [StoryController::class, 'getStoryOwner']);
-
-
-
 
 //Rutas para los comentarios
-
 Route::middleware('auth:sanctum')->group(function(){
 
     Route::post('/stories/{story}/comments', [CommentController::class, 'update']); //nuevo comentario en una historia especifica

@@ -13,6 +13,6 @@ class Category extends Model
 
     public function stories()
     {
-        return $this->belongsToMany(Story::class, 'category_story', 'id_story');
+        return $this->belongsToMany(Story::class, 'category_story', 'id_category' ,'id_story');
     }
 }
