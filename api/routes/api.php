@@ -29,8 +29,9 @@ Route::prefix('users')->middleware('auth:sanctum')->controller(UserController::c
 // Rutas para historias
 Route::prefix('stories')->group(function () {
 // Rutas públicas
-Route::get('/', [StoryController::class, 'index']); // Obtener todas las historias
-Route::get('/{id}', [StoryController::class, 'show']); // Obtener datos
+    Route::get('/', [StoryController::class, 'index']); // Obtener todas las historias
+    Route::get('/{id}', [StoryController::class, 'show']); // Obtener datos
+    Route::get('/{story}/comments', [CommentController::class, 'index']); // Obtener comentarios de una historia
 
     Route::middleware('auth:sanctum')->group(function () {
     // Rutas protegidas
@@ -38,35 +39,20 @@ Route::get('/{id}', [StoryController::class, 'show']); // Obtener datos
         Route::put('/{story}', [StoryController::class, 'update']); // Actualizar
         Route::delete('/{story}', [StoryController::class, 'destroy']); // Eliminar
         Route::get('{id}/owner', [StoryController::class, 'getStoryOwner']); // Obtener dueño de una historia
+        Route::post('/{story}/comments', [CommentController::class, 'store']); // Crear comentario
     });
 });
 
 //Rutas para los comentarios
-Route::middleware('auth:sanctum')->group(function(){
+Route::prefix('comments')->group(function(){
+    //Rutas públicas
+    Route::get('/{comment}', [CommentController::class, 'show']); //Obtener un comentario específico
 
-    Route::post('/stories/{story}/comments', [CommentController::class, 'update']); //nuevo comentario en una historia especifica
-    Route::put('/comments/{comment}', [CommentController::class, 'update']); //Actualizar un comentario (solo para administradores y dueños de los comentarios)
-    Route::delete('/comments/{comment}', [CommentController::class, 'destroy']); //Eliminar un comentario (solo para administradores y dueños de los comentarios)
-
+    Route::middleware('auth:sanctum')->group(function(){
+        //Rutas protegidas
+        Route::put('/{comment}', [CommentController::class, 'update']); //Actualizar un comentario
+        Route::delete('/{comment}', [CommentController::class, 'destroy']); //Eliminar un comentario
+        Route::get('/{id}/owner', [CommentController::class, 'getCommentOwner']); //Obtener dueño de un comentario
+    });
 });
 
-//Obtener todos los comentarios de una historia específica (público)
-Route::get('/stories/{story}/comments', [CommentController::class, 'index']);
-//Obtener todos los comentarios de una historia específica (público)
-Route::get('/comments/{comment}', [CommentController::class, 'show']);
-//Obtener todos los comentarios de un usuario
-Route::middleware('auth:sanctum')->get('/users/{user}/comments', [CommentController::class, 'getUserComments']);
-//Obtener el dueño de un comentario especifico
-Route::middleware('auth:sanctum')->get('/comments/{id}/owner', [CommentController::class, 'getCommentOwner']);
-
-
-
-
-
-
-
-
-
-
-
-// accion, drama, ficcion, misterio, romance, terror

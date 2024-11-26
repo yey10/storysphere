@@ -11,7 +11,7 @@ class Comment extends Model
     use HasFactory;
 
 
-
+    public $timestamps = false;
     protected $table = 'comments';
     protected $primaryKey = 'id_comment';
     protected $fillable = [
