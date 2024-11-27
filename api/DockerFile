@@ -1,6 +1,14 @@
 # Usar la imagen base de Railway
 FROM ghcr.io/railwayapp/nixpacks:ubuntu-1725321821
 
+# Instalar dependencias necesarias, incluyendo PHP y Composer
+RUN apt-get update && apt-get install -y \
+    curl \
+    php-cli \
+    php-mbstring \
+    php-xml \
+    unzip
+
 # Instalar Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
