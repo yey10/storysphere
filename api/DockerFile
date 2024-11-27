@@ -1,0 +1,17 @@
+# Usar la imagen base de Railway
+FROM ghcr.io/railwayapp/nixpacks:ubuntu-1725321821
+
+# Instalar Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# Establecer el directorio de trabajo
+WORKDIR /app/
+
+# Copiar el contenido de la aplicación al contenedor
+COPY . /app/
+
+# Instalar dependencias de PHP (Composer) y Node (npm)
+RUN composer install --no-dev --optimize-autoloader && npm install
+
+# Comando para iniciar el servidor de Laravel
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
