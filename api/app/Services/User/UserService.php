@@ -33,21 +33,26 @@ class UserService
         }
     }
 
+
      // Obtener un usuario por ID
-     public function getUserById($id)
-     {
+    public function getUserById($id)
+    {
          return User::findOrFail($id);
-     }
+    }
  
      // Obtener el perfil del usuario autenticado
-     public function getUserProfile()
-     {
-         return Auth::user();
-     }
+    public function getUserProfile()
+    {
+        $user = Auth::user();
+        if (!$user) {
+            throw new \Exception('Usuario no encontrado');
+        }
+        return $user;
+    }
  
      // Actualizar perfil de un usuario
-     public function updateUserProfile($authUser, $id, $data)
-     {
+    public function updateUserProfile($authUser, $id, $data)
+    {
          $user = User::findOrFail($id);
  
          if ($authUser->id_user !== $user->id_user && $authUser->id_rol !== 2) {
@@ -55,19 +60,19 @@ class UserService
          }
  
          $validatedData = validator($data, [
-             'name' => 'required|string|max:255',
-             'email' => 'required|string|email|max:255|unique:users,email,' . $user->id_user,
+             'name' => 'nullable|string|max:255',
+             'email' => 'nullable|string|email|max:255|unique:users,email,' . $user->id_user,
              'biography' => 'nullable|string',
          ])->validate();
  
          $user->update($validatedData);
  
          return $user;
-     }
+    }
  
      // Eliminar cuenta de usuario
-     public function deleteUserAccount($authUser, $id)
-     {
+    public function deleteUserAccount($authUser, $id)
+    {
          $user = User::findOrFail($id);
  
          if ($authUser->id_user !== $user->id_user && $authUser->id_rol !== 2) {
@@ -75,12 +80,12 @@ class UserService
          }
  
          $user->delete();
-     }
+    }
  
      // Actualizar el rol de un usuario
-     public function updateUserRole($admin, $id, $data)
-     {
-         if ($admin->id_rol !== 1) {
+    public function updateUserRole($admin, $id, $data)
+    {
+         if ($admin->id_rol !== 2) {
              throw new \Exception('No tienes permiso para actualizar roles');
          }
  
@@ -93,7 +98,7 @@ class UserService
          $user->update(['id_rol' => $validatedData['id_rol']]);
  
          return $user;
-     }
+    }
 
 
 
