@@ -1,13 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import '../assets/css/login.css';
+import { useAuth } from '../context/AuthContext.jsx';
+import {useNavigate} from 'react-router-dom';
 
 const Login = () => {
+
+  {/* State to store the user's input */}
+  const navigate = useNavigate();
   const [isRegister, setIsRegister] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  const toggleForm = () => {
-    setIsRegister(!isRegister);
-  };
+  const {handleRegister, handleLogin} = useAuth(); //importar las funciones de registro y login para usarlas en el componente
+  const [formData, setFormData] = useState({
+    name : '',
+    email : '',
+    password : '',
+    password_confirm: '',
+    biography: '',
+    profile_photo:null,
+  });//Datos del formulario
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
@@ -20,6 +31,80 @@ const Login = () => {
 
     return () => window.removeEventListener('resize', handleResize);
   }, [windowWidth]);
+
+  const toggleForm = ()=>{
+    setIsRegister(!isRegister);
+    setFormData({
+      name : '',
+      email : '',
+      password : '',
+      password_confirm: '',
+      biography: '',
+      profile_photo:null,
+    });
+    setError(null);
+  };
+
+  //manejar los cambios en los inputs
+  const handleChange = (e) => {
+    const {name, value, files} = e.target;
+    setFormData({...formData, [name]: files ? files[0] : value});
+  }
+
+  //manejar el submit del formulario
+  const handleSubmit = async (e) =>{
+    e.preventDefault();
+    try {
+      if (isRegister) {
+        if (!formData.password || !formData.password_confirm) {
+          setError('Por favor, completa ambos campos de contraseña');
+          return;
+        }
+        if (formData.password !== formData.password_confirm) {
+          setError('Las contraseñas no coinciden');
+          return;
+        }
+        if (formData.profile_photo && formData.profile_photo.size > 2 * 1024 * 1024) {
+          setError('El tamaño del archivo no debe exceder 2MB');
+          return;
+        }
+
+        const data = new FormData();
+        data.append('name', formData.name);
+        data.append('email', formData.email);
+        data.append('password', formData.password);
+        data.append('biography', formData.biography);
+        if (formData.profile_photo) {
+          data.append('profile_photo', formData.profile_photo);
+        }
+
+        await handleRegister(data);
+        alert('registro exitoso');
+        setFormData({
+          name: '',
+          email: '',
+          password: '',
+          password_confirm: '',
+          biography: '',
+          profile_photo: null,
+        });
+        toggleForm();
+      }else{
+        await handleLogin({
+          email: formData.email,
+          password: formData.password,
+        });
+        alert('login exitoso');
+        navigate('/');
+      }
+    } catch (error) {
+      setError(error.message || 'Error al registrar');
+    }
+  }
+
+
+
+
 
   return (
     <div className="container-login">
@@ -43,24 +128,27 @@ const Login = () => {
         {/* Formularios de Login y Registro */}
         <div className="form" style={{ left: isRegister && windowWidth > 850 ? '410px' : '10px' }}>
           {/* Formulario de Login */}
-          <form className={`form-login ${isRegister ? 'hidden' : ''}`}>
+          <form className={`form-login ${isRegister ? 'hidden' : ''}`} onSubmit={handleSubmit}>
             <h2>Iniciar Sesión</h2>
-            <input type="email" placeholder="Correo electrónico" required />
-            <input type="password" placeholder="Contraseña" required />
+            <input type="email" name='email' value={formData.email} onChange={handleChange} placeholder="Correo electrónico" required />
+            <input type="password" name='password' value={formData.password} onChange={handleChange} placeholder="Contraseña" required />
             <button type="submit">Iniciar sesión</button>
           </form>
 
           {/* Formulario de Registro */}
-          <form className={`form-register ${!isRegister ? 'hidden' : ''}`}>
+          <form className={`form-register ${!isRegister ? 'hidden' : ''}`} onSubmit={handleSubmit} encType='multipart/form-data'>
             <h2>Registrarse</h2>
-            <input type="text" placeholder="Nombre de Usuario" required />
-            <input type="email" placeholder="Correo electrónico" required />
-            <input type="password" placeholder="Contraseña" required />
-            <input type="password" placeholder="Confirmar contraseña" required />
+            <input type="text" name='name' value={formData.name} onChange={handleChange} placeholder="Nombre de Usuario" required />
+            <input type="email" name='email' value={formData.email} onChange={handleChange} placeholder="Correo electrónico" required />
+            <input type='text' name="biography" value={formData.biography} onChange={handleChange} placeholder='Biografía'/>
+            <input type="password" name='password' value={formData.password} onChange={handleChange} placeholder="Contraseña" required />
+            <input type="password" name='password_confirm' value={formData.password_confirm} onChange={handleChange} placeholder="Confirmar contraseña" required />
+            <input type="file" name="profile_photo" onChange={handleChange} />
             <button type="submit">Registrarse</button>
           </form>
         </div>
       </div>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
     </div>
   );
 };
