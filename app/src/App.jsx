@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext.jsx';
+import ProtectedRoute from './ProtectedRoute.jsx';
 import Home from './pages/Home.jsx';
 import Login from './pages/Login.jsx';
 import About from './pages/About.jsx';
@@ -21,6 +22,8 @@ function App() {
       <BrowserRouter>
         <AuthProvider>
           <Routes>
+            {/*Rutas públicas*/}
+            {/*Rutas privadas*/}
             <Route path='/' element={<Home />} />
             <Route path='/login' element={<Login />} />
             <Route path='/about' element={<About />} />
