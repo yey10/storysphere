@@ -1,33 +1,41 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext.jsx';
+import Home from './pages/Home.jsx';
+import Login from './pages/Login.jsx';
+import About from './pages/About.jsx';
+import Contact from './pages/Contact.jsx';
+import Services from './pages/Services.jsx';
+import Histories from './pages/Histories.jsx';
+import Authors from './pages/Authors.jsx';
+import Categories from './pages/Categories.jsx';
+import Comunity from './pages/Comunity.jsx';
+import Profile from './pages/Profile.jsx';
+import Help from './pages/Help.jsx';
+import Settings from './pages/Settings.jsx';
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <BrowserRouter>
+        <AuthProvider>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/about' element={<About />} />
+            <Route path='/contact' element={<Contact />} />
+            <Route path='/services' element={<Services />} />
+            <Route path='/histories' element={<Histories />} />
+            <Route path='/authors' element={<Authors />} />
+            <Route path='/categories' element={<Categories />} />
+            <Route path='/comunity' element={<Comunity />} />
+            <Route path='/profile' element={<Profile />} />
+            <Route path='/help' element={<Help />} />
+            <Route path='/settings' element={<Settings />} />
+          </Routes>
+        </AuthProvider>
+      </BrowserRouter>
     </>
   )
 }

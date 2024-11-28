@@ -1,0 +1,16 @@
+.services{width: 100%; height: 115vh; padding-left: 85px; padding-top: 80px; padding-bottom: 50px; background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(../img/fondoServices.jpeg); background-size: cover; background-repeat: no-repeat; background-attachment: fixed; display: flex; flex-direction: column; justify-content: center; align-items: center;}
+.services h1{font-size: 50px; color: #D4AF37; text-align: center; margin-bottom: 50px; text-shadow: 0px 5px 5px #000000;}
+.services .box{width: 100%; display: flex; justify-content: space-around;}
+.services .box .box-content{width: 25%; height: 70vh; position: relative; background-color: #0000008d; border-radius: 20px; padding: 30px; box-shadow: 0 5px 15px 5px #D4AF372d; transition: all 0.3s ease 0s;}
+.services .box .box-content h2{font-size: 30px; color: #D4AF37; text-align: center; }
+.services .box .box-content p:nth-child(2){font-size: 16px; color: gray; margin-bottom: 20px; text-align: center;}
+.services .box .box-content p:nth-child(3){font-size: 30px; color: white; font-weight: 700; margin-bottom: 20px;}
+.services .box .box-content p:nth-child(3) small{font-size: 17px; color: gray;}
+.services .box .box-content ul li{display: block; color: white;}
+.services .box .box-content ul li svg{color: #D4AF37; margin-right: 10px;}
+.services .box .box-content button{position: absolute; bottom: 30px; padding: 1em 3em; margin: 0 10%; margin-top: 50px; font-size: 12px; text-transform: uppercase; letter-spacing: 2.5px; font-weight: 500; background-color: rgba(255, 255, 255, 0.2); border: none; border-radius: 45px; box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); transition: all 0.3s ease 0s; cursor: pointer; outline: none;}
+.services .box .box-content button a{text-decoration: none; color: #fff;}
+.services .box .box-content button:hover{background-color: #D4AF37; box-shadow: 0 15px 20px rgba(212, 175, 55, 0.4); transform: translateY(-7px);}
+.services .box .box-content button:active{transform: translateY(-1px);}
+
+.services .box .box-content:hover{transform: scale(1.1); transition: all 0.3s ease 0s; box-shadow: 0 10px 20px 10px #D4AF375d;}
