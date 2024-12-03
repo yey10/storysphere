@@ -28,27 +28,27 @@ const SliderHome = () => {
         >
           <SwiperSlide className="swiper-slide slide-1 slide-item img-1">
             <div>
-              <h4>Image 1</h4>
+              <h4>History 1</h4>
             </div>
           </SwiperSlide>
           <SwiperSlide className="swiper-slide slide-2 slide-item img-2">
             <div>
-              <h4>Image 2</h4>
+              <h4>History 2</h4>
             </div>
           </SwiperSlide>
           <SwiperSlide className="swiper-slide slide-3 slide-item img-3">
             <div>
-              <h4>Image 3</h4>
+              <h4>History 3</h4>
             </div>
           </SwiperSlide>
           <SwiperSlide className="swiper-slide slide-4 slide-item img-4">
             <div>
-              <h4>Image 4</h4>
+              <h4>History 4</h4>
             </div>
           </SwiperSlide>
           <SwiperSlide className="swiper-slide slide-5 slide-item img-5">
             <div>
-              <h4>Image 5</h4>
+              <h4>History 5</h4>
             </div>
           </SwiperSlide>
         </Swiper>
