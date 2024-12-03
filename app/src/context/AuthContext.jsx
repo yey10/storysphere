@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState} from "react";
+import { login, register, logout } from '../api/authService.jsx'
 
 //Crear el contexto
 const AuthContext = createContext();
@@ -9,16 +10,41 @@ export const AuthProvider = ({children}) =>{
     useEffect(() =>{
         //Verificar que existe el token
         const token = localStorage.getItem('token');
-        if (token) {
-            setIsAuthenticated(true); //si existe el token el usuario está autenticado
-        }else{
-            setIsAuthenticated(false); //si no existe el token el usuario no está autenticado
-        }
+        setIsAuthenticated(!!token);
     }, []);//  El array vacío asegura que este efecto se ejecute solo una vez al montar el componente
+
+    const handleLogin = async (data) =>{
+        try {
+            await login(data);
+            setIsAuthenticated(true);
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    const handleRegister = async (data) =>{
+        try {
+            await register(data);
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    const handleLogout = () =>{
+        localStorage.removeItem('token');
+        setIsAuthenticated(false);
+        logout();
+    }
+
 
     // Proveer el estado de autenticación a los componentes hijos
     return (
-        <AuthContext.Provider  value={{isAuthenticated}}>
+        <AuthContext.Provider  value={{
+            isAuthenticated,
+            handleLogin,
+            handleRegister,
+            handleLogout
+        }}>
             {children}
         </AuthContext.Provider>
     );
