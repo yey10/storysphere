@@ -41,7 +41,6 @@ class AuthService
 
         $user->roles()->attach($roles);
             return $user;
-
         }
 
     public function login($data)
