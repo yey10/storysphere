@@ -4,7 +4,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-const SliderHistories = ({ title, movies }) => {
+const SliderStories = ({ title, movies }) => {
   return (
     <div className="my-8">
       <h2 className="text-2xl font-bold mb-4 text-gray-800 px-4">{title}</h2>
@@ -55,4 +55,4 @@ const SliderHistories = ({ title, movies }) => {
   )
 }
 
-export default SliderHistories
+export default SliderStories

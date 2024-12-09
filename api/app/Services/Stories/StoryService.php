@@ -5,6 +5,8 @@ namespace App\Services\Stories;
 use App\Models\Story;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class StoryService
 {
@@ -20,9 +22,18 @@ class StoryService
             throw new \Exception('Debes estar autenticado para crear una historia');
         }
 
+        $photo = null;
+        if (isset($data['photo'])) {
+            $file = $data['photo'];
+            $filename = Str::random(10) . '.' . $file->getClientOriginalExtension();
+            Storage::disk('public')->put($filename, file_get_contents($file));
+            $photo = $filename;
+        }
+
         $story = Story::create([
             'title' => $data['title'],
             'content' => $data['content'],
+            'photo' => $photo,
             'state' => $data['state'],
             'id_user' => $user->id_user,
         ]);

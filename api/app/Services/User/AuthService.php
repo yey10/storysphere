@@ -18,7 +18,7 @@ class AuthService
         if (isset($data['profile_photo'])) {
             $file = $data['profile_photo'];
             $file_name = Str::random(10) . '.' . $file->getClientOriginalExtension();
-            $file->storeAs('public/profile_photos', $file_name);
+            Storage::disk('public')->put($file_name, file_get_contents($file));
             $profile_photo = $file_name;
         }
 
