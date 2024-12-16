@@ -25,8 +25,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    protected $table = 'users'; // Asegúrate de que esté apuntando a la tabla correcta
-    protected $primaryKey = 'id_user'; // Mantén esto como 'id_user' si es el campo autoincremental
+    protected $table = 'users'; 
+    protected $primaryKey = 'id_user'; 
 
 
     public function roles()
@@ -48,7 +48,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(Comment::class, 'id_user', 'id_user');
     }
-/*
+
           public function likes()
     {
         return $this->hasMany(Like::class, 'id_user');
@@ -63,5 +63,5 @@ class User extends Authenticatable
     {
         return $this->hasMany(Follower::class, 'id_follower');
     }
-*/
+
 }
