@@ -5,6 +5,8 @@ use App\Http\Controllers\User\AuthController;
 use App\Http\Controllers\Stories\StoryController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Interactions\CommentController;
+use App\Http\Controllers\Interactions\FollowerController;
+use App\Http\Controllers\Interactions\LikeController;
 use Illuminate\Support\Facades\Route;
 
 // Rutas para autenticación
@@ -54,5 +56,20 @@ Route::prefix('comments')->group(function(){
         Route::delete('/{comment}', [CommentController::class, 'destroy']); //Eliminar un comentario
         Route::get('/{id}/owner', [CommentController::class, 'getCommentOwner']); //Obtener dueño de un comentario
     });
+});
+
+//Rutas para likes 
+Route::prefix('likes')->middleware('auth:sanctum')->group(function (){
+    Route::post('/{story}', [LikeController::class, 'likeStory']);
+    Route::delete('/{story}', [LikeController::class, 'unlikeStory']);
+    Route::get('/{story}/count', [LikeController::class, 'getStoryLikes']);
+});
+
+//Rutas para followers
+Route::prefix('followers')->middleware('auth:sanctum')->group(function (){
+    Route::post('/{user}', [FollowerController::class, 'followUser']);
+    Route::delete('/{user}', [FollowerController::class, 'unFollowUser']);
+    Route::get('/{user}/followers', [FollowerController::class, 'getFollowers']);
+    Route::get('/{user}/following', [FollowerController::class, 'getFollowing']);
 });
 
