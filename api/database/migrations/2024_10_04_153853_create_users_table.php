@@ -21,7 +21,6 @@ return new class extends Migration
             $table->text('biography')->nullable(); // Biografía del usuario
             $table->string('profile_photo', 150)->nullable(); // Foto de perfil
             $table->string('account_status', 100)->default('active'); // Estado de la cuenta con valor por defecto 'active'
-            $table->boolean('active')->default(true); // Estado activo, booleano por defecto true
             $table->rememberToken()->nullable(); // Token para recordar la sesión
         });
     }

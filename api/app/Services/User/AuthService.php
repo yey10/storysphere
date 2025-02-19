@@ -18,7 +18,7 @@ class AuthService
         if (isset($data['profile_photo'])) {
             $file = $data['profile_photo'];
             $file_name = Str::random(10) . '.' . $file->getClientOriginalExtension();
-            $file->storeAs('public/profile_photos', $file_name);
+            Storage::disk('public')->put($file_name, file_get_contents($file));
             $profile_photo = $file_name;
         }
 
@@ -31,7 +31,7 @@ class AuthService
             'profile_photo' => $profile_photo,
         ]);
 
-       // Validar y asignar roles
+        // Validar y asignar roles
         $allowedRoles = Role::pluck('id_rol')->toArray(); // IDs válidos
         $roles = array_intersect($data['roles'] ?? [1], $allowedRoles); // Filtrar roles válidos
         
@@ -40,8 +40,8 @@ class AuthService
         }
 
         $user->roles()->attach($roles);
-            return $user;
-        }
+        return $user;
+    }
 
     public function login($data)
     {

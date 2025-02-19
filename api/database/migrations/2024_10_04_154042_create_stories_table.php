@@ -15,6 +15,7 @@ return new class extends Migration
             $table->bigIncrements('id_story'); // Autoincrementable
             $table->string('title'); // Título de la historia
             $table->text('content'); // Contenido de la historia
+            $table->text('sinopsis'); // sinopsis de la historia
             $table->timestamps(); // Añade los campos created_at y updated_at automáticamente
 
             $table->string('state', 50)->default('draft'); // Estado de la historia (borrador, publicado, etc.)

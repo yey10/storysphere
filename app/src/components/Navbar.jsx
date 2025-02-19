@@ -17,8 +17,8 @@ const Navbar = () => {
                 <input type="text" placeholder="Buscar" id="search" />
                 <Search />
               </li>
-              <li><Link to="/login">LOG IN</Link></li>
-              <li><Link to="/login">SING UP</Link></li>
+              <li><Link to="/login">LOGIN</Link></li>
+              <li><Link to="/login">SIGNUP</Link></li>
             </ul>
           </div>
           {/* sidebar */}
