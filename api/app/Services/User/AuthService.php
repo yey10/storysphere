@@ -31,7 +31,7 @@ class AuthService
             'profile_photo' => $profile_photo,
         ]);
 
-       // Validar y asignar roles
+        // Validar y asignar roles
         $allowedRoles = Role::pluck('id_rol')->toArray(); // IDs válidos
         $roles = array_intersect($data['roles'] ?? [1], $allowedRoles); // Filtrar roles válidos
         
@@ -40,8 +40,8 @@ class AuthService
         }
 
         $user->roles()->attach($roles);
-            return $user;
-        }
+        return $user;
+    }
 
     public function login($data)
     {
