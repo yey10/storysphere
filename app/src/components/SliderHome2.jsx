@@ -12,8 +12,8 @@ import { ArrowLeft, ArrowRight } from 'lucide-react';
 const sliderHome2 = () => {
   return (
     <div>
-      <div className="home-5">
-        <h3>Lo que dicen nuestros usuarios</h3>
+      <div className="home-5 bg">
+        <h3 className='title'>Lo que dicen nuestros usuarios</h3>
         <div className="home5-content">
           <Swiper
             modules={[Navigation]}

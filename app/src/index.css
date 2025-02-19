@@ -1,22 +1,8 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Sofia+Sans+Condensed:ital,wght@0,1..1000;1,1..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mouse+Memoirs&display=swap');
 
-/* @layer base {
-  body {
-    @apply bg-black text-white;
-  }
-}
-
-@layer utilities {
-  .text-shadow-gold {
-    text-shadow: 0 0 10px rgba(251, 191, 36, 0.3);
-  }
-  
-  .bg-dark-gradient {
-    background: linear-gradient(to bottom, #111111, #1a1a1a, #0a0a0a);
-  }
-} */
-
-*{margin: 0; padding: 0; box-sizing: border-box; text-decoration: none;}
+*{margin: 0; padding: 0; box-sizing: border-box; font-family: 'Sofia Sans Condensed', sans-serif; font-optical-sizing: auto; font-size: 18px;}
 body{background-color: black; color: white;}
+
+.title{font-family: "Mouse Memoirs", serif; font-weight: 400; letter-spacing: 2px;}
+.bg{background: radial-gradient(#38321e, #191405, #000000, #000000);}

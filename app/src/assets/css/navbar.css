@@ -8,11 +8,12 @@
   .header .navbar ul{float: right; margin: 0; margin-right: 10vh;}
   .header .navbar ul li{display: inline-block; line-height: 80px; margin-right: 40px;}
   .header .navbar ul li:nth-child(1){position: relative;}
-  .header .navbar ul li:nth-child(1) input{position: relative; left: 3px; top: -2px; height: 30px; border: none; border-radius: 15px; padding-left: 20px; width: 0; transition: all 1s ease; outline: none; background-color: #2A2A1A; color: white;}
+  .header .navbar ul li:nth-child(1) input{position: relative; left: 3px; top: -2px; height: 35px; border: none; border-radius: 15px; padding-left: 20px; width: 0; transition: all 1s ease; outline: none; background-color: #2A2A1A; color: white;}
+  .header .navbar ul li:nth-child(1) input::placeholder{font-size: 17px;}
   .header .navbar ul li:nth-child(1) svg{position: absolute; right: -15px; top: 15px; text-align: center; line-height: 50px; background-color: #D4AF37; border-radius: 50%; cursor: pointer; transition: all 1s ease-in-out; width: 45px; height: 45px; padding: 10px;} 
   .header .navbar ul li:nth-child(1):hover input{width: 400px; transition: all 1s ease-in-out; border: 1px solid #D4AF37; box-shadow: 0px 0px 5px #f9db5c;}
   .header .navbar ul li:nth-child(1):hover svg{transform: rotate(-360deg); transition: all 1s ease-in-out;} 
-  .header .navbar ul li a{text-decoration: none; color: white; font-size: 20px; padding: 10px 40px; border-radius: 50px; border: 1px solid white; backdrop-filter: blur(10px); background-color: #ffffff2d;}
+  .header .navbar ul li a{text-decoration: none; color: white; font-size: 20px; padding: 7px 30px; border-radius: 50px; border: 1px solid white; backdrop-filter: blur(10px); background-color: #ffffff2d;}
   .header .navbar ul li a:hover{box-shadow: 0 0 15px 5px #ffffff2d;}
   .header .navbar ul li:nth-child(3) a{background-color: #D4AF37; border: none; color: white;}
   .header .navbar ul li:nth-child(3) a:hover{box-shadow: 0 0 15px 5px #D4AF375d;}
@@ -23,14 +24,14 @@
   .header .sidebar:hover{width: 260px;}
   .header .sidebar .sidebar-header{display: flex; align-items: center; padding-top: 20px;}
   .header .sidebar .sidebar-header img{width: 42px; border-radius: 50%;}
-  .header .sidebar .sidebar-header h2{font-size: 1.25rem; font-weight: 600; color: white; margin-left: 23px;}
+  .header .sidebar .sidebar-header h2{font-size: 1.5rem; font-weight: 400; color: white; margin-left: 25px;}
   .header .sidebar .sidebar-links{list-style: none; margin-top: 20px; height: 80%; overflow-y: auto; scrollbar-width: none; padding: 0;}
   .header .sidebar .sidebar-links h4{color: white; font-weight: 500; margin: 10px 0; white-space: nowrap; position: relative;}
   .header .sidebar .sidebar-links h4 span{opacity: 0;}
   .header .sidebar:hover .sidebar-links h4 span{opacity: 1; color: #D4AF37;}
   .header .sidebar .sidebar-links h4 .separator{position: absolute; left: 0; top: 50%; width: 100%; height: 1px; transform: scaleX(1); transform: translateY(-50%); background-color: #D4AF37; transform-origin: right; transition-duration: .2s;}
   .header .sidebar:hover .sidebar-links h4 .separator{transition-delay: 0s; transform: scaleX(0);}
-  .header .sidebar .sidebar-links li a{display: flex; align-items: center; gap: 12px; color: #dbd4d4e3; font-weight: 500; padding: 15px 10px; white-space: nowrap; text-decoration: none;}
+  .header .sidebar .sidebar-links li a{display: flex; align-items: center; gap: 12px; color: #dbd4d4e3; font-size: 1.25rem; font-weight: 400; padding: 15px 10px; white-space: nowrap; text-decoration: none;}
   .header .sidebar .sidebar-links li a .icon{width: 24px; height: 24px; vertical-align: middle;}
   .header .sidebar .sidebar-links li a span{display: none;}
   .header .sidebar:hover .sidebar-links li a span{display: block;}
@@ -38,9 +39,9 @@
   .header .sidebar .user-account{margin-top: 5px; padding: 5px 10px; margin-bottom: 15px; margin-left: -10px;}
   .header .sidebar .user-account .user-profile{color: #e5dede; display: flex; align-items: center;}
   .header .sidebar .user-account .user-profile img{width: 42px; border-radius: 50%;}
-  .header .sidebar .user-account .user-profile .user-detail{margin-left: 23px; white-space: nowrap; padding: 15px 0;}
-  .header .sidebar .user-account .user-profile .user-detail h3{font-size: 1rem; font-weight: 600; margin: 0; margin-bottom: 10px;}
-  .header .sidebar .user-account .user-profile .user-detail span{font-size: 0.775rem; font-weight: 600; display: block; margin-top: 0;}
+  .header .sidebar .user-account .user-profile .user-detail{margin-left: 25px; white-space: nowrap; padding: 15px 0;}
+  .header .sidebar .user-account .user-profile .user-detail h3{font-size: 1.25rem; font-weight: 400; margin: 0; margin-bottom: 10px;}
+  .header .sidebar .user-account .user-profile .user-detail span{font-size: 0.85rem; font-weight: 400; display: block; margin-top: 0;}
   .header .sidebar:hover .user-account{background-color: #ffffff2d; border-radius: 5px; }
 
 

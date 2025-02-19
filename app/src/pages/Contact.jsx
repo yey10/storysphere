@@ -11,7 +11,7 @@ const Contact = () => {
     <>
         <div className="contact">
             <div className="box-info">
-                <h1>CONTÁCTE CON NOSOTROS</h1>
+                <h1 className='title'>CONTÁCTE CON NOSOTROS</h1>
                 <div className="data">
                     <p><FontAwesomeIcon icon={faPhone} /> +57 314 7821614</p>
                     <p><FontAwesomeIcon icon={faEnvelope} /> StorySphere@gmail.com</p>

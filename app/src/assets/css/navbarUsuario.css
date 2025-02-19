@@ -1,0 +1,81 @@
+/* header */
+.headerUsuario{width: 100%;}
+
+  /* navbar */
+  .headerUsuario .navbar{width: 100%; height: 80px; position: absolute; top: 0; left: 0;}
+  .headerUsuario .navbar div:nth-child(1){width: 200px; margin: 5px 0; margin-left: 20vh; position: absolute;}
+  .headerUsuario .navbar div:nth-child(1) img{width: 100%;}
+  .headerUsuario .navbar ul{float: right; margin: 0; margin-right: 10vh;}
+  .headerUsuario .navbar ul li{display: inline-block; line-height: 80px; margin-right: 40px;}
+  .headerUsuario .navbar ul li:nth-child(1){position: relative;}
+  .headerUsuario .navbar ul li:nth-child(1) input{position: relative; left: 3px; top: -2px; height: 30px; border: none; border-radius: 15px; padding-left: 20px; width: 0; transition: all 1s ease; outline: none; background-color: #2A2A1A; color: white;}
+  .headerUsuario .navbar ul li:nth-child(1) svg{position: absolute; right: -15px; top: 15px; text-align: center; line-height: 50px; background-color: #D4AF37; border-radius: 50%; cursor: pointer; transition: all 1s ease-in-out; width: 45px; height: 45px; padding: 10px;} 
+  .headerUsuario .navbar ul li:nth-child(1):hover input{width: 400px; transition: all 1s ease-in-out; border: 1px solid #D4AF37; box-shadow: 0px 0px 5px #f9db5c;}
+  .headerUsuario .navbar ul li:nth-child(1):hover svg{transform: rotate(-360deg); transition: all 1s ease-in-out;}
+  .headerUsuario .navbar ul li:nth-child(2){position: relative;}
+  .headerUsuario .navbar ul li:nth-child(2) a{text-decoration: none; color: white; font-size: 20px; padding: 7px 30px; border-radius: 50px; background-color: #D4AF37;}
+  .headerUsuario .navbar ul li:nth-child(2) a svg{position: relative; top: 5px; margin-right: 5px;}
+  .headerUsuario .navbar ul li:nth-child(3){position: relative;}
+  .headerUsuario .navbar ul li:nth-child(3) svg{position: relative; top: 5px;}
+  .headerUsuario .navbar ul li:nth-child(4){position: relative;} 
+  .headerUsuario .navbar ul li:nth-child(4) a{color: white; text-decoration: none;padding: 0; background-color: #0000001d; display: flex; position: relative; top: 20px;}
+  .headerUsuario .navbar ul li:nth-child(4) a img{width: 50px; height: 50px; border-radius: 50%;}
+
+  /* sidebar */
+  .headerUsuario .sidebar{position: fixed; top: 0; left: 0; height: 100vh; width: 85px; display: flex; flex-direction: column; overflow-x: hidden; backdrop-filter: blur(10px); background-color: #0505053d; padding: 0px 20px; transition: all 0.5s ease; z-index: 99999999;}
+  .headerUsuario .sidebar:hover{width: 260px;}
+  .headerUsuario .sidebar .sidebar-header{display: flex; align-items: center; padding-top: 20px;}
+  .headerUsuario .sidebar .sidebar-header img{width: 42px; border-radius: 50%;}
+  .headerUsuario .sidebar .sidebar-header h2{font-size: 1.25rem; font-weight: 600; color: white; margin-left: 23px;}
+  .headerUsuario .sidebar .sidebar-links{list-style: none; margin-top: 20px; height: 80%; overflow-y: auto; scrollbar-width: none; padding: 0;}
+  .headerUsuario .sidebar .sidebar-links h4{color: white; font-weight: 500; margin: 10px 0; white-space: nowrap; position: relative;}
+  .headerUsuario .sidebar .sidebar-links h4 span{opacity: 0;}
+  .headerUsuario .sidebar:hover .sidebar-links h4 span{opacity: 1; color: #D4AF37;}
+  .headerUsuario .sidebar .sidebar-links h4 .separator{position: absolute; left: 0; top: 50%; width: 100%; height: 1px; transform: scaleX(1); transform: translateY(-50%); background-color: #D4AF37; transform-origin: right; transition-duration: .2s;}
+  .headerUsuario .sidebar:hover .sidebar-links h4 .separator{transition-delay: 0s; transform: scaleX(0);}
+  .headerUsuario .sidebar .sidebar-links li a{display: flex; align-items: center; gap: 12px; color: #dbd4d4e3; font-weight: 500; padding: 15px 10px; white-space: nowrap; text-decoration: none;}
+  .headerUsuario .sidebar .sidebar-links li a .icon{width: 24px; height: 24px; vertical-align: middle;}
+  .headerUsuario .sidebar .sidebar-links li a span{display: none;}
+  .headerUsuario .sidebar:hover .sidebar-links li a span{display: block;}
+  .headerUsuario .sidebar .sidebar-links li a:hover{background-color: #ffffff2d; color: white; border-radius: 5px;}
+  .headerUsuario .sidebar .user-account{margin-top: 5px; padding: 5px 10px; margin-bottom: 15px; margin-left: -10px;}
+  .headerUsuario .sidebar .user-account .user-profile{color: #e5dede; display: flex; align-items: center;}
+  .headerUsuario .sidebar .user-account .user-profile img{width: 42px; border-radius: 50%;}
+  .headerUsuario .sidebar .user-account .user-profile .user-detail{margin-left: 23px; white-space: nowrap; padding: 15px 0;}
+  .headerUsuario .sidebar .user-account .user-profile .user-detail h3{font-size: 1rem; font-weight: 600; margin: 0; margin-bottom: 10px;}
+  .headerUsuario .sidebar .user-account .user-profile .user-detail span{font-size: 0.775rem; font-weight: 600; display: block; margin-top: 0;}
+  .headerUsuario .sidebar:hover .user-account{background-color: #ffffff2d; border-radius: 5px; }
+
+
+  /* responsive */
+  @media screen and (max-width: 1024px) {
+      .headerUsuario .navbar ul{margin-right: 5vh;}
+      .headerUsuario .navbar ul li:first-child{margin-right: 40px;}
+      .headerUsuario .navbar ul li:nth-child(2):hover input{width: 300px;}
+  }
+
+  @media screen and (max-width: 768px) {
+      .headerUsuario .navbar div:nth-child(1){width: 150px; height: 50px; margin: 15px 0; margin-left: 15vh;}
+      .headerUsuario .navbar ul{margin-right: 5vh;}
+      .headerUsuario .navbar ul li{margin-right: 20px;}
+      .headerUsuario .navbar ul li:nth-child(2):hover input{width: 250px;}
+  }
+
+  @media screen and (max-width: 500px) {
+      .headerUsuario .navbar div:nth-child(1){margin-left: 12vh; position: absolute;}
+      .headerUsuario .navbar ul li a{font-size: 16px;}
+      .headerUsuario .navbar ul li:first-child{position: absolute; right: 60px;}
+      .headerUsuario .navbar ul li:nth-child(2) input{height: 25px;}
+      .headerUsuario .navbar ul li:nth-child(2) span{width: 40px; height: 40px; margin: 20px 15px; line-height: 40px;}
+      .headerUsuario .navbar ul li:nth-child(2):hover{background-color: #050505;}
+      .headerUsuario .navbar ul li:nth-child(2):hover input{width: 365px;}
+  }
+
+  @media screen and (max-width: 375px) {
+      .headerUsuario .navbar div:nth-child(1){width: 100px; height: 50px; margin-left: 10vh;}
+      .headerUsuario .navbar ul{margin-right: 2vh;}
+      .headerUsuario .navbar ul li a{font-size: 13px;}
+      .headerUsuario .navbar ul li:first-child{position: absolute; right: 40px;}
+      .headerUsuario .navbar ul li:nth-child(2):hover input{width: 258px;}
+  }
+

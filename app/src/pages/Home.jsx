@@ -5,9 +5,9 @@ import ParticlesBackground from '../components/ParticlesBackground';
 import '../assets/css/home.css';
 import SliderHome from '../components/SliderHome';
 import SliderHome2 from '../components/SliderHome2';
-import ReactImg1 from '../assets/img/CF1.png';
-import ReactImg2 from '../assets/img/CF3.png';
-import ReactImg3 from '../assets/img/CF3.png';
+import ReactImg1 from '../assets/img/leyendo.jpeg';
+import ReactImg2 from '../assets/img/escribiendo.jpeg';
+import ReactImg3 from '../assets/img/interactuar.jpeg';
 import ReactImg4 from '../assets/img/Accion.jpeg';
 import ReactImg5 from '../assets/img/Drama.jpeg';
 import ReactImg6 from '../assets/img/Ficcion.jpeg';
@@ -22,7 +22,7 @@ const Home = () => {
     <>
       <div className="home-1">
         <div className='home1-content'>
-          <h1>¡Bienvenido a StorySphere!</h1>
+          <h1 className='title'>¡Bienvenido a StorySphere!</h1>
           <p>Sumérgete en un universo de historias ilimitadas. Escribe, comparte y descubre mundos nuevos con nuestra vibrante comunidad de narradores. ¡Explora ahora y deja que tu imaginación vuele libremente!</p>
           <button><Link to="/login">¡Empieza ya!</Link></button>
         </div>
@@ -35,31 +35,30 @@ const Home = () => {
             <div className='home'>
               <SliderHome />
 
-              <div className="home-3">
-                <h3>¿Cómo funciona?</h3>
+              <div className="home-3 bg">
+                <h3 className='title'>¿CÓMO FUNCIONA?</h3>
                 <div className="home3-content">
                   <div>
-                    <img src={ReactImg1} alt="Escribir" />
-                    <p>Puedes Escribir</p>
-                    <p>Ofrecemos una amplia gama de herramientas de escritura que puedes aprovechar sin importar tu nivel de escritura.</p>
-                  </div>
-                  <div>
-                    <img src={ReactImg2} alt="Leer" />
-                    <p>Puedes Leer</p>
+                    <div className='image'><img src={ReactImg1} alt="Escribir" /></div>
+                    <span>Puedes Leer</span>
                     <p>Ofrecemos una galería de historias creadas por otros usuarios que puedes leer y disfrutar tanto como quieras.</p>
                   </div>
                   <div>
-                    <img src={ReactImg3} alt="Interactuar" />
-                    <p>Puedes Interactuar</p>
+                    <div className='image'><img src={ReactImg2} alt="Leer" /></div>
+                    <span>Puedes Escribir</span>
+                    <p>Ofrecemos una amplia gama de herramientas de escritura que puedes aprovechar sin importar tu nivel de escritura.</p>
+                  </div>
+                  <div>
+                    <div className='image'><img src={ReactImg3} alt="Interactuar" /></div>
+                    <span>Puedes Interactuar</span>
                     <p>También puedes contactar con otros usuarios de tus mismos gustos e incluso hablar con tus autores favoritos.</p>
                   </div>
                 </div>
-                <Link to="/login">¡ INICIA AHORA !</Link>
-                <h3>¡Completamente Gratis!</h3>
+                <button><Link to="/login">¡ INICIA AHORA !</Link></button>
               </div>
 
               <div className="home-4">
-                <h3>La categoría que quieras a tu alcance</h3>
+                <h3 className='title'>La categoría que quieras a tu alcance</h3>
                 {/* seccion de categorias */}
                 <div className="categorias">
                   <div><img src={ReactImg4} alt="Acción" /><div><h4>Acción</h4><button><Link to="/categories">Saber más</Link></button></div></div>

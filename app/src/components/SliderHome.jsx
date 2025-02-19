@@ -13,7 +13,7 @@ const SliderHome = () => {
   return (
     <div>
       <div className="home-2 slider">
-        <h3>DESTACADOS</h3>
+        <h3 className='title'>DESTACADOS</h3>
         <Swiper
           modules={[Navigation, Pagination, Autoplay, EffectCards]}
           spaceBetween={50}

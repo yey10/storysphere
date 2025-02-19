@@ -1,4 +1,4 @@
-.about .slider{width: 100%; height: 90vh; background: radial-gradient(rgb(56, 50, 30), rgb(25, 20, 5), rgb(0, 0, 0)); display: flex; flex-direction: column; justify-content: center; align-items: center;}
+.about .slider{width: 100%; height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center;}
 .about .slider h3{font-size: 50px; color: #D4AF37; text-align: center; padding-top: 15px;}
 .about .slider .swiper{width: 60%; height: 60vh; margin-top: 20px; border-radius: 15px;}
 .about .slider .swiper .swiper-wrapper{width: 100%; height: 60vh;}

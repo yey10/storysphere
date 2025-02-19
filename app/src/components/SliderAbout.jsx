@@ -13,8 +13,8 @@ import { Autoplay, EffectCube, Navigation, Pagination } from 'swiper/modules';
 const SliderAbout = () => {
   return (
     <div>
-      <div className="about-6 slider">
-        <h3>EQUIPO DE TRABAJO</h3>
+      <div className="about-6 slider bg">
+        <h3 className='title'>EQUIPO DE TRABAJO</h3>
         <Swiper
           modules={[Navigation, Pagination, Autoplay, EffectCube]}
           spaceBetween={50}

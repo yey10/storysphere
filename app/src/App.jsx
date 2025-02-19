@@ -14,6 +14,7 @@ import Comunity from './pages/Comunity.jsx';
 import Profile from './pages/Profile.jsx';
 import Help from './pages/Help.jsx';
 import Settings from './pages/Settings.jsx';
+import HomeUsuario from './pages/usuario/Home.jsx';
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
             {/*Rutas públicas*/}
             {/*Rutas privadas*/}
             <Route path='/' element={<Home />} />
+            <Route path='/homeusuario' element={<HomeUsuario />} />
             <Route path='/login' element={<Login />} />
             <Route path='/about' element={<About />} />
             <Route path='/contact' element={<Contact />} />

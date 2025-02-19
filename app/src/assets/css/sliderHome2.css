@@ -1,4 +1,4 @@
-.home .home-5{background: radial-gradient(rgb(56, 50, 30), rgb(25, 20, 5), rgb(0, 0, 0)); display: flex; flex-direction: column; justify-content: center; align-items: center; row-gap: 20px; min-height: 100vh; overflow: hidden;}
+.home .home-5{display: flex; flex-direction: column; justify-content: center; align-items: center; row-gap: 20px; min-height: 100vh; overflow: hidden;}
 .home .home-5 h3{font-size: 50px; color: #D4AF37; text-align: center; padding-top: 30px;}
 .home .home-5 img{width: 100%; pointer-events: none; user-select: none;}
 .home .home-5 .home5-content{display: flex; flex-direction: column; justify-content: center; align-items: center; width: 80%; overflow: hidden;}

@@ -9,7 +9,7 @@ const Services = () => {
   return (
     <>
         <div className="services">
-          <h1>Elige tu plan de suscripción</h1>
+          <h1 className='title'>Elige tu plan de suscripción</h1>
           <div className="box">
             <div className="box-content">
               <h2>Estándar</h2>
