@@ -7,7 +7,7 @@ import 'swiper/css/autoplay';
 import 'swiper/css/effect-cube';
 import SwiperCore from 'swiper/core';
 SwiperCore.use([Navigation, Pagination, Autoplay, EffectCube]);
-import '../assets/css/sliderAbout.css';
+import '../../assets/css/sliderAbout.css';
 import { Autoplay, EffectCube, Navigation, Pagination } from 'swiper/modules';
 
 const SliderAbout = () => {

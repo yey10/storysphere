@@ -1,11 +1,11 @@
 import React from 'react';
-import ReactImg from '../assets/img/persona.png';
+import ReactImg from '../../assets/img/persona.png';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import SwiperCore from 'swiper/core';
 SwiperCore.use([ Navigation ]);
-import '../assets/css/sliderHome2.css';
+import '../../assets/css/sliderHome2.css';
 import { Navigation } from 'swiper/modules';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 

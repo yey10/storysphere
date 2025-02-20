@@ -1,4 +1,4 @@
-.footer{width: calc(100% - 85px); margin-left: 85px; backdrop-filter: blur(10px); background-color: #1010103d;}
+.footer{backdrop-filter: blur(10px); background-color: #101010;}
 
   .footer .footer-content{width: 80%; margin: 0 10%;}
   .footer .footer-content > div:nth-child(1){width: 100%; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); grid-gap: 40px; place-items: center; padding-top: 50px; padding-bottom: 40px; border-bottom: 1px solid gray;}

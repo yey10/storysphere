@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import ParticlesBackground from '../components/ParticlesBackground';
-import SliderAbout from '../components/SliderAbout';
+import SliderAbout from '../components/Sliders/SliderAbout';
 import Footer from '../components/Footer';
 import Logo from '../assets/img/Logo.png';
 import '../assets/css/about.css';

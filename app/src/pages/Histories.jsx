@@ -1,7 +1,7 @@
 import React from 'react'
 import Navbar from '../components/Navbar';
 import ParticlesBackground from '../components/ParticlesBackground';
-import SliderStories from '../components/SliderStories.jsx';
+import SliderStories from '../components/Sliders/SliderStories.jsx';
 import { featuredHistories, recommendedHistories, recentHistories } from '../data/histories';
 import '../assets/css/histories.css';
 

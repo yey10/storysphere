@@ -6,7 +6,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/autoplay';
 import SwiperCore from 'swiper/core';
 SwiperCore.use([Navigation, Pagination, Autoplay, EffectCards]);
-import '../assets/css/sliderHome.css';
+import '../../assets/css/sliderHome.css';
 import { Autoplay, EffectCards, Navigation, Pagination } from 'swiper/modules';
 
 const SliderHome = () => {
