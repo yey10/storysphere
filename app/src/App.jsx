@@ -23,21 +23,24 @@ function App() {
       <BrowserRouter>
         <AuthProvider>
           <Routes>
-            {/*Rutas públicas*/}
+
             {/*Rutas privadas*/}
-            <Route path='/' element={<Home />} />
-            <Route path='/homeusuario' element={<HomeUsuario />} />
-            <Route path='/login' element={<Login />} />
-            <Route path='/about' element={<About />} />
-            <Route path='/contact' element={<Contact />} />
-            <Route path='/services' element={<Services />} />
-            <Route path='/histories' element={<Histories />} />
-            <Route path='/authors' element={<Authors />} />
-            <Route path='/categories' element={<Categories />} />
-            <Route path='/comunity' element={<Comunity />} />
-            <Route path='/profile' element={<Profile />} />
-            <Route path='/help' element={<Help />} />
-            <Route path='/settings' element={<Settings />} />
+              <Route path='/home' element={<ProtectedRoute><HomeUsuario /></ProtectedRoute>} />
+              <Route path='/categories' element={<ProtectedRoute><Categories /></ProtectedRoute>} />
+              <Route path='/comunity' element={<ProtectedRoute><Comunity /></ProtectedRoute>} />
+              <Route path='/profile' element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+              <Route path='/help' element={<ProtectedRoute><Help /></ProtectedRoute>} />
+              <Route path='/settings' element={<ProtectedRoute><Settings /></ProtectedRoute>} />
+              
+            {/*Rutas públicas*/}
+              <Route path='/' element={<Home />} />
+              <Route path='/login' element={<Login />} />
+              <Route path='/about' element={<About />} />
+              <Route path='/contact' element={<Contact />} />
+              <Route path='/services' element={<Services />} />
+              <Route path='/histories' element={<Histories />} />
+              <Route path='/authors' element={<Authors />} />
+            
           </Routes>
         </AuthProvider>
       </BrowserRouter>

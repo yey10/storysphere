@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Services\User\AuthService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 
 class AuthController extends Controller
 {
@@ -69,6 +70,11 @@ class AuthController extends Controller
 
             //Se genera un nuevo token con sanctum para la autenticación
             $token = $user->createToken('auth_token')->plainTextToken;
+
+            //Establecer fecha de expiración del token
+            $user->tokens()->latest()->first()->update([
+                'expires_at' => Carbon::now()->addDays(1),
+            ]);
 
             //Devolver respuesta con el token
             return response()->json([

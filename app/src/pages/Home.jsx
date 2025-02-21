@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import Navbar from '../components/Navbar';
+import DynamicNavbar from '../components/DynamicNavbar.jsx';
 import ParticlesBackground from '../components/ParticlesBackground';
 import '../assets/css/home.css';
 import SliderHome from '../components/Sliders/SliderHome';
@@ -30,7 +30,7 @@ const Home = () => {
       <div className="min-h-screen bg-black relative">
         <ParticlesBackground />
         <div className="relative z-10">
-          <Navbar />
+          <DynamicNavbar />
           <main className="container mx-auto px-4">
             <div className='home'>
               <SliderHome />

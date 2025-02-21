@@ -13,11 +13,11 @@ use Illuminate\Support\Facades\Route;
 Route::controller(AuthController::class)->group(function () {
     Route::post('/register', 'register'); // Registrar nuevo usuario
     Route::post('/login', 'login'); // Loguear usuario
-    Route::middleware('auth:sanctum')->post('/logout', 'logout'); // Cerrar sesión
+    Route::middleware(['auth:sanctum', 'token.expiration'])->post('/logout', 'logout'); // Cerrar sesión
 });
 
 // Rutas para usuarios
-Route::prefix('users')->middleware('auth:sanctum')->controller(UserController::class)->group(function () {
+Route::prefix('users')->middleware(['auth:sanctum', 'token.expiration'])->controller(UserController::class)->group(function () {
     Route::get('/', 'index'); // Obtener todos los usuarios
     Route::get('/{id}', 'show'); // Obtener datos del usuario
     Route::get('/profile', 'profile'); // Obtener perfil
@@ -35,7 +35,7 @@ Route::prefix('stories')->group(function () {
     Route::get('/{id}', [StoryController::class, 'show']); // Obtener datos
     Route::get('/{story}/comments', [CommentController::class, 'index']); // Obtener comentarios de una historia
 
-    Route::middleware('auth:sanctum')->group(function () {
+    Route::middleware(['auth:sanctum', 'token.expiration'])->group(function () {
     // Rutas protegidas
         Route::post('/', [StoryController::class, 'store']); // Crear nueva historia
         Route::put('/{story}', [StoryController::class, 'update']); // Actualizar
@@ -50,7 +50,7 @@ Route::prefix('comments')->group(function(){
     //Rutas públicas
     Route::get('/{comment}', [CommentController::class, 'show']); //Obtener un comentario específico
 
-    Route::middleware('auth:sanctum')->group(function(){
+    Route::middleware(['auth:sanctum', 'token.expiration'])->group(function(){
         //Rutas protegidas
         Route::put('/{comment}', [CommentController::class, 'update']); //Actualizar un comentario
         Route::delete('/{comment}', [CommentController::class, 'destroy']); //Eliminar un comentario
@@ -59,14 +59,14 @@ Route::prefix('comments')->group(function(){
 });
 
 //Rutas para likes 
-Route::prefix('likes')->middleware('auth:sanctum')->group(function (){
+Route::prefix('likes')->middleware(['auth:sanctum', 'token.expiration'])->group(function (){
     Route::post('/{story}', [LikeController::class, 'likeStory']);
     Route::delete('/{story}', [LikeController::class, 'unlikeStory']);
     Route::get('/{story}/count', [LikeController::class, 'getStoryLikes']);
 });
 
 //Rutas para followers
-Route::prefix('followers')->middleware('auth:sanctum')->group(function (){
+Route::prefix('followers')->middleware(['auth:sanctum', 'token.expiration'])->group(function (){
     Route::post('/{user}', [FollowerController::class, 'followUser']);
     Route::delete('/{user}', [FollowerController::class, 'unFollowUser']);
     Route::get('/{user}/followers', [FollowerController::class, 'getFollowers']);

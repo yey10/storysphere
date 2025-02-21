@@ -31,7 +31,7 @@ const NavbarUsuario = () => {
             </div>
             <ul className="sidebar-links">
               <h4><span>Main Menu</span><div className="separator"></div></h4>
-              <li><Link to="/"><House className='icon' /><span>Home</span></Link></li>
+              <li><Link to="/home"><House className='icon' /><span>Home</span></Link></li>
               <li><Link to="/about"><BookUp2 className='icon' /><span>Populares</span></Link></li>
               <li><Link to="/contact"><MessageCircleMore className='icon' /><span>Explorar</span></Link></li>
               <h4><span>Creación</span><div className="separator"></div></h4>

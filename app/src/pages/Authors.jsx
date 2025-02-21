@@ -1,10 +1,9 @@
 import React from 'react'
-import Navbar from '../components/Navbar'
-
+import DynamicNavbar from '../components/DynamicNavbar.jsx'
 const Authors = () => {
   return (
     <div>
-      <Navbar />
+      <DynamicNavbar />
       <h1>Authors Page</h1>
     </div>
   )
