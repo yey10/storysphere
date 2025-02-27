@@ -17,6 +17,8 @@ import Profile from './pages/Profile.jsx';
 import Help from './pages/Help.jsx';
 import Settings from './pages/Settings.jsx';
 import HomeUsuario from './pages/usuario/Home.jsx';
+import StoriesUsuario from './pages/usuario/Stories.jsx';
+import StoryPage from './pages/usuario/StoryPage.jsx';
 
 function App() {
 
@@ -24,6 +26,7 @@ function App() {
     <>
       <BrowserRouter>
         <AuthProvider>
+<<<<<<< HEAD
           <StoryProvider>
             <Routes>
 
@@ -49,6 +52,25 @@ function App() {
               
             </Routes>
           </StoryProvider>
+=======
+          <Routes>
+            {/*Rutas públicas*/}
+            {/*Rutas privadas*/}
+            <Route path='/' element={<Home />} />
+            <Route path='/homeusuario' element={<HomeUsuario />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/about' element={<About />} />
+            <Route path='/contact' element={<Contact />} />
+            <Route path='/services' element={<Services />} />
+            <Route path='/histories' element={<Histories />} />
+            <Route path='/authors' element={<Authors />} />
+            <Route path='/categories' element={<Categories />} />
+            <Route path='/comunity' element={<Comunity />} />
+            <Route path='/profile' element={<Profile />} />
+            <Route path='/help' element={<Help />} />
+            <Route path='/settings' element={<Settings />} />
+          </Routes>
+>>>>>>> 65b1af33b65bd092b93f5780b79ce143f6d60926
         </AuthProvider>
       </BrowserRouter>
     </>

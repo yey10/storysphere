@@ -6,13 +6,12 @@ import 'swiper/css/pagination';
 import 'swiper/css/autoplay';
 import SwiperCore from 'swiper/core';
 SwiperCore.use([Navigation, Pagination, Autoplay, EffectCards]);
-import '../../assets/css/sliderHome.css';
 import { Autoplay, EffectCards, Navigation, Pagination } from 'swiper/modules';
 
 const SliderHome = () => {
   return (
-    <div>
-      <div className="home-2 slider">
+    <div className='home-2'>
+      <div className="slider">
         <h3 className='title'>DESTACADOS</h3>
         <Swiper
           modules={[Navigation, Pagination, Autoplay, EffectCards]}
