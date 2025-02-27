@@ -1,10 +1,10 @@
 import React from 'react'
-import Navbar from '../components/Navbar'
+import DynamicNavbar from '../components/DynamicNavbar.jsx'
 
 const Comunity = () => {
   return (
     <div>
-      <Navbar />
+      <DynamicNavbar />
       <h1>Comunity Page</h1>
     </div>
   )

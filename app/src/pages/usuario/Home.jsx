@@ -1,7 +1,8 @@
 import React from 'react'
+import {useAuth} from '../../context/authContext.jsx'
 import { Link } from 'react-router-dom';
 import ParticlesBackground from '../../components/ParticlesBackground';
-import NavbarUsuario from '../../components/NavbarUsuario';
+import NavbarUsuario from  '../../components/NavbarUsuario';
 import SliderUsuario from '../../components/Sliders/SliderUsuario';
 import SliderUsuario2 from '../../components/Sliders/SliderUsuario2';
 import SliderUsuario3 from '../../components/Sliders/SliderUsuario3';
@@ -26,6 +27,17 @@ import '../../assets/css/homeusuario.css';
 import { Crown } from 'lucide-react'
 
 const Home = () => {
+
+    const {isAuthenticated, isLoading} = useAuth();
+
+    if (isLoading) {
+      return <div>Cargando...</div>
+    }
+
+
+
+
+
   return (
     <div>
       <div className="min-h-screen bg-black relative">

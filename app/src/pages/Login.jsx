@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import {ToastContainer, toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import '../assets/css/login.css';
 import { useAuth } from '../context/AuthContext.jsx';
 import {useNavigate} from 'react-router-dom';
 
 const Login = () => {
 
-  {/* State to store the user's input */}
+  
   const navigate = useNavigate();
   const [isRegister, setIsRegister] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -18,7 +20,8 @@ const Login = () => {
     biography: '',
     profile_photo:null,
   });//Datos del formulario
-  const [error, setError] = useState(null);
+  //const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
@@ -42,7 +45,6 @@ const Login = () => {
       biography: '',
       profile_photo:null,
     });
-    setError(null);
   };
 
   //manejar los cambios en los inputs
@@ -53,20 +55,25 @@ const Login = () => {
 
   //manejar el submit del formulario
   const handleSubmit = async (e) =>{
+
     e.preventDefault();
+    setIsLoading(true);
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 5000);
+
     try {
       if (isRegister) {
         if (!formData.password || !formData.password_confirm) {
-          setError('Por favor, completa ambos campos de contraseña');
-          return;
+         throw new Error('Por favor, completa ambos campos de contraseña');
+          
         }
         if (formData.password !== formData.password_confirm) {
-          setError('Las contraseñas no coinciden');
-          return;
+          throw new Error('Las contraseñas no coinciden');
+          
         }
         if (formData.profile_photo && formData.profile_photo.size > 2 * 1024 * 1024) {
-          setError('El tamaño del archivo no debe exceder 2MB');
-          return;
+          throw new Error('El tamaño del archivo no debe exceder 2MB');
+          
         }
 
         const data = new FormData();
@@ -78,33 +85,36 @@ const Login = () => {
           data.append('profile_photo', formData.profile_photo);
         }
 
-        await handleRegister(data);
-        alert('registro exitoso');
-        setFormData({
+        await handleRegister(data, {signal: controller.signal});
+        toast.success('Registro exitoso');
+        toggleForm();
+        /*setFormData({
           name: '',
           email: '',
           password: '',
           password_confirm: '',
           biography: '',
           profile_photo: null,
-        });
-        toggleForm();
+        });*/
       }else{
         await handleLogin({
           email: formData.email,
           password: formData.password,
-        });
-        alert('login exitoso');
-        navigate('/');
+        }, {signal: controller.signal});
+        toast.success('Inicio de sesión exitoso');
+        navigate('/home');
       }
     } catch (error) {
-      setError(error.message || 'Error al registrar');
+      if (error.name !== 'AbortError') {
+        toast.error('la solicitud tardó demasiado');
+      }else{
+        toast.error(error.message || 'error al procesar la solicitud');
+      }
+    }finally{
+      setIsLoading(false);
+      clearTimeout(timeoutId);
     }
   }
-
-
-
-
 
   return (
     <div className="container-login">
@@ -132,7 +142,9 @@ const Login = () => {
             <h2>Iniciar Sesión</h2>
             <input type="email" name='email' value={formData.email} onChange={handleChange} placeholder="Correo electrónico" required />
             <input type="password" name='password' value={formData.password} onChange={handleChange} placeholder="Contraseña" required />
-            <button type="submit">Iniciar sesión</button>
+            <button type="submit" disabled={isLoading}>
+              {isLoading ? 'Cargando...' : 'Iniciar Sesión'}
+            </button>
           </form>
 
           {/* Formulario de Registro */}
@@ -144,11 +156,13 @@ const Login = () => {
             <input type="password" name='password' value={formData.password} onChange={handleChange} placeholder="Contraseña" required />
             <input type="password" name='password_confirm' value={formData.password_confirm} onChange={handleChange} placeholder="Confirmar contraseña" required />
             <input type="file" name="profile_photo" onChange={handleChange} />
-            <button type="submit">Registrarse</button>
+            <button type="submit" disabled={isLoading}>
+              {isLoading ? 'Cargando...' : 'Registrarse'}
+            </button>
           </form>
         </div>
       </div>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+      
     </div>
   );
 };

@@ -6,11 +6,13 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({children}) =>{
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() =>{
         //Verificar que existe el token
         const token = localStorage.getItem('token');
         setIsAuthenticated(!!token);
+        setIsLoading(false);//finaliza la carga
     }, []);//  El array vacío asegura que este efecto se ejecute solo una vez al montar el componente
 
     const handleLogin = async (data) =>{
@@ -41,6 +43,7 @@ export const AuthProvider = ({children}) =>{
     return (
         <AuthContext.Provider  value={{
             isAuthenticated,
+            isLoading,
             handleLogin,
             handleRegister,
             handleLogout

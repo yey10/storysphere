@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import Navbar from '../components/Navbar';
+import DynamicNavbar from '../components/DynamicNavbar';
 import Footer from '../components/Footer';
 import '../assets/css/services.css';
 import { Check } from 'lucide-react';
@@ -54,7 +54,7 @@ const Services = () => {
           </div>
         </div>
       <div className="relative z-10">
-        <Navbar />
+        <DynamicNavbar />
         <main className="container mx-auto px-4">
           <Footer />
         </main>

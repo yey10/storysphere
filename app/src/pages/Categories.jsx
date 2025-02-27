@@ -1,10 +1,10 @@
 import React from 'react'
-import Navbar from '../components/Navbar'
+import DynamicNavbar from '../components/DynamicNavbar.jsx'
 
 const Categories = () => {
   return (
     <div>
-      <Navbar />
+      <DynamicNavbar />
       <h1>Categories Page</h1>
     </div>
   )

@@ -33,6 +33,7 @@ class StoryService
         $story = Story::create([
             'title' => $data['title'],
             'content' => $data['content'],
+            'sinopsis' => $data['sinopsis'],
             'photo' => $photo,
             'state' => $data['state'],
             'id_user' => $user->id_user,

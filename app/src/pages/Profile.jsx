@@ -1,10 +1,10 @@
 import React from 'react'
-import Navbar from '../components/Navbar'
+import DynamicNavbar from '../components/DynamicNavbar'
 
 const Profile = () => {
   return (
     <div>
-      <Navbar />
+      <DynamicNavbar />
       <h1>Profile Page</h1>
     </div>
   )

@@ -1,5 +1,5 @@
 import React from 'react'
-import Navbar from '../components/Navbar';
+import DynamicNavbar from '../components/DynamicNavbar.jsx';
 import Footer from '../components/Footer';
 import '../assets/css/contact.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -43,7 +43,7 @@ const Contact = () => {
             </form>
         </div>
       <div className="relative z-10">
-        <Navbar />
+        <DynamicNavbar />
         <main className="container mx-auto px-4">
           <Footer />
         </main>

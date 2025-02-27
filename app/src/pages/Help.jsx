@@ -1,10 +1,10 @@
 import React from 'react'
-import Navbar from '../components/Navbar'
+import DynamicNavbar from '../components/DynamicNavbar.jsx'
 
 const Help = () => {
   return (
     <div>
-      <Navbar />
+      <DynamicNavbar />
       <h1>Help Page</h1>
     </div>
   )

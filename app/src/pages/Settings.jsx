@@ -1,10 +1,10 @@
 import React from 'react'
-import Navbar from '../components/Navbar'
+import DynamicNavbar from '../components/DynamicNavbar'
 
 const Settings = () => {
   return (
     <div>
-      <Navbar />
+      <DynamicNavbar />
       <h1>Settings Page</h1>
     </div>
   )
