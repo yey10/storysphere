@@ -10,14 +10,23 @@ export const AuthProvider = ({children}) =>{
 
     useEffect(() =>{
         //Verificar que existe el token
-        const token = localStorage.getItem('token');
-        setIsAuthenticated(!!token);
+        const token = sessionStorage.getItem('token');
+        console.log('Token encontrado en sessionStorage:', token);
+
+        if (token) {
+            setIsAuthenticated(true);
+        }else{
+            setIsAuthenticated(false);
+        }
         setIsLoading(false);//finaliza la carga
     }, []);//  El array vacío asegura que este efecto se ejecute solo una vez al montar el componente
 
     const handleLogin = async (data) =>{
         try {
-            await login(data);
+            const response = await login(data);
+            if (response.access_token) {
+                sessionStorage.setItem('token', response.access_token);
+            }
             setIsAuthenticated(true);
         } catch (error) {
             throw error;
@@ -33,7 +42,7 @@ export const AuthProvider = ({children}) =>{
     }
 
     const handleLogout = () =>{
-        localStorage.removeItem('token');
+        sessionStorage.removeItem('token');
         setIsAuthenticated(false);
         logout();
     }

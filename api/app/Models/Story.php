@@ -22,6 +22,11 @@ class Story extends Model
         'state',
         'id_user',
     ];
+    
+    protected $casts = [
+        'content' => 'string',
+    ];
+    
 
     public function user()
     {

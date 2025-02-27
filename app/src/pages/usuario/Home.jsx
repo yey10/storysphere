@@ -1,5 +1,5 @@
-import React from 'react'
-import {useAuth} from '../../context/authContext.jsx'
+import React from 'react';
+import {useAuth} from '../../context/AuthContext.jsx';
 import { Link } from 'react-router-dom';
 import ParticlesBackground from '../../components/ParticlesBackground';
 import NavbarUsuario from  '../../components/NavbarUsuario';
@@ -7,34 +7,33 @@ import SliderUsuario from '../../components/Sliders/SliderUsuario';
 import SliderUsuario2 from '../../components/Sliders/SliderUsuario2';
 import SliderUsuario3 from '../../components/Sliders/SliderUsuario3';
 import Footer from '../../components/Footer';
-import Descatado1 from '../../assets/img/Stories/41.webp'
-import Descatado2 from '../../assets/img/Stories/51.webp'
-import Descatado3 from '../../assets/img/Stories/21.webp'
-import Descatado4 from '../../assets/img/Stories/31.webp'
-import premium from '../../assets/img/Stories/1.webp'
-import premium2 from '../../assets/img/Stories/2.webp'
-import Categoria1 from '../../assets/img/Stories/22.webp'
-import Categoria2 from '../../assets/img/Stories/23.webp'
-import Categoria3 from '../../assets/img/Stories/24.webp'
-import Categoria4 from '../../assets/img/Stories/25.webp'
-import Categoria5 from '../../assets/img/Stories/26.webp'
-import Categoria6 from '../../assets/img/Stories/27.webp'
-import Categoria7 from '../../assets/img/Stories/28.webp'
-import Categoria8 from '../../assets/img/Stories/29.webp'
-import Categoria9 from '../../assets/img/Stories/30.webp'
-import Categoria10 from '../../assets/img/Stories/48.webp'
+import Descatado1 from '../../assets/img/Stories/41.webp';
+import Descatado2 from '../../assets/img/Stories/51.webp';
+import Descatado3 from '../../assets/img/Stories/21.webp';
+import Descatado4 from '../../assets/img/Stories/31.webp';
+import premium from '../../assets/img/Stories/1.webp';
+import premium2 from '../../assets/img/Stories/2.webp';
+import Categoria1 from '../../assets/img/Stories/22.webp';
+import Categoria2 from '../../assets/img/Stories/23.webp';
+import Categoria3 from '../../assets/img/Stories/24.webp';
+import Categoria4 from '../../assets/img/Stories/25.webp';
+import Categoria5 from '../../assets/img/Stories/26.webp';
+import Categoria6 from '../../assets/img/Stories/27.webp';
+import Categoria7 from '../../assets/img/Stories/28.webp';
+import Categoria8 from '../../assets/img/Stories/29.webp';
+import Categoria9 from '../../assets/img/Stories/30.webp';
+import Categoria10 from '../../assets/img/Stories/48.webp';
 import '../../assets/css/homeusuario.css';
-import { Crown } from 'lucide-react'
+import { Crown } from 'lucide-react';
 
 const Home = () => {
 
     const {isAuthenticated, isLoading} = useAuth();
+    console.log('Estado de autenticación:', isAuthenticated)
 
     if (isLoading) {
       return <div>Cargando...</div>
     }
-
-
 
 
 
