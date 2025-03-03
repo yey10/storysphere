@@ -7,38 +7,27 @@ use App\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+
 
 class AuthService
 {
 
-    public function register($data)
+    public function register(array $data): User
     {
         //Subida del archivo de imágen
-        $profile_photo = null;
-        if (isset($data['profile_photo'])) {
-            $file = $data['profile_photo'];
-            $file_name = Str::random(10) . '.' . $file->getClientOriginalExtension();
-            Storage::disk('public')->put($file_name, file_get_contents($file));
-            $profile_photo = $file_name;
-        }
+        $profile_photo = isset($data['profile_photo']) ? $this->uploadProfilePhoto($data['profile_photo']) : null;
 
         //Crear nuevo usuario
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'biography' => $data['biography'],
+            'biography' => $data['biography'] ?? null,
             'profile_photo' => $profile_photo,
         ]);
 
-        // Validar y asignar roles
-        $allowedRoles = Role::pluck('id_rol')->toArray(); // IDs válidos
-        $roles = array_intersect($data['roles'] ?? [1], $allowedRoles); // Filtrar roles válidos
-        
-        if (empty($roles)) {
-            $roles = [1]; // Si no hay roles válidos, asignar 'user'
-        }
-
+        $roles = $this->getValidRoles($data['roles'] ?? [1]);
         $user->roles()->attach($roles);
         return $user;
     }
@@ -48,17 +37,30 @@ class AuthService
         //Verificar credenciales
         $user = User::where('email', $data['email'])->first();
 
-        if (!$user || !Hash::check($data['password'], $user->password)) {
-            return null; //No se encontró el usuario o la contraseña no coincide
-        }
-
-        return $user;
+        return ($user && Hash::check($data['password'], $user->password)) ? $user : null;
 
     }
 
     public function logout($user)
     {
         $user->tokens()->delete();
+    }
+
+    private function uploadProfilePhoto($file): ?string
+    {
+
+        if (!$file || !$file->isValid()) {
+            return null;
+        }
+        $file_name = Str::random(10) . '.' . $file->getClientOriginalExtension();
+        $path = Storage::disk('public')->putFileAs('profile_photos', $file, $file_name);
+        return $path;
+    }
+
+    private function getValidRoles(array $roles): array
+    {
+        $allowed_roles = Role::all()->pluck('id_rol')->toArray();
+        return array_intersect($roles, $allowed_roles) ?: [1];
     }
 
 }

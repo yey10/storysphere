@@ -55,7 +55,7 @@ const NavbarUsuario = () => {
               <li><Link to="/storyForm"><Pencil className='icon' /><span>Crear</span></Link></li>
               <li><Link to="/comunity"><NotebookPen className='icon' /><span>Mis historias</span></Link></li>
               <h4><span>General</span><div className="separator"></div></h4>
-              <li><Link to="/histories"><BookOpenText className='icon' /><span>Historias</span></Link></li>
+              <li><Link to="/stories"><BookOpenText className='icon' /><span>Historias</span></Link></li>
               <li><Link to="/authors"><BookUser className='icon' /><span>Autores</span></Link></li>
               <li><Link to="/favorite"><Heart className='icon' /><span>Favoritos</span></Link></li>
               <li><Link to="/categories"><ChartBarStacked className='icon' /><span>Categorías</span></Link></li>

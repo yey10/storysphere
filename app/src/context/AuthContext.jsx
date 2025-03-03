@@ -26,6 +26,7 @@ export const AuthProvider = ({children}) =>{
             const response = await login(data);
             if (response.access_token) {
                 sessionStorage.setItem('token', response.access_token);
+                setIsAuthenticated(true);
             }
             setIsAuthenticated(true);
         } catch (error) {

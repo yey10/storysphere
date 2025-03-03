@@ -33,7 +33,7 @@ export const StoryProvider = ({children}) =>{
         }
     };
 
-    const editStory = async (IdleDeadline, updatedData) =>{
+    const editStory = async (id, updatedData) =>{
         try {
             const updatedStory = await updateStory(id, updatedData);
             setStories(stories.map(story => (story.id_story === id ? updatedStory : story)));

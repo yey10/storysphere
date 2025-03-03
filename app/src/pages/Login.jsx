@@ -12,6 +12,9 @@ const Login = () => {
   const [isRegister, setIsRegister] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const {handleRegister, handleLogin} = useAuth(); //importar las funciones de registro y login para usarlas en el componente
+  const [errors, setErrors] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+
   const [formData, setFormData] = useState({
     name : '',
     email : '',
@@ -20,8 +23,8 @@ const Login = () => {
     biography: '',
     profile_photo:null,
   });//Datos del formulario
-  //const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+ 
+  
 
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
@@ -45,6 +48,7 @@ const Login = () => {
       biography: '',
       profile_photo:null,
     });
+    setErrors({});
   };
 
   //manejar los cambios en los inputs
@@ -58,22 +62,28 @@ const Login = () => {
 
     e.preventDefault();
     setIsLoading(true);
+    setErrors({});
+
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 5000);
+    const timeoutId = setTimeout(() => controller.abort(), 20000);
 
     try {
       if (isRegister) {
         if (!formData.password || !formData.password_confirm) {
-         throw new Error('Por favor, completa ambos campos de contraseña');
-          
+         toast.error('Por favor, completa ambos campos de contraseña');
+          return;
+        }
+        if(formData.password.lenght < 8){
+          toast.error('La contraseña debe tener al menos 8 caracteres');
+          return;
         }
         if (formData.password !== formData.password_confirm) {
-          throw new Error('Las contraseñas no coinciden');
-          
+          toast.error('Las contraseñas no coinciden');
+          return;
         }
         if (formData.profile_photo && formData.profile_photo.size > 2 * 1024 * 1024) {
           throw new Error('El tamaño del archivo no debe exceder 2MB');
-          
+          return;
         }
 
         const data = new FormData();
@@ -105,13 +115,23 @@ const Login = () => {
         navigate('/home');
       }
     } catch (error) {
-      if (error.name !== 'AbortError') {
+      if (error.name === 'AbortError') {
         toast.error('la solicitud tardó demasiado');
+        return;
+      }
+
+      if(error.response && error.response.data){
+        const {message, errors} = error.response.data;
+        if(errors){
+          setErrors(errors);
+          Object.values(errors).flat().forEach(err => toast.error(err));
+        }else{
+          toast.error(message || 'Ocurrió un error');
+        }
       }else{
-        toast.error(error.message || 'error al procesar la solicitud');
+        toast.error(error.message || 'Error inesperado');
       }
     }finally{
-      setIsLoading(false);
       clearTimeout(timeoutId);
     }
   }
@@ -141,7 +161,9 @@ const Login = () => {
           <form className={`form-login ${isRegister ? 'hidden' : ''}`} onSubmit={handleSubmit}>
             <h2>Iniciar Sesión</h2>
             <input type="email" name='email' value={formData.email} onChange={handleChange} placeholder="Correo electrónico" required />
+            {errors.email && <p className="error">{errors.email[0]}</p>}
             <input type="password" name='password' value={formData.password} onChange={handleChange} placeholder="Contraseña" required />
+            {errors.password && <p className="error">{errors.password[0]}</p>}
             <button type="submit" disabled={isLoading}>
               {isLoading ? 'Cargando...' : 'Iniciar Sesión'}
             </button>
@@ -151,18 +173,22 @@ const Login = () => {
           <form className={`form-register ${!isRegister ? 'hidden' : ''}`} onSubmit={handleSubmit} encType='multipart/form-data'>
             <h2>Registrarse</h2>
             <input type="text" name='name' value={formData.name} onChange={handleChange} placeholder="Nombre de Usuario" required />
+            {errors.name && <p className="error">{errors.name[0]}</p>}
             <input type="email" name='email' value={formData.email} onChange={handleChange} placeholder="Correo electrónico" required />
+            {errors.email && <p className="error">{errors.email[0]}</p>}
             <input type='text' name="biography" value={formData.biography} onChange={handleChange} placeholder='Biografía'/>
             <input type="password" name='password' value={formData.password} onChange={handleChange} placeholder="Contraseña" required />
+            {errors.password && <p className="error">{errors.password[0]}</p>}
             <input type="password" name='password_confirm' value={formData.password_confirm} onChange={handleChange} placeholder="Confirmar contraseña" required />
             <input type="file" name="profile_photo" onChange={handleChange} />
+            {errors.profile_photo && <p className="error">{errors.profile_photo[0]}</p>}
             <button type="submit" disabled={isLoading}>
               {isLoading ? 'Cargando...' : 'Registrarse'}
             </button>
           </form>
         </div>
       </div>
-      
+      <ToastContainer />
     </div>
   );
 };

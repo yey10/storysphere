@@ -10,12 +10,19 @@ export const register = async (data) =>{
     }
 }
 
-export const login = async (data) =>{
+export const login = async (data, config ={}) =>{
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 20000);
+
+
     try {
-        const response = await axios.post('/login', data);
+        const response = await axios.post('/login', data,{
+            signal: controller.signal,
+            ...config
+        });
         //Guardar el token en el localStorage
         if (response.data.access_token) {
-            localStorage.setItem('token', response.data.access_token);
+            sessionStorage.setItem('token', response.data.access_token);
             axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.access_token}`;
         } else {
             throw new Error('Token no encontrado en la respuesta del servidor');
@@ -23,11 +30,14 @@ export const login = async (data) =>{
         return response.data;
     } catch (error) {
         throw error.response ? error.response.data : error;
+        console.log("Error en login:", error.response); 
+    }finally{
+        clearTimeout(timeoutId);
     }
 }
 
 export const logout = () =>{
-    localStorage.removeItem('token');
+    sessionStorage.removeItem('token');
     axios.defaults.headers.common['Authorization'] = null;
     window.location.href='/';
 }

@@ -36,6 +36,8 @@ function App() {
                   <Route path='/categories' element={<Categories />} />
                   <Route path='/createStory' element={<CreateStoryPage />} />
                   <Route path='/storyForm' element={<StoryForm/>} />
+                  <Route path='stories' element={<StoriesUsuario/>}></Route>
+                  <Route path='/story/:id' element={<StoryPage />} />
                   <Route path='/profile' element={<Profile />} />
                   <Route path='/help' element={<Help />} />
                   <Route path='/settings' element={<Settings />} />
