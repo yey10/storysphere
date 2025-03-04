@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\Comment;
 use App\Models\Category;
+use App\Models\Rating;
 
 class Story extends Model
 {
@@ -31,6 +32,11 @@ class Story extends Model
     public function user()
     {
         return $this->belongsTo(User::class,  'id_user');
+    }
+
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class, 'id_story', 'id_story');
     }
 
     public function categories()
