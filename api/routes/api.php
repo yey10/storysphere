@@ -7,6 +7,7 @@ use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Interactions\CommentController;
 use App\Http\Controllers\Interactions\FollowerController;
 use App\Http\Controllers\Interactions\LikeController;
+use App\Http\Controllers\Interactions\RatingController; // Ensure this class exists in the specified namespace
 use Illuminate\Support\Facades\Route;
 
 // Rutas para autenticación
@@ -73,3 +74,9 @@ Route::prefix('followers')->middleware(['auth:sanctum', 'token.expiration'])->gr
     Route::get('/{user}/following', [FollowerController::class, 'getFollowing']);
 });
 
+//Rutas para ratings
+Route::prefix('ratings')->middleware(['auth:sanctum', 'token.expiration'])->group(function (){
+    Route::post('/ratings', [RatingController::class, 'store']);
+    Route::get('/ratings/{id_story}/average', [RatingController::class, 'getAverageRating']);
+    Route::delete('/ratings/{id_story}', [RatingController::class, 'destroy']);
+});

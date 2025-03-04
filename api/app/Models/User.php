@@ -9,6 +9,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Models\Role;
 use App\Models\Story;
 use App\Models\Comment;
+use App\Models\Like;
+use App\Models\Follower;
+use App\Models\Rating;
+
+
 class User extends Authenticatable
 {
     use HasFactory, HasApiTokens, Notifiable; 
@@ -39,6 +44,11 @@ class User extends Authenticatable
     {
         
         return $this->hasMany(Story::class, 'id_user', 'id_user');
+    }
+
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class, 'id_user', 'id_user');
     }
 
 
