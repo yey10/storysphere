@@ -54,26 +54,36 @@
 
   @media screen and (max-width: 768px) {
       .header .navbar div:nth-child(1){width: 150px; height: 50px; margin: 15px 0; margin-left: 15vh;}
-      .header .navbar ul{margin-right: 5vh;}
+      .header .navbar ul{margin-right: 0;}
       .header .navbar ul li{margin-right: 20px;}
-      .header .navbar ul li:nth-child(2):hover input{width: 250px;}
+      .header .navbar ul li:nth-child(1):hover input{width: 230px;}
   }
 
   @media screen and (max-width: 500px) {
       .header .navbar div:nth-child(1){margin-left: 12vh; position: absolute;}
+      .header .navbar ul{margin-right: 10px;}
       .header .navbar ul li a{font-size: 16px;}
-      .header .navbar ul li:first-child{position: absolute; right: 60px;}
-      .header .navbar ul li:nth-child(2) input{height: 25px;}
-      .header .navbar ul li:nth-child(2) span{width: 40px; height: 40px; margin: 20px 15px; line-height: 40px;}
-      .header .navbar ul li:nth-child(2):hover{background-color: #050505;}
-      .header .navbar ul li:nth-child(2):hover input{width: 365px;}
+      .header .navbar ul li:nth-child(1) input{height: 25px;}
+      .header .navbar ul li:nth-child(1) span{width: 40px; height: 40px; margin: 20px 15px; line-height: 40px;}
+      .header .navbar ul li:nth-child(1):hover{background-color: #00000000;}
+      .header .navbar ul li:nth-child(1):hover input{width: 265px;}
+      .header .navbar ul li:nth-child(2){margin-right: 0;}
+      .header .navbar ul li:nth-child(3){display: none;}
+
+      .header .sidebar{width: 65px;}
+      .header .sidebar .sidebar-header{position: relative; right: 10px;}
+      .header .sidebar .sidebar-links li a{padding: 15px 0px;}
+      .header .sidebar:hover .sidebar-links li a{padding: 15px 10px;}
+      .header .sidebar .user-account .user-profile{position: relative; right: 10px;}
   }
 
-  @media screen and (max-width: 375px) {
-      .header .navbar div:nth-child(1){width: 100px; height: 50px; margin-left: 10vh;}
+  @media screen and (max-width: 390px) {
+      .header .navbar div:nth-child(1){width: 120px; height: 50px; margin-left: 11vh; margin-top: 20px;}
       .header .navbar ul{margin-right: 2vh;}
       .header .navbar ul li a{font-size: 13px;}
-      .header .navbar ul li:first-child{position: absolute; right: 40px;}
-      .header .navbar ul li:nth-child(2):hover input{width: 258px;}
+      .header .navbar ul li:nth-child(1){margin-right: 20px;}
+      .header .navbar ul li:nth-child(1) input{top: 2px;}
+      .header .navbar ul li:nth-child(1) svg{width: 35px; height: 35px; top: 23px;}
+      .header .navbar ul li:nth-child(1):hover input{width: 180px;}
   }
 

@@ -42,7 +42,7 @@ const SliderStories = ({ movies }) => {
                 className="w-full h-64 object-cover"
               />
               <div className="title p-4">
-                <h3 className="text-lg font-semibold text-gray-800 truncate">
+                <h3 className="text-lg text-center font-semibold text-gray-800 truncate">
                   {movie.title}
                 </h3>
               </div>

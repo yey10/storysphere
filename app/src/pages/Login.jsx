@@ -176,12 +176,9 @@ const Login = () => {
             {errors.name && <p className="error">{errors.name[0]}</p>}
             <input type="email" name='email' value={formData.email} onChange={handleChange} placeholder="Correo electrónico" required />
             {errors.email && <p className="error">{errors.email[0]}</p>}
-            <input type='text' name="biography" value={formData.biography} onChange={handleChange} placeholder='Biografía'/>
             <input type="password" name='password' value={formData.password} onChange={handleChange} placeholder="Contraseña" required />
             {errors.password && <p className="error">{errors.password[0]}</p>}
             <input type="password" name='password_confirm' value={formData.password_confirm} onChange={handleChange} placeholder="Confirmar contraseña" required />
-            <input type="file" name="profile_photo" onChange={handleChange} />
-            {errors.profile_photo && <p className="error">{errors.profile_photo[0]}</p>}
             <button type="submit" disabled={isLoading}>
               {isLoading ? 'Cargando...' : 'Registrarse'}
             </button>
