@@ -12,6 +12,8 @@ use App\Models\Comment;
 use App\Models\Like;
 use App\Models\Follower;
 use App\Models\Rating;
+use App\Models\Subscription;
+use App\Models\Invoice;
 
 
 class User extends Authenticatable
@@ -72,6 +74,16 @@ class User extends Authenticatable
        public function following()
     {
         return $this->hasMany(Follower::class, 'id_follower');
+    }
+
+    public function subscription()
+    {
+        return $this->hasMany(Subscription::class, 'id_user', 'id_user');
+    }
+
+    public function invoices()
+    {
+        return $this->hasMany(Invoice::class, 'id_user', 'id_user');
     }
 
 }
