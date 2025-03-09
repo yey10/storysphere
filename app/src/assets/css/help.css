@@ -1,0 +1,15 @@
+.help{width: 100%; min-height: 100vh; display: flex; justify-content: center; align-items: center; flex-direction: column; margin-bottom: 50px;}
+.help h1{width: 80%; margin: 50px auto; font-size: 50px; color: #D4AF37; text-align: center; margin-top: 120px;}
+.help .manual-usuario{width: 85%; margin: 0 auto; position: relative; background-color: #151515ee; border: 1px solid #D4AF37; border-radius: 15px; padding: 30px; display: flex; justify-content: center; align-items: center; flex-direction: column;}
+.help .manual-usuario h3{font-size: 40px; color: #D4AF37; text-align: center; margin-bottom: 30px; text-shadow: 0 5px 4px #000;}
+.help .manual-usuario iframe{width: 90%; height: 600px; margin: 0 auto; margin-bottom: 40px; border: none;}
+.help .manual-usuario button{padding: 10px 40px; border: none; border-radius: 5px; background-color: #D4AF37; color: #fff; cursor: pointer;}
+
+.help2{width: 75%; min-height: 50vh; margin: 0 auto; display: flex; justify-content: center; align-items: center; flex-direction: column; margin-bottom: 50px;}
+.help2 h2{font-size: 50px; color: #D4AF37; text-align: center; margin-bottom: 20px;}
+.help2 p{font-size: 22px; letter-spacing: 2.2px; text-align: center; margin-bottom: 40px;}
+
+@media (max-width: 500px) {
+    .help .manual-usuario{padding: 30px 10px;}
+    .help .manual-usuario iframe{height: 400px;}
+}
