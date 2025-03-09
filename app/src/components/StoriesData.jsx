@@ -8,15 +8,17 @@ const StoriesData = ({ stories }) => {
         <div>
             <div className="body4-content">
                 {stories.map((story) => (
-                    <div key={story.id} className="story">
+                    <div key={story.id_story} className="story">
                         <div>
-                            <img src={story.image} alt={story.title} />
+                            <img src={story.photo} alt={story.title} />
                         </div>
                         <div className="story-info">
                             <h2 className='title'>{story.title}</h2>
                             <p>{story.author}</p>
                             <p>{story.sinopsis}</p>
-                            <button className='buttonLight' onClick={() => setSelectedStory(story)}>Leer Historia</button>
+                            <button className="buttonLight" onClick={() => setSelectedStory(story)}>
+                                Leer Historia
+                            </button>
                         </div>
                     </div>
                 ))}

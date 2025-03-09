@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreStoryRequest extends FormRequest
+class CreateSubscriptionPaymentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,13 +22,8 @@ class StoreStoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|string|max:255',
-            'content' => 'required|string',
-            'sinopsis' => 'required|string|max:500',
-            'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'state' => 'required|string|in:draft,published',
-            'categories' => 'required|array',
-            'categories.*' => 'exists:categories,id_category',
+            'plan_id' => 'required|exists:plans,id',
+            'payer_email' => 'required|email',
         ];
     }
 }

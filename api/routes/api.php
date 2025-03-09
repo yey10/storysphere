@@ -3,11 +3,15 @@
 
 use App\Http\Controllers\User\AuthController;
 use App\Http\Controllers\Stories\StoryController;
+use App\Http\Controllers\Stories\CategoryController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Interactions\CommentController;
 use App\Http\Controllers\Interactions\FollowerController;
 use App\Http\Controllers\Interactions\LikeController;
-use App\Http\Controllers\Interactions\RatingController; // Ensure this class exists in the specified namespace
+use App\Http\Controllers\Interactions\RatingController;
+use App\Http\Controllers\Payment\InvoiceController;
+use App\Http\Controllers\Payment\MercadoPagoController;
+use App\Http\Controllers\Payment\SubscriptionController;
 use Illuminate\Support\Facades\Route;
 
 // Rutas para autenticación
@@ -33,6 +37,7 @@ Route::prefix('users')->middleware(['auth:sanctum', 'token.expiration'])->contro
 Route::prefix('stories')->group(function () {
 // Rutas públicas
     Route::get('/', [StoryController::class, 'index']); // Obtener todas las historias
+    Route::get('/categories', [CategoryController::class, 'index']); // Obtener historias por categoría
     Route::get('/{id}', [StoryController::class, 'show']); // Obtener datos
     Route::get('/{story}/comments', [CommentController::class, 'index']); // Obtener comentarios de una historia
 
@@ -79,4 +84,26 @@ Route::prefix('ratings')->middleware(['auth:sanctum', 'token.expiration'])->grou
     Route::post('/ratings', [RatingController::class, 'store']);
     Route::get('/ratings/{id_story}/average', [RatingController::class, 'getAverageRating']);
     Route::delete('/ratings/{id_story}', [RatingController::class, 'destroy']);
+});
+
+// Rutas para suscripciones
+Route::prefix('subscriptions')->middleware(['auth:sanctum', 'token.expiration'])->group(function () {
+    Route::post('/', [SubscriptionController::class, 'createSubscription']);
+    Route::get('/', [SubscriptionController::class, 'getUserSubscriptions']);
+    Route::delete('/{subscriptionId}', [SubscriptionController::class, 'cancelSubscription']);
+});
+
+// Rutas para facturas
+Route::prefix('invoices')->middleware(['auth:sanctum', 'token.expiration'])->group(function () {
+    Route::get('/', [InvoiceController::class, 'index']);
+    Route::get('/{id}', [InvoiceController::class, 'show']);
+    Route::post('/', [InvoiceController::class, 'store']);
+    Route::put('/{id}/status', [InvoiceController::class, 'updateStatus']);
+    Route::delete('/{id}', [InvoiceController::class, 'destroy']);
+});
+
+// Rutas para MercadoPago
+Route::prefix('mercado-pago')->middleware(['auth:sanctum', 'token.expiration'])->group(function () {
+    Route::post('/create-payment', [MercadoPagoController::class, 'createPayment']);
+    Route::post('/create-subscription', [MercadoPagoController::class, 'createSubscriptionPayment']);
 });

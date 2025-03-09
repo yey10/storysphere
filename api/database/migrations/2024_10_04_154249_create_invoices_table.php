@@ -18,9 +18,22 @@ return new class extends Migration
             $table->unsignedBigInteger('id_subscription'); // Relación con la tabla de suscripciones
             $table->date('issue_date'); // Fecha de emisión de la factura
             $table->decimal('total_amount', 8, 2); // Monto total de la factura
-            $table->string('payment_method', 100); // Método de pago (tarjeta, PayPal, etc.)
-            $table->string('payment_status', 100); // Estado del pago (pendiente, completado, etc.)
+            $table->enum('payment_method', ['credit_card', 'debit_card', 'mercado_pago', 'paypal', 'cash'])->default('mercado_pago'); // Método de pago (tarjeta, PayPal, etc.)
+            $table->enum('payment_status', ['pending', 'approved', 'rejected', 'cancelled', 'refunded'])->default('pending'); // Estado del pago (pendiente, completado, etc.)
             $table->text('invoice_detail'); // Detalle de la factura
+
+            //campos adicionales para mercadopago
+            $table->string('mercado_pago_payment_id')->nullable(); // Id del pago en mercado pago
+            $table->string('mercado_pago_status')->nullable(); // Estado del pago en mercado pago
+            $table->string('mercado_pago_preference_id')->nullable(); // Id de la preferencia en mercado pago
+            $table->timestamp('mercado_pago_created_at')->nullable(); // Fecha de creación del pago en mercado pago
+            $table->timestamp('mercado_pago_updated_at')->nullable(); // Fecha de actualización del pago en mercado pago
+            $table->text('mercado_pago_response')->nullable(); // Respuesta completa de Mercado Pago (JSON)
+
+
+
+
+
 
             $table->timestamps(); // created_at y updated_at
 
@@ -30,6 +43,7 @@ return new class extends Migration
             // Índices para mejorar el rendimiento
             $table->index('id_user'); // Índice para la clave foránea id_user
             $table->index('id_subscription'); // Índice para la clave foránea id_subscription
+            $table->index('mercado_pago_payment_id'); // Índice para el campo mercado_pago_payment_id
         });
     }
 

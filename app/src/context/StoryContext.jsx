@@ -1,5 +1,5 @@
-import { createContext, useContext, useEffect, useState} from "react";
-import { getAllStories, createStory, updateStory, deleteStory } from '../api/storyService.jsx';
+import { createContext, useContext, useEffect, useState, useCallback} from "react";
+import { getAllStories, createStory, updateStory, deleteStory, getCategories  } from '../api/storyService.jsx';
 
 //Crear el contexto
 const StoryContext = createContext();
@@ -7,22 +7,38 @@ const StoryContext = createContext();
 export const StoryProvider = ({children}) =>{
 
     const [stories, setStories] = useState([]);
+    const [categories, setCategories] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+
+
+
+
+     // Memorizar fetchStories
+    const fetchStories = useCallback(async () => {
+        try {
+        const data = await getAllStories();
+        setStories(data);
+        } catch (error) {
+        console.error("Error al obtener las historias:", error);
+        } finally {
+        setIsLoading(false);
+        }
+    }, []);
+
+    // Memorizar fetchCategories
+    const fetchCategories = useCallback(async () => {
+        try {
+        const data = await getCategories();
+        setCategories(data);
+        } catch (error) {
+        console.error("Error al obtener las categorías:", error);
+        }
+    }, []);
 
     useEffect(() =>{
         fetchStories();
-    }, []);
-
-    const fetchStories = async () =>{
-        try {
-            const data = await getAllStories();
-            setStories(data);
-        } catch (error) {
-            console.error("Error al obtener las historias:", error);
-        }finally{
-            setIsLoading(false);
-        }
-    };
+        fetchCategories();
+    }, [fetchStories, fetchCategories]);
 
     const addStory = async (storyData) =>{
         try {
@@ -55,8 +71,10 @@ export const StoryProvider = ({children}) =>{
     return(
         <StoryContext.Provider value={{
             stories,
+            categories,
             isLoading,
             fetchStories,
+            fetchCategories,
             addStory,
             editStory,
             removeStory

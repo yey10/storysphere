@@ -1,0 +1,78 @@
+/* quill-custom.css */
+
+/* Estilos para el contenedor del editor */
+.ql-container {
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+  }
+  
+  /* Estilos para la barra de herramientas */
+  .ql-toolbar {
+    border: 1px solid #ccc;
+    border-radius: 4px 4px 0 0;
+    background-color: #f1f1f1;
+  }
+  
+  /* Estilos para los botones de la barra de herramientas */
+  .ql-toolbar button {
+    color: #333;
+    transition: background-color 0.3s ease;
+  }
+  
+  .ql-toolbar button:hover {
+    background-color: #ddd;
+  }
+  
+  /* Estilos para el área de edición */
+  .ql-editor {
+    min-height: 200px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 0 0 4px 4px;
+    background-color: #fff;
+  }
+  
+  /* Estilos para los encabezados */
+  .ql-editor h1,
+  .ql-editor h2,
+  .ql-editor h3 {
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    font-weight: bold;
+  }
+  
+  .ql-editor h1 {
+    font-size: 2em;
+  }
+  
+  .ql-editor h2 {
+    font-size: 1.5em;
+  }
+  
+  .ql-editor h3 {
+    font-size: 1.17em;
+  }
+  
+  /* Estilos para las listas */
+  .ql-editor ul,
+  .ql-editor ol {
+    padding-left: 1.5em;
+  }
+  
+  .ql-editor li {
+    margin-bottom: 0.5em;
+  }
+  
+  /* Estilos para los enlaces */
+  .ql-editor a {
+    color: #007bff;
+    text-decoration: underline;
+  }
+  
+  .ql-editor a:hover {
+    color: #0056b3;
+  }

@@ -3,29 +3,35 @@ import { useNavigate } from "react-router-dom";
 import { Star, Plus } from "lucide-react";
 
 const Modal = ({ story, isOpen, onClose }) => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    if (!isOpen || !story) return null;
+  if (!isOpen || !story) return null;
 
-    const handleReadMore = () => {
-        navigate(`/story/${story.id}`); // Redirige a la página de la historia
-        onClose(); // Cierra el modal
-    };
+  const handleReadMore = () => {
+    navigate(`/story/${story.id_story}`); // Redirige a la página de la historia
+    onClose(); // Cierra el modal
+  };
 
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <div className="modal-image">
-          <img src={story.image} alt={story.title} />
+          <img src={story.photo} alt={story.title} /> {/* Usar story.photo */}
         </div>
         <div className="modal-info">
           <h2 className="title">{story.title}</h2>
-          <p>By {story.author}</p>
+          <p>By {story.user.name}</p> {/* Usar story.user.name */}
           <div>
-            <Star /><Star /><Star /><Star /><Star /><p>{story.opinions} opiniones</p> <div><Plus /></div>
+            <Star /><Star /><Star /><Star /><Star />
+            <p>{story.opinions} opiniones</p> {/* Si tienes un campo para opiniones */}
+            <div><Plus /></div>
           </div>
           <p>{story.sinopsis}</p>
-          <div><p>{story.category}</p></div>
+          <div>
+            {story.categories.map((category) => (
+              <p key={category.id_category}>{category.name}</p> 
+            ))}
+          </div>
           <div>
             <button className="read-button" onClick={handleReadMore}>Leer</button>
             <button className="close-button" onClick={onClose}>Cerrar</button>
