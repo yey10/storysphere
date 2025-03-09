@@ -12,7 +12,6 @@ import Histories from './pages/Histories.jsx';
 import Authors from './pages/Authors.jsx';
 import Categories from './pages/Categories.jsx';
 import CreateStoryPage from './pages/CreateStoryPage.jsx';
-import StoryForm from './pages/StoryForm.jsx';
 import Profile from './pages/Profile.jsx';
 import Help from './pages/Help.jsx';
 import Settings from './pages/Settings.jsx';
@@ -35,7 +34,6 @@ function App() {
                   <Route path='/home' element={<HomeUsuario />} />
                   <Route path='/categories' element={<Categories />} />
                   <Route path='/createStory' element={<CreateStoryPage />} />
-                  <Route path='/storyForm' element={<StoryForm/>} />
                   <Route path='stories' element={<StoriesUsuario/>}></Route>
                   <Route path='/story/:id' element={<StoryPage />} />
                   <Route path='/profile' element={<Profile />} />

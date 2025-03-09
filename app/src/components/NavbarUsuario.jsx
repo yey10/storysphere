@@ -17,6 +17,9 @@ const NavbarUsuario = () => {
     handleLogout();
     navigate('/');
   }
+  const handleCreateStoryClick = () => {
+    navigate('/createStory'); // Redirigir a la página de creación de historias
+  };
 
 
 
@@ -52,7 +55,11 @@ const NavbarUsuario = () => {
               <li><Link to="/about"><BookUp2 className='icon' /><span>Populares</span></Link></li>
               <li><Link to="/contact"><MessageCircleMore className='icon' /><span>Explorar</span></Link></li>
               <h4><span>Creación</span><div className="separator"></div></h4>
-              <li><Link to="/storyForm"><Pencil className='icon' /><span>Crear</span></Link></li>
+              <li>
+              <button onClick={handleCreateStoryClick}> {/* Botón para crear historia */}
+                <Pencil className='icon' /><span>Crear</span>
+              </button>
+              </li>
               <li><Link to="/comunity"><NotebookPen className='icon' /><span>Mis historias</span></Link></li>
               <h4><span>General</span><div className="separator"></div></h4>
               <li><Link to="/stories"><BookOpenText className='icon' /><span>Historias</span></Link></li>

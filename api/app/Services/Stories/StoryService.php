@@ -22,13 +22,7 @@ class StoryService
             throw new \Exception('Debes estar autenticado para crear una historia');
         }
 
-        $photo = null;
-        if (isset($data['photo'])) {
-            $file = $data['photo'];
-            $filename = Str::random(10) . '.' . $file->getClientOriginalExtension();
-            Storage::disk('public')->put($filename, file_get_contents($file));
-            $photo = $filename;
-        }
+        $photo = isset($data['photo']) ? $this->uploadStoryPhoto($data['photo']) : null;
 
         $story = Story::create([
             'title' => $data['title'],
@@ -78,6 +72,16 @@ class StoryService
         $story = Story::with('user')->findOrFail($id);
         return $story->user;
     }
+
+    private function uploadStoryPhoto($file): ?string
+    {
+        if (!$file || !$file->isValid()) {
+            return null;
+        }
+        $file_name = Str::random(10) . '.' . $file->getClientOriginalExtension();
+        $path = Storage::disk('public')->putFileAs('stories_photos', $file, $file_name);
+        return $path;
+    }   
 
 
 

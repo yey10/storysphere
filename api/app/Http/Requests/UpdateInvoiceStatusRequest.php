@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreStoryRequest extends FormRequest
+class UpdateInvoiceStatusRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,13 +22,10 @@ class StoreStoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|string|max:255',
-            'content' => 'required|string',
-            'sinopsis' => 'required|string|max:500',
-            'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'state' => 'required|string|in:draft,published',
-            'categories' => 'required|array',
-            'categories.*' => 'exists:categories,id_category',
+            'payment_status' => 'required|string',
+            'mercado_pago_payment_id' => 'nullable|string',
+            'mercado_pago_status' => 'nullable|string',
+            'mercado_pago_response' => 'nullable|array',
         ];
     }
 }

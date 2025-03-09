@@ -7,12 +7,18 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    
     public function index()
     {
-        //
+        /**
+         * Obtener todas las categorias
+         */
+        try {
+            $categories = Category::all();
+            return response()->json($categories);
+        } catch (\Throwable $th) {
+            return response()->json(['error' => 'Failed to retrieve categories'], 500);
+        }
     }
 
     /**

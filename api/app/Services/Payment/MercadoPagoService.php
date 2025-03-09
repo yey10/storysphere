@@ -8,6 +8,7 @@ use MercadoPago\Client\PreApproval\PreApprovalClient;
 use MercadoPago\MercadoPagoConfig;
 use App\Models\Subscription;
 use App\Models\Invoice;
+use App\Services\Payment\InvoiceService;
 
 class MercadoPagoService
 {
@@ -15,8 +16,9 @@ class MercadoPagoService
     protected $paymentClient;
     protected $preferenceClient;
     protected $preapprovalClient;
+    protected $invoiceService;
 
-    public function __construct()
+    public function __construct(InvoiceService $invoiceService)
     {
         MercadoPagoConfig::setAccessToken(config('services.mercadopago.token'));
 
@@ -24,6 +26,7 @@ class MercadoPagoService
         $this->paymentClient = new PaymentClient();
         $this->preferenceClient = new PreferenceClient();
         $this->preapprovalClient = new PreApprovalClient();
+        $this->invoiceService = $invoiceService;
     }
 
     /**
@@ -100,7 +103,7 @@ class MercadoPagoService
 
             //si el pago es exitoso, generar una factura
             if ($subscription->status === 'authorized' || $subscription->status === 'active') {
-                $this->generateInvoice($appSubscription);
+                $this->invoiceService->generateInvoice($appSubscription);
             }
 
             
@@ -112,24 +115,7 @@ class MercadoPagoService
     /**
      * Generar una factura a partir de una suscripción.
      */
-    protected function generateInvoice(Subscription $subscription)
-    {
-        Invoice::create([
-            'id_user' => $subscription->id_user,
-            'id_subscription' => $subscription->id_subscription,
-            'issue_date' => now(),
-            'total_amount' => $subscription->plan->transaction_amount, // Monto del plan
-            'payment_method' => 'Mercado Pago',
-            'payment_status' => 'approved',
-            'invoice_detail' => json_encode([
-                'plan' => $subscription->subscription_type,
-                'description' => 'Pago de suscripción',
-            ]),
-            'mercado_pago_payment_id' => $subscription->mercado_pago_subscription_id,
-            'mercado_pago_status' => $subscription->mercado_pago_status,
-            'mercado_pago_response' => $subscription->mercado_pago_response,
-        ]);
-    }
+   
 
 
 }

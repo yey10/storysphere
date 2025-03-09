@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { Link } from 'react-router-dom';
 import ParticlesBackground from '../../components/ParticlesBackground';
 import NavbarUsuario from '../../components/NavbarUsuario';
@@ -11,9 +11,16 @@ import SliderStories from '../../components/Sliders/SliderStories';
 import { Misterio, Terror, Accion, Ficcion } from '../../data/histories';
 import StoriesData from '../../components/StoriesData';
 import { stories } from '../../data/stories';
+import {useStory} from '../../context/StoryContext';
 import { Search } from 'lucide-react';
 
 const Stories = () => {
+
+    const { stories, fetchStories, isLoading } = useStory();
+    useEffect(() => {
+        fetchStories();
+    }, [fetchStories]);
+    
 
   return (
     <div>
@@ -63,7 +70,11 @@ const Stories = () => {
                                 <button type='submit'><Search /></button>
                             </form>
                         </div>
-                        <StoriesData stories={stories} />
+                            {isLoading ? (
+                            <p>Cargando historias...</p>
+                            ) : (
+                            <StoriesData stories={stories} />
+                            )}
                     </div>
 
                     
