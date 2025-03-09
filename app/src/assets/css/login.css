@@ -22,7 +22,7 @@
     width: 100%;
     padding: 10px 20px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     backdrop-filter: blur(10px);
     background-color: #d4af373d;
     border-radius: 5px;
@@ -34,6 +34,12 @@
   }
   .container-login .box div p {
     margin-top: 30px;
+  }
+  .container-login .box .box-login p{
+    width: 90%;
+  }
+  .container-login .box .box-register p{
+    width: 90%;
   }
   .container-login .box div button {
     margin-top: 30px;
@@ -109,11 +115,11 @@
   .container-login .hidden {
     display: none;
   }
-  
+
   /* Responsive */
   @media screen and (max-width: 850px) {
     .container-login {
-      margin-top: 50px;
+      height: 150vh;
     }
     .container-login .box {
       max-width: 350px;
@@ -123,7 +129,9 @@
     }
     .container-login .box div {
       margin: 0;
+      margin-top: 50px;
       position: absolute;
+      transition: none;
     }
     .container-login .form {
       top: -10px;
@@ -133,5 +141,9 @@
     .container-login form {
       position: relative;
     }
+  }
+
+  @media screen and (max-width: 425px) {
+    .container-login .container-content{max-width: 300px;}
   }
   

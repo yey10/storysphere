@@ -13,9 +13,8 @@ import Authors from './pages/Authors.jsx';
 import Categories from './pages/Categories.jsx';
 import CreateStoryPage from './pages/CreateStoryPage.jsx';
 import StoryForm from './pages/StoryForm.jsx';
-import Profile from './pages/Profile.jsx';
 import Help from './pages/Help.jsx';
-import Settings from './pages/Settings.jsx';
+import Profile from './pages/usuario/Profile.jsx';
 import HomeUsuario from './pages/usuario/Home.jsx';
 import StoriesUsuario from './pages/usuario/Stories.jsx';
 import StoryPage from './pages/usuario/StoryPage.jsx';
@@ -39,8 +38,6 @@ function App() {
                   <Route path='/stories' element={<StoriesUsuario/>}></Route>
                   <Route path='/story/:id' element={<StoryPage />} />
                   <Route path='/profile' element={<Profile />} />
-                  <Route path='/help' element={<Help />} />
-                  <Route path='/settings' element={<Settings />} />
                 </Route>
                 
               {/*Rutas públicas*/}
@@ -51,7 +48,7 @@ function App() {
                 <Route path='/services' element={<Services />} />
                 <Route path='/histories' element={<Histories />} />
                 <Route path='/authors' element={<Authors />} />
-              
+                <Route path='/help' element={<Help />} />
             </Routes>
           </StoryProvider>          
 
