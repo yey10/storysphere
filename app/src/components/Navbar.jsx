@@ -36,11 +36,8 @@ const Navbar = () => {
               <h4><span>General</span><div className="separator"></div></h4>
               <li><Link to="/histories"><BookOpenText className='icon' /><span>Historias</span></Link></li>
               <li><Link to="/authors"><BookUser className='icon' /><span>Autores</span></Link></li>
-              <li><Link to="/categories"><ChartBarStacked className='icon' /><span>Categorías</span></Link></li>
-              <li><Link to="/comunity"><Users className='icon' /><span>Comunidades</span></Link></li>
               <h4><span>Account</span><div className="separator"></div></h4>
               <li><Link to="/help"><CircleHelp className='icon' /><span>Ayuda</span></Link></li>
-              <li><Link to="/settings"><Settings className='icon' /><span>Opciones</span></Link></li>
               <li><Link to="/login"><LogIn className='icon' /><span>LogIn</span></Link></li>
             </ul>
             <div className="user-account">

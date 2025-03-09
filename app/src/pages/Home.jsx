@@ -48,7 +48,7 @@ const Home = () => {
                     <p>También puedes contactar con otros usuarios de tus mismos gustos e incluso hablar con tus autores favoritos.</p>
                   </div>
                 </div>
-                <button><Link to="/login">¡ INICIA AHORA !</Link></button>
+                <button><Link to="/login">¡INICIA AHORA!</Link></button>
               </div>
 
               <SliderHome3 />

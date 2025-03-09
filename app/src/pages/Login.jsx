@@ -6,7 +6,6 @@ import { useAuth } from '../context/AuthContext.jsx';
 import {useNavigate} from 'react-router-dom';
 
 const Login = () => {
-
   
   const navigate = useNavigate();
   const [isRegister, setIsRegister] = useState(false);
@@ -23,8 +22,6 @@ const Login = () => {
     biography: '',
     profile_photo:null,
   });//Datos del formulario
- 
-  
 
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
@@ -142,13 +139,13 @@ const Login = () => {
         {/* Caja trasera de Login y registro */}
         <div className="box">
           {/* Caja de Login */}
-          <div className="box-login" style={{ display: windowWidth > 850 || !isRegister ? 'block' : 'none' }}>
+          <div className="box-login" style={{ display: isRegister ? 'block' : 'block', opacity: isRegister ? '1' : '0' }}>
             <h2>¿Ya tienes una cuenta?</h2>
             <p>Inicia sesión para que puedas navegar dentro del sitio web</p>
             <button onClick={() => setIsRegister(false)}>Iniciar sesión</button>
           </div>
           {/* Caja de Registro */}
-          <div className="box-register" style={{ display: windowWidth > 850 || isRegister ? 'block' : 'none' }}>
+          <div className="box-register" style={{ display: isRegister ? 'none' : 'block' }}>
             <h2>¿Aun no tienes una cuenta?</h2>
             <p>Registrate para que puedas navegar dentro del sitio web</p>
             <button onClick={() => setIsRegister(true)}>Registrarse</button>
@@ -176,12 +173,9 @@ const Login = () => {
             {errors.name && <p className="error">{errors.name[0]}</p>}
             <input type="email" name='email' value={formData.email} onChange={handleChange} placeholder="Correo electrónico" required />
             {errors.email && <p className="error">{errors.email[0]}</p>}
-            <input type='text' name="biography" value={formData.biography} onChange={handleChange} placeholder='Biografía'/>
             <input type="password" name='password' value={formData.password} onChange={handleChange} placeholder="Contraseña" required />
             {errors.password && <p className="error">{errors.password[0]}</p>}
             <input type="password" name='password_confirm' value={formData.password_confirm} onChange={handleChange} placeholder="Confirmar contraseña" required />
-            <input type="file" name="profile_photo" onChange={handleChange} />
-            {errors.profile_photo && <p className="error">{errors.profile_photo[0]}</p>}
             <button type="submit" disabled={isLoading}>
               {isLoading ? 'Cargando...' : 'Registrarse'}
             </button>

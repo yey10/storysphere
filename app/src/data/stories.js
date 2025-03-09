@@ -34,5 +34,14 @@ export const stories = [
         image: "https://i.pinimg.com/736x/0b/89/d7/0b89d77e8973390d4cd7d2fd2cef31d5.jpg",
         opinions: "3",
         category: "Terror"
+    },
+    {
+        id: 5,
+        title: "Los Susurros de la Biblioteca Eterna",
+        author: "Andrea Fuentes",
+        sinopsis: "En lo más profundo de la Biblioteca Eterna, donde el tiempo no transcurre y el conocimiento es infinito, un joven erudito descubre un libro prohibido que emana un extraño resplandor. Al abrirlo, despierta fuerzas ancestrales que habían permanecido selladas durante milenios.",
+        image: "https://i.pinimg.com/736x/61/de/1f/61de1f7d549e13c4298ec3394ffee074.jpg",
+        opinions: "0",
+        category: "Misterio"
     }
 ];

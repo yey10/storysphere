@@ -7,13 +7,11 @@ import 'swiper/css/autoplay';
 import 'swiper/css/effect-cube';
 import SwiperCore from 'swiper/core';
 SwiperCore.use([Navigation, Pagination, Autoplay, EffectCube]);
-import '../../assets/css/sliderAbout.css';
 import { Autoplay, EffectCube, Navigation, Pagination } from 'swiper/modules';
 
 const SliderAbout = () => {
   return (
-    <div>
-      <div className="about-6 slider bg">
+    <div className="about-6 slider bg">
         <h3 className='title'>EQUIPO DE TRABAJO</h3>
         <Swiper
           modules={[Navigation, Pagination, Autoplay, EffectCube]}
@@ -42,7 +40,6 @@ const SliderAbout = () => {
             </div>
           </SwiperSlide>
         </Swiper>
-      </div>
     </div>
   )
 }

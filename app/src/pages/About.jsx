@@ -13,8 +13,10 @@ const About = () => {
     <>
       <div className="about-1">
         <div className='about1-content'>
-          <div className='blur'></div>
-          <img src={Logo} alt="Logo" />
+          <div className='logo-content'>
+            <div className='blur'></div>
+            <div><img src={Logo} alt="Logo" /></div>
+          </div>
           <h1 className='title'>Donde las historias cobran vida</h1>
         </div>
       </div>
@@ -43,7 +45,7 @@ const About = () => {
                 <div className="about-4 bg">
                   <h2 className='title'>NUESTROS SERVICIOS</h2>
                   <p>Además de su enfoque creativo, la plataforma ofrece un sistema de suscripciones premium con acceso a características exclusivas, tales como historias descargables para lectura offline, eventos en línea, concursos de escritura, y acceso prioritario a nuevas funcionalidades.</p>
-                  <button><Link to="/services">Premium</Link></button>
+                  <button className='buttonLight'><Link to="/services">Premium</Link></button>
                 </div>
 
                 <div className="about-5">
@@ -53,6 +55,7 @@ const About = () => {
                 </div>
 
                 <SliderAbout />
+
             </div>
 
             <Footer />

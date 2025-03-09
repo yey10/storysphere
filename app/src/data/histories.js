@@ -1,84 +1,84 @@
 export const featuredHistories = [
     {
       id: 1,
-      title: "Inception",
-      image: "https://files.oaiusercontent.com/file-DyemiJh66k9MwHnVpmDuFb?se=2025-02-20T04%3A17%3A32Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3Dcb005b4f-ef59-498f-b60c-5dd9b7e80097.webp&sig=DJGbr%2Bwjw61AyyCTRTIN0asi5MjQajTDsSW6TeLZZZM%3D"
+      title: "Neon Utopia: La Ciudad del Mañana",
+      image: "https://i.pinimg.com/736x/97/54/40/97544070b020eeb1d1697467f9b7fa7b.jpg"
     },
     {
       id: 2,
-      title: "The Dark Knight",
-      image: "https://files.oaiusercontent.com/file-3AW9inp3CJoLZuUmdNDF64?se=2025-02-20T04%3A17%3A32Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3De88a7d56-7f69-4725-aaff-42c3a119fa02.webp&sig=7%2BBvnrA9v57dgZbXYoO4wVcTvgAabwBfRMSm5iiewYs%3D"
+      title: "El Templo Perdido de Zareth",
+      image: "https://i.pinimg.com/736x/ed/b3/85/edb3856c80d7d80014689acd1ff233de.jpg"
     },
     {
       id: 3,
-      title: "Interstellar",
-      image: "https://files.oaiusercontent.com/file-86kFoaHHNkMUxqWeeMWuL5?se=2025-02-20T04%3A17%3A32Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D35f2eefe-d662-45b6-bf4a-35c52517312d.webp&sig=ug65YnC93vVU6bVdcPQIbXi3/YXTDUJM51t/Upi0B5w%3D"
+      title: "La entrada al inframundo",
+      image: "https://i.pinimg.com/474x/aa/1a/a4/aa1aa41c1e379a17e181cf75648ad67a.jpg"
     },
     {
       id: 4,
-      title: "The Matrix",
-      image: "https://files.oaiusercontent.com/file-RFXQcWHQBkmfoTeoXAWHNC?se=2025-02-20T04%3A17%3A32Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D1a940607-f1cf-41a1-b96b-f3a2fb733add.webp&sig=MilGH%2B8ID/%2Bj4Dt0WDLZb0cttwyCX8MRxDbPmhSLLaE%3D"
+      title: "Cazadores en la Noche",
+      image: "https://i.pinimg.com/736x/75/66/55/7566553796104efae8ebb970aa3372d6.jpg"
     },
     {
       id: 5,
-      title: "Pulp Fiction",
-      image: "https://files.oaiusercontent.com/file-5ds8RGP4DCbWjy2dPhYzNP?se=2025-02-20T04%3A17%3A32Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3Db207e1c9-510c-4f59-ad18-d0dcb068a0db.webp&sig=WuEwl%2BHNHRBjGwLJKtBW3PstOohOQ6aAdWfZ4m11KgU%3D"
+      title: "El Último Guerrero",
+      image: "https://i.pinimg.com/736x/d7/b2/c8/d7b2c8e5321ed3f9fbb720dab3d0442e.jpg"
     }
   ];
   
   export const recommendedHistories = [
     {
       id: 6,
-      title: "The Shawshank Redemption",
-      image: "https://files.oaiusercontent.com/file-MU6L5ePEPdGoqGdhadvcbm?se=2025-02-20T04%3A17%3A32Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D60b42642-f3d0-4e35-82eb-ba150c295802.webp&sig=woYpZwrGktKaprKz2Q2r1GmlUVGX9XxoUNBY2VeQe1s%3D"
+      title: "Las Profundidades del Oráculo",
+      image: "https://i.pinimg.com/474x/54/37/ee/5437ee959dbc7ef5a87b32bfa9b135ab.jpg"
     },
     {
       id: 7,
-      title: "Forrest Gump",
-      image: "https://files.oaiusercontent.com/file-YUsLgq7UXcwNZFvVpHLqrM?se=2025-02-20T04%3A17%3A32Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D25172f33-b897-48c9-8b1a-d1ddac11f832.webp&sig=CoQxvaUb1UOPwL9P55oKcPqvaiRN6vrIIobGI5vVnNc%3D"
+      title: "Los Susurros de la Biblioteca Eterna",
+      image: "https://i.pinimg.com/474x/54/37/ee/5437ee959dbc7ef5a87b32bfa9b135ab.jpg"
     },
     {
       id: 8,
-      title: "Sombras en la Ciudad: El Último Justiciero",
-      image: "https://files.oaiusercontent.com/file-NT19FmqaNya1t5v1Q43SpG?se=2025-02-20T04%3A17%3A32Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3Da0be9a6c-7f96-471e-bb31-861bfe404e15.webp&sig=5ba9%2B0O1L9QdNLmIHmU1yMRLoIJuKfL74LOHh/NVshY%3D"
+      title: "Persecución Cibernética",
+      image: "https://i.pinimg.com/736x/33/ef/23/33ef2333163a91c06e1aa7161c6b7e4e.jpg"
     },
     {
       id: 9,
-      title: "Fight Club",
-      image: "https://files.oaiusercontent.com/file-P6pfQub8gfSYkRqTANa4ho?se=2025-02-20T04%3A17%3A32Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D29cf6905-2056-410d-917b-b5a45a77605a.webp&sig=/ls8luLdbWVeArVDW0o6yDC0nISc0MIEkkSmaBFVabk%3D"
+      title: "El Último Contacto",
+      image: "https://i.pinimg.com/736x/2d/f4/45/2df445f7e63777bce66a9c40a2be9f0a.jpg"
     },
     {
       id: 10,
-      title: "Goodfellas",
-      image: "https://files.oaiusercontent.com/file-7dxHFLLJNcRar48ijmk5u5?se=2025-02-20T04%3A17%3A32Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D56af323b-0941-471a-b69f-96dca1a73fd6.webp&sig=e%2Bukj0tYSYIxdVimNKVV4kr/Un9D/D%2BmOiGIHAWjZfw%3D"
+      title: "En otoño",
+      image: "https://i.pinimg.com/474x/f3/c7/ce/f3c7ce21b1e20ad45c6753487de258d1.jpg"
     }
   ];
   
   export const recentHistories = [
     {
       id: 11,
-      title: "Dune",
-      image: "https://files.oaiusercontent.com/file-F2mbbK4TiV1N13RNUJsmDy?se=2025-02-20T04%3A17%3A32Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3Dce141847-ba9f-464b-91df-6962ee226a70.webp&sig=Z4iYeygDHUMxYKv4e5Ngj42upiuHzrBLppjGROnG2Do%3D"
+      title: "La Mansión de la Luna Rota",
+      image: "https://i.pinimg.com/736x/a7/04/4f/a7044fab6c39ea5963f72b52dbd3850f.jpg"
     },
     {
       id: 12,
-      title: "No Time to Die",
-      image: "https://files.oaiusercontent.com/file-5sDeiJh3AXSTZVG2CJWcdy?se=2025-02-20T04%3A17%3A32Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D43b60769-bd89-462e-997c-3a38ee58f07b.webp&sig=O99F49yNiuJBqRxVF4W/RG7HTHnxDj68g/6takEmuVU%3D"
+      title: "Cartas Bajo la Lluvia",
+      image: "https://i.pinimg.com/474x/23/ab/36/23ab3658fba136a60c0c6c431245668c.jpg"
     },
     {
       id: 13,
-      title: "The Batman",
-      image: "https://files.oaiusercontent.com/file-2XJZw4oYVDViUiba61RiVa?se=2025-02-20T04%3A17%3A32Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D704b94d5-40c7-4efb-81f8-4e67fff7ea9d.webp&sig=xAB/jj%2BnAeCkvfXv9KhXMmTFY4/s4VjvGsJRszNxRfM%3D"
+      title: "El Reflejo Perdido",
+      image: "https://i.pinimg.com/736x/68/75/e1/6875e19be6728af16ca75de6d87923c3.jpg"
     },
     {
       id: 14,
-      title: "Top Gun: Maverick",
-      image: "https://files.oaiusercontent.com/file-Eag2MNhwbhGwi1wvUe54Ar?se=2025-02-20T04%3A17%3A32Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D61f44ba5-002c-4b40-99bf-e6718e25c21e.webp&sig=8aeMEAfdK5yjy1agY3Ka8b8JyNnGgowdJdYpwP6pudY%3D"
+      title: "El Susurro del Bosque",
+      image: "https://i.pinimg.com/736x/75/07/f1/7507f1b3fd5026ee8ebb4d0d193dec9b.jpg"
     },
     {
       id: 15,
-      title: "Black Widow",
-      image: "https://files.oaiusercontent.com/file-Se41tY24QcdeqNKFCjPnxk?se=2025-02-20T04%3A17%3A32Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D45f4b20c-ad58-4a1b-b3d6-bb35ede052e9.webp&sig=Jtf1CJSMeHinrNLRAG3aVcsvqVu/spflTfvApIPtvuQ%3D"
+      title: "Sombras en la Niebla",
+      image: "https://i.pinimg.com/736x/39/6b/fb/396bfb8b0d8df628b8e4072ab148954c.jpg"
     }
   ];
 
