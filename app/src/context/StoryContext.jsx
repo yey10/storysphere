@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState, useCallback} from "react";
-import { getAllStories, createStory, updateStory, deleteStory, getCategories  } from '../api/storyService.jsx';
+import { getAllStories, createStory, updateStory, deleteStory, getCategories, getStoryById  } from '../api/storyService.jsx';
 
 //Crear el contexto
 const StoryContext = createContext();
@@ -15,23 +15,25 @@ export const StoryProvider = ({children}) =>{
 
      // Memorizar fetchStories
     const fetchStories = useCallback(async () => {
+        console.log("Fetching stories...");
         try {
-        const data = await getAllStories();
-        setStories(data);
+            const data = await getAllStories();
+            setStories(data);
         } catch (error) {
-        console.error("Error al obtener las historias:", error);
+            console.error("Error al obtener las historias:", error);
         } finally {
-        setIsLoading(false);
+            setIsLoading(false);
         }
     }, []);
 
     // Memorizar fetchCategories
     const fetchCategories = useCallback(async () => {
+        console.log("Fetching categories...");
         try {
-        const data = await getCategories();
-        setCategories(data);
+            const data = await getCategories();
+            setCategories(data);
         } catch (error) {
-        console.error("Error al obtener las categorías:", error);
+            console.error("Error al obtener las categorías:", error);
         }
     }, []);
 
@@ -46,6 +48,16 @@ export const StoryProvider = ({children}) =>{
             setStories([...stories, newStory]);
         } catch (error) {
             console.error("Error al crear la historia:", error);
+        }
+    };
+
+    const getStory = async (id) => {
+        try {
+            const story = await getStoryById(id);
+            return story;
+        } catch (error) {
+            console.error("Error al obtener la historia por ID:", error);
+            throw error;
         }
     };
 
@@ -76,6 +88,7 @@ export const StoryProvider = ({children}) =>{
             fetchStories,
             fetchCategories,
             addStory,
+            getStory,
             editStory,
             removeStory
         }}>

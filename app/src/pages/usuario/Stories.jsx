@@ -18,8 +18,10 @@ const Stories = () => {
 
     const { stories, fetchStories, isLoading } = useStory();
     useEffect(() => {
-        fetchStories();
-    }, [fetchStories]);
+        if (stories.length === 0 && !isLoading) {
+            fetchStories();
+        }
+    }, [stories, isLoading]);
     
 
   return (
