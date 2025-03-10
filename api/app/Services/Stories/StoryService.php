@@ -16,7 +16,7 @@ class StoryService
 
         // Asegurar que cada historia tenga la URL completa de la imagen
         foreach ($stories as $story) {
-            $story->photo = $story->photo ? asset('storage/' . $story->photo) : null;
+            $story->photo = $story->photo ? url('storage/' . $story->photo) : null;
         }
 
         return $stories;
@@ -92,7 +92,7 @@ class StoryService
         }
         $file_name = Str::random(10) . '.' . $file->getClientOriginalExtension();
         $path = Storage::disk('public')->putFileAs('stories_photos', $file, $file_name);
-        return $path;
+        return $path ? url('storage/' . $path) : null;
     }   
 
 

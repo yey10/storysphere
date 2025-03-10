@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useCallback } from "react";
-import { createEditor, Transforms, Text, Editor } from "slate";
+import { createEditor, Transforms, Text, Editor, Node } from "slate";
 import { Slate, Editable, withReact } from "slate-react";
 import { withHistory } from "slate-history";
 import { toast } from "react-toastify";
@@ -65,9 +65,10 @@ const StoryEditor = ({ onSave }) => {
 
   //Guardar la historia
   const handleSave = async () => {
+    const plainText = content.map(node => Node.string(node)).join("\n")
     const formData = new FormData();
     formData.append("title", title);
-    formData.append("content", JSON.stringify(content));
+    formData.append("content", plainText);
     formData.append("sinopsis", sinopsis);
     formData.append("state", state);
 

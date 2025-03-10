@@ -25,7 +25,7 @@ class StoreStoryRequest extends FormRequest
             'title' => 'required|string|max:255',
             'content' => 'required|string',
             'sinopsis' => 'required|string|max:500',
-            'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'photo' => 'required|image|mimes:jpeg,png,jpg,gif',
             'state' => 'required|string|in:draft,published',
             'categories' => 'required|array',
             'categories.*' => 'exists:categories,id_category',
