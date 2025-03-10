@@ -1,7 +1,8 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { StoryProvider } from '../context/StoryContext';
-import { LikeProvider } from '../context/LikeContext';import HomeUsuario from '../pages/usuario/Home.jsx';
+import { LikeProvider } from '../context/LikeContext';
+import HomeUsuario from '../pages/usuario/Home.jsx';
 import Popular from '../pages/usuario/Popular.jsx';
 import Explore from '../pages/usuario/Explore.jsx';
 import CreateStoryPage from '../pages/usuario/CreateStoryPage.jsx';
@@ -16,17 +17,18 @@ const PrivateRoutes = () =>{
     return (
         <StoryProvider>
           <LikeProvider>
-            <Routes>
-              <Route path="/home" element={<HomeUsuario />} />
-              <Route path="/popular" element={<Popular />} />
-              <Route path="/explore" element={<Explore />} />
-              <Route path="/createStory" element={<CreateStoryPage />} />
-              <Route path="/stories" element={<StoriesUsuario />} />
-              <Route path="/story/:id" element={<StoryPage />} />
-              <Route path="/categories" element={<Categories />} />
-              <Route path="/favorite" element={<Favorite />} />
-              <Route path="/profile" element={<Profile />} />
-            </Routes>
+          <Routes>
+            <Route path="/user/home" element={<HomeUsuario />} />
+            <Route path="/user/popular" element={<Popular />} />
+            <Route path="/user/explore" element={<Explore />} />
+            <Route path="/user/createStory" element={<CreateStoryPage />} />
+            <Route path="/user/stories" element={<StoriesUsuario />} />
+            <Route path="/user/story/:id" element={<StoryPage />} />
+            <Route path="/user/categories" element={<Categories />} />
+            <Route path="/user/favorite" element={<Favorite />} />
+            <Route path="/user/profile" element={<Profile />} />
+          </Routes>
+
           </LikeProvider>
         </StoryProvider>
       );

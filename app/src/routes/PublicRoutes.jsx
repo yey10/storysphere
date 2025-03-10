@@ -10,6 +10,7 @@ import Authors from '../pages/Authors.jsx';
 import Help from '../pages/Help.jsx';
 
 const PublicRoutes = () => {
+  console.log("Renderizando PublicRoutes...");
   return (
     <Routes>
       <Route path="/" element={<Home />} />
