@@ -15,19 +15,12 @@ class LikeController extends Controller
         $this->likeService = $likeService;
     }
 
-    public function likeStory(Request $request, $idStory)
+    public function toggleLike(Request $request, $idStory)
     {
         $idUser = $request->user()->id_user;
-        $this->likeService->likeStory($idUser, $idStory);
+        $result = $this->likeService->toggleLike($idUser, $idStory);
 
-        return response()->json(['message' => 'Story liked successfully'], 200);
-    }
-
-    public function unlikeStory(Request $request, $idStory)
-    {
-        $idUser = $request->user()->id_user;
-        $this->likeService->unlikeStory($idUser, $idStory);
-        return response()->json(['message' => 'Story unliked successfully'], 200);
+        return response()->json(['message' => $result['message']], 200);
     }
 
     public function getStoryLikes($idStory)

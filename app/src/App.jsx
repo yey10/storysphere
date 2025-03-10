@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext.jsx';
 import { StoryProvider } from './context/StoryContext.jsx';
+import { LikeProvider } from './context/LikeContext.jsx';
 import ProtectedRoute from './ProtectedRoute.jsx';
 import Home from './pages/Home.jsx';
 import Login from './pages/Login.jsx';
@@ -27,33 +28,36 @@ function App() {
     <>
       <BrowserRouter>
         <AuthProvider>
-
           <StoryProvider>
-            <Routes>
+            <LikeProvider>
+              <Routes>
 
-              {/* Rutas privadas */}
-                <Route element={<ProtectedRoute />}>
-                  <Route path='/home' element={<HomeUsuario />} />
-                  <Route path='/popular' element={<Popular />} />
-                  <Route path='/explore' element={<Explore />} />
-                  <Route path='/createStory' element={<CreateStoryPage />} />
-                  <Route path='/stories' element={<StoriesUsuario/>} />
-                  <Route path='/story/:id' element={<StoryPage />} />
-                  <Route path='/categories' element={<Categories />} />
-                  <Route path='/favorite' element={<Favorite />} />
-                  <Route path='/profile' element={<Profile />} />
-                </Route>
-                
-              {/*Rutas públicas*/}
-                <Route path='/' element={<Home />} />
-                <Route path='/login' element={<Login />} />
-                <Route path='/about' element={<About />} />
-                <Route path='/contact' element={<Contact />} />
-                <Route path='/services' element={<Services />} />
-                <Route path='/histories' element={<Histories />} />
-                <Route path='/authors' element={<Authors />} />
-                <Route path='/help' element={<Help />} />
-            </Routes>
+                {/* Rutas privadas */}
+                  <Route element={<ProtectedRoute />}>
+                    <Route path='/home' element={<HomeUsuario />} />
+                    <Route path='/popular' element={<Popular />} />
+                    <Route path='/explore' element={<Explore />} />
+                    <Route path='/createStory' element={<CreateStoryPage />} />
+                    <Route path='/stories' element={<StoriesUsuario/>} />
+                    <Route path='/story/:id' element={<StoryPage />} />
+                    <Route path='/categories' element={<Categories />} />
+                    <Route path='/favorite' element={<Favorite />} />
+                    <Route path='/profile' element={<Profile />} />
+                  </Route>
+
+                {/*Rutas públicas*/}
+                  <Route path='/' element={<Home />} />
+                  <Route path='/login' element={<Login />} />
+                  <Route path='/about' element={<About />} />
+                  <Route path='/contact' element={<Contact />} />
+                  <Route path='/services' element={<Services />} />
+                  <Route path='/histories' element={<Histories />} />
+                  <Route path='/authors' element={<Authors />} />
+                  <Route path='/help' element={<Help />} />
+              </Routes>
+
+          </LikeProvider>
+
           </StoryProvider>          
 
         </AuthProvider>

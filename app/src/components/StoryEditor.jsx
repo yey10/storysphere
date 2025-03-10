@@ -1,9 +1,45 @@
 import React, { useState, useMemo, useCallback } from "react";
-import { createEditor } from "slate";
+import { createEditor, Transforms, Text, Editor } from "slate";
 import { Slate, Editable, withReact } from "slate-react";
+import { withHistory } from "slate-history";
 import { toast } from "react-toastify";
 import "../assets/css/form-stories.css";
 import { useStory } from "../context/StoryContext";
+
+// 🎨 Componente de Botón
+const ToolbarButton = ({ format, icon, editor }) => {
+  const isActive = isMarkActive(editor, format);
+  return (
+    <button
+      onMouseDown={(event) => {
+        event.preventDefault();
+        toggleMark(editor, format);
+      }}
+      style={{
+        fontWeight: isActive ? "bold" : "normal",
+        margin: "0 5px",
+        cursor: "pointer",
+      }}
+    >
+      {icon}
+    </button>
+  );
+};
+
+// 🛠️ Función para activar/desactivar formato
+const isMarkActive = (editor, format) => {
+  const marks = Editor.marks(editor);
+  return marks ? marks[format] === true : false;
+};
+
+const toggleMark = (editor, format) => {
+  const isActive = isMarkActive(editor, format);
+  if (isActive) {
+    Transforms.unsetNodes(editor, format, { match: Text.isText, split: true });
+  } else {
+    Transforms.setNodes(editor, { [format]: true }, { match: Text.isText, split: true });
+  }
+};
 
 const StoryEditor = ({ onSave }) => {
   const initialValue = [
@@ -19,11 +55,10 @@ const StoryEditor = ({ onSave }) => {
   const [photo, setPhoto] = useState("");
   const [state, setState] = useState("draft");
   const [selectedCategories, setSelectedCategories] = useState([]);
-  const editor = useMemo(() => withReact(createEditor()), []);
+  const editor = useMemo(() => withHistory(withReact(createEditor())), []);
 
   const [content, setContent] = useState(initialValue);
 
-  // 🛠️ Evitar renders innecesarios con useCallback
   const handleChange = useCallback((newValue) => {
     setContent(newValue);
   }, []);

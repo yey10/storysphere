@@ -12,7 +12,14 @@ class StoryService
 {
     public function getAllStories()
     {
-        return Story::with('user', 'categories')->get();
+        $stories = Story::with('user', 'categories')->get();
+
+        // Asegurar que cada historia tenga la URL completa de la imagen
+        foreach ($stories as $story) {
+            $story->photo = $story->photo ? asset('storage/' . $story->photo) : null;
+        }
+
+        return $stories;
     }
 
     public function createStory($data)
@@ -40,7 +47,12 @@ class StoryService
 
     public function getById($id)
     {
-        return Story::with('user', 'categories')->findOrFail($id);
+        $story = Story::with('user', 'categories')->findOrFail($id);
+
+        // Convertir la ruta relativa en una URL accesible
+        $story->photo = $story->photo ? asset('storage/' . $story->photo) : null;
+    
+        return $story;
     }
 
     public function updateStory(Story $story, $data)
