@@ -18,7 +18,7 @@ const NavbarUsuario = () => {
     navigate('/');
   }
   const handleCreateStoryClick = () => {
-    navigate('/createStory'); // Redirigir a la página de creación de historias
+    navigate('/user/createStory'); // Redirigir a la página de creación de historias
   };
 
 
@@ -40,7 +40,7 @@ const NavbarUsuario = () => {
               </li>
               <li><Link to="/services"><Crown /> PREMIUM</Link></li>
               <li><Bell /></li>
-              <li><Link to="/profile"><img src={ReactImg4} alt="persona" /></Link></li>
+              <li><Link to="/user/profile"><img src={ReactImg4} alt="persona" /></Link></li>
             </ul>
           </div>
           {/* sidebar */}
@@ -51,25 +51,25 @@ const NavbarUsuario = () => {
             </div>
             <ul className="sidebar-links">
               <h4><span>Main Menu</span><div className="separator"></div></h4>
-              <li><Link to="/home"><House className='icon' /><span>Home</span></Link></li>
-              <li><Link to="/popular"><BookUp2 className='icon' /><span>Populares</span></Link></li>
-              <li><Link to="/explore"><MessageCircleMore className='icon' /><span>Explorar</span></Link></li>
+              <li><Link to="/user/home"><House className='icon' /><span>Home</span></Link></li>
+              <li><Link to="/user/popular"><BookUp2 className='icon' /><span>Populares</span></Link></li>
+              <li><Link to="/user/explore"><MessageCircleMore className='icon' /><span>Explorar</span></Link></li>
               <h4><span>Creación</span><div className="separator"></div></h4>
               <li>
               <button onClick={handleCreateStoryClick}> {/* Botón para crear historia */}
                 <Pencil className='icon' /><span>Crear</span>
               </button>
               </li>
-              <li><Link to="/profile"><NotebookPen className='icon' /><span>Mis historias</span></Link></li>
+              <li><Link to="/user/profile"><NotebookPen className='icon' /><span>Mis historias</span></Link></li>
               <h4><span>General</span><div className="separator"></div></h4>
-              <li><Link to="/stories"><BookOpenText className='icon' /><span>Historias</span></Link></li>
-              <li><Link to="/authors"><BookUser className='icon' /><span>Autores</span></Link></li>
-              <li><Link to="/favorite"><Heart className='icon' /><span>Favoritos</span></Link></li>
-              <li><Link to="/categories"><ChartBarStacked className='icon' /><span>Categorías</span></Link></li>
+              <li><Link to="/user/stories"><BookOpenText className='icon' /><span>Historias</span></Link></li>
+              <li><Link to="/user/authors"><BookUser className='icon' /><span>Autores</span></Link></li>
+              <li><Link to="/user/favorite"><Heart className='icon' /><span>Favoritos</span></Link></li>
+              <li><Link to="/user/categories"><ChartBarStacked className='icon' /><span>Categorías</span></Link></li>
               <h4><span>Account</span><div className="separator"></div></h4>
-              <li><Link to="/profile"><CircleUser className='icon' /><span>Perfil</span></Link></li>
-              <li><Link to="/help"><CircleHelp className='icon' /><span>Ayuda</span></Link></li>
-              <li><Link to="/settings"><Settings className='icon' /><span>Opciones</span></Link></li>
+              <li><Link to="/user/profile"><CircleUser className='icon' /><span>Perfil</span></Link></li>
+              <li><Link to="/user/help"><CircleHelp className='icon' /><span>Ayuda</span></Link></li>
+              <li><Link to="/user/settings"><Settings className='icon' /><span>Opciones</span></Link></li>
               <li>
                
                 <button onClick={handleLogoutClick} >

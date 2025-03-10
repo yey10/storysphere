@@ -109,7 +109,8 @@ const Login = () => {
           password: formData.password,
         }, {signal: controller.signal});
         toast.success('Inicio de sesión exitoso');
-        navigate('/home');
+        console.log("Redirigiendo a /user/home"); 
+        navigate('/user/home');
       }
     } catch (error) {
       if (error.name === 'AbortError') {

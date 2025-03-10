@@ -8,7 +8,7 @@ const Modal = ({ story, isOpen, onClose }) => {
   if (!isOpen || !story) return null;
 
   const handleReadMore = () => {
-    navigate(`/story/${story.id_story}`); // Redirige a la página de la historia
+    navigate(`user/story/${story.id_story}`); // Redirige a la página de la historia
     onClose(); // Cierra el modal
   };
 
