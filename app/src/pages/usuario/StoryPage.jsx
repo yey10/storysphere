@@ -9,11 +9,14 @@ import StoryImg from '../../assets/img/Stories/51.webp';
 import autorImg from '../../assets/img/autor.jpg';
 import commentImg from '../../assets/img/comentario.jpg';
 import { useStory } from "../../context/StoryContext";
+import { useLikes } from "../../context/LikeContext";
 
 const StoryPage = () => {
   
   const { id } = useParams();
   const {getStory} = useStory();
+  const { likes, handleToggleLike, fetchLikes } = useLikes();
+  const [isLiking, setIsLiking] = useState(false);
   const [story, setStory] = useState(null);
   const [isLoading, setIsloading] = useState(true);
   const [error, setError] = useState(null);
@@ -32,6 +35,16 @@ const StoryPage = () => {
     };
     fetchStory();
    }, [id, getStory]);
+
+   //Cargar los likes cuando el componente se monte
+  useEffect(() => {
+    fetchLikes(id);
+  }, [id, fetchLikes]);
+
+  const handleLike = () => {
+    handleToggleLike(id);
+  };
+  
     // Si está cargando, muestra un mensaje
     if (isLoading) {
       return (
@@ -104,7 +117,18 @@ const StoryPage = () => {
                       </div>
                       <div className="info-story">
                         <div>
-                          <div><Heart /><p>0</p></div>
+                        <div>
+                          <h1>Detalles de la Historia</h1>
+                          {/* Botón de Like */}
+                          <button 
+                              onClick={handleLike} 
+                              disabled={isLiking}
+                              className="flex items-center gap-2 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 disabled:bg-gray-400"
+                          >
+                              <Heart fill={likes[id] ? "red" : "none"} color="black" />
+                              <span>{likes[id] || 0}</span>
+                          </button>
+                        </div>
                           <div><MessageSquareMore /><p>0</p></div>
                           <div><Bookmark /><p>0</p></div>
                           <div><Download /><p>0</p></div>

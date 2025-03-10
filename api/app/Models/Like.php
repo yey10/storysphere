@@ -11,7 +11,7 @@ use App\Models\Story;
 class Like extends Model
 {
     use HasFactory;
-
+    public $timestamps = false;
     protected $table = 'likes';
     protected $primaryKey = 'id_like';
 
