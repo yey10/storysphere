@@ -3,7 +3,7 @@ import ParticlesBackground from '../../components/ParticlesBackground'
 import DynamicNavbar from '../../components/DynamicNavbar'
 import Footer from '../../components/Footer'
 
-const Profile = () => {
+const Favorite = () => {
   return (
     <div>
         <div className="min-h-screen bg-black relative">
@@ -11,7 +11,7 @@ const Profile = () => {
             <div className="relative z-10">
                 <DynamicNavbar />
                 <main className="container mx-auto px-4">
-                
+
                 </main>
             </div>
         </div>
@@ -19,4 +19,4 @@ const Profile = () => {
   )
 }
 
-export default Profile
+export default Favorite

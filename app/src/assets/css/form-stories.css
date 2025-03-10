@@ -1,53 +1,143 @@
 /* form-styles.css */
 
+.create-storie{
+  width: 100%;
+  min-height: 170vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 /* Estilos para el contenedor del formulario */
-.form-container {
-    color: black;
+  .create-storie .form-container {
     max-width: 800px;
-    margin:  auto;
-    margin-top: 50px;
+    height: 400px;
+    margin: 0 auto;
+    margin-bottom: 50px;
     padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
+    background-color: #202020;
+    border-radius: 10px;
+    border: 1px solid #D4AF37;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .create-storie .form-container .form-image{
+    width: 40%;
+    height: 100%;
+    border: 1px solid gray;
+    border-radius: 5px;
+  }
+  .create-storie .form-container .form-image > input{
+    width: 100%;
+    height: 100%;
+  }
+
+  .create-storie .form-container .form-info{
+    width: 60%;
+    height: 100%;
+    padding: 0 20px;
   }
   
   /* Estilos para los inputs y textarea */
-  input[type="text"],
-  textarea {
+  .create-storie input[type="text"],
+  .create-storie textarea {
     width: 100%;
+    background-color: #202020;
+    color: #fff;
     padding: 12px;
     margin-bottom: 16px;
-    border: 1px solid #ccc;
+    border: 1px solid #D4AF37;
     border-radius: 4px;
     font-size: 16px;
-    font-family: 'Arial', sans-serif;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
   }
   
   /* Efecto hover y focus */
-  input[type="text"]:hover,
-  textarea:hover {
-    border-color: #999;
+  .create-storie input[type="text"]:hover,
+  .create-storie textarea:hover {
+    border-color: #ffc400;
   }
   
-  input[type="text"]:focus,
-  textarea:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+  .create-storie input[type="text"]:focus,
+  .create-storie textarea:focus {
+    border-color: #ffd448;
+    box-shadow: 0 0 10px #ffd3414d;
     outline: none;
   }
   
   /* Estilos para el textarea */
-  textarea {
+  .create-storie textarea {
     resize: vertical; /* Permitir redimensionar verticalmente */
     min-height: 120px;
   }
   
+  /* Estilos para las categorías */
+  .create-storie .form-container .form-info .categories-container {
+    height: 44%;
+  }
+  
+  .create-storie .form-container .form-info .categories-container h3 {
+    margin-bottom: 8px;
+    font-size: 18px;
+  }
+  
+  .create-storie .form-container .form-info .categories-container select {
+    width: 100%;
+    height: 80%;
+    background-color: #0000007d;
+    border: 1px solid #D4AF37;
+    border-radius: 4px;
+    outline: none;
+  }
+
+  .create-storie .form-container .form-info .categories-container select::-webkit-scrollbar{
+    width: 10px;
+    background-color: #00000000;
+  }
+  .create-storie .form-container .form-info .categories-container select::-webkit-scrollbar-thumb{
+    background-color: #ffffff3d;
+    border: 1px solid #ffffff7d;
+    border-radius: 10px;
+  }
+  
+  .create-storie .form-container .form-info .categories-container option {
+    color: #fff;
+    font-size: 17px;
+    padding: 5px 0;
+    padding-left: 10px;
+    border-radius: 4px;
+  }
+  .create-storie .form-container .form-info .categories-container option:hover{
+    background-color: #ffffff2d;
+  }
+
+
+  .create-storie .form-content{
+    max-width: 1000px;
+    width: 900px;
+    height: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #202020;
+    border-radius: 10px;
+    border: 1px solid #D4AF37;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    position: relative;
+  }
+
   /* Estilos para el botón */
-  button {
+  .create-storie .form-content > div:nth-child(2){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .create-storie .form-content > div:nth-child(2) button {
     padding: 12px 24px;
-    background-color: #007bff;
+    background-color: #D4AF37;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -56,26 +146,6 @@
     transition: background-color 0.3s ease;
   }
   
-  button:hover {
-    background-color: #0056b3;
-  }
-  
-  /* Estilos para las categorías */
-  .categories-container {
-    margin-bottom: 16px;
-  }
-  
-  .categories-container h3 {
-    margin-bottom: 8px;
-    font-size: 18px;
-  }
-  
-  .categories-container label {
-    display: block;
-    margin-bottom: 8px;
-    font-size: 16px;
-  }
-  
-  .categories-container input[type="checkbox"] {
-    margin-right: 8px;
+  .create-storie .form-content > div:nth-child(2) button:hover {
+    background-color: #927926;
   }

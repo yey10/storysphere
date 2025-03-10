@@ -74,45 +74,55 @@ const StoryEditor = ({ onSave }) => {
   };
 
   return (
-    <div className="form-container">
-      <input
-        type="text"
-        placeholder="Título"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
-      <textarea
-        placeholder="Sinopsis"
-        value={sinopsis}
-        onChange={(e) => setSinopsis(e.target.value)}
-      />
-      <input type="file" accept="image/*" onChange={handlePhotoChange} />
-      <div>
-        <h3>Selecciona categorías:</h3>
-        {categories.map((category) => (
-          <label key={category.id_category}>
+    <div>
+      <div className="create-storie">
+        <div className="form-container">
+          <div className="form-image">
+            <input type="file" accept="image/*" onChange={handlePhotoChange} />
+          </div>
+          <div className="form-info">
             <input
-              type="checkbox"
-              value={category.id_category}
-              checked={selectedCategories.includes(category.id_category)}
-              onChange={handleCategoryChange}
+              type="text"
+              placeholder="Título"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
             />
-            {category.category_name}
-          </label>
-        ))}
+            <textarea
+              placeholder="Sinopsis"
+              value={sinopsis}
+              onChange={(e) => setSinopsis(e.target.value)}
+            />
+            <div className="categories-container">
+              <h3>Selecciona categorías:</h3>
+              <select multiple value={selectedCategories} onChange={handleCategoryChange}>
+                {categories.map((category) => (
+                  <option key={category.id_category} value={category.id_category}>
+                    {category.category_name}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+        </div>
+        <div className="form-content">
+          <Slate editor={editor} initialValue={content} onChange={handleChange}>
+            <Editable
+              placeholder="Escribe tu historia aquí..."
+              style={{
+                Width: "100%",
+                border: "1px solid #ccc",
+                padding: "10px",
+                minHeight: "400px",
+                borderRadius: "4px",
+                marginBottom: "20px",
+              }}
+            />
+          </Slate>
+          <div>
+            <button onClick={handleSave}>Guardar</button>
+          </div>
+        </div>
       </div>
-      <Slate editor={editor} initialValue={content} onChange={handleChange}>
-        <Editable
-          placeholder="Escribe tu historia aquí..."
-          style={{
-            border: "1px solid #ccc",
-            padding: "10px",
-            minHeight: "200px",
-            borderRadius: "4px",
-          }}
-        />
-      </Slate>
-      <button onClick={handleSave}>Guardar</button>
     </div>
   );
 };

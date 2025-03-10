@@ -1,5 +1,5 @@
 import React from 'react'
-import DynamicNavbar from '../components/DynamicNavbar.jsx'
+import DynamicNavbar from '../../components/DynamicNavbar.jsx'
 
 const Categories = () => {
   return (

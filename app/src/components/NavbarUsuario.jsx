@@ -52,21 +52,20 @@ const NavbarUsuario = () => {
             <ul className="sidebar-links">
               <h4><span>Main Menu</span><div className="separator"></div></h4>
               <li><Link to="/home"><House className='icon' /><span>Home</span></Link></li>
-              <li><Link to="/about"><BookUp2 className='icon' /><span>Populares</span></Link></li>
-              <li><Link to="/contact"><MessageCircleMore className='icon' /><span>Explorar</span></Link></li>
+              <li><Link to="/popular"><BookUp2 className='icon' /><span>Populares</span></Link></li>
+              <li><Link to="/explore"><MessageCircleMore className='icon' /><span>Explorar</span></Link></li>
               <h4><span>Creación</span><div className="separator"></div></h4>
               <li>
               <button onClick={handleCreateStoryClick}> {/* Botón para crear historia */}
                 <Pencil className='icon' /><span>Crear</span>
               </button>
               </li>
-              <li><Link to="/comunity"><NotebookPen className='icon' /><span>Mis historias</span></Link></li>
+              <li><Link to="/profile"><NotebookPen className='icon' /><span>Mis historias</span></Link></li>
               <h4><span>General</span><div className="separator"></div></h4>
               <li><Link to="/stories"><BookOpenText className='icon' /><span>Historias</span></Link></li>
               <li><Link to="/authors"><BookUser className='icon' /><span>Autores</span></Link></li>
               <li><Link to="/favorite"><Heart className='icon' /><span>Favoritos</span></Link></li>
               <li><Link to="/categories"><ChartBarStacked className='icon' /><span>Categorías</span></Link></li>
-              <li><Link to="/comunity"><Users className='icon' /><span>Comunidades</span></Link></li>
               <h4><span>Account</span><div className="separator"></div></h4>
               <li><Link to="/profile"><CircleUser className='icon' /><span>Perfil</span></Link></li>
               <li><Link to="/help"><CircleHelp className='icon' /><span>Ayuda</span></Link></li>
