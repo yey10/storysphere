@@ -11,13 +11,16 @@ import Contact from './pages/Contact.jsx';
 import Services from './pages/Services.jsx';
 import Histories from './pages/Histories.jsx';
 import Authors from './pages/Authors.jsx';
-import Categories from './pages/Categories.jsx';
-import CreateStoryPage from './pages/CreateStoryPage.jsx';
+import Categories from './pages/usuario/Categories.jsx';
+import CreateStoryPage from './pages/usuario/CreateStoryPage.jsx';
 import Help from './pages/Help.jsx';
 import Profile from './pages/usuario/Profile.jsx';
 import HomeUsuario from './pages/usuario/Home.jsx';
 import StoriesUsuario from './pages/usuario/Stories.jsx';
 import StoryPage from './pages/usuario/StoryPage.jsx';
+import Popular from './pages/usuario/Popular.jsx';
+import Explore from './pages/usuario/Explore.jsx';
+import Favorite from './pages/usuario/Favorite.jsx';
 
 function App() {
 
@@ -32,14 +35,16 @@ function App() {
                 {/* Rutas privadas */}
                   <Route element={<ProtectedRoute />}>
                     <Route path='/home' element={<HomeUsuario />} />
-                    <Route path='/categories' element={<Categories />} />
+                    <Route path='/popular' element={<Popular />} />
+                    <Route path='/explore' element={<Explore />} />
                     <Route path='/createStory' element={<CreateStoryPage />} />
-                    <Route path='/stories' element={<StoriesUsuario/>}></Route>
-
+                    <Route path='/stories' element={<StoriesUsuario/>} />
                     <Route path='/story/:id' element={<StoryPage />} />
+                    <Route path='/categories' element={<Categories />} />
+                    <Route path='/favorite' element={<Favorite />} />
                     <Route path='/profile' element={<Profile />} />
                   </Route>
-                  
+
                 {/*Rutas públicas*/}
                   <Route path='/' element={<Home />} />
                   <Route path='/login' element={<Login />} />
@@ -50,7 +55,9 @@ function App() {
                   <Route path='/authors' element={<Authors />} />
                   <Route path='/help' element={<Help />} />
               </Routes>
-            </LikeProvider>
+
+          </LikeProvider>
+
           </StoryProvider>          
 
         </AuthProvider>
