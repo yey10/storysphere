@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import ParticlesBackground from "../../components/ParticlesBackground";
 import NavbarUsuario from '../../components/NavbarUsuario';
 import Footer from "../../components/Footer";
+import ReactStars from "react-rating-stars-component";
 import { Star, Heart, MessageSquareMore, Bookmark, Download, ChevronsLeft, ChevronsRight, List, Send, Ellipsis } from "lucide-react";
 import "../../assets/css/storypage.css";
 import StoryImg from '../../assets/img/Stories/51.webp';
@@ -10,12 +11,14 @@ import autorImg from '../../assets/img/autor.jpg';
 import commentImg from '../../assets/img/comentario.jpg';
 import { useStory } from "../../context/StoryContext";
 import { useLikes } from "../../context/LikeContext";
+import { useRatings } from "../../context/RatingsContext";
 
-const StoryPage = () => {
+const StoryPage = ({ storyId }) => {
   
   const { id } = useParams();
   const {getStory} = useStory();
   const { likes, handleToggleLike, fetchLikes } = useLikes();
+  const { ratings, userRatings, handleRateStory } = useRatings();
   const [isLiking, setIsLiking] = useState(false);
   const [story, setStory] = useState(null);
   const [isLoading, setIsloading] = useState(true);
@@ -155,8 +158,17 @@ const StoryPage = () => {
               </div>
               <div className="punctuation">
                 <h3 className="title">¿Te gusto lo que acabas de leer? Puedes puntuar la historia</h3>
-                <div><Star /><Star /><Star /><Star /><Star /></div>
-                <p>0.0</p>
+                <div>
+                    <ReactStars
+                          count={5} // 5 estrellas
+                          value={userRatings[storyId] || ratings[storyId] || 0} // Mostrar calificación actual
+                          onChange={(newRating) => handleRateStory(storyId, newRating)} // Al hacer click
+                          size={24} // Tamaño de las estrellas
+                          activeColor="#ffd700" // Color de las estrellas activas
+                          isHalf={true} // Permitir medias estrellas
+                    />
+                </div>
+                <p>{ratings[storyId] ? ratings[storyId].toFixed(1) : "0.0"} puntuación</p>
               </div>
               <div className="comments">
                 <form action="">

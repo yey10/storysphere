@@ -2,7 +2,7 @@ import React, { useState, useMemo, useCallback } from "react";
 import { createEditor, Transforms, Text, Editor, Node } from "slate";
 import { Slate, Editable, withReact } from "slate-react";
 import { withHistory } from "slate-history";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import "../assets/css/form-stories.css";
 import { useStory } from "../context/StoryContext";
 
@@ -159,6 +159,7 @@ const StoryEditor = ({ onSave }) => {
           </div>
         </div>
       </div>
+      <ToastContainer/>
     </div>
   );
 };
