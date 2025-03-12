@@ -1,5 +1,5 @@
-import { createContext, useState, useContext, useEffect, useCallback, Children } from 'react';
-import { rateStory, getAverageRating, removeRating } from '../api/ratingsService';
+import { createContext, useState, useContext, useEffect, useCallback, useMemo } from 'react';
+import { rateStory, getAverageRating, removeRating } from '../api/ratingsService.jsx';
 
 const RatingsContext = createContext();
 
@@ -8,7 +8,9 @@ export const RatingsProvider = ({children}) =>{
     const [userRatings, setUserRatings] = useState({});
 
     const fetchRating = useCallback(async (storyId) =>{
-        if (!storyId) return;
+
+        if (!storyId || isNaN(storyId)) return;
+
         try {
             const average = await getAverageRating(storyId);
             setRatings((prev) => ({ ...prev, [storyId]: average}));
@@ -18,7 +20,12 @@ export const RatingsProvider = ({children}) =>{
     }, []);
 
     const handleRateStory = useCallback(async (storyId, rating) =>{
-        if (!storyId) return;
+
+         if (!storyId || isNaN(storyId) || rating < 1 || rating > 5) {
+            console.error("Datos inválidos: storyId debe ser un número y rating debe estar entre 1 y 5.");
+            return;
+        }
+
         try {
             await rateStory(storyId, rating);
             setUserRatings((prev) => ({ ...prev, [storyId]: rating}));
@@ -43,15 +50,19 @@ export const RatingsProvider = ({children}) =>{
         }
     }, [fetchRating]);
 
+    const contextValue = useMemo(() => ({
+        ratings,
+        userRatings,
+        fetchRating,
+        handleRateStory,
+        handleRemoveRating
+    }), [ratings, userRatings, fetchRating, handleRateStory, handleRemoveRating]);
+
 
     return (
-        <RatingsContext.Provider value={{
-            ratings,
-            userRatings,
-            fetchRating,
-            handleRateStory,
-            handleRemoveRating
-        }}>
+        <RatingsContext.Provider value={
+            contextValue
+        }>
             {children}
         </RatingsContext.Provider>
     );

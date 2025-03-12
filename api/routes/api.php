@@ -55,9 +55,11 @@ Route::prefix('stories')->group(function () {
 Route::prefix('comments')->group(function(){
     //Rutas públicas
     Route::get('/{comment}', [CommentController::class, 'show']); //Obtener un comentario específico
+    
 
     Route::middleware(['auth:sanctum', 'token.expiration'])->group(function(){
         //Rutas protegidas
+        Route::post('/comments/{storyId}', [CommentController::class, 'store']);
         Route::put('/{comment}', [CommentController::class, 'update']); //Actualizar un comentario
         Route::delete('/{comment}', [CommentController::class, 'destroy']); //Eliminar un comentario
         Route::get('/{id}/owner', [CommentController::class, 'getCommentOwner']); //Obtener dueño de un comentario

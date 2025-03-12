@@ -19,7 +19,7 @@ class RatingController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'id_story' => 'required|exists:stories, id_story',
+            'id_story' => 'required|exists:stories,id_story',
             'rating' => 'required|integer|min:1|max:5',
         ]);
 

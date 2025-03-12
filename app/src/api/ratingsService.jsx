@@ -1,6 +1,11 @@
 import axios from './api.js';
 
 export const rateStory = async (storyId, rating) =>{
+
+    if(!storyId || isNaN(storyId) || rating < 1 || rating > 5){
+        throw { message: "Datos inválidos: storyId debe ser un número y rating debe estar entre 1 y 5."
+    };}
+
     try {
         const response = await axios.post('/ratings', {id_story: storyId, rating});
         return response.data;
@@ -11,6 +16,10 @@ export const rateStory = async (storyId, rating) =>{
 };
 
 export const getAverageRating = async (storyId) =>{
+    
+    if (!storyId || isNaN(storyId)) {
+        throw { message: "Datos inválidos: storyId debe ser un número." };
+    }
     try {
         const response = await axios.get(`/ratings/${storyId}/average`);
         return response.data;
@@ -21,6 +30,11 @@ export const getAverageRating = async (storyId) =>{
 };
 
 export const removeRating = async (storyId) =>{
+
+    if (!storyId || isNaN(storyId)) {
+        throw { message: "Datos inválidos: storyId debe ser un número." };
+    }
+
     try {
         await axios.delete(`/ratings/${storyId}`);
     } catch (error) {

@@ -17,7 +17,7 @@ class CommentService
         $data['id_user'] = Auth::id();
         $data['id_story'] = $storyId;
 
-        return Comment::create($data);
+        return Comment::create($data)->load('user');
     }
 
     public function getCommentById($comment)

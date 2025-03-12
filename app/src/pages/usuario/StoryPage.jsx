@@ -12,18 +12,22 @@ import commentImg from '../../assets/img/comentario.jpg';
 import { useStory } from "../../context/StoryContext";
 import { useLikes } from "../../context/LikeContext";
 import { useRatings } from "../../context/RatingsContext";
+import { useComment } from "../../context/CommentContext";
 
-const StoryPage = ({ storyId }) => {
+const StoryPage = () => {
   
   const { id } = useParams();
   const {getStory} = useStory();
   const { likes, handleToggleLike, fetchLikes } = useLikes();
-  const { ratings, userRatings, handleRateStory } = useRatings();
+  const { ratings, userRatings, handleRateStory, fetchRating, handleRemoveRating } = useRatings();
+  const { comments, fetchComment, addComment, removeComment } = useComment();
+  const [newComment, setNewComment] = useState("");
   const [isLiking, setIsLiking] = useState(false);
   const [story, setStory] = useState(null);
   const [isLoading, setIsloading] = useState(true);
   const [error, setError] = useState(null);
 
+  //obtener historias
   useEffect(() => {
     const fetchStory = async () => {
       try {
@@ -44,8 +48,22 @@ const StoryPage = ({ storyId }) => {
     fetchLikes(id);
   }, [id, fetchLikes]);
 
+  //cargar los comentarios
+  useEffect(() => {
+    fetchComment(id);
+  }, [id, fetchComment]);
+
+  //handlers
+
   const handleLike = () => {
     handleToggleLike(id);
+  };
+
+  const handleAddComment = async () => {
+    e.preventDefault();
+    if (newComment.trim() === "") return;
+    await addComment(id, { content: newComment });
+    setNewComment("");
   };
   
     // Si está cargando, muestra un mensaje
@@ -114,8 +132,17 @@ const StoryPage = ({ storyId }) => {
                       <div className="info-autor">
                         <div><img src={autorImg} alt="" /></div>
                         <p>By {story.author}</p>
-                        <div><Star /><Star /><Star /><Star /><Star /></div>
-                        <p>{story.rating || "0.0"} puntuación</p>
+                        <div>
+                          <ReactStars
+                                count={5} // 5 estrellas
+                                value={userRatings[id] || ratings[id] || 0} // Mostrar calificación actual
+                                onChange={(newRating) => handleRateStory(id, newRating)} // Al hacer click
+                                size={24} // Tamaño de las estrellas
+                                activeColor="#ffd700" // Color de las estrellas activas
+                                isHalf={true} // Permitir medias estrellas
+                          />
+                        </div>
+                        <p>{ratings[id] !== undefined ? ratings[id].toFixed(1) : "0.0"} puntuación</p>
                         <button><Link to="authors">Ver más</Link></button>
                       </div>
                       <div className="info-story">
@@ -161,30 +188,37 @@ const StoryPage = ({ storyId }) => {
                 <div>
                     <ReactStars
                           count={5} // 5 estrellas
-                          value={userRatings[storyId] || ratings[storyId] || 0} // Mostrar calificación actual
-                          onChange={(newRating) => handleRateStory(storyId, newRating)} // Al hacer click
+                          value={userRatings[id] || ratings[id] || 0} // Mostrar calificación actual
+                          onChange={(newRating) => handleRateStory(id, newRating)} // Al hacer click
                           size={24} // Tamaño de las estrellas
                           activeColor="#ffd700" // Color de las estrellas activas
                           isHalf={true} // Permitir medias estrellas
                     />
                 </div>
-                <p>{ratings[storyId] ? ratings[storyId].toFixed(1) : "0.0"} puntuación</p>
+                <p>{ratings[id] !== undefined ? ratings[id].toFixed(1) : "0.0"} puntuación</p>
               </div>
               <div className="comments">
                 <form action="">
-                  <input type="text" placeholder="Agrega un comentario" />
-                  <button type="submit"><Send /></button>
+                  <input
+                   type="text"
+                   value={newComment}
+                   onChange={(e) => setNewComment(e.target.value)}
+                   placeholder="Agrega un comentario" 
+                  />
+                  <button onClick={handleAddComment}><Send /></button>
                 </form>
                 <div className="box-comment">
                   <div>
                     <div><img src={commentImg} alt="" /></div>
                     <div>
-                      <div>
-                        <h4>Usuario</h4>
-                        <p>16/01/2025</p>
-                      </div>
-                      <p>Contenido del comentario</p>
-                      <p>Responder</p>
+                    <ul>
+                      {comments[id]?.map(comment => (
+                        <li key={comment.id}>
+                            {comment.content}
+                            <button onClick={() => removeComment(comment.id, storyId)}>Eliminar</button>
+                        </li>
+                      ))}
+                    </ul>
                     </div>
                   </div>
                   <div>
@@ -202,17 +236,7 @@ const StoryPage = ({ storyId }) => {
       </div>
 
 
-      {/** 
-      <div className="story-page">
-        <h1>{story.title}</h1>
-        <p><strong>Autor:</strong> {story.author}</p>
-        <img src={story.image} alt={story.title} />
-        <p>{story.sinopsis}</p>
-        <p>
-          📖 Aquí puedes agregar el contenido completo de la historia para que el usuario lo lea.
-        </p>
-      </div>
-      */}
+      
     </div>
   );
 };
