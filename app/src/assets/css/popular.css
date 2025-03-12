@@ -1,0 +1,38 @@
+.popular-page{width: 100%;}
+
+.popular-page .popular1{width: 100%; min-height: 50vh; margin: 0 auto; padding: 30px; padding-top: 100px;}
+.popular-page .popular1 .swiper {padding: 20px 10px 40px !important;}
+.popular-page .popular1 .swiper-button-next, .popular-page .popular1 .swiper-button-prev {color: #D4AF37 !important;}
+.popular-page .popular1 .swiper-pagination-bullet-active {background: #D4AF37 !important;}
+.popular-page .popular1 .popular-slider .swiper-slide .popular-content{height: 50vh !important; background-color: #0000005d; border-radius: 10px; position: relative;}
+.popular-page .popular1 .popular-slider .swiper-slide .popular-content .popular-img{width: 100%; height: 100%; border-radius: 10px;}
+.popular-page .popular1 .popular-slider .swiper-slide .popular-content .popular-img img{width: 100%; height: 100%; border-radius: 10px;}
+.popular-page .popular1 .popular-slider .swiper-slide .popular-content .popular-info{width: 100%; height: 100%; display: flex; justify-content: flex-end; align-items: flex-start; flex-direction: column; padding: 15px; position: absolute; bottom: 0; left: 0; background: linear-gradient(#00000000, #0000003d, #000000d5);}
+.popular-page .popular1 .popular-slider .swiper-slide .popular-content .popular-info h3{font-size: 20px; text-shadow: 0 4px 8px #000;}
+.popular-page .popular1 .popular-slider .swiper-slide .popular-content .popular-info p:nth-child(2){font-size: 15px; text-shadow: 0 4px 8px #000;}
+.popular-page .popular1 .popular-slider .swiper-slide .popular-content .popular-info p:nth-child(3){font-size: 14px; text-shadow: 0 4px 8px #000;}
+
+.popular-page .popular2{width: 100%; min-height: 100vh; display: flex; justify-content: center; align-items: center; flex-direction: column;}
+.popular-page .popular2 h1{font-size: 60px; color: #D4AF37; text-align: center;}
+.popular-page .popular2 > p:nth-child(2){width: 80%; text-align: center; margin-bottom: 50px; padding-bottom: 20px; border-bottom: 1px solid gray;}
+.popular-page .popular2 .popular-data{width: 80%; min-height: 100vh; display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 30px; margin-bottom: 50px;}
+.popular-page .popular2 .popular-data .popular-storie{position: relative; display: flex; justify-content: space-between; background-color: #0000009c; border-radius: 20px; padding: 10px; overflow: hidden; transition: all .3s ease;}
+.popular-page .popular2 .popular-data .popular-storie:hover{transform: scale(1.1); box-shadow: 0 0 7px #D4AF37;}
+.popular-page .popular2 .popular-data .popular-storie div:nth-child(1){width: 40%; height: 100%; border-radius: 15px;}
+.popular-page .popular2 .popular-data .popular-storie div:nth-child(1) img{width: 100%; height: 100%; border-radius: 15px;}
+.popular-page .popular2 .popular-data .popular-storie div:nth-child(2){width: 50%; padding: 20px 0px; padding-right: 30px; position: relative;}
+.popular-page .popular2 .popular-data .popular-storie div:nth-child(2) span{font-size: 30px; color: #D4AF37; text-shadow: 0 5px 5px #000;}
+.popular-page .popular2 .popular-data .popular-storie div:nth-child(2) p:nth-child(3){font-size: 15px; margin-bottom: 20px;}
+.popular-page .popular2 .popular-data .popular-storie div:nth-child(2) p:nth-child(4){font-size: 17px;}
+.popular-page .popular2 .popular-data .popular-storie div:nth-child(2) > div:nth-child(1){position: absolute; top: -20px; right: -60px; width: 60%; height: 60px; border-radius: 0; background: linear-gradient(#795300, #D4AF37, #D4AF37); color: #fff; box-shadow: 0 5px 10px #D4AF374d; display: flex; justify-content: flex-end; align-items: center; flex-direction: column; transform: rotate(45deg);}
+.popular-page .popular2 .popular-data .popular-storie div:nth-child(2) > div:nth-child(1) p{font-size: 20px; text-shadow: 0 0px 10px #fff; margin: 0;}
+
+.popular-page .popular3{width: 90%; min-height: 30vh; margin: 0 auto; padding: 30px;}
+.popular-page .popular3 .swiper {padding: 20px 10px 40px !important;}
+.popular-page .popular3 .swiper-button-next, .popular-page .popular3 .swiper-button-prev {color: #D4AF37 !important;}
+.popular-page .popular3 .author-slider .swiper-slide{width: 30vh !important; height: 25vh !important; border-radius: 10px;}
+.popular-page .popular3 .author-slider .swiper-slide .popular-content{width: 20vh !important; height: 20vh !important; border-radius: 10px; position: relative;}
+.popular-page .popular3 .author-slider .swiper-slide .popular-content .popular-img{width: 100%; height: 100%; border-radius: 50%;}
+.popular-page .popular3 .author-slider .swiper-slide .popular-content .popular-img img{width: 100%; height: 100%; border-radius: 50%;}
+.popular-page .popular3 .author-slider .swiper-slide .popular-content .popular-info{width: 100%; height: auto; display: flex; justify-content: center; align-items: center; margin-top: 10px;}
+.popular-page .popular3 .author-slider .swiper-slide .popular-content .popular-info p{font-size: 20px; text-shadow: 0 4px 8px #000;}
