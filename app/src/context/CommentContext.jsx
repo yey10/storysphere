@@ -5,14 +5,17 @@ import { getCommentById, updateComment, deleteComment, getCommentOwner, createCo
 const CommentContext = createContext();
 
 export const CommentProvider = ({children}) =>{
-    const [comments, setComments] = useState([]);
+    const [comments, setComments] = useState({});
     const [isLoading, setIsLoading] = useState(true);
 
 
     const fetchComment = useCallback(async (id) => {
         try {
             const comment = await getCommentById(id);
-            setComments((prevComments) => [...prevComments.filter(c => c.id_comment !== id), comment]);
+            setComments((prevComments) => {
+                const commentsArray = Array.isArray(prevComments) ? prevComments : []; 
+                return [...commentsArray.filter(c => c.id_comment !== id), comment];
+            });
         } catch (error) {
             console.error("Error al obtener el comentario:", error);
         }
@@ -23,7 +26,7 @@ export const CommentProvider = ({children}) =>{
             const newComment = await createComment(storyId, commentData);
             setComments((prev) => ({
                 ...prev,
-                [storyId]: [...(prev[storyId] || []), newComment],
+                [storyId]: [...(Array.isArray(prev[storyId]) ? prev[storyId] : []), newComment]
             }));
         } catch (error) {
             console.error("Error al agregar comentario:", error);
