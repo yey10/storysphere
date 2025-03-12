@@ -2,6 +2,7 @@ export const featuredHistories = [
     {
       id: 1,
       title: "Neon Utopia: La Ciudad del Mañana",
+      autor: "",
       image: "https://i.pinimg.com/736x/97/54/40/97544070b020eeb1d1697467f9b7fa7b.jpg"
     },
     {
