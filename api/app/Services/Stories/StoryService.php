@@ -14,9 +14,11 @@ class StoryService
     {
         $stories = Story::with('user', 'categories')->get();
 
-        // Asegurar que cada historia tenga la URL completa de la imagen
+        
         foreach ($stories as $story) {
-            $story->photo = $story->photo ? url('storage/' . $story->photo) : null;
+            if ($story->photo && !Str::startsWith($story->photo, ['http', 'https'])) {
+                $story->photo = url(Storage::url($story->photo)); 
+            }
         }
 
         return $stories;
@@ -24,7 +26,7 @@ class StoryService
 
     public function createStory($data)
     {
-        $user = Auth::user(); //Verificar si el usuario está autenticado
+        $user = Auth::user(); 
         if (!$user) {
             throw new \Exception('Debes estar autenticado para crear una historia');
         }
@@ -49,8 +51,10 @@ class StoryService
     {
         $story = Story::with('user', 'categories')->findOrFail($id);
 
-        // Convertir la ruta relativa en una URL accesible
-        $story->photo = $story->photo ? asset('storage/' . $story->photo) : null;
+        
+        if ($story->photo && !Str::startsWith($story->photo, ['http', 'https'])) {
+            $story->photo = url(Storage::url($story->photo)); 
+        }
     
         return $story;
     }
