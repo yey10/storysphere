@@ -19,8 +19,10 @@
 .storypage .read .read-info > div:nth-child(2) .info-content .info-autor > button:hover{background: #947a23;}
 .storypage .read .read-info > div:nth-child(2) .info-content .info-story{width: 70%; display: flex; justify-content: center; align-items: center; flex-direction: column; padding-left: 30px;}
 .storypage .read .read-info > div:nth-child(2) .info-content .info-story > div:nth-child(1){width: 100%; display: flex; justify-content: space-between; margin-bottom: 20px; padding-right: 100px;}
-.storypage .read .read-info > div:nth-child(2) .info-content .info-story > div:nth-child(1) > div{display: flex; justify-content: center; align-items: center; flex-direction: column;}
-.storypage .read .read-info > div:nth-child(2) .info-content .info-story > div:nth-child(1) > div svg{width: 40px; height: 40px; color: white;}
+.storypage .read .read-info > div:nth-child(2) .info-content .info-story > div:nth-child(1) > .buttom{display: flex; justify-content: center; align-items: center; flex-direction: column;}
+.storypage .read .read-info > div:nth-child(2) .info-content .info-story > div:nth-child(1) > .buttom button{background-color: #00000000; border: none;}
+.storypage .read .read-info > div:nth-child(2) .info-content .info-story > div:nth-child(1) > .buttom button svg{width: 40px; height: 40px; color: white;}
+.storypage .read .read-info > div:nth-child(2) .info-content .info-story > div:nth-child(1) > .buttom button p{color: white;}
 .storypage .read .read-info > div:nth-child(2) .info-content .info-story > div:nth-child(2){width: 100%;}
 .storypage .read .read-info > div:nth-child(2) .info-content .info-story > div:nth-child(2) p{font-size: 17px; padding-right: 20px;}
 .storypage .read .read-content{padding: 0 100px; padding-top: 30px; position: relative;}
