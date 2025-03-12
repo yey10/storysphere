@@ -23,7 +23,7 @@ export const CommentProvider = ({children}) =>{
             const newComment = await createComment(storyId, commentData);
             setComments((prev) => ({
                 ...prev,
-                [storyId]: [...Children(prev[storyId] || []), newComment]
+                [storyId]: [...(prev[storyId] || []), newComment],
             }));
         } catch (error) {
             console.error("Error al agregar comentario:", error);
@@ -33,7 +33,11 @@ export const CommentProvider = ({children}) =>{
     const editComment = async (id, updatedData) => {
         try {
             const updatedComment = await updateComment(id, updatedData);
-            setComments(comments.map(comment => (comment.id_comment === id ? updatedComment : comment)));
+            setComments((prevComments) =>
+                prevComments.map(comment => 
+                  comment.id_comment === id ? updatedComment : comment
+                )
+            );
         } catch (error) {
             console.error("Error al actualizar el comentario:", error);
         }
@@ -42,7 +46,9 @@ export const CommentProvider = ({children}) =>{
     const removeComment = async (id) => {
         try {
             await deleteComment(id);
-            setComments(comments.filter(comment => comment.id_comment !== id));
+            setComments((prevComments) => 
+                prevComments.filter(comment => comment.id_comment !== id)
+            );
         } catch (error) {
             console.error("Error al eliminar el comentario:", error);
         }

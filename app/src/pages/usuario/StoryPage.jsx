@@ -59,11 +59,17 @@ const StoryPage = () => {
     handleToggleLike(id);
   };
 
-  const handleAddComment = async () => {
+  const handleAddComment = async (e) => {
     e.preventDefault();
     if (newComment.trim() === "") return;
-    await addComment(id, { content: newComment });
-    setNewComment("");
+    try{
+      await addComment(id, { content_comment: newComment });
+      setNewComment("");
+      fetchComment(id);
+    } catch (error) {
+      console.error("Error al agregar el comentario:", error);
+    }
+    
   };
   
     // Si está cargando, muestra un mensaje
@@ -226,12 +232,16 @@ const StoryPage = () => {
                     <div><img src={commentImg} alt="" /></div>
                     <div>
                     <ul>
-                      {comments[id]?.map(comment => (
-                        <li key={comment.id}>
+                      {comments[id] && Array.isArray(comments[id]) && comments[id].length > 0 ? (
+                        comments[id].map((comment, index) => (
+                          <li key={comment.id_comment || index}>
                             {comment.content}
-                            <button onClick={() => removeComment(comment.id, storyId)}>Eliminar</button>
-                        </li>
-                      ))}
+                            <button onClick={() => removeComment(comment.id, id)}>Eliminar</button>
+                          </li>
+                        ))
+                      ) : (
+                        <p>No hay comentarios aún</p>
+                      )}
                     </ul>
                     </div>
                   </div>
