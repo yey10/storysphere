@@ -55,6 +55,7 @@ Route::prefix('stories')->group(function () {
 Route::prefix('comments')->group(function(){
     //Rutas públicas
     Route::get('/{comment}', [CommentController::class, 'show']); //Obtener un comentario específico
+    Route::get('/{storyId}/comment', [CommentController::class, 'index']);
     
 
     Route::middleware(['auth:sanctum', 'token.expiration'])->group(function(){

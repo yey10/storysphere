@@ -1,25 +1,45 @@
 import React from "react";
+import commentImg from '../../assets/img/comentario.jpg';
 import { Send, Ellipsis, Heart } from "lucide-react";
-import commentImg from "../../assets/img/comentario.jpg";
-import "../../assets/css/storypage.css";
 
-const StoryComments = () => {
+const StoryComments = ({ storyComments, newComment, setNewComment, handleAddComment, handleRemoveComment }) => {
+
+  console.log("Comentarios en StoryComments:", storyComments); // Depuración
+  if (!Array.isArray(storyComments)) {
+    return <p>Error: No se pudieron cargar los comentarios.</p>;
+  }
+
   return (
     <div className="comments">
       <form action="">
-        <input type="text" placeholder="Agrega un comentario" />
-        <button type="submit"><Send /></button>
+        <input
+          type="text"
+          value={newComment}
+          onChange={(e) => setNewComment(e.target.value)}
+          placeholder="Agrega un comentario"
+        />
+        <button onClick={handleAddComment}>
+          <Send />
+        </button>
       </form>
       <div className="box-comment">
         <div>
-          <div><img src={commentImg} alt="" /></div>
           <div>
-            <div>
-              <h4>Usuario</h4>
-              <p>16/01/2025</p>
-            </div>
-            <p>Contenido del comentario</p>
-            <p>Responder</p>
+            <img src={commentImg} alt="" />
+          </div>
+          <div>
+          <ul>
+            {storyComments.length > 0 ? (
+              storyComments.map((comment) => (
+                <li key={comment.id_comment}>
+                  {comment.content_comment || "Comentario sin contenido"}
+                  <button onClick={() => handleRemoveComment(comment.id_comment)}>Eliminar</button>
+                </li>
+              ))
+            ) : (
+              <p>No hay comentarios aún</p>
+            )}
+          </ul>
           </div>
         </div>
         <div>

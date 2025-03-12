@@ -1,11 +1,10 @@
 import React from "react";
 import ReactStars from "react-rating-stars-component";
-import "../../assets/css/storypage.css";
 
-const StoryRating = ({ ratings, userRatings, handleRateStory, id }) => {
+const StoryRating = ({ userRatings, ratings, id, handleRateStory }) => {
   return (
     <div className="punctuation">
-      <h3 className="title">¿Te gustó lo que acabas de leer? Puedes puntuar la historia</h3>
+      <h3 className="title">¿Te gusto lo que acabas de leer? Puedes puntuar la historia</h3>
       <div>
         <ReactStars
           count={5}

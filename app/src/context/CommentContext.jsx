@@ -1,33 +1,45 @@
 import { createContext, useContext, useState, useEffect, useCallback, Children } from "react";
-import { getCommentById, updateComment, deleteComment, getCommentOwner, createComment } from "../api/commentService";
+import { getCommentById, updateComment, deleteComment, getCommentOwner, createComment, getAllCommentsByStory } from "../api/commentService";
 
 //crear el contexto
 const CommentContext = createContext();
 
 export const CommentProvider = ({children}) =>{
-    const [comments, setComments] = useState({});
+    const [comments, setComments] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
 
+    const getAllComments = useCallback(async (storyId) => {
+        try {
+            const comments = await getAllCommentsByStory(storyId);
+            console.log("Comentarios obtenidos:", comments); // Depuración
+            setComments(Array.isArray(comments) ? comments : []);
+        } catch (error) {
+            console.error("Error al obtener los comentarios:", error);
+        } finally {
+            setIsLoading(false);
+        }
+    }, []);
+/*
     const fetchComment = useCallback(async (id) => {
         try {
             const comment = await getCommentById(id);
             setComments((prevComments) => {
-                const commentsArray = Array.isArray(prevComments) ? prevComments : []; 
-                return [...commentsArray.filter(c => c.id_comment !== id), comment];
+                const prevCommentsArray = Array.isArray(prevComments) ? prevComments : [];
+                // Filtra el comentario antiguo
+                const filteredComments = prevCommentsArray.filter(c => c.id_comment !== id);
+                // Agrega el nuevo comentario
+                return [...filteredComments, comment]; 
             });
         } catch (error) {
             console.error("Error al obtener el comentario:", error);
         }
     }, []);
-
+*/
     const addComment = async (storyId, commentData) =>{
         try {
             const newComment = await createComment(storyId, commentData);
-            setComments((prev) => ({
-                ...prev,
-                [storyId]: [...(Array.isArray(prev[storyId]) ? prev[storyId] : []), newComment]
-            }));
+            setComments((prevComments) => [...prevComments, newComment]);
         } catch (error) {
             console.error("Error al agregar comentario:", error);
         }
@@ -71,7 +83,7 @@ export const CommentProvider = ({children}) =>{
         <CommentContext.Provider value={{
             comments,
             isLoading,
-            fetchComment,
+            getAllComments,
             editComment,
             addComment,
             removeComment,
