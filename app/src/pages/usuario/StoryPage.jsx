@@ -46,6 +46,10 @@ const StoryPage = () => {
   }, [id, fetchLikes]);
 
   useEffect(() => {
+    fetchRating(id);
+  }, [id, fetchRating]);
+
+  useEffect(() => {
     const fetchComments = async () => {
       try {
         await getAllComments(id);
@@ -143,6 +147,7 @@ const StoryPage = () => {
                   ratings={ratings}
                   id={id}
                   handleRateStory={handleRateStory}
+                  
                 />
                 <StoryContent story={story} />
               </div>
@@ -152,6 +157,7 @@ const StoryPage = () => {
                 ratings={ratings}
                 id={id}
                 handleRateStory={handleRateStory}
+                
               />
               <StoryComments
                 storyComments={comments}

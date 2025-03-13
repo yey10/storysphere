@@ -16,7 +16,7 @@ class Rating extends Model
     protected $primaryKey = 'id_rating';
 
     protected $fillable = [
-        'id_user', 'id_product', 'rating',
+        'id_user', 'id_story', 'rating',
     ];
 
     public function user()

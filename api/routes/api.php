@@ -84,6 +84,7 @@ Route::prefix('followers')->middleware(['auth:sanctum', 'token.expiration'])->gr
 //Rutas para ratings
 Route::prefix('ratings')->middleware(['auth:sanctum', 'token.expiration'])->group(function (){
     Route::post('/', [RatingController::class, 'store']);
+    Route::get('/{id_story}/user', [RatingController::class, 'getUserRating']);
     Route::get('/{id_story}/average', [RatingController::class, 'getAverageRating']);
     Route::delete('/{id_story}', [RatingController::class, 'destroy']);
 });
