@@ -5,6 +5,7 @@ import NavbarUsuario from '../../components/NavbarUsuario';
 import Footer from "../../components/Footer";
 import '../../assets/css/storypage.css';
 import { useStory } from "../../context/StoryContext";
+import  { useAuth } from "../..context/StoryContext";
 import { useLikes } from "../../context/LikeContext";
 import { useRatings } from "../../context/RatingsContext";
 import { useComment } from "../../context/CommentContext";
@@ -16,6 +17,7 @@ import StoryComments from "../../components/Story/StoryComments";
 
 const StoryPage = () => {
   const { id } = useParams();
+  const  { user } = useAuth();
   const { getStory } = useStory();
   const { likes, handleToggleLike, fetchLikes } = useLikes();
   const { ratings, userRatings, handleRateStory, fetchRating, handleRemoveRating } = useRatings();
@@ -25,6 +27,10 @@ const StoryPage = () => {
   const [story, setStory] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  //obtener informacion del usuario
+  const currentUserId = user?.id;
+  const isAdmin = user?.role === 'admin';
 
   useEffect(() => {
     const fetchStory = async () => {
@@ -147,7 +153,6 @@ const StoryPage = () => {
                   ratings={ratings}
                   id={id}
                   handleRateStory={handleRateStory}
-                  
                 />
                 <StoryContent story={story} />
               </div>
@@ -160,6 +165,8 @@ const StoryPage = () => {
                 
               />
               <StoryComments
+                currentUserId={currentUserId}
+                isAdmin={isAdmin}
                 storyComments={comments}
                 newComment={newComment}
                 setNewComment={setNewComment}
