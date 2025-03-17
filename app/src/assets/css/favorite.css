@@ -1,0 +1,20 @@
+.favorite-page{width: 100%; min-height: 100vh; display: flex; justify-content: center; align-items: center; flex-direction: column; padding-top: 120px;}
+.favorite-page h1{font-size: 60px; color: #D4AF37; text-align: center; margin-bottom: 30px;}
+.favorite-page .contenedor{width: 80%; margin: 0 auto; display: flex; justify-content: center; align-items: center; flex-direction: column;}
+.favorite-page .contenedor .botones{margin-bottom: 30px; display: flex;}
+.favorite-page .contenedor .botones .boton{display: flex; padding: 10px 40px; background-color: #00000000; color: #fff; border: 1px solid #D4AF37; cursor: pointer; outline: none;}
+.favorite-page .contenedor .botones .boton p{margin: 3px 0 0 5px;}
+.favorite-page .contenedor .botones .boton:nth-child(1){border-radius: 5px 0 0 5px;}
+.favorite-page .contenedor .botones .boton:nth-child(2){border-radius: 0 5px 5px 0;}
+.favorite-page .contenedor .botones .boton.activo{background-color: #D4AF37; position: relative;}
+.favorite-page .contenedor .lista{width: 100%; height: auto; padding: 20px 0; margin-bottom: 50px; display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); grid-gap: 20px; justify-items: center; align-items: center;}
+.favorite-page .contenedor .lista .item{position: relative; width: 100%; max-height: 400px; background-color: #000000ad; border: 1px solid #D4AF379d; border-radius: 20px; padding: 10px; display: flex;}
+.favorite-page .contenedor .lista .item .like-image{width: 40%; height: 100%; position: relative;}
+.favorite-page .contenedor .lista .item .like-image > div:nth-child(1){position: absolute; top: 0; left: 0; padding: 5px;}
+.favorite-page .contenedor .lista .item .like-image > div:nth-child(1) svg{width: 40px; height: 40px;}
+.favorite-page .contenedor .lista .item .like-image img{width: 100%; height: 100%; border-radius: 10px;}
+.favorite-page .contenedor .lista .item .like-info{width: 60%; height: 100%; padding: 0 20px;}
+.favorite-page .contenedor .lista .item .like-info h2{font-size: 25px; color: #D4AF37;}
+.favorite-page .contenedor .lista .item .like-info p:nth-child(2){font-size: 15px; margin-bottom: 20px;}
+.favorite-page .contenedor .lista .item .like-info p:nth-child(3){font-size: 17px; margin-bottom: 20px;}
+.favorite-page .contenedor .lista .item .like-info button{padding: 10px 70px; margin-bottom: 10px; font-size: 14px; color: white;}

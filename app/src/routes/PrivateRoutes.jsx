@@ -11,6 +11,7 @@ import CreateStoryPage from '../pages/usuario/CreateStoryPage.jsx';
 import StoriesUsuario from '../pages/usuario/Stories.jsx';
 import StoryPage from '../pages/usuario/StoryPage.jsx';
 import Categories from '../pages/usuario/Categories.jsx';
+import StoriesByCategory from '../pages/usuario/StoriesByCategory.jsx';
 import Favorite from '../pages/usuario/Favorite.jsx';
 import Profile from '../pages/usuario/Profile.jsx';
 
@@ -30,6 +31,7 @@ const PrivateRoutes = () => {
               <Route path="stories" element={<StoriesUsuario />} />
               <Route path="story/:id" element={<StoryPage />} />
               <Route path="categories" element={<Categories />} />
+              <Route path="category/:id" element={<StoriesByCategory />} />
               <Route path="favorite" element={<Favorite />} />
               <Route path="profile" element={<Profile />} />
             </Routes>

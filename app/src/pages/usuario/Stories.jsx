@@ -8,7 +8,7 @@ import SliderUsuario3 from '../../components/Sliders/SliderUsuario3';
 import '../../assets/css/storiesusuario.css';
 import SliderStorie from '../../components/Sliders/SliderStorie';
 import SliderStories from '../../components/Sliders/SliderStories';
-import { Misterio, Terror, Accion, Ficcion } from '../../data/histories';
+import { Misterio, Terror, Accion, Ficcion } from '../../data/categories';
 import StoriesData from '../../components/StoriesData';
 import { stories } from '../../data/stories';
 import {useStory} from '../../context/StoryContext';
