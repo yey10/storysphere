@@ -8,10 +8,12 @@ const StoryComments = ({
   setNewComment,
   handleAddComment,
   handleRemoveComment,
-  currentUserId, // ID del usuario actual
-  isAdmin, // Indica si el usuario es administrador
+  currentUserId,
+  isAdmin,
 }) => {
-  console.log("Comentarios en StoryComments:", storyComments); // Depuración
+  console.log("Comentarios en StoryComments:", storyComments);
+
+  
 
   // Verificar si storyComments es un array
   if (!Array.isArray(storyComments)) {
@@ -58,9 +60,6 @@ const StoryComments = ({
                       {/* Mostrar botones de editar y eliminar si tiene permisos */}
                       {canEditOrDelete && (
                         <div>
-                          <button onClick={() => handleEditComment(comment.id_comment)}>
-                            Editar
-                          </button>
                           <button onClick={() => handleRemoveComment(comment.id_comment)}>
                             Eliminar
                           </button>

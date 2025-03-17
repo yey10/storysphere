@@ -17,7 +17,8 @@ class Like extends Model
 
     protected $fillable = [
         'id_user',
-        'id_story'
+        'id_story',
+        'interaction_type'
     ];
 
     public function user()

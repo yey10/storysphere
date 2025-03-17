@@ -10,7 +10,7 @@ const Login = () => {
   const navigate = useNavigate();
   const [isRegister, setIsRegister] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const {handleRegister, handleLogin} = useAuth(); //importar las funciones de registro y login para usarlas en el componente
+  const {handleRegister, handleLogin} = useAuth(); 
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
@@ -130,6 +130,7 @@ const Login = () => {
         toast.error(error.message || 'Error inesperado');
       }
     }finally{
+      setIsLoading(false);
       clearTimeout(timeoutId);
     }
   }

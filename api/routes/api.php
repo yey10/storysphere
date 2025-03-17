@@ -67,10 +67,10 @@ Route::prefix('comments')->group(function(){
     });
 });
 
-//Rutas para likes 
-Route::prefix('likes')->middleware(['auth:sanctum', 'token.expiration'])->group(function () {
-    Route::put('/{story}', [LikeController::class, 'toggleLike']); // Alternar like
-    Route::get('/{story}/count', [LikeController::class, 'getStoryLikes']); // Contar likes
+//Rutas para interacciones 
+Route::prefix('interactions')->middleware(['auth:sanctum', 'token.expiration'])->group(function () {
+    Route::put('/{story}', [LikeController::class, 'toggleInteraction']); // Alternar interacciones
+    Route::get('/{story}/count', [LikeController::class, 'getStoryInteractions']); // Contar interacciones
 });
 
 //Rutas para followers
