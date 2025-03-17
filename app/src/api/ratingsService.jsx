@@ -1,5 +1,16 @@
 import axios from './api.js';
 
+
+export const getUserRating = async (storyId) =>{
+    try {
+        const response = await axios.get(`/ratings/${storyId}/user`);
+        return response.data.data;
+    } catch (error) {
+        console.error("Error al obtener la calificación del usuario:", error);
+        return { data: null };
+    }
+}
+
 export const rateStory = async (storyId, rating) =>{
 
     if(!storyId || isNaN(storyId) || rating < 1 || rating > 5){

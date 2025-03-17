@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect, useCallback, Children } from "react";
+import { createContext, useContext, useState, useCallback } from "react";
 import { getCommentById, updateComment, deleteComment, getCommentOwner, createComment, getAllCommentsByStory } from "../api/commentService";
 
 //crear el contexto
@@ -20,32 +20,35 @@ export const CommentProvider = ({children}) =>{
             setIsLoading(false);
         }
     }, []);
-/*
-    const fetchComment = useCallback(async (id) => {
+
+    const addComment = useCallback(async (storyId, commentData) => {
         try {
-            const comment = await getCommentById(id);
-            setComments((prevComments) => {
-                const prevCommentsArray = Array.isArray(prevComments) ? prevComments : [];
-                // Filtra el comentario antiguo
-                const filteredComments = prevCommentsArray.filter(c => c.id_comment !== id);
-                // Agrega el nuevo comentario
-                return [...filteredComments, comment]; 
-            });
-        } catch (error) {
-            console.error("Error al obtener el comentario:", error);
-        }
-    }, []);
-*/
-    const addComment = async (storyId, commentData) =>{
-        try {
+            //crear comentario temporal
+            const tempComment = {
+                id_comment: Date.now(),
+                content_comment: commentData.content_comment,
+            };
+
+            setComments((prevComments) => [...prevComments, tempComment]);
             const newComment = await createComment(storyId, commentData);
-            setComments((prevComments) => [...prevComments, newComment]);
+
+            //reemplazar el comentario temporal por el comentario real
+            setComments((prevComments) =>
+                prevComments.map((comment) =>
+                    comment.id_comment === tempComment.id_comment ? newComment : comment
+                )
+            );
         } catch (error) {
             console.error("Error al agregar comentario:", error);
-        }
-    }
+      
+            // Revertir el cambio en el estado local si la API falla
+            setComments((prevComments) =>
+              prevComments.filter((comment) => comment.id_comment !== tempComment.id_comment)
+            );
+          }
+    }, []);
 
-    const editComment = async (id, updatedData) => {
+    const editComment = useCallback(async (id, updatedData) => {
         try {
             const updatedComment = await updateComment(id, updatedData);
             setComments((prevComments) =>
@@ -56,9 +59,9 @@ export const CommentProvider = ({children}) =>{
         } catch (error) {
             console.error("Error al actualizar el comentario:", error);
         }
-    };
+    }, []);
 
-    const removeComment = async (id) => {
+    const removeComment = useCallback(async (id) => {
         try {
             await deleteComment(id);
             setComments((prevComments) => 
@@ -67,16 +70,16 @@ export const CommentProvider = ({children}) =>{
         } catch (error) {
             console.error("Error al eliminar el comentario:", error);
         }
-    };
+    }, []);
 
-    const fetchCommentOwner = async (id) => {
+    const fetchCommentOwner = useCallback(async (id) => {
         try {
             return await getCommentOwner(id);
         } catch (error) {
             console.error("Error al obtener el dueño del comentario:", error);
             throw error;
         }
-    };
+    }, []);
 
 
     return (

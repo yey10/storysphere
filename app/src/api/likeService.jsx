@@ -1,22 +1,22 @@
 import axios from './api.js';
 
-export const toggleLike = async (storyId) => {
+export const toggleInteraction = async (storyId, interactionType) => {
     try {
-        const response = await axios.put(`/likes/${storyId}`);
+        const response = await axios.put(`/interactions/${storyId}`, { interaction_type: interactionType });
         return response.data;
     }catch (error){
-        console.error("Error al dar like a la historia:", error);
-        throw new Error("Error al dar like a la historia");
+        console.error(`Error al cambiar la interacción (${interactionType}):`, error);
+        throw new Error(`Error al cambiar la interacción (${interactionType})`);
     }
 }
 
-export const getStoryLikes = async (storyId) => {
+export const getStoryInteractions = async (storyId) => {
     try {
-        const response = await axios.get(`/likes/${storyId}/count`);
-        return response.data.likes;
+        const response = await axios.get(`/interactions/${storyId}/count`);
+        return response.data.interactions;
     }catch (error){
-        console.error("Error al obtener los likes de la historia:", error);
-        throw new Error("Error al obtener los likes de la historia");
+        console.error("Error al obtener interacciones de la historia:", error);
+        throw new Error("Error al obtener interacciones de la historia");
     }
 }
 

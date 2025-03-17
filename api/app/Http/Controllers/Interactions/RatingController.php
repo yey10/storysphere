@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Interactions;
 
 use App\Http\Controllers\Controller;
 use App\Services\Interactions\RatingService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,11 +17,20 @@ class RatingController extends Controller
         $this->ratingService = $ratingService;
     }
 
+
+    public function getUserRating($id_story)
+    {
+        $rating = $this->ratingService->getUserRating($id_story);
+        return response()->json([
+            'data' => $rating
+        ]);
+    }
+
     public function store(Request $request)
     {
         $request->validate([
             'id_story' => 'required|exists:stories,id_story',
-            'rating' => 'required|integer|min:1|max:5',
+            'rating' => 'required|numeric|min:1|max:5',
         ]);
 
         $user = Auth::user();
