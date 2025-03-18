@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Contracts\Auth\CanResetPassword;
 use App\Models\Role;
 use App\Models\Story;
 use App\Models\Comment;
@@ -16,7 +17,7 @@ use App\Models\Subscription;
 use App\Models\Invoice;
 
 
-class User extends Authenticatable
+class User extends Authenticatable implements CanResetPassword
 {
     use HasFactory, HasApiTokens, Notifiable; 
 

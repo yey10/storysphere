@@ -3,7 +3,7 @@ import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import '../assets/css/login.css';
 import { useAuth } from '../context/AuthContext.jsx';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, Link} from 'react-router-dom';
 
 const Login = () => {
   
@@ -52,41 +52,16 @@ const Login = () => {
 
 
 
-  const formatDate = (date) => {
-    const [day, month, year] = date.split('-'); // Divide la fecha en día, mes y año
-  
-    // Convierte el año a 4 dígitos (por ejemplo, "90" -> "1990")
-    const fullYear = year.length === 2 ? `20${year}` : year;
-  
-    // Reconstruye la fecha en formato yyyy-mm-dd
-    return `${fullYear}-${month}-${day}`;
-  };
+ 
 
   
   //manejar los cambios en los inputs
   const handleChange = (e) => {
     const { name, value, files } = e.target;
   
-    let formattedValue = value;
-  
-    // Si el input es de tipo birthdate, convertir el formato
-    if (name === "birthdate") {
-      const regex = /^(\d{2})-(\d{2})-(\d{2})$/; // Formato dd-mm-aa
-      const match = value.match(regex);
-  
-      if (match) {
-        // Convertir a yyyy-mm-dd
-        formattedValue = formatDate(value);
-      } else {
-        // Si el formato no coincide, mostrar un error y no actualizar el estado
-        toast.error('Formato de fecha inválido. Use dd-mm-aa');
-        return;
-      }
-    }
-  
     setFormData({
       ...formData,
-      [name]: files ? files[0] : formattedValue,
+      [name]: files ? files[0] : value, // Asigna el valor directamente
     });
   };
 
@@ -200,6 +175,9 @@ const Login = () => {
             {errors.email && <p className="error">{errors.email[0]}</p>}
             <input type="password" name='password' value={formData.password} onChange={handleChange} placeholder="Contraseña" required />
             {errors.password && <p className="error">{errors.password[0]}</p>}
+            <p className="forgot-password">
+              <Link to="/forgot-password">¿Olvidaste tu contraseña?</Link>
+            </p>
             <button type="submit" disabled={isLoading}>
               {isLoading ? 'Cargando...' : 'Iniciar Sesión'}
             </button>
@@ -217,6 +195,7 @@ const Login = () => {
             <input type="password" name='password_confirm' value={formData.password_confirm} onChange={handleChange} placeholder="Confirmar contraseña" required />
             <input type="date" name="birthdate" value={formData.birthdate || ""} onChange={handleChange} required />
             {errors.birthdate && <p className="error">{errors.birthdate[0]}</p>}
+            
             <button type="submit" disabled={isLoading}>
               {isLoading ? 'Cargando...' : 'Registrarse'}
             </button>
