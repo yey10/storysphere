@@ -5,6 +5,7 @@ import NavbarUsuario from '../../components/NavbarUsuario';
 import Footer from "../../components/Footer";
 import '../../assets/css/storypage.css';
 import { useStory } from "../../context/StoryContext";
+import { useAuth } from "../../context/AuthContext";
 import { useLikes } from "../../context/LikeContext";
 import { useRatings } from "../../context/RatingsContext";
 import { useComment } from "../../context/CommentContext";
@@ -16,34 +17,44 @@ import StoryComments from "../../components/Story/StoryComments";
 
 const StoryPage = () => {
   const { id } = useParams();
+  const  { user } = useAuth();
   const { getStory } = useStory();
-  const { likes, handleToggleLike, fetchLikes } = useLikes();
+  const { likes, favorites, handleToggleInteraction, fetchInteractions, userInteractions } = useLikes();
   const { ratings, userRatings, handleRateStory, fetchRating, handleRemoveRating } = useRatings();
   const { comments, addComment, removeComment, getAllComments } = useComment();
   const [newComment, setNewComment] = useState("");
-  const [isLiking, setIsLiking] = useState(false);
   const [story, setStory] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  //obtener informacion del usuario
+  const currentUserId = user ? user.id : null;
+  const isAdmin = user ? user.role === 'admin' : false;
+
   useEffect(() => {
+    let isMounted = true;
     const fetchStory = async () => {
       try {
         const story = await getStory(id);
-        setStory(story);
+        if (isMounted) setStory(story);
       } catch (error) {
         console.error("Error al obtener la historia:", error);
-        setError(error);
+        if (isMounted) setError(error);
       } finally {
-        setIsLoading(false);
+        if (isMounted) setIsLoading(false);
       }
     };
     fetchStory();
+    return () => {isMounted = false};
   }, [id, getStory]);
 
   useEffect(() => {
-    fetchLikes(id);
-  }, [id, fetchLikes]);
+    fetchInteractions(id);
+  }, [id, fetchInteractions]);
+
+  useEffect(() => {
+    fetchRating(id);
+  }, [id, fetchRating]);
 
   useEffect(() => {
     const fetchComments = async () => {
@@ -57,7 +68,11 @@ const StoryPage = () => {
   }, [id, getAllComments]);
 
   const handleLike = () => {
-    handleToggleLike(id);
+    handleToggleInteraction(id, "like");
+  };
+
+  const handleFavorite = () => {
+    handleToggleInteraction(id, "favorite");
   };
 
   const handleAddComment = async (e) => {
@@ -69,14 +84,17 @@ const StoryPage = () => {
       setNewComment("");
     } catch (error) {
       console.error("Error al agregar el comentario:", error);
+      setError("Error al agregar el comentario. Inténtalo de nuevo.");
     }
   };
+
 
   const handleRemoveComment = async (commentId) => {
     try {
       await removeComment(commentId, id);
     } catch (error) {
       console.error("Error al eliminar el comentario:", error);
+      setError("Error al eliminar el comentario. Inténtalo de nuevo.");
     }
   };
 
@@ -136,9 +154,11 @@ const StoryPage = () => {
               <div className="read">
                 <StoryHeader
                   story={story}
-                  likes={likes}
+                  likes={likes[id] || 0}
+                  favorites={favorites[id] || 0}
                   handleLike={handleLike}
-                  isLiking={isLiking}
+                  handleFavorite={handleFavorite}
+                  userInteraction={userInteractions[id] || null}
                   userRatings={userRatings}
                   ratings={ratings}
                   id={id}
@@ -151,9 +171,11 @@ const StoryPage = () => {
                 userRatings={userRatings}
                 ratings={ratings}
                 id={id}
-                handleRateStory={handleRateStory}
+                handleRateStory={handleRateStory} 
               />
               <StoryComments
+                currentUserId={currentUserId}
+                isAdmin={isAdmin}
                 storyComments={comments}
                 newComment={newComment}
                 setNewComment={setNewComment}

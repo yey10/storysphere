@@ -3,9 +3,22 @@
 namespace App\Services\Interactions;
 
 use App\Models\Rating;
+use Illuminate\Support\Facades\Auth;
 
 class RatingService
 {
+
+
+    public function getUserRating($storyId)
+    {
+        $userId = Auth::id();
+        $rating = Rating::where('id_user', $userId)
+                        ->where('id_story', $storyId)
+                        ->first();    
+        return $rating ? $rating->rating : null;
+    }
+
+
 
     public function addOrUpdateRating($userId, $storyId, $ratingValue)
     {
