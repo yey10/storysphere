@@ -12,9 +12,9 @@ const Footer = () => {
           <div className="footer">
             <div className="footer-content">
                 <div>
-                    <div><FontAwesomeIcon icon={faLocationDot} /><span>Encuentranos</span><p>Lorem ipsum dolor sit amet.</p></div>
-                    <div><FontAwesomeIcon icon={faPhone} /><span>Llamanos</span><p>Lorem ipsum dolor sit amet.</p></div>
-                    <div><FontAwesomeIcon icon={faEnvelope} /><span>Escribenos</span><p>Lorem ipsum dolor sit amet.</p></div>
+                    <div><FontAwesomeIcon icon={faLocationDot} /><span>Encuentranos</span><p>No aplica</p></div>
+                    <div><FontAwesomeIcon icon={faPhone} /><span>Llamanos</span><p>+57 314 782 1614</p></div>
+                    <div><FontAwesomeIcon icon={faEnvelope} /><span>Escribenos</span><p>storysphere@gmail.com</p></div>
                 </div>
                 <div>
                     <div>
@@ -35,11 +35,11 @@ const Footer = () => {
                             <li><Link to ="/contact">Contacto</Link></li>
                             <li><Link to ="/authors">Autores</Link></li>
                             <li><Link to ="/about">Nosotros</Link></li>
-                            <li><Link to ="/categories">Categorías</Link></li>
+                            <li><Link to ="/user/categories">Categorías</Link></li>
                             <li><Link to ="/about">Equipo</Link></li>
-                            <li><Link to ="/terms">Terminos</Link></li>
-                            <li><Link to ="/terms">Privacidad</Link></li>
-                            <li><Link to ="/terms">Política</Link></li>
+                            <li><Link to ="/help">Terminos</Link></li>
+                            <li><Link to ="/help">Privacidad</Link></li>
+                            <li><Link to ="/help">Política</Link></li>
                         </ul>
                     </div>
                     <div>
@@ -50,7 +50,7 @@ const Footer = () => {
                 </div>
             </div>
             <div className="footer-end">
-              <p>Copiright © 2024, All right Reserved StorySphere</p>
+              <p>Copiright © 2025, All right Reserved StorySphere</p>
             </div>
           </div>
     </div>
