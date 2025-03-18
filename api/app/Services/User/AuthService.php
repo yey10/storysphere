@@ -25,6 +25,7 @@ class AuthService
             'password' => Hash::make($data['password']),
             'biography' => $data['biography'] ?? null,
             'profile_photo' => $profile_photo,
+            'birthdate' => $data['birthdate'],
         ]);
 
         $roles = $this->getValidRoles($data['roles'] ?? [1]);

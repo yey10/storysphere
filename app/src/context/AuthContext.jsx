@@ -35,7 +35,8 @@ export const AuthProvider = ({children}) =>{
                     id: response.user.id,
                     role: response.user.role,
                     name: response.user.name,
-                    profile_photo: response.user.profile_photo
+                    profile_photo: response.user.profile_photo,
+                    birthdate: response.user.birthdate
                 };
                 sessionStorage.setItem('user', JSON.stringify(userData));
                 setIsAuthenticated(true);
@@ -48,8 +49,23 @@ export const AuthProvider = ({children}) =>{
     }
 
     const handleRegister = async (data) =>{
+        console.log("Datos recibidos en handleRegister:", data);
         try {
-            await register(data);
+            let formattedDate = null;
+
+            if (data.birthdate) {
+                const [day, month, year] = data.birthdate.split("-"); // Suponiendo que viene en "dd-mm-yy"
+                formattedDate = `${year.length === 2 ? "20" + year : year}-${month}-${day}`; // Convertir a "YYYY-MM-DD"
+            }
+    
+            const formattedData = {
+                ...data,
+                birthdate: formattedDate
+            };
+
+            console.log("Datos formateados para enviar:", formattedData); 
+    
+            await register(formattedData);
         } catch (error) {
             throw error;
         }

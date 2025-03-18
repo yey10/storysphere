@@ -27,6 +27,7 @@ class RegisterUserRequest extends FormRequest
             'password' => 'required|string|min:8',
             'biography' => 'nullable|string|max:500',
             'profile_photo' => 'nullable|image|mimes:jpg,png,jpeg,gif|max:2048',
+            'birthdate' => ['required', 'date', 'before:' . now()->subYears(12)->format('Y-m-d')],
         ];
     }
 }
