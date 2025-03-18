@@ -18,7 +18,7 @@ const Favorite = () => {
                     <h1 className='title'>Tus Historias Favoritas</h1>
                     <FavoriteData historiasFavoritas={historiasFavoritas} historiasMeGusta={historiasMeGusta} />
                   </div>
-
+                  
                   <Footer />
                 </main>
             </div>

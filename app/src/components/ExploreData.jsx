@@ -11,7 +11,7 @@ const ExploreData = ({ stories }) => {
                 <div className="story-info">
                     <h2 className='title'>{story.title}</h2>
                     <p>{story.author}</p>
-                    <p>{story.sinopsis}</p>
+                    <div><p>{story.sinopsis}</p></div>
                     <button className="buttonLight">Leer Historia</button>
                 </div>
             </div>

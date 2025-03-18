@@ -1,6 +1,6 @@
 .storypage{width: 100%;}
 
-.storypage .read{width: 85%; min-height: 100vh; max-height: 300vh; margin: 0 auto; background-color: #151515; border-radius: 15px; box-shadow: 0 0px 15px 2px #D4AF378d; padding: 30px; margin-top: 150px; margin-bottom: 50px; position: relative;}
+.storypage .read{width: 85%; min-height: 100vh; margin: 0 auto; background-color: #151515; border-radius: 15px; box-shadow: 0 0px 15px 2px #D4AF378d; padding: 30px; margin-top: 150px; margin-bottom: 50px; position: relative;}
 .storypage .read .read-info{width: 100%; display: flex; justify-content: space-between; align-items: center; padding-bottom: 30px; border-bottom: 2px solid gray;}
 .storypage .read .read-info > div:nth-child(1){width: 35%; height: 400px; border-radius: 10px;}
 .storypage .read .read-info > div:nth-child(1) img{width: 100%; height: 100%; border-radius: 10px; background-size: cover;}
@@ -35,10 +35,10 @@
 .storypage .chapters > div:nth-child(2) > p:nth-child(2){margin-left: 10px; font-size: 22px;}
 .storypage .chapters > div svg{width: 30px; height: 30px; color: white;}
 .storypage .punctuation{width: 80%; margin: 0 auto; display: flex; justify-content: center; align-items: center; flex-direction: column; margin-bottom: 50px;}
-.storypage .punctuation h3{font-size: 40px; margin-bottom: 20px;}
+.storypage .punctuation h3{font-size: 40px; margin-bottom: 20px; text-align: center;}
 .storypage .punctuation div:nth-child(2){display: flex; justify-content: center; align-items: center;}
 .storypage .punctuation div:nth-child(2) svg{width: 35px; height: 35px; color: #D4AF37; margin: 0 20px; margin-bottom: 10px;}
-.storypage .punctuation p{font-size: 21px;}
+.storypage .punctuation p{font-size: 21px; text-align: center;}
 .storypage .comments{width: 80%; margin: 0 auto; display: flex; justify-content: center; align-items: center; flex-direction: column; margin-bottom: 50px;}
 .storypage .comments form{width: 80%; margin: 0 auto; position: relative; margin-bottom: 20px;}
 .storypage .comments form input{width: 100%; height: 45px; background-color: #2A2A1A; color: white; position: relative; border: 1px solid #D4AF37; border-radius: 50px; padding: 0 20px; outline: none; z-index: 1;}
@@ -55,7 +55,55 @@
 .storypage .comments .comments-content .box-comment > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) p{font-size: 15px; color: #b3b3b3; padding-left: 20px; padding-top: 7px;}
 .storypage .comments .comments-content .box-comment > div:nth-child(1) > div:nth-child(2) > p:nth-child(2){ font-size: 17px; margin-bottom: 20px;}
 .storypage .comments .comments-content .box-comment > div:nth-child(1) > div:nth-child(2) > p:nth-child(3){font-size: 15px; color: #D4AF37; text-decoration: underline; cursor: pointer;}
-.storypage .comments .comments-content .box-comment > div:nth-child(2){display: flex; justify-content: center; align-items: center; flex-direction: column;}
+.storypage .comments .comments-content .box-comment > div:nth-child(2){display: flex; justify-content: center; align-items: center; flex-direction: column; margin-left: 20px;}
 .storypage .comments .comments-content .box-comment > div:nth-child(2) > button{background-color: #00000000; border: none; cursor: pointer; margin-bottom: 10px;}
 .storypage .comments .comments-content .box-comment > div:nth-child(2) > button > svg{color: #fff;}
 .storypage .comments .comments-content .box-comment > div:nth-child(2) > svg:nth-child(1){margin-bottom: 10px;}
+
+@media (max-width: 900px) {
+    .storypage .read{width: 95%;}
+    .storypage .read .read-info > div:nth-child(2) .info-content .info-autor{padding: 0;}
+    .storypage .read .read-info > div:nth-child(2) .info-content .info-autor > button{padding: 5px 0;}
+    .storypage .read .read-info > div:nth-child(2) .info-content .info-story > div:nth-child(1){padding-right: 50px;}
+    .storypage .read .read-content{padding: 0 50px; padding-top: 30px;}
+}
+@media (max-width: 800px){
+    .storypage .read .read-info > div:nth-child(2) .info-content .info-story > div:nth-child(1){padding-right: 20px;}
+    .storypage .read .read-info > div:nth-child(2) h1{font-size: 55px;}
+}
+@media (max-width: 500px) {
+    .storypage .read{width: 100%; padding: 10px;}
+    .storypage .read .read-info > div:nth-child(1){display: none;}
+    .storypage .read .read-info > div:nth-child(2){width: 100%; height: 270px; padding-left: 5px;}
+    .storypage .read .read-info > div:nth-child(2) h1{font-size: 30px; margin-bottom: 10px;}
+    .storypage .read .read-info > div:nth-child(2) .info-content .info-autor > div:first-child{height: 80px;}
+    .storypage .read .read-info > div:nth-child(2) .info-content .info-autor > p:nth-child(2){margin-bottom: 0px;}
+    .storypage .read .read-info > div:nth-child(2) .info-content .info-autor > div:nth-child(3){margin-bottom: 0;}
+    .storypage .read .read-info > div:nth-child(2) .info-content .info-autor > div:nth-child(3) span{width: 18px; height: 30px;}
+    .storypage .read .read-info > div:nth-child(2) .info-content .info-autor > button a{padding: 5px 20px;}
+    .storypage .read .read-info > div:nth-child(2) .info-content .info-story{padding-left: 10px;}
+    .storypage .read .read-info > div:nth-child(2) .info-content .info-story > div:nth-child(1){margin-bottom: 5px;}
+    .storypage .read .read-info > div:nth-child(2) .info-content .info-story > div:nth-child(1) > .buttom button svg{width: 30px; height: 30px;}
+    .storypage .read .read-info > div:nth-child(2) .info-content .info-story > div:nth-child(2){height: 130px; overflow-y: auto;}
+    .storypage .read .read-info > div:nth-child(2) .info-content .info-story > div:nth-child(2):hover{padding-right: 10px;}
+    .storypage .read .read-info > div:nth-child(2) .info-content .info-story > div:nth-child(2)::-webkit-scrollbar{display: none;}
+    .storypage .read .read-info > div:nth-child(2) .info-content .info-story > div:nth-child(2):hover::-webkit-scrollbar{width: 5px; background-color: #00000000; display: block;}
+    .storypage .read .read-info > div:nth-child(2) .info-content .info-story > div:nth-child(2):hover::-webkit-scrollbar-thumb{background-color: #ffffff3d; border: 1px solid #ffffff7d; border-radius: 10px;}
+    .storypage .read .read-info > div:nth-child(2) .info-content .info-story > div:nth-child(2) p{font-size: 14px; padding: 0;}
+    .storypage .read .read-content{padding: 0 20px; padding-top: 30px;}
+    .storypage .read .read-content h2{font-size: 25px;}
+    .storypage .read .read-content .canvas p{font-size: 17px; line-height: 27px;}
+
+    .storypage .punctuation{width: 100%;}
+    .storypage .comments{width: 100%;}
+    .storypage .comments form{width: 90%;}
+    .storypage .comments .comments-content{width: 95%;}
+    .storypage .comments .comments-content .box-comment{padding: 10px; padding-left: 5px;}
+    .storypage .comments .comments-content .box-comment > div:nth-child(1) > div:nth-child(2){padding-left: 5px;}
+    .storypage .comments .comments-content .box-comment > div:nth-child(1) > div:nth-child(2) > div:nth-child(1){margin-bottom: 5px;}
+    .storypage .comments .comments-content .box-comment > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) h4{font-size: 18px;}
+    .storypage .comments .comments-content .box-comment > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) p{font-size: 13px; padding-left: 5px; padding-top: 5px;}
+    .storypage .comments .comments-content .box-comment > div:nth-child(1) > div:nth-child(2) > p:nth-child(2){font-size: 16px; margin-bottom: 10px;}
+    .storypage .comments .comments-content .box-comment > div:nth-child(1) > div:nth-child(2) > p:nth-child(3){font-size: 14px;}
+    .storypage .comments .comments-content .box-comment > div:nth-child(2){margin-left: 10px;}
+}

@@ -31,7 +31,7 @@ const FavoriteData = ({ historiasMeGusta, historiasFavoritas }) => {
                 <div className="like-info">
                     <h2 className='title'>{historia.title}</h2>
                     <p>{historia.author}</p>
-                    <p>{historia.description}</p>
+                    <div><p>{historia.description}</p></div>
                     <button className='buttonLight'>Leer Historia</button>
                 </div>
               </div>
@@ -45,7 +45,7 @@ const FavoriteData = ({ historiasMeGusta, historiasFavoritas }) => {
                 <div className="like-info">
                     <h2 className='title'>{historia.title}</h2>
                     <p>{historia.author}</p>
-                    <p>{historia.description}</p>
+                    <div><p>{historia.description}</p></div>
                     <button className='buttonLight'>Leer Historia</button>
                 </div>
             </div>
