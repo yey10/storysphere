@@ -25,7 +25,7 @@ class User extends Authenticatable
     public $timestamps = false; // Deshabilitar manejo de created_at y updated_at
 
     protected $fillable = [
-        'name', 'email', 'password', 'biography', 'profile_photo',
+        'name', 'email', 'password', 'biography', 'profile_photo', 'birthdate',
     ];
 
     protected $hidden = [

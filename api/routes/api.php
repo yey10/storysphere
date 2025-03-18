@@ -67,10 +67,10 @@ Route::prefix('comments')->group(function(){
     });
 });
 
-//Rutas para likes 
-Route::prefix('likes')->middleware(['auth:sanctum', 'token.expiration'])->group(function () {
-    Route::put('/{story}', [LikeController::class, 'toggleLike']); // Alternar like
-    Route::get('/{story}/count', [LikeController::class, 'getStoryLikes']); // Contar likes
+//Rutas para interacciones 
+Route::prefix('interactions')->middleware(['auth:sanctum', 'token.expiration'])->group(function () {
+    Route::put('/{story}', [LikeController::class, 'toggleInteraction']); // Alternar interacciones
+    Route::get('/{story}/count', [LikeController::class, 'getStoryInteractions']); // Contar interacciones
 });
 
 //Rutas para followers
@@ -84,6 +84,7 @@ Route::prefix('followers')->middleware(['auth:sanctum', 'token.expiration'])->gr
 //Rutas para ratings
 Route::prefix('ratings')->middleware(['auth:sanctum', 'token.expiration'])->group(function (){
     Route::post('/', [RatingController::class, 'store']);
+    Route::get('/{id_story}/user', [RatingController::class, 'getUserRating']);
     Route::get('/{id_story}/average', [RatingController::class, 'getAverageRating']);
     Route::delete('/{id_story}', [RatingController::class, 'destroy']);
 });

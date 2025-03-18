@@ -6,29 +6,46 @@ use App\Models\Like;
 
 class LikeService
 {
-    public function toggleLike($idUser, $idStory)
+    public function toggleInteraction($idUser, $idStory, $type)
     {
         // Verificar si ya existe el like
-        $existingLike = Like::where('id_user', $idUser)
+        $existingInteraction = Like::where('id_user', $idUser)
             ->where('id_story', $idStory)
             ->first();
 
-        if ($existingLike) {
-            $existingLike->delete(); // Si existe, eliminar (quitar like)
-            return ['liked' => false, 'message' => 'Like removed'];
-        }
+        
+            if ($existingInteraction) {
+                if ($existingInteraction->interaction_type === $type) {
+                    // Si el usuario ya tiene esta interacción, eliminarla
+                    $existingInteraction->delete();
+                    return ['status' => 'removed', 'message' => ucfirst($type) . ' removed'];
+                }
+    
+                if ($existingInteraction->interaction_type === 'like' && $type === 'favorite' ||
+                    $existingInteraction->interaction_type === 'favorite' && $type === 'like') {
+                    // Si tiene una interacción y se agrega la otra, cambiar a "both"
+                    $existingInteraction->update(['interaction_type' => 'both']);
+                    return ['status' => 'updated', 'message' => 'Now both Like and Favorite'];
+                }
+    
+                // Si ya tiene "both" y quiere cambiarlo a solo un tipo de interacción
+                $existingInteraction->update(['interaction_type' => $type]);
+                return ['status' => 'updated', 'message' => ucfirst($type) . ' updated'];
+            }
 
         Like::create([
             'id_user' => $idUser,
             'id_story' => $idStory,
+            'interaction_type' => $type
         ]);
 
-        return ['liked' => true, 'message' => 'Like added'];
+        return ['status' => 'added', 'message' => ucfirst($type) . ' added'];
+
     }
 
-    public function getStoryLikes($idStory)
+    public function getStoryInteractions($idStory)
     {
-        return Like::where('id_story', $idStory)->count();
+        return Like::where('id_story', $idStory)->get();
     }
 }
 

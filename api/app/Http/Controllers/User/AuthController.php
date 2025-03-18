@@ -23,6 +23,15 @@ class AuthController extends Controller
     public function register(RegisterUserRequest $request)
     {
         try {
+
+            //verificar que el usuario tenga al menos 12 años
+            $birthdate = Carbon::parse($request->birthdate);
+            if ($birthdate->diffInYears(Carbon::now()) < 12) {
+                return response()->json([
+                    'message' => 'El usuario debe tener al menos 12 años',
+                ], 400);
+            }
+
             $user = $this->authService->register($request->validated());
             //Generar token con sanctum
             $token = $user->createToken('auth_token')->plainTextToken;

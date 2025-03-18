@@ -15,17 +15,23 @@ class LikeController extends Controller
         $this->likeService = $likeService;
     }
 
-    public function toggleLike(Request $request, $idStory)
+    public function toggleInteraction(Request $request, $idStory)
     {
         $idUser = $request->user()->id_user;
-        $result = $this->likeService->toggleLike($idUser, $idStory);
+        $type = $request->input('interaction_type');
+
+        if (!in_array($type, ['like', 'favorite'])) {
+            return response()->json(['message' => 'Invalid interaction type'], 400);
+        }
+
+        $result = $this->likeService->toggleInteraction($idUser, $idStory, $type);
 
         return response()->json(['message' => $result['message']], 200);
     }
 
-    public function getStoryLikes($idStory)
+    public function getStoryInteractions($idStory)
     {
-        $count = $this->likeService->getStoryLikes($idStory);
-        return response()->json(['likes' => $count], 200);
+        $interactions  = $this->likeService->getStoryInteractions($idStory);
+        return response()->json(['interactions' => $interactions ], 200);
     }
 }
