@@ -63,13 +63,12 @@ const NavbarUsuario = () => {
               <li><Link to="/user/profile"><NotebookPen className='icon' /><span>Mis historias</span></Link></li>
               <h4><span>General</span><div className="separator"></div></h4>
               <li><Link to="/user/stories"><BookOpenText className='icon' /><span>Historias</span></Link></li>
-              <li><Link to="/user/authors"><BookUser className='icon' /><span>Autores</span></Link></li>
+              <li><Link to="/authors"><BookUser className='icon' /><span>Autores</span></Link></li>
               <li><Link to="/user/favorite"><Heart className='icon' /><span>Favoritos</span></Link></li>
               <li><Link to="/user/categories"><ChartBarStacked className='icon' /><span>Categorías</span></Link></li>
               <h4><span>Account</span><div className="separator"></div></h4>
               <li><Link to="/user/profile"><CircleUser className='icon' /><span>Perfil</span></Link></li>
-              <li><Link to="/user/help"><CircleHelp className='icon' /><span>Ayuda</span></Link></li>
-              <li><Link to="/user/settings"><Settings className='icon' /><span>Opciones</span></Link></li>
+              <li><Link to="/help"><CircleHelp className='icon' /><span>Ayuda</span></Link></li>
               <li>
                
                 <button onClick={handleLogoutClick} >

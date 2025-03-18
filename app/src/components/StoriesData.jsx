@@ -14,8 +14,8 @@ const StoriesData = ({ stories }) => {
                         </div>
                         <div className="story-info">
                             <h2 className='title'>{story.title}</h2>
-                            <p>{story.author}</p>
-                            <p>{story.sinopsis}</p>
+                            <p>By {story.author}</p>
+                            <div><p>{story.sinopsis}</p></div>
                             <button className="buttonLight" onClick={() => setSelectedStory(story)}>
                                 Leer Historia
                             </button>
