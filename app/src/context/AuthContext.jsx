@@ -48,28 +48,13 @@ export const AuthProvider = ({children}) =>{
         }
     }
 
-    const handleRegister = async (data) =>{
-        console.log("Datos recibidos en handleRegister:", data);
+    const handleRegister = async (data) => {
         try {
-            let formattedDate = null;
-
-            if (data.birthdate) {
-                const [day, month, year] = data.birthdate.split("-"); // Suponiendo que viene en "dd-mm-yy"
-                formattedDate = `${year.length === 2 ? "20" + year : year}-${month}-${day}`; // Convertir a "YYYY-MM-DD"
-            }
-    
-            const formattedData = {
-                ...data,
-                birthdate: formattedDate
-            };
-
-            console.log("Datos formateados para enviar:", formattedData); 
-    
-            await register(formattedData);
+          await register(data);
         } catch (error) {
-            throw error;
+          throw error;
         }
-    }
+      };
 
     const handleLogout = () =>{
         sessionStorage.removeItem('token');

@@ -12,6 +12,7 @@ use App\Http\Controllers\Interactions\RatingController;
 use App\Http\Controllers\Payment\InvoiceController;
 use App\Http\Controllers\Payment\MercadoPagoController;
 use App\Http\Controllers\Payment\SubscriptionController;
+use App\Http\Controllers\User\PasswordResetController;
 use Illuminate\Support\Facades\Route;
 
 // Rutas para autenticación
@@ -31,7 +32,13 @@ Route::prefix('users')->middleware(['auth:sanctum', 'token.expiration'])->contro
     Route::put('/{id}/role', 'updateRole'); // Actualizar rol
     Route::get('/{user}/stories', [StoryController::class, 'getUserStories']); // Historias de un usuario
     Route::get('/{user}/comments', [CommentController::class, 'getUserComments']); // Comentarios de un usuario
+
+    
 });
+
+//RESETEAR CONTRASEÑA
+Route::post('/forgot-password', [PasswordResetController::class, 'sendResetLink']);
+Route::post('/reset-password', [PasswordResetController::class, 'resetPassword']);
 
 // Rutas para historias
 Route::prefix('stories')->group(function () {
