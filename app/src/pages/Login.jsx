@@ -4,6 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import '../assets/css/login.css';
 import { useAuth } from '../context/AuthContext.jsx';
 import {useNavigate, Link} from 'react-router-dom';
+import { X } from 'lucide-react';
 
 const Login = () => {
   
@@ -170,6 +171,7 @@ const Login = () => {
         <div className="form" style={{ left: isRegister && windowWidth > 850 ? '410px' : '10px' }}>
           {/* Formulario de Login */}
           <form className={`form-login ${isRegister ? 'hidden' : ''}`} onSubmit={handleSubmit}>
+            <div><Link to="/"><p>Volver al inicio</p><X /></Link></div>
             <h2>Iniciar Sesión</h2>
             <input type="email" name='email' value={formData.email} onChange={handleChange} placeholder="Correo electrónico" required />
             {errors.email && <p className="error">{errors.email[0]}</p>}
@@ -185,6 +187,7 @@ const Login = () => {
 
           {/* Formulario de Registro */}
           <form className={`form-register ${!isRegister ? 'hidden' : ''}`} onSubmit={handleSubmit} encType='multipart/form-data'>
+            <div><Link to="/"><p>Volver al inicio</p><X /></Link></div>
             <h2>Registrarse</h2>
             <input type="text" name='name' value={formData.name} onChange={handleChange} placeholder="Nombre de Usuario" required />
             {errors.name && <p className="error">{errors.name[0]}</p>}
