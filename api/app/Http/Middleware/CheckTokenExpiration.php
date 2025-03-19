@@ -1,32 +1,40 @@
 <?php
-
 namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Carbon\Carbon;
+use Laravel\Sanctum\PersonalAccessToken;
 
 class CheckTokenExpiration
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
-     */
     public function handle(Request $request, Closure $next): Response
     {
-        $token = $request->user()->currentAccessToken();
-        if ($token && $token->expires_at && Carbon::now()->gt($token->expires_at)) {
+        if (!$request->user()) {
             return response()->json([
-                'message' => 'Token has expired',
+                'message' => 'Usuario no autenticado',
             ], 401);
         }
 
+        $token = $request->user()->currentAccessToken();
+        
+        if (!$token) {
+            return response()->json([
+                'message' => 'Token no encontrado',
+            ], 401);
+        }
 
+        // Si el campo expires_at no existe, omitir la verificación
+        if (!isset($token->expires_at)) {
+            return $next($request);
+        }
 
-
-
+        if (Carbon::now()->gt($token->expires_at)) {
+            return response()->json([
+                'message' => 'El token ha expirado',
+            ], 401);
+        }
 
         return $next($request);
     }

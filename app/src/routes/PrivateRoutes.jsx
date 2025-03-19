@@ -4,6 +4,7 @@ import { StoryProvider } from '../context/StoryContext';
 import { LikeProvider } from '../context/LikeContext';
 import { RatingsProvider } from '../context/RatingsContext.jsx';
 import { CommentProvider } from '../context/CommentContext.jsx';
+import { UserProvider } from '../context/UserContext.jsx';
 import HomeUsuario from '../pages/usuario/Home.jsx';
 import Popular from '../pages/usuario/Popular.jsx';
 import Explore from '../pages/usuario/Explore.jsx';
@@ -23,18 +24,20 @@ const PrivateRoutes = () => {
       <LikeProvider>
         <RatingsProvider>
           <CommentProvider>
-            <Routes>
-              <Route path="home" element={<HomeUsuario />} />
-              <Route path="popular" element={<Popular />} />
-              <Route path="explore" element={<Explore />} />
-              <Route path="createStory" element={<CreateStoryPage />} />
-              <Route path="stories" element={<StoriesUsuario />} />
-              <Route path="story/:id" element={<StoryPage />} />
-              <Route path="categories" element={<Categories />} />
-              <Route path="category/:id" element={<StoriesByCategory />} />
-              <Route path="favorite" element={<Favorite />} />
-              <Route path="profile" element={<Profile />} />
-            </Routes>
+            <UserProvider>
+              <Routes>
+                <Route path="home" element={<HomeUsuario />} />
+                <Route path="popular" element={<Popular />} />
+                <Route path="explore" element={<Explore />} />
+                <Route path="createStory" element={<CreateStoryPage />} />
+                <Route path="stories" element={<StoriesUsuario />} />
+                <Route path="story/:id" element={<StoryPage />} />
+                <Route path="categories" element={<Categories />} />
+                <Route path="category/:id" element={<StoriesByCategory />} />
+                <Route path="favorite" element={<Favorite />} />
+                <Route path="profile" element={<Profile />} />
+              </Routes>
+            </UserProvider>
           </CommentProvider>
         </RatingsProvider>
       </LikeProvider>

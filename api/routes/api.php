@@ -14,6 +14,10 @@ use App\Http\Controllers\Payment\MercadoPagoController;
 use App\Http\Controllers\Payment\SubscriptionController;
 use App\Http\Controllers\User\PasswordResetController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+
+
 
 // Rutas para autenticación
 Route::controller(AuthController::class)->group(function () {
@@ -34,6 +38,13 @@ Route::prefix('users')->middleware(['auth:sanctum', 'token.expiration'])->contro
     Route::get('/{user}/comments', [CommentController::class, 'getUserComments']); // Comentarios de un usuario
 
     
+});
+
+Route::get('/test-profile', function () {
+    $user = Auth::user();
+    Log::info('Token recibido:', ['token' => request()->header('Authorization')]);
+    Log::info('Usuario autenticado:', ['user' => $user]);
+    return response()->json(['user' => $user]);
 });
 
 //RESETEAR CONTRASEÑA
