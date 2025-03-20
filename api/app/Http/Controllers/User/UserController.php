@@ -9,6 +9,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Log;
+use Laravel\Sanctum\PersonalAccessToken;
+
 
 
 class UserController extends Controller
@@ -49,17 +51,17 @@ class UserController extends Controller
 
     }
 
-    public function profile()
+
+    public function getProfile()
     {
         try {
-            $userFromRequest = request()->user();
-            dd($userFromRequest); // Ver si Laravel detecta al usuario desde la request
-    
-            return response()->json(['user' => $userFromRequest], 200);
+            $user = $this->userService->getAuthenticatedUser();
+            return response()->json(['user' => $user], 200);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Error inesperado: ' . $e->getMessage()], 500);
         }
     }
+    
 
 
 

@@ -41,16 +41,14 @@ class UserService
     }
  
      // Obtener el perfil del usuario autenticado
-     public function getUserProfile()
-     {
-        $user = request()->user();
-
-        if (!$user) {
-            return response()->json(['error' => 'Usuario no autenticado'], 401);
+    public function getAuthenticatedUser()
+    {
+        if (!Auth::check()) {
+            throw new \Exception('Usuario no autenticado');
         }
 
-        return response()->json(['user' => $user], 200);
-     }
+        return Auth::user();
+    }
  
      // Actualizar perfil de un usuario
     public function updateUserProfile($authUser, $id, $data)
@@ -65,6 +63,7 @@ class UserService
              'name' => 'nullable|string|max:255',
              'email' => 'nullable|string|email|max:255|unique:users,email,' . $user->id_user,
              'biography' => 'nullable|string',
+             'profile_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
          ]);
 
         if ($validator->fails()) {

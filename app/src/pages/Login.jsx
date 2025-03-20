@@ -10,7 +10,7 @@ const Login = () => {
   const navigate = useNavigate();
   const [isRegister, setIsRegister] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const {handleRegister, handleLogin} = useAuth(); 
+  const {handleRegister, handleLogin, user} = useAuth(); 
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
@@ -121,8 +121,13 @@ const Login = () => {
           password: formData.password,
         }, {signal: controller.signal});
         toast.success('Inicio de sesión exitoso');
-        console.log("Redirigiendo a /user/home"); 
-        navigate('/user/home');
+        
+        if (user && user.role === "Admin") {
+          navigate('/admin/home');
+        }else{
+          navigate('/user/home');
+        }
+        
       }
     } catch (error) {
       if (error.name === 'AbortError') {

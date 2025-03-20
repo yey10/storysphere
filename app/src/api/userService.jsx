@@ -29,7 +29,11 @@ export const getUserProfile = async () =>{
 
 export const updateUserProfile = async (id, data) =>{
     try {
-        const response = await axios.put(`/users/${id}/profile`, data);
+        const response = await axios.put(`/users/${id}/profile`, data, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+              },
+        });
         return response.data;
     } catch (error) {
         throw error.response ? error.response.data : error;

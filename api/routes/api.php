@@ -30,21 +30,12 @@ Route::controller(AuthController::class)->group(function () {
 Route::prefix('users')->middleware(['auth:sanctum', 'token.expiration'])->controller(UserController::class)->group(function () {
     Route::get('/', 'index'); // Obtener todos los usuarios
     Route::get('/{id}', 'show'); // Obtener datos del usuario
-    Route::get('/profile', 'profile'); // Obtener perfil
+    Route::get('/profile', 'getProfile'); // Obtener perfil
     Route::put('/{id}/profile', 'updateProfile'); // Actualizar perfil
     Route::delete('/{id}', 'deleteAccount'); // Eliminar cuenta
     Route::put('/{id}/role', 'updateRole'); // Actualizar rol
     Route::get('/{user}/stories', [StoryController::class, 'getUserStories']); // Historias de un usuario
     Route::get('/{user}/comments', [CommentController::class, 'getUserComments']); // Comentarios de un usuario
-
-    
-});
-
-Route::get('/test-profile', function () {
-    $user = Auth::user();
-    Log::info('Token recibido:', ['token' => request()->header('Authorization')]);
-    Log::info('Usuario autenticado:', ['user' => $user]);
-    return response()->json(['user' => $user]);
 });
 
 //RESETEAR CONTRASEÑA
