@@ -1,14 +1,39 @@
 .categoryStory-page{width: 85%; min-height: 100vh; margin: 0 auto; display: flex; justify-content: center; align-items: center; flex-direction: column; padding-top: 120px;}
 
 .categoryStory-page h1{font-size: 60px; color: #D4AF37; text-align: center; margin-bottom: 30px;}
-.categoryStory-page .stories-container{width: 100%; height: auto; padding: 20px 0; margin-bottom: 50px; display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); grid-gap: 30px; justify-items: center; align-items: center;}
-.categoryStory-page .stories-container .story-card{position: relative; width: 100%; max-height: 400px; background-color: #000000ad; border: 1px solid #D4AF379d; border-radius: 20px; padding: 10px; display: flex;}
-.categoryStory-page .stories-container .story-card .story-img{width: 40%; height: 100%; position: relative;}
+.categoryStory-page .stories-container{width: 100%; height: auto; padding: 20px 0; margin-bottom: 50px; display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); grid-gap: 20px; justify-items: center; align-items: center;}
+.categoryStory-page .stories-container .story-card{position: relative; width: 100%; height: 300px; background-color: #000000ad; border: 1px solid #D4AF379d; border-radius: 20px; padding: 10px; display: flex;}
+.categoryStory-page .stories-container .story-card .story-img{width: 40%; height: 100%;}
 .categoryStory-page .stories-container .story-card .story-img img{width: 100%; height: 100%; border-radius: 10px;}
 .categoryStory-page .stories-container .story-card .story-info{width: 60%; height: 100%; padding: 0 20px;}
 .categoryStory-page .stories-container .story-card .story-info h2{font-size: 25px; color: #D4AF37;}
 .categoryStory-page .stories-container .story-card .story-info p:nth-child(2){font-size: 15px; margin-bottom: 20px;}
-.categoryStory-page .stories-container .story-card .story-info p:nth-child(3){font-size: 17px; margin-bottom: 20px;}
-.categoryStory-page .stories-container .story-card .story-info button{padding: 10px 70px; margin-bottom: 10px; font-size: 14px; color: white;}
+.categoryStory-page .stories-container .story-card .story-info div:nth-child(3){height: 130px; overflow-y: auto; margin-bottom: 10px;}
+.categoryStory-page .stories-container .story-card .story-info div:nth-child(3):hover{padding-right: 10px;}
+.categoryStory-page .stories-container .story-card .story-info div:nth-child(3)::-webkit-scrollbar{display: none;}
+.categoryStory-page .stories-container .story-card .story-info div:nth-child(3):hover::-webkit-scrollbar{width: 5px; background-color: #00000000; display: block;}
+.categoryStory-page .stories-container .story-card .story-info div:nth-child(3):hover::-webkit-scrollbar-thumb{background-color: #ffffff3d; border: 1px solid #ffffff7d; border-radius: 10px;}
+.categoryStory-page .stories-container .story-card .story-info div:nth-child(3) p{font-size: 17px; margin-bottom: 20px;}
+.categoryStory-page .stories-container .story-card .story-info button{padding: 10px 60px; margin-bottom: 10px; font-size: 14px; color: white;}
 
 .categoryStory-page > button:nth-child(3){margin-bottom: 50px;}
+
+@media (max-width: 900px) {
+    .categoryStory-page{width: 90%;}
+    .categoryStory-page .stories-container{ grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));}
+    .categoryStory-page .stories-container .story-card .story-info h2{font-size: 20px;}
+    .categoryStory-page .stories-container .story-card .story-info button{padding: 10px 30px; font-size: 12px;}
+}
+@media (max-width: 800px) {
+    .categoryStory-page .stories-container .story-card .story-info h2{font-size: 18px;}
+    .categoryStory-page .stories-container .story-card .story-info button{padding: 10px 20px; font-size: 10px;}
+}
+@media (max-width: 768px) {
+    .categoryStory-page .stories-container .story-card .story-info h2{font-size: 25px;}
+    .categoryStory-page .stories-container .story-card .story-info button{padding: 10px 50px; font-size: 15px;}
+}
+@media (max-width: 500px) {
+    .categoryStory-page .stories-container .story-card .story-info h2{font-size: 20px;}
+    .categoryStory-page .stories-container .story-card .story-info p:nth-child(2){margin-bottom: 5px;}
+    .categoryStory-page .stories-container .story-card .story-info button{padding: 10px; font-size: 12px;}
+}
