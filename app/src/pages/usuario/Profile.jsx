@@ -1,15 +1,39 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import ParticlesBackground from '../../components/ParticlesBackground'
 import DynamicNavbar from '../../components/DynamicNavbar'
 import Footer from '../../components/Footer'
+import EditProfileModal from '../../components/EditProfileModal'
 import '../../assets/css/profile.css'
+import { useAuth } from '../../context/AuthContext';
+import { useStory } from '../../context/StoryContext';
+import { useUser } from '../../context/UserContext';
 import { Camera, Edit, Github, Instagram, Linkedin, Mail, MapPin, Twitter } from "lucide-react"
 
 const Profile = () => {
+  
+  const { user } = useAuth();
+  const { updateUser } = useUser();
+  const { fetchUserStories } = useStory();
+  const [userStories, setUserStories] = useState([]);
   const [activeTab, setActiveTab] = useState("about")
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    if (user?.id_user) {
+      const fetchStories = async () => {
+        const stories = await fetchUserStories(user.id_user);
+        setUserStories(stories);
+      };
+      fetchStories();
+    }
+  }, [user, fetchUserStories]);
 
   const handleTabChange = (tab) => {
     setActiveTab(tab)
+  }
+
+  if (!user) {
+    return <p className="text-white text-center">Cargando perfil...</p>;
   }
 
   return (
@@ -30,7 +54,7 @@ const Profile = () => {
                         <div className="avatar-wrapper">
                           <div className="avatar-gradient">
                             <div className="avatar-image-container">
-                              <img src="/placeholder.svg?height=200&width=200" alt="Profile" className="avatar-image" />
+                              <img src={user.profile_photo || ""} alt="Profile" className="avatar-image" />
                             </div>
                           </div>
                           <button className="camera-button">
@@ -43,15 +67,19 @@ const Profile = () => {
                     {/* Profile content */}
                     <div className="profile-card">
                       <div className="profile-header">
-                        <h1 className="profile-name">Alejandra Martínez</h1>
-                        <p className="profile-title">alejandramartinez10@gmail.com</p>
+                        <h1 className="profile-name">{user.name}</h1>
+                        <p className="profile-title">{user.email}</p>
+                        <p className="profile-role text-sm text-gray-400">{user.role}</p>
+                        <p className={`profile-status ${user.account_status === "active" ? "text-green-500" : "text-red-500"}`}>
+                          {user.account_status === "active" ? "Cuenta Activa" : "Cuenta Inactiva"}
+                        </p>
 
                         <div className="action-buttons">
                           <button className="button outline">
                             <Mail className="icon-small" />
                             Mensaje
                           </button>
-                          <button className="button primary">
+                          <button className="button primary" onClick={() => setIsModalOpen(true)}>
                             <Edit className="icon-small" />
                             Editar Perfil
                           </button>
@@ -95,9 +123,7 @@ const Profile = () => {
                               <div className="section">
                                 <h2 className="section-title">Biografía</h2>
                                 <p className="section-text">
-                                  Diseñadora UX/UI y desarrolladora frontend con 5 años de experiencia creando experiencias digitales
-                                  centradas en el usuario. Apasionada por combinar diseño y código para crear interfaces elegantes y
-                                  funcionales.
+                                  {user.biography || "Sin biografía disponible."}
                                 </p>
                               </div>
 
@@ -111,10 +137,10 @@ const Profile = () => {
                                   ].map((job, i) => (
                                     <div key={i} className="experience-item">
                                       <div>
-                                        <h3 className="job-title">{job.role}</h3>
-                                        <p className="company-name">{job.company}</p>
+                                        <h3 className="job-title"></h3>
+                                        <p className="company-name"></p>
                                       </div>
-                                      <span className="period-badge">{job.period}</span>
+                                      <span className="period-badge"></span>
                                     </div>
                                   ))}
                                 </div>
@@ -122,30 +148,39 @@ const Profile = () => {
                             </div>
                           )}
 
-                          {activeTab === "portfolio" && (
-                            <div className="portfolio-section">
-                              <div className="portfolio-grid">
-                                {[1, 2, 3, 4].map((item) => (
-                                  <div key={item} className="portfolio-item">
-                                    <img
-                                      src={`/placeholder.svg?height=300&width=400&text=Proyecto ${item}`}
-                                      alt={`Proyecto ${item}`}
-                                    />
-                                    <div className="portfolio-overlay">
-                                      <div className="portfolio-info">
-                                        <h3 className="portfolio-title">Proyecto {item}</h3>
-                                        <p className="portfolio-category">Diseño UX/UI</p>
-                                      </div>
-                                    </div>
+                    {activeTab === "portfolio" && (
+                      <div className="portfolio-section">
+                        <div className="portfolio-grid">
+                          {userStories.length > 0 ? (
+                            userStories.map((story) => (
+                              <div key={story.id_story} className="portfolio-item">
+                                <img
+                                  src={story.image || "/placeholder.svg?height=300&width=400&text=Historia"}
+                                  alt={story.title}
+                                />
+                                <div className="portfolio-overlay">
+                                  <div className="portfolio-info">
+                                    <h3 className="portfolio-title">{story.title}</h3>
+                                    <p className="portfolio-category">{story.category}</p>
                                   </div>
-                                ))}
+                                </div>
                               </div>
-                            </div>
+                            ))
+                          ) : (
+                            <p className="text-white">No hay historias disponibles.</p>
                           )}
+                        </div>
+                      </div>
+                    )}
                         </div>
                       </div>
                     </div>
                   </div>
+                  <EditProfileModal
+                    visible={isModalOpen}
+                    onCancel={() => setIsModalOpen(false)}
+                    onUpdate={updateUser}
+                  />
 
                   <Footer />
                 </main>

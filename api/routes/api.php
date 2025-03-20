@@ -14,6 +14,10 @@ use App\Http\Controllers\Payment\MercadoPagoController;
 use App\Http\Controllers\Payment\SubscriptionController;
 use App\Http\Controllers\User\PasswordResetController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+
+
 
 // Rutas para autenticación
 Route::controller(AuthController::class)->group(function () {
@@ -26,14 +30,12 @@ Route::controller(AuthController::class)->group(function () {
 Route::prefix('users')->middleware(['auth:sanctum', 'token.expiration'])->controller(UserController::class)->group(function () {
     Route::get('/', 'index'); // Obtener todos los usuarios
     Route::get('/{id}', 'show'); // Obtener datos del usuario
-    Route::get('/profile', 'profile'); // Obtener perfil
+    Route::get('/profile', 'getProfile'); // Obtener perfil
     Route::put('/{id}/profile', 'updateProfile'); // Actualizar perfil
     Route::delete('/{id}', 'deleteAccount'); // Eliminar cuenta
     Route::put('/{id}/role', 'updateRole'); // Actualizar rol
     Route::get('/{user}/stories', [StoryController::class, 'getUserStories']); // Historias de un usuario
     Route::get('/{user}/comments', [CommentController::class, 'getUserComments']); // Comentarios de un usuario
-
-    
 });
 
 //RESETEAR CONTRASEÑA

@@ -62,3 +62,13 @@ export const getCategories = async () => {
         throw error.response ? error.response.data : error;
     }
 };
+
+export const getUserStories = async (user) => {
+    try{
+        const response = await axios.get(`/stories/${user}/stories`);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching categories:', error);
+        throw error.response ? error.response.data : error;
+    }
+}

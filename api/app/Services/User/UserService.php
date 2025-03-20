@@ -3,6 +3,8 @@ namespace App\Services\User;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
 
 
 class UserService
@@ -12,21 +14,19 @@ class UserService
         try {
             $query = User::query();
 
-            if ($request->has('name')) {
+            if ($request->filled('name')) {
                 $query->where('name', 'like', '%' . $request->name . '%');
             }
 
-            if ($request->has('role')) {
-                $query->whereHas('roles', function($q) use ($request){
-                    $q->where('roles.id_rol', $request->role);
-                });
+            if ($request->filled('role')) {
+                $query->where('id_rol', $request->role);
             }
 
-            if ($request->has('email')) {
+            if ($request->filled('email')) {
                 $query->where('email', 'like', '%' . $request->email . '%');
             }
 
-            return $query->get();
+            return $query->paginate(10);
             
         } catch (\Exception $e) {
             throw new \Exception('Error inesperado: ' . $e->getMessage());
@@ -37,17 +37,17 @@ class UserService
      // Obtener un usuario por ID
     public function getUserById($id)
     {
-         return User::findOrFail($id);
+        return User::findOrFail($id);
     }
  
      // Obtener el perfil del usuario autenticado
-    public function getUserProfile()
+    public function getAuthenticatedUser()
     {
-        $user = Auth::user();
-        if (!$user) {
-            throw new \Exception('Usuario no encontrado');
+        if (!Auth::check()) {
+            throw new \Exception('Usuario no autenticado');
         }
-        return $user;
+
+        return Auth::user();
     }
  
      // Actualizar perfil de un usuario
@@ -59,15 +59,21 @@ class UserService
              throw new \Exception('No tienes permiso para actualizar este perfil');
          }
  
-         $validatedData = validator($data, [
+         $validator = Validator::make($data, [
              'name' => 'nullable|string|max:255',
              'email' => 'nullable|string|email|max:255|unique:users,email,' . $user->id_user,
              'biography' => 'nullable|string',
-         ])->validate();
- 
-         $user->update($validatedData);
- 
-         return $user;
+             'profile_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+         ]);
+
+        if ($validator->fails()) {
+            throw new \Illuminate\Validation\ValidationException($validator);
+        }
+
+        $user->update($validator->validated());
+
+        return $user;
+
     }
  
      // Eliminar cuenta de usuario
@@ -85,21 +91,23 @@ class UserService
      // Actualizar el rol de un usuario
     public function updateUserRole($admin, $id, $data)
     {
-         if ($admin->id_rol !== 2) {
-             throw new \Exception('No tienes permiso para actualizar roles');
-         }
- 
-         $user = User::findOrFail($id);
- 
-         $validatedData = validator($data, [
-             'id_rol' => 'required|exists:roles,id_rol',
-         ])->validate();
- 
-         $user->update(['id_rol' => $validatedData['id_rol']]);
- 
-         return $user;
+          if ($admin->id_rol !== 2) {
+            throw new \Exception('No tienes permiso para actualizar roles');
+        }
+
+        $user = User::findOrFail($id);
+
+        $validator = Validator::make($data, [
+            'id_rol' => 'required|exists:roles,id_rol',
+        ]);
+
+        if ($validator->fails()) {
+            throw new \Illuminate\Validation\ValidationException($validator);
+        }
+
+        $user->update(['id_rol' => $validator->validated()['id_rol']]);
+
+        return $user;
     }
-
-
 
 }

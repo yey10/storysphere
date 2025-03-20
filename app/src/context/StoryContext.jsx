@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState, useCallback} from "react";
-import { getAllStories, createStory, updateStory, deleteStory, getCategories, getStoryById  } from '../api/storyService.jsx';
+import { getAllStories, createStory, updateStory, deleteStory, getCategories, getStoryById, getUserStories } from '../api/storyService.jsx';
 
 //Crear el contexto
 const StoryContext = createContext();
@@ -7,6 +7,7 @@ const StoryContext = createContext();
 export const StoryProvider = ({children}) =>{
 
     const [stories, setStories] = useState([]);
+    const [userStories, setUserStories] = useState([]);
     const [categories, setCategories] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
@@ -36,6 +37,18 @@ export const StoryProvider = ({children}) =>{
             console.error("Error al obtener las categorías:", error);
         }
     }, []);
+
+    const fetchUserStories = useCallback(async (userId) => {
+        setIsLoading(true);
+        try {
+            const data = await getUserStories(userId);
+            setUserStories(data);
+        } catch (error) {
+            console.error("Error al obtener las historias del usuario:", error);
+        } finally {
+            setIsLoading(false);
+        }
+    }, [])
 
     useEffect(() =>{
         if (stories.length === 0) fetchStories();
@@ -83,10 +96,12 @@ export const StoryProvider = ({children}) =>{
     return(
         <StoryContext.Provider value={{
             stories,
+            userStories,
             categories,
             isLoading,
             fetchStories,
             fetchCategories,
+            fetchUserStories,
             addStory,
             getStory,
             editStory,
