@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { usePasswordReset } from '../../context/PasswordResetContext';
+import '../../assets/css/password.css'
 
 const ResetPassword = () => {
     const [searchParams] = useSearchParams();
@@ -16,27 +17,30 @@ const ResetPassword = () => {
     };
 
     return (
-        <div>
-            <h2>Restablecer Contraseña</h2>
-            <form onSubmit={handleSubmit}>
-                <input 
-                    type="password" 
-                    placeholder="Nueva contraseña" 
-                    value={password} 
-                    onChange={(e) => setPassword(e.target.value)} 
-                    required 
-                />
-                <input 
-                    type="password" 
-                    placeholder="Confirmar contraseña" 
-                    value={password_confirmation} 
-                    onChange={(e) => setPassword_confirmation(e.target.value)} 
-                    required 
-                />
-                <button type="submit">Restablecer</button>
-            </form>
-            {message && <p style={{ color: "green" }}>{message}</p>}
-            {error && <p style={{ color: "red" }}>{error}</p>}
+        <div className="password-container">
+            <div className="form">
+                <h2>Restablecer Contraseña</h2>
+                <form onSubmit={handleSubmit}>
+                    <input 
+                        type="password" 
+                        placeholder="Nueva contraseña" 
+                        value={password} 
+                        onChange={(e) => setPassword(e.target.value)} 
+                        required 
+                    />
+                    <input 
+                        type="password" 
+                        placeholder="Confirmar contraseña" 
+                        value={password_confirmation} 
+                        onChange={(e) => setPassword_confirmation(e.target.value)} 
+                        required 
+                    />
+                    <button type="submit">Restablecer</button>
+                </form>
+                <Link to="/login">Volver</Link>
+                {message && <p style={{ color: "green" }}>{message}</p>}
+                {error && <p style={{ color: "red" }}>{error}</p>}
+            </div>
         </div>
     )
 }

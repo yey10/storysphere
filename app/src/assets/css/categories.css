@@ -1,7 +1,7 @@
 .categories-page{width: 100%; min-height: 100vh; display: flex; justify-content: center; align-items: center; flex-direction: column; padding-top: 120px;}
 
 .categories-page .categories1{width: 80%; min-height: 60vh; margin: 0 auto;}
-.categories-page .categories1 h1{font-size: 60px; color: #D4AF37; margin-bottom: 30px;}
+.categories-page .categories1 h1{font-size: 60px; color: #D4AF37; margin-bottom: 30px; text-align: center;}
 .categories-page .categories1 .search{width: 100%; height: auto; padding: 20px 70px;}
 .categories-page .categories1 .search form{position: relative; width: 100%; height: auto; background-color: #2A2A1A; border-radius: 50px; display: flex; justify-content: space-between; align-items: center;}
 .categories-page .categories1 .search form input{width: 90%; background-color: #00000000; border: none; border-radius: 50px 0 0 50px; padding: 10px 30px; outline: none;}
@@ -24,3 +24,22 @@
 .categories-page .categories2 .categories .categories-content > div:nth-child(2) > .image-content{width: 100%; height: 100%; display: flex; justify-content: space-between; align-items: center;}
 .categories-page .categories2 .categories .categories-content > div:nth-child(2) > .image-content > div{width: 32%; height: 100%; border-radius: 10px;}
 .categories-page .categories2 .categories .categories-content > div:nth-child(2) > .image-content > div img{width: 100%; height: 100%; border-radius: 10px;}
+
+
+@media (max-width: 900px) {
+    .categories-page .categories2 .categories{ min-height: 320vh;}
+    .categories-page .categories2 .categories .categories-content{height: 70%;}
+}
+
+@media (max-width: 500px) {
+    .categories-page .categories1{width: 90%;}
+    .categories-page .categories1 .search{padding: 20px 0;}
+    .categories-page .categories1 .search form input{width: 80%;}
+    .categories-page .categories1 .search form button{width: 20%;}
+    .categories-page .categories1 .categories-filter{width: 100%;}
+    .categories-page .categories1 .categories-filter .category{padding: 10px; margin: 10px 5px;}
+    .categories-page .categories1 .categories-filter > p{font-size: 17px;}
+
+    .categories-page .categories2{width: 95%; padding-top: 100px;}
+    .categories-page .categories2 .categories{ grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));}
+}

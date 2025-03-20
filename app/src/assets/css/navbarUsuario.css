@@ -52,35 +52,48 @@
   .headerUsuario .sidebar:hover .user-account{background-color: #ffffff2d; border-radius: 5px; }
 
 
-  /* responsive */
-  @media screen and (max-width: 1024px) {
-      .headerUsuario .navbar ul{margin-right: 5vh;}
-      .headerUsuario .navbar ul li:first-child{margin-right: 40px;}
-      .headerUsuario .navbar ul li:nth-child(2):hover input{width: 300px;}
-  }
+ /* responsive */
+ @media screen and (max-width: 1024px) {
+    .headerUsuario .navbar ul{margin-right: 5vh;}
+    .headerUsuario .navbar ul li:first-child{margin-right: 40px;}
+    .headerUsuario .navbar ul li:nth-child(1):hover input{width: 300px;}
+}
 
-  @media screen and (max-width: 768px) {
-      .headerUsuario .navbar div:nth-child(1){width: 150px; height: 50px; margin: 15px 0; margin-left: 15vh;}
-      .headerUsuario .navbar ul{margin-right: 5vh;}
-      .headerUsuario .navbar ul li{margin-right: 20px;}
-      .headerUsuario .navbar ul li:nth-child(2):hover input{width: 250px;}
-  }
+@media screen and (max-width: 768px) {
+    .headerUsuario .navbar div:nth-child(1){width: 150px; height: 50px; margin: 15px 0; margin-left: 15vh;}
+    .headerUsuario .navbar ul{margin-right: 0;}
+    .headerUsuario .navbar ul li{margin-right: 20px;}
+    .headerUsuario .navbar ul li:nth-child(1):hover input{width: 230px;}
+}
 
-  @media screen and (max-width: 500px) {
-      .headerUsuario .navbar div:nth-child(1){margin-left: 12vh; position: absolute;}
-      .headerUsuario .navbar ul li a{font-size: 16px;}
-      .headerUsuario .navbar ul li:first-child{position: absolute; right: 60px;}
-      .headerUsuario .navbar ul li:nth-child(2) input{height: 25px;}
-      .headerUsuario .navbar ul li:nth-child(2) span{width: 40px; height: 40px; margin: 20px 15px; line-height: 40px;}
-      .headerUsuario .navbar ul li:nth-child(2):hover{background-color: #050505;}
-      .headerUsuario .navbar ul li:nth-child(2):hover input{width: 365px;}
-  }
+@media screen and (max-width: 500px) {
+    .headerUsuario .navbar div:nth-child(1){margin-left: 12vh; position: absolute;}
+    .headerUsuario .navbar ul{margin-right: 20px;}
+    .headerUsuario .navbar ul li a{font-size: 16px;}
+    .headerUsuario .navbar ul li:nth-child(1){margin-right: 30px;}
+    .headerUsuario .navbar ul li:nth-child(1) input{height: 25px;}
+    .headerUsuario .navbar ul li:nth-child(1) span{width: 40px; height: 40px; margin: 20px 15px; line-height: 40px;}
+    .headerUsuario .navbar ul li:nth-child(1):hover{background-color: #00000000;}
+    .headerUsuario .navbar ul li:nth-child(1):hover input{width: 220px;}
+    .headerUsuario .navbar ul li:nth-child(2){display: none;}
+    .headerUsuario .navbar ul li:nth-child(3){margin-right: 10px;}
+    .headerUsuario .navbar ul li:nth-child(4){margin: 0;}
 
-  @media screen and (max-width: 375px) {
-      .headerUsuario .navbar div:nth-child(1){width: 100px; height: 50px; margin-left: 10vh;}
-      .headerUsuario .navbar ul{margin-right: 2vh;}
-      .headerUsuario .navbar ul li a{font-size: 13px;}
-      .headerUsuario .navbar ul li:first-child{position: absolute; right: 40px;}
-      .headerUsuario .navbar ul li:nth-child(2):hover input{width: 258px;}
-  }
+    .headerUsuario .sidebar{width: 65px;}
+    .headerUsuario .sidebar .sidebar-header{position: relative; right: 10px;}
+    .headerUsuario .sidebar .sidebar-links li a{padding: 15px 0px;}
+    .headerUsuario .sidebar .sidebar-links li button{padding: 15px 0px;}
+    .headerUsuario .sidebar:hover .sidebar-links li a{padding: 15px 10px;}
+    .headerUsuario .sidebar:hover .sidebar-links li button{padding: 15px 10px;}
+    .headerUsuario .sidebar .user-account .user-profile{position: relative; right: 10px;}
+}
 
+@media screen and (max-width: 390px) {
+    .headerUsuario .navbar div:nth-child(1){width: 120px; height: 50px; margin-left: 11vh; margin-top: 20px;}
+    .headerUsuario .navbar ul{margin-right: 2vh;}
+    .headerUsuario .navbar ul li a{font-size: 13px;}
+    .headerUsuario .navbar ul li:nth-child(1){margin-right: 30px;}
+    .headerUsuario .navbar ul li:nth-child(1) input{top: 2px;}
+    .headerUsuario .navbar ul li:nth-child(1) svg{width: 35px; height: 35px; top: 23px;}
+    .headerUsuario .navbar ul li:nth-child(1):hover input{width: 190px;}
+}

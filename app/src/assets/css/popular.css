@@ -36,3 +36,26 @@
 .popular-page .popular3 .author-slider .swiper-slide .popular-content .popular-img img{width: 100%; height: 100%; border-radius: 50%;}
 .popular-page .popular3 .author-slider .swiper-slide .popular-content .popular-info{width: 100%; height: auto; display: flex; justify-content: center; align-items: center; margin-top: 10px;}
 .popular-page .popular3 .author-slider .swiper-slide .popular-content .popular-info p{font-size: 20px; text-shadow: 0 4px 8px #000;}
+
+@media (max-width: 900px) {
+    .popular-page .popular1 .popular-slider .swiper-slide .popular-content{height: 40vh !important;}
+
+    .popular-page .popular2 .popular-data .popular-storie div:nth-child(2) > div:nth-child(1){top: -20px; right: -80px;}
+}
+
+@media (max-width: 768px) {
+    .popular-page .popular2 .popular-data .popular-storie div:nth-child(2) > div:nth-child(1){top: -20px; right: -70px;}
+}
+
+@media (max-width: 500px) {
+    .popular-page .popular1 .popular-slider .swiper-slide .popular-content{height: 50vh !important;}
+
+    .popular-page .popular2 h1{font-size: 50px;}
+    .popular-page .popular2 .popular-data{width: 95%; margin: 0 auto; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));}
+    .popular-page .popular2 .popular-data .popular-storie{width: 100%; position: relative;}
+    .popular-page .popular2 .popular-data .popular-storie:hover{transform: scale(0.9);}
+    .popular-page .popular2 .popular-data .popular-storie div:nth-child(1){width: 100%; height: 100%;}
+    .popular-page .popular2 .popular-data .popular-storie div:nth-child(2){position: absolute; top: 0; left: 0; width: 100%; height: 100%; padding: 30px; background-color: #0000009d; border: 1px solid #D4AF37; border-radius: 20px; opacity: 0; transition: all .3s ease;}
+    .popular-page .popular2 .popular-data .popular-storie:hover div:nth-child(2){opacity: 1;}
+    .popular-page .popular2 .popular-data .popular-storie div:nth-child(2) > div:nth-child(1){top: -10px; right: -62px; width: 50%; height: 70px;}
+}

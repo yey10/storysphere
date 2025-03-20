@@ -80,7 +80,6 @@ const Stories = () => {
                     </div>
 
                     
-
                 </div>
 
                 <Footer />

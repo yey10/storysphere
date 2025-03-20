@@ -1,19 +1,42 @@
-/* Fondo oscuro semitransparente */
-.modal-overlay {position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); display: flex; align-items: center; justify-content: center;}
-  /* Contenedor del modal */
-.modal-content {background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); text-align: center; animation: fadeIn 0.3s ease-in-out;}
-  /* Animación de entrada */
+.modal-overlay {position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); display: flex; align-items: center; justify-content: center; z-index: 999999999999999;}
+.modal-overlay .modal-content {position: relative; width: 50%; height: 60%; background: #151515; border: 1px solid #D4AF37; padding: 20px; border-radius: 10px; box-shadow: 0 0px 5px #D4AF37; text-align: center; animation: fadeIn 0.3s ease-in-out; display: flex; justify-content: space-between;}
   @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: scale(0.9);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
+    from {opacity: 0; transform: scale(0.9);}
+    to {opacity: 1; transform: scale(1);}
   }
-  /* Botón de cierre */
-.close-button {margin-top: 15px; padding: 8px 16px; background: #ff4d4d; color: white; border: none; border-radius: 4px; cursor: pointer; transition: background 0.2s;}
-.close-button:hover {background: #cc0000;}
-  
+.modal-overlay .modal-content .modal-image{width: 40%; height: 100%;}
+.modal-overlay .modal-content .modal-image img{width: 100%; height: 100%; background-size: cover; border-radius: 10px;}
+.modal-overlay .modal-content .modal-info{width: 60%; height: auto; padding-left: 20px; text-align: left;}
+.modal-overlay .modal-content .modal-info > div:nth-child(1) > h2{font-size: 30px; color: #D4AF37;}
+.modal-overlay .modal-content .modal-info > div:nth-child(1) > p:nth-child(2){font-size: 15px; margin-bottom: 20px;}
+.modal-overlay .modal-content .modal-info > div:nth-child(1) > div:nth-child(3){width: 100%; display: flex; margin-bottom: 10px;}
+.modal-overlay .modal-content .modal-info > div:nth-child(1) > div:nth-child(3) > svg{color: white; margin-right: 10px;}
+.modal-overlay .modal-content .modal-info > div:nth-child(1) > div:nth-child(3) > p:nth-child(6){padding-left: 20px; position: relative; top: 5px; font-size: 15px;}
+.modal-overlay .modal-content .modal-info > div:nth-child(1) > div:nth-child(3) > div:nth-child(7){width: 40px; height: 40px; border: 2px solid white; border-radius: 50%; background-color: #D4AF37; display: flex; justify-content: center; align-items: center; margin-left: 50px; position: relative; bottom: 5px;}
+.modal-overlay .modal-content .modal-info > div:nth-child(2) > p{margin-bottom: 10px;}
+.modal-overlay .modal-content .modal-info > div:nth-child(3){background-color: #ffffff2d; border-radius: 50px; width: 100px;}
+.modal-overlay .modal-content .modal-info > div:nth-child(3) > p{padding: 5px 23px;}
+.modal-overlay .modal-content .modal-info > div:nth-child(4){position: absolute; bottom: 20px;}
+.modal-overlay .modal-content .modal-info > div:nth-child(4) .read-button{padding: 8px 125px; background: #D4AF37; color: white; border: none; border-radius: 5px; cursor: pointer; transition: background 0.2s;}
+.modal-overlay .modal-content .modal-info > div:nth-child(4) .read-button:hover{background: #b28405;}
+.modal-overlay .modal-content .modal-info > div:nth-child(4) .close-button {padding: 8px 16px; background: #ff4d4d; color: white; border: none; border-radius: 5px; cursor: pointer; transition: background 0.2s; margin-left: 5px;}
+.modal-overlay .modal-content .modal-info > div:nth-child(4) .close-button:hover {background: #cc0000;}
+
+@media (max-width: 900px) {
+  .modal-overlay .modal-content{width: 70%; height: 50%;}
+  .modal-overlay .modal-content .modal-info > div:nth-child(4) .read-button{padding: 8px 100px;}
+}
+
+@media (max-width: 768px) {
+  .modal-overlay .modal-content{width: 80%; height: 60%;}
+}
+
+@media (max-width: 500px) {
+  .modal-overlay .modal-content{width: 90%; height: 75%;}
+  .modal-overlay .modal-content .modal-image{position: absolute; width: 40%; height: 50%;}
+  .modal-overlay .modal-content .modal-info{width: 100%; height: 100%; padding: 0;}
+  .modal-overlay .modal-content .modal-info > div:nth-child(1){width: 55%; height: 55%; margin-left: 45%; padding-left: 20px;}
+  .modal-overlay .modal-content .modal-info > div:nth-child(1) > div:nth-child(3){display: grid; grid-template-columns: repeat(auto-fit, minmax(25px, 1fr)); gap: 10px 0;}
+  .modal-overlay .modal-content .modal-info > div:nth-child(1) > div:nth-child(3) > svg{margin: 0;}
+  .modal-overlay .modal-content .modal-info > div:nth-child(1) > div:nth-child(3) > p:nth-child(6){padding: 0;}
+}

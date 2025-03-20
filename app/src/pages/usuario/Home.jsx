@@ -66,7 +66,7 @@ const Home = () => {
                       <div>
                         <img src={Descatado1} alt="" />
                         <div className='boximg-content'>
-                          <span className='title'>Un Asilo olvidado</span>
+                          <h3 className='title'>Un Asilo olvidado</h3>
                           <p>Autor</p>
                           <p>En lo más profundo del bosque, un antiguo monasterio emana una luz inquietante cada noche. Se dice que quien cruce sus puertas jamás regresa, atrapado por los susurros de un secreto olvidado...</p>
                           <button className='buttonLight'><Link to="/histories">Leer más</Link></button>
@@ -75,7 +75,7 @@ const Home = () => {
                       <div>
                         <img src={Descatado2} alt="" />
                         <div className='boximg-content'>
-                          <span className='title'>Los susurros de la biblioteca eterna</span>
+                          <h3 className='title'>Los susurros de la biblioteca eterna</h3>
                           <p>Autor</p>
                           <p>En lo más profundo de la biblioteca eterna, donde el tiempo no transcurre y el conocimiento es infinito, un jover erudito descubre un libro prohibido, que emana un extraño resplandor...</p>
                           <button className='buttonLight'><Link to="/histories">Leer más</Link></button> {/** historia por id */}
@@ -84,7 +84,7 @@ const Home = () => {
                       <div>
                         <img src={Descatado3} alt="" />
                         <div className='boximg-content'>
-                          <span className='title'>Cartas bajo la lluvia</span>
+                          <h3 className='title'>Cartas bajo la lluvia</h3>
                           <p>Autor</p>
                           <p>Sofía y Andrés solían dejarse cartas en un viejo buzón abandonado. Años después, una carta perdida llega a las manos de Sofía en medio de una tormenta. Cuando la abre, descubre una confesión de amor nunca entregada…</p>
                           <button className='buttonLight'><Link to="/histories">Leer más</Link></button>
@@ -93,7 +93,7 @@ const Home = () => {
                       <div>
                         <img src={Descatado4} alt="" />
                         <div className='boximg-content'>
-                          <span className='title'>Hacia el Horizonte del Infinito</span>
+                          <h3 className='title'>Hacia el Horizonte del Infinito</h3>
                           <p>Autor</p>
                           <p>Desde la estación orbital, el comandante observa la última nave partir hacia lo desconocido. Más allá del portal estelar, un nuevo destino aguarda, donde el tiempo y el espacio dejan de tener sentido...</p>
                           <button className='buttonLight'><Link to="/histories">Leer más</Link></button>
@@ -111,7 +111,7 @@ const Home = () => {
                         <div><img src={premium} alt="" /></div>
                         <div>
                           <div><Crown /><p>PREMIUM</p></div>
-                          <span className='title'>Ecos del pasado</span>
+                          <h4 className='title'>Ecos del pasado</h4>
                           <p>Lucía encuentra un antiguo diario que revela un amor prohibido y un misterio sin resolver en su familia. A medida que lee, extraños sucesos comienzan a rodearla. Ahora, deberá descubrir la verdad antes de que el pasado la alcance.</p>
                         </div>
                       </div>
@@ -119,7 +119,7 @@ const Home = () => {
                         <div><img src={premium2} alt="" /></div>
                         <div>
                           <div><Crown /><p>PREMIUM</p></div>
-                          <span className='title'>El Último Tren</span>
+                          <h4 className='title'>El Último Tren</h4>
                           <p>Daniel toma el tren nocturno como cada día, pero esta vez algo es diferente: los pasajeros parecen inmóviles, el paisaje nunca cambia y el reloj no avanza. Pronto descubre que está atrapado en un viaje sin final, donde cada estación es un eco de su pasado.</p>
                         </div>
                       </div>

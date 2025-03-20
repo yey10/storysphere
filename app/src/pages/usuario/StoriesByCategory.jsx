@@ -29,7 +29,7 @@ const StoriesByCategory = () => {
                       <div className='story-info'>
                         <h2>{story.title}</h2>
                         <p>{story.author}</p>
-                        <p>{story.sinopsis}</p>
+                        <div><p>{story.sinopsis}</p></div>
                         <button className='buttonLight'>Leer Historia</button>
                       </div>
                     </div>
