@@ -11,6 +11,7 @@ import Popular from '../pages/usuario/Popular.jsx';
 import Explore from '../pages/usuario/Explore.jsx';
 import CreateStoryPage from '../pages/usuario/CreateStoryPage.jsx';
 import StoriesUsuario from '../pages/usuario/Stories.jsx';
+import UserStorieslist from '../pages/UserStoriesList.jsx';
 import StoryPage from '../pages/usuario/StoryPage.jsx';
 import Categories from '../pages/usuario/Categories.jsx';
 import StoriesByCategory from '../pages/usuario/StoriesByCategory.jsx';
@@ -32,6 +33,7 @@ const PrivateRoutes = () => {
                   <Route path="popular" element={<Popular />} />
                   <Route path="explore" element={<Explore />} />
                   <Route path="createStory" element={<CreateStoryPage />} />
+                  <Route path="userStories" element={<UserStorieslist />} />
                   <Route path="stories" element={<StoriesUsuario />} />
                   <Route path="story/:id" element={<StoryPage />} />
                   <Route path="categories" element={<Categories />} />

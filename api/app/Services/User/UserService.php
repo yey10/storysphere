@@ -43,11 +43,8 @@ class UserService
      // Obtener el perfil del usuario autenticado
     public function getAuthenticatedUser()
     {
-        if (!Auth::check()) {
-            throw new \Exception('Usuario no autenticado');
-        }
-
-        return Auth::user();
+        $user = Auth::user();
+        return response()->json($user);
     }
  
      // Actualizar perfil de un usuario

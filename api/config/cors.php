@@ -22,7 +22,7 @@ return [
     'allowed_origins' => [
         'http://localhost:3000',
          'https://storysphere-production.up.railway.app'
-        ],
+    ],
 
     'allowed_origins_patterns' => [],
 

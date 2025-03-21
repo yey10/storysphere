@@ -5,6 +5,7 @@ use App\Http\Controllers\User\AuthController;
 use App\Http\Controllers\Stories\StoryController;
 use App\Http\Controllers\Stories\CategoryController;
 use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\Interactions\CommentController;
 use App\Http\Controllers\Interactions\FollowerController;
 use App\Http\Controllers\Interactions\LikeController;
@@ -13,9 +14,11 @@ use App\Http\Controllers\Payment\InvoiceController;
 use App\Http\Controllers\Payment\MercadoPagoController;
 use App\Http\Controllers\Payment\SubscriptionController;
 use App\Http\Controllers\User\PasswordResetController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use App\Models\User;
 
 
 
@@ -29,13 +32,16 @@ Route::controller(AuthController::class)->group(function () {
 // Rutas para usuarios
 Route::prefix('users')->middleware(['auth:sanctum', 'token.expiration'])->controller(UserController::class)->group(function () {
     Route::get('/', 'index'); // Obtener todos los usuarios
-    Route::get('/{id}', 'show'); // Obtener datos del usuario
-    Route::get('/profile', 'getProfile'); // Obtener perfil
-    Route::put('/{id}/profile', 'updateProfile'); // Actualizar perfil
+    Route::get('{id}', 'show'); // Obtener todos los usuarios
     Route::delete('/{id}', 'deleteAccount'); // Eliminar cuenta
     Route::put('/{id}/role', 'updateRole'); // Actualizar rol
     Route::get('/{user}/stories', [StoryController::class, 'getUserStories']); // Historias de un usuario
     Route::get('/{user}/comments', [CommentController::class, 'getUserComments']); // Comentarios de un usuario
+});
+
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::get('profile', [ProfileController::class, 'show']); // Obtener perfil
+    Route::put('profile/{user}', [ProfileController::class, 'update']);
 });
 
 //RESETEAR CONTRASEÑA
@@ -119,3 +125,8 @@ Route::prefix('mercado-pago')->middleware(['auth:sanctum', 'token.expiration'])-
     Route::post('/create-payment', [MercadoPagoController::class, 'createPayment']);
     Route::post('/create-subscription', [MercadoPagoController::class, 'createSubscriptionPayment']);
 });
+
+
+
+
+

@@ -39,16 +39,25 @@ export const StoryProvider = ({children}) =>{
     }, []);
 
     const fetchUserStories = useCallback(async (userId) => {
+        if (!userId) {
+            console.error("Error: userId es undefined o null");
+            return;
+        }
+    
+        console.log(`Fetching user stories for userId: ${userId}`);
+    
         setIsLoading(true);
         try {
             const data = await getUserStories(userId);
-            setUserStories(data);
+            console.log("📌 Datos recibidos en fetchUserStories:", data); // <-- Agregar log
+            setUserStories(Array.isArray(data.stories) ? data.stories : []);
         } catch (error) {
             console.error("Error al obtener las historias del usuario:", error);
+            setUserStories([]);
         } finally {
             setIsLoading(false);
         }
-    }, [])
+    }, []);
 
     useEffect(() =>{
         if (stories.length === 0) fetchStories();
