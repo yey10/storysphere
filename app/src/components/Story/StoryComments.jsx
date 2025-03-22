@@ -8,8 +8,6 @@ const StoryComments = ({
   setNewComment,
   handleAddComment,
   handleRemoveComment,
-  currentUserId,
-  isAdmin,
 }) => {
   console.log("Comentarios en StoryComments:", storyComments);
 
@@ -53,7 +51,13 @@ const StoryComments = ({
                     <h4>Karla Martínez</h4>
                     <p>16/03/2025</p>
                   </div>
-                  <p>{comment.content_comment || "Comentario sin contenido"}</p>
+                  <p>
+                    {comment.pending
+                      ? "Enviando..."
+                      : comment.content_comment?.trim()
+                      ? comment.content_comment
+                      : "Error: No se pudo cargar el contenido"}
+                  </p>
                   <p>Responder</p>
                 </div>
               </div>
