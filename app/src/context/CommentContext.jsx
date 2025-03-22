@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useCallback } from "react";
-import { getCommentById, updateComment, deleteComment, getCommentOwner, createComment, getAllCommentsByStory } from "../api/commentService";
+import { updateComment, deleteComment, getCommentOwner, createComment, getAllCommentsByStory } from "../api/commentService";
 
 //crear el contexto
 const CommentContext = createContext();

@@ -1,6 +1,7 @@
 import React from "react";
 import commentImg from '../../assets/img/comentario.jpg';
 import { Send, Trash2, Heart } from "lucide-react";
+import {useUser} from '../../context/UserContext';
 
 const StoryComments = ({
   storyComments,
@@ -9,6 +10,8 @@ const StoryComments = ({
   handleAddComment,
   handleRemoveComment,
 }) => {
+
+  const { user } = useUser();
   console.log("Comentarios en StoryComments:", storyComments);
 
   
@@ -48,8 +51,8 @@ const StoryComments = ({
                 </div>
                 <div>
                   <div>
-                    <h4>Karla Martínez</h4>
-                    <p>16/03/2025</p>
+                    <h4>{comment.user?.name}</h4>
+                    <p>{comment.created_at}</p>
                   </div>
                   <p>
                     {comment.pending

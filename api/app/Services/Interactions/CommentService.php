@@ -9,7 +9,7 @@ class CommentService
 {
     public function getAllCommentsForStory($storyId)
     {
-        return Comment::with('user')->where('id_story', $storyId)->get();
+        return Comment::with('user:id_user,name')->where('id_story', $storyId)->get();
     }
 
     public function createComment(array $data, $storyId)
