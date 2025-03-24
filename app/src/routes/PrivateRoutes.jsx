@@ -28,7 +28,7 @@ const PrivateRoutes = () => {
           <CommentProvider>
             <UserProvider>
               <Routes>
-                <Route element={<ProtectedRoute allowedRoles={["User", "Admin"]} />}>
+                <Route element={<ProtectedRoute allowedRoles={["User"]} />}>
                   <Route path="home" element={<HomeUsuario />} />
                   <Route path="popular" element={<Popular />} />
                   <Route path="explore" element={<Explore />} />

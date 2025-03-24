@@ -63,6 +63,13 @@ class UserService
              'profile_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
          ]);
 
+         if ($authUser->id_rol === 2) {
+            $rules['account_status'] = 'nullable|in:active,inactive';
+            }
+
+        $validator = Validator::make($data, $rules);
+
+
         if ($validator->fails()) {
             throw new \Illuminate\Validation\ValidationException($validator);
         }
