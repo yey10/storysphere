@@ -86,9 +86,16 @@ export const StoryProvider = ({children}) =>{
     const editStory = async (id, updatedData) =>{
         try {
             const updatedStory = await updateStory(id, updatedData);
-            setStories(stories.map(story => (story.id_story === id ? updatedStory : story)));
+            console.log("Historia actualizada en editStory:", updatedStory); 
+            setStories((prevStories) =>
+                prevStories.map((story) =>
+                    story.id_story === id ? updatedStory : story
+                )
+            );
+            return updatedStory;
         } catch (error) {
             console.error("Error al editar la historia:", error);
+            throw error;
         }
     };
 

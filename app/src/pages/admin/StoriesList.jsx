@@ -1,62 +1,60 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
 import AdminLayout from './AdminLayout';
 import { useStory } from '../../context/StoryContext';
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Table, Button, Switch, message } from "antd";
 
 const Storieslist = () => {
   const { stories, isLoading, fetchStories, editStory, removeStory } = useStory();
-  const queryClient = useQueryClient();
+  const [localStories, setLocalStories] = useState([]);
 
-  console.log("Historias recibidas:", stories);
+  useEffect(() => {
+    if (stories) {
+      setLocalStories(stories);
+    }
+  }, [stories]);
 
-  // React Query para obtener historias
-  const { data: storyList, isFetching } = useQuery({
-    queryKey: ["stories"],
-    queryFn: async () => stories ?? [], 
-    initialData: stories ?? [],
-    enabled: !!stories, 
-  });
+  const toggleStoryStatus = async (id, currentState) => {
+    try {
+        const newState = currentState === "draft" ? "published" : "draft";
+        const updatedStory = await editStory(id, { state: newState });
+        console.log("Historia actualizada en toggleStoryStatus:", updatedStory); // Registra la historia actualizada
+        setLocalStories((prevStories) =>
+            prevStories.map((story) =>
+                story.id_story === id ? updatedStory : story
+            )
+        );
+        message.success("Estado de la historia actualizado correctamente");
+    } catch (error) {
+        message.error("Error al actualizar el estado de la historia");
+    }
+};
 
-
-  const updateStoryMutation = useMutation({
-    mutationFn: ({ id, data }) => editStory(id, data),
-    onSuccess: () => {
-      message.success("Estado de la historia actualizado correctamente");
-      queryClient.invalidateQueries(["stories"]);
-    },
-    onError: () => {
-      message.error("Error al actualizar el estado de la historia");
-    },
-  });
-
-
-  // Mutación para eliminar historia
-  const deleteStoryMutation = useMutation({
-    mutationFn: removeStory,
-    onSuccess: () => {
+  const handleDeleteStory = async (id) => {
+    try {
+      await removeStory(id);
       message.success("Historia eliminada correctamente");
-      queryClient.invalidateQueries(["stories"]);
-    },
-    onError: () => {
-      message.error("No se pudo eliminar la historia");
-    },
-  });
 
-  const toggleStoryStatus = (id, currentState) => {
-    const newState = currentState === "published" ? "draft" : "published";
-    updateStoryMutation.mutate({ id, data: { state: newState } });
+      // Actualiza el estado local
+      setLocalStories((prevStories) => prevStories.filter((story) => story.id_story !== id));
+    } catch (error) {
+      message.error("No se pudo eliminar la historia");
+    }
   };
 
-  if (isLoading || isFetching) return <div>Cargando historias...</div>;
-  if (!storyList || storyList.length === 0) return <div>No hay historias disponibles.</div>;
+  useEffect(() => {
+    if (localStories.length === 0) {
+      fetchStories();
+    }
+  }, [fetchStories, localStories.length]);
 
+  if (isLoading) return <div>Cargando historias...</div>;
+  if (!localStories || localStories.length === 0) return <div>No hay historias disponibles.</div>;
   
   return (
     <AdminLayout>
       <h2>Historias</h2>
       <Table
-        dataSource={stories}
+        dataSource={localStories}
         rowKey="id_story"
         columns={[
           { title: "ID", dataIndex: "id_story" },
@@ -67,7 +65,10 @@ const Storieslist = () => {
             title: "Estado",
             dataIndex: "state",
             render: (state, record) => (
-              <Switch checked={state === "published"} onChange={() => toggleStoryStatus(record.id_story, state)} />
+              <Switch
+                checked={state === "published"}
+                onChange={() => toggleStoryStatus(record.id_story, state)}
+              />
             ),
           },
           {
@@ -78,7 +79,7 @@ const Storieslist = () => {
           {
             title: "Acciones",
             render: (_, record) => (
-              <Button danger onClick={() => deleteStoryMutation.mutate(record.id_story)}>
+              <Button danger onClick={() => handleDeleteStory(record.id_story)}>
                 Eliminar
               </Button>
             ),

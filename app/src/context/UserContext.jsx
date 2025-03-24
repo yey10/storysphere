@@ -35,6 +35,33 @@ export const UserProvider = ({ children }) => {
     }, []);
 
 
+    // Obtener el perfil del usuario actual al montar el componente
+  /*useEffect(() => {
+    const fetchUserProfile = async () => {
+      try {
+        const userData = await getUserProfile();
+        setUser(userData);
+      } catch (error) {
+        console.error("Error al obtener el perfil del usuario:", error);
+      }
+    };
+
+    fetchUserProfile();
+  }, []);
+
+  // Función para obtener todos los usuarios
+  const fetchUsers = async () => {
+    try {
+      const usersData = await getAllUsers();
+      setUsers(usersData); // Actualiza el estado local
+      return usersData; // Devuelve los datos para React Query
+    } catch (error) {
+      console.error("Error al obtener los usuarios:", error);
+      throw error; // Propaga el error para que React Query lo maneje
+    }
+  };*/
+
+
     const fetchUserById = async (id) =>{
         try {
             const userData = await getUserById(id);
@@ -47,9 +74,6 @@ export const UserProvider = ({ children }) => {
     const updateUser = async (id, data) =>{
         try {
             const updatedUser = await updateUserProfile(id, data);
-            setUsers(prevUsers =>
-                prevUsers.map(user => (user.id_user === id ? updatedUser : user))
-            );
             return updatedUser;
         } catch (error) {
             throw error;
@@ -59,8 +83,12 @@ export const UserProvider = ({ children }) => {
     const changeUserRole  = async (id, data) =>{
         try {
             const updatedUser = await updateUserRole(id, data);
-            setUsers(prevUsers => prevUsers.map(user => (user.id_user === id ? updatedUser : user)));
-            setUser(updatedUser);
+            setUsers(prevUsers =>
+                prevUsers.map(user =>
+                    user.id_user === id ? { ...user, ...updatedUser } : user
+                )
+            );
+            setUser(prevUser => (prevUser?.id_user === id ? { ...prevUser, ...updatedUser } : prevUser));
         } catch (error) {
             message.error("Error al actualizar el rol.");
             throw error;
@@ -70,7 +98,7 @@ export const UserProvider = ({ children }) => {
     const deleteUser = async (id) =>{
         try {
             await deleteUserAccount(id);
-            setUsers(prevUsers => prevUsers.filter(user => user.id_user !== id));
+            return id;
         } catch (error) {
             throw error;
         }

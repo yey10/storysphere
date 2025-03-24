@@ -38,7 +38,8 @@ export const updateStory = async (id, storyData) =>{
               'Content-Type': 'multipart/form-data',
             },
           });
-        return response.data;
+          console.log("Respuesta de updateStory:", response.data);
+        return response.data.story;
     } catch (error) {
         throw error.response ? error.response.data : error;
     }
