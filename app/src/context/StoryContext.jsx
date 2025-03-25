@@ -74,7 +74,7 @@ export const StoryProvider = ({children}) =>{
     useEffect(() =>{
         if (stories.length === 0) fetchStories();
         if (categories.length === 0) fetchCategories();
-    }, [fetchStories, fetchCategories, stories.length, categories.length]);
+    }, [fetchStories, fetchCategories]);
 
     const addStory = async (storyData) =>{
         try {
