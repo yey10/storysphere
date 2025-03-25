@@ -96,12 +96,6 @@ class StoryService
         }
         $file_name = Str::random(10) . '.' . $file->getClientOriginalExtension();
         $path = Storage::disk('public')->putFileAs('stories_photos', $file, $file_name);
-        return $path ? asset("storage/$path") : null;
-
+        return $path ? str_replace('http://', 'https://', config('app.url') . Storage::url($path)) : null;
     }   
-
-
-
-
-
 }
