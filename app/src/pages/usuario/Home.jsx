@@ -75,7 +75,7 @@ const Home = () => {
                     <div className="boximage">
                         {highlightedStories.map((story) => (
                             <div key={story.id_story}>
-                                <img src={story.image_url} alt={story.title} />
+                                <img src={story.photo} alt={story.title} />
                                 <div className="boximg-content">
                                     <h3 className="title">{story.title}</h3>
                                     <p>{story.author}</p>

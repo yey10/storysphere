@@ -50,7 +50,7 @@ const FavoriteData = () => {
                     <div key={historia.id_story} className="item">
                         <div className="like-image">
                             <div>{vista === "meGusta" ? <Heart fill="red" /> : <Bookmark fill="yellow" />}</div>
-                            <img src={historia.image} alt={historia.title} />
+                            <img src={historia.photo} alt={historia.title} />
                         </div>
                         <div className="like-info">
                             <h2 className="title">{historia.title}</h2>
