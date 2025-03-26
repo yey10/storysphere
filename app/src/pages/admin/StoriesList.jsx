@@ -48,7 +48,7 @@ const Storieslist = () => {
   }, [fetchStories, localStories.length]);
 
   if (isLoading) return <div>Cargando historias...</div>;
-  if (!localStories || localStories.length === 0) return <div>No hay historias disponibles.</div>;
+  //if (!localStories || localStories.length === 0) return <div>No hay historias disponibles.</div>;
   
   return (
     <AdminLayout>

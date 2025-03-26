@@ -44,7 +44,7 @@ const UsersList = () => {
   };
 
   if (isLoading) return <div>Cargando...</div>;
-  if (!localUsers || localUsers.length === 0) return <div>No hay usuarios disponibles.</div>;
+  //if (!localUsers || localUsers.length === 0) return <div>No hay usuarios disponibles.</div>;
   
     return (
     <AdminLayout>

@@ -24,6 +24,7 @@ const menuItems = [
 
 const AdminLayout = ({ children }) => {
 
+  const navigate = useNavigate();
 
   const {handleLogout} = useAuth();
   const handleLogoutClick = async () =>{
