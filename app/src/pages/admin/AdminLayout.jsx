@@ -8,7 +8,8 @@ import {
   LogoutOutlined,
   BellOutlined,
 } from "@ant-design/icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from '../../context/AuthContext';
 
 const { Header, Content, Sider } = Layout;
 
@@ -19,12 +20,26 @@ const menuItems = [
   { key: "settings", icon: <SettingOutlined />, label: <Link to="/admin/settings">Configuración</Link> },
 ];
 
-const userMenuItems = [
-  { key: "profile", label: "Perfil", icon: <UserOutlined /> },
-  { key: "logout", label: "Cerrar sesión", icon: <LogoutOutlined /> },
-];
+
 
 const AdminLayout = ({ children }) => {
+
+
+  const {handleLogout} = useAuth();
+  const handleLogoutClick = async () =>{
+    handleLogout();
+    navigate('/');
+  }
+
+
+  const userMenu = [
+    {
+      key: "logout",
+      icon: <LogoutOutlined />,
+      label: <span onClick={handleLogoutClick}>Cerrar sesión</span>,
+    },
+  ];
+
   return (
     <Layout style={{ minHeight: "100vh" }}>
       {/* Sidebar */}
@@ -44,7 +59,7 @@ const AdminLayout = ({ children }) => {
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: "15px" }}>
             <BellOutlined style={{ fontSize: "20px" }} />
-            <Dropdown menu={{ items: userMenuItems }} placement="bottomRight">
+            <Dropdown menu={{ items: userMenu }} placement="bottomRight">
               <Button icon={<Avatar icon={<UserOutlined />} />} />
             </Dropdown>
           </div>
