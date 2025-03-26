@@ -47,7 +47,7 @@ const SliderUsuario2 = () => {
                   <SwiperSlide key={story.id_story}>
                     <div className="content">
                       <img
-                        src={story.photo || "/default-image.jpg"}
+                        src={story.photo}
                         alt={story.title}
                       />
                     </div>
