@@ -5,6 +5,11 @@ import autorImg from '../../assets/img/autor.jpg';
 import { Heart, MessageSquareMore, Bookmark, Download } from "lucide-react";
 
 const StoryHeader = ({ story, likes, favorites, handleLike, handleFavorite, userInteractions, userRatings, ratings, id, handleRateStory }) => {
+  
+  const userRating = userRatings[id] ? Number(userRatings[id]) : 0;
+  const averageRating = ratings[id]?.data ? Number(ratings[id].data) : 0;
+  const starsValue = userRating || averageRating;
+  
   return (
     <div className="read-info">
       <div>
@@ -21,14 +26,14 @@ const StoryHeader = ({ story, likes, favorites, handleLike, handleFavorite, user
             <div>
               <ReactStars
                 count={5}
-                value={Number(userRatings[id]) || Number(ratings[id]) || 0}
+                value={starsValue}
                 onChange={(newRating) => handleRateStory(id, newRating)}
                 size={24}
                 activeColor="#ffd700"
                 isHalf={true}
               />
             </div>
-            <p>{ratings[id] && ratings[id].data !== undefined ? Number(ratings[id].data).toFixed(1) : "0.0"} puntuación</p>
+            <p>{averageRating.toFixed(1)} puntuación</p>
             <button>
               <Link to="authors">Ver más</Link>
             </button>

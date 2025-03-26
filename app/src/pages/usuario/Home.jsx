@@ -33,9 +33,14 @@ const Home = () => {
     const [highlightedStories, setHighlightedStories] = useState([]);
 
     useEffect(() => {
-      // Obtener las historias más destacadas (según likes)
-      const featured = getFeaturedStories(4);
-      setHighlightedStories(featured);
+      const fetchStories = async () => {
+
+        const featured = await getFeaturedStories(4);
+        setHighlightedStories(featured);
+      };
+    
+      fetchStories();
+
     }, []);
 
     const {isAuthenticated, isLoading} = useAuth();
