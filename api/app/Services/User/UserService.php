@@ -51,7 +51,7 @@ class UserService
      // Actualizar perfil de un usuario
      public function updateUserProfile($authUser, $id, $data)
      {
-         $user = User::findOrFail($id);
+            $user = User::where('id_user', $id)->firstOrFail();
      
          // Verificar permisos: El usuario puede actualizar su propio perfil o un admin puede actualizar cualquier usuario
          if ($authUser->id_user !== $user->id_user && $authUser->id_rol !== 2) {
@@ -61,9 +61,9 @@ class UserService
          // Reglas de validación base
          $rules = [
              'name' => 'nullable|string|max:255',
-             'email' => 'nullable|string|email|max:255|unique:users,email,' . $user->id_user,
+             'email' => 'nullable|string|email|max:255|unique:users,email,' . $user->id_user . ',id_user',
              'biography' => 'nullable|string',
-             'profile_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+             'profile_photo' => 'nullable|string|url',
          ];
      
          // Solo los administradores pueden actualizar el estado de la cuenta
@@ -78,22 +78,15 @@ class UserService
              throw new \Illuminate\Validation\ValidationException($validator);
          }
 
-         //eliminar la imagen de perfil anterior
-         if (isset($data['profile_photo']) && $data['profile_photo']->isValid()) {
-            $cloudinary = new UploadApi();
-
-            if ($user->profile_photo) {
-                // Extraer el public_id de la URL anterior
-                $publicId = pathinfo(parse_url($user->profile_photo, PHP_URL_PATH), PATHINFO_FILENAME);
-                $cloudinary->destroy('user_profile_photos/' . $publicId);
-            }
-
-            $uploaded = $cloudinary->upload($data['profile_photo']->getRealPath(), ['folder' => 'userProfile_photos']);
-            $data['profile_photo'] = $uploaded['secure_url'] ?? null;
+         if (!empty($data['profile_photo'])) {
+            $user->profile_photo = $data['profile_photo'];
          }
+
+         
+         $user->fill($validator->validated());
      
          // Actualizar usuario
-         $user->update($validator->validated());
+         $user->save();
      
          return $user;
      }

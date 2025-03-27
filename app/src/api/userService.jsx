@@ -33,7 +33,7 @@ export const updateUserProfile = async (user, data) =>{
     try {
         const response = await axios.put(`/profile/${user}`, data, {
             headers: {
-                'Content-Type': 'multipart/form-data',
+                'Content-Type': 'application/json',
               },
         });
         return response.data;

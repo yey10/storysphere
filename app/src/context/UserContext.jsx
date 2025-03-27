@@ -46,7 +46,14 @@ export const UserProvider = ({ children }) => {
     const updateUser = async (user, data) =>{
         try {
             const updatedUser = await updateUserProfile(user, data);
-            setUser(prevUser => ({ ...prevUser, ...updatedUser }));
+            setUser(prevUser => ({
+                ...prevUser,
+                name: updatedUser.user.name,
+                email: updatedUser.user.email,
+                biography: updatedUser.user.biography,
+                profile_photo: updatedUser.user.profile_photo, // Asegurar que la foto se actualice
+                account_status: updatedUser.user.account_status
+            }));
             return updatedUser;
         } catch (error) {
             throw error;
