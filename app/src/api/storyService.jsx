@@ -33,12 +33,13 @@ export const createStory = async (storyData) =>{
 
 export const updateStory = async (id, storyData) =>{
     try {
-        const response = await axios.post(`/stories/${id}`, storyData, {
+        const response = await axios.put(`/stories/${id}`, storyData, {
             headers: {
               'Content-Type': 'multipart/form-data',
             },
           });
-        return response.data;
+          console.log("Respuesta de updateStory:", response.data);
+        return response.data.story;
     } catch (error) {
         throw error.response ? error.response.data : error;
     }
@@ -63,12 +64,13 @@ export const getCategories = async () => {
     }
 };
 
-export const getUserStories = async (user) => {
-    try{
-        const response = await axios.get(`/stories/${user}/stories`);
+export const getUserStories = async (userId) => {
+    try {
+        const response = await axios.get(`/users/${userId}/stories`);
         return response.data;
     } catch (error) {
-        console.error('Error fetching categories:', error);
+        console.error('Error fetching user stories:', error);
         throw error.response ? error.response.data : error;
     }
-}
+};
+

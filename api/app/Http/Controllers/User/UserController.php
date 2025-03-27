@@ -9,7 +9,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Log;
-use Laravel\Sanctum\PersonalAccessToken;
+use App\Models\User;
+
 
 
 
@@ -21,7 +22,9 @@ class UserController extends Controller
     public function __construct(UserService $userService)
     {
         $this->userService = $userService;
+
     }
+
     
     //metodo para obtener todos los usuarios (filtros)
     public function index(Request $request){
@@ -36,12 +39,11 @@ class UserController extends Controller
     }
 
     //obtener por id 
-    public function show( $id){
+    public function show(Request $request){
 
         try{
 
-            $user = $this->userService->getUserById($id);
-            return response()->json(['user' => $user], 200);
+            return Auth::user();
 
         } catch (ModelNotFoundException $e) {
             return response()->json(['error' => 'Usuario no encontrado'], 404);
@@ -52,33 +54,12 @@ class UserController extends Controller
     }
 
 
-    public function getProfile()
-    {
-        try {
-            $user = $this->userService->getAuthenticatedUser();
-            return response()->json(['user' => $user], 200);
-        } catch (\Exception $e) {
-            return response()->json(['error' => 'Error inesperado: ' . $e->getMessage()], 500);
-        }
-    }
+   
     
 
 
 
-    //Metodo para actualizar perfil de usuario, (admins y users)
 
-    public function updateProfile(Request $request, $id){
-        try {
-            $authUser = Auth::user();
-            $user = $this->userService->updateUserProfile($authUser, $id, $request->all());
-            return response()->json(['message' => 'Perfil actualizado con éxito','user' => $user], 200);
-
-        } catch (ValidationException $e) {
-            return response()->json(['error' => $e->errors()], 422);
-        } catch (\Exception $e) {
-            return response()->json(['error' => 'Error inesperado: ' . $e->getMessage()], 500);
-        }
-    }
 
 
     //eliminar cuenta

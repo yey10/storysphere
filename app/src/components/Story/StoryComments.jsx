@@ -1,6 +1,7 @@
 import React from "react";
 import commentImg from '../../assets/img/comentario.jpg';
 import { Send, Trash2, Heart } from "lucide-react";
+import {useUser} from '../../context/UserContext';
 
 const StoryComments = ({
   storyComments,
@@ -8,9 +9,9 @@ const StoryComments = ({
   setNewComment,
   handleAddComment,
   handleRemoveComment,
-  currentUserId,
-  isAdmin,
 }) => {
+
+  const { user } = useUser();
   console.log("Comentarios en StoryComments:", storyComments);
 
   
@@ -50,10 +51,16 @@ const StoryComments = ({
                 </div>
                 <div>
                   <div>
-                    <h4>Karla Martínez</h4>
-                    <p>16/03/2025</p>
+                    <h4>{comment.user?.name}</h4>
+                    <p>{comment.created_at}</p>
                   </div>
-                  <p>{comment.content_comment || "Comentario sin contenido"}</p>
+                  <p>
+                    {comment.pending
+                      ? "Enviando..."
+                      : comment.content_comment?.trim()
+                      ? comment.content_comment
+                      : "Error: No se pudo cargar el contenido"}
+                  </p>
                   <p>Responder</p>
                 </div>
               </div>

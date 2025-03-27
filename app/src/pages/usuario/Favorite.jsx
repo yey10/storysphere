@@ -16,7 +16,7 @@ const Favorite = () => {
                 <main className="container mx-auto px-4">
                   <div className="favorite-page">
                     <h1 className='title'>Tus Historias Favoritas</h1>
-                    <FavoriteData historiasFavoritas={historiasFavoritas} historiasMeGusta={historiasMeGusta} />
+                    <FavoriteData/>
                   </div>
                   
                   <Footer />

@@ -3,8 +3,10 @@ import axios from './api.js';
 export const getAllUsers = async (filters={}) =>{
     try {
         const response = await axios.get('/users', { params: filters });
-        return response.data;
+        console.log("Respuesta completa de la API:", response.data);
+        return response.data.users.data;
     } catch (error) {
+        console.error("Error en getAllUsers():", error);
         throw error.response ? error.response.data : error;
     }
 }
@@ -20,7 +22,7 @@ export const getUserById = async (id) =>{
 
 export const getUserProfile = async () =>{
     try {
-        const response = await axios.get('/users/profile');
+        const response = await axios.get('/profile');
         return response.data;
     } catch (error) {
         throw error.response ? error.response.data : error;
@@ -29,7 +31,7 @@ export const getUserProfile = async () =>{
 
 export const updateUserProfile = async (id, data) =>{
     try {
-        const response = await axios.put(`/users/${id}/profile`, data, {
+        const response = await axios.put(`/profile/${id}`, data, {
             headers: {
                 'Content-Type': 'multipart/form-data',
               },

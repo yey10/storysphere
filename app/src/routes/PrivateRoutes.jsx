@@ -11,6 +11,7 @@ import Popular from '../pages/usuario/Popular.jsx';
 import Explore from '../pages/usuario/Explore.jsx';
 import CreateStoryPage from '../pages/usuario/CreateStoryPage.jsx';
 import StoriesUsuario from '../pages/usuario/Stories.jsx';
+import UserStorieslist from '../pages/UserStoriesList.jsx';
 import StoryPage from '../pages/usuario/StoryPage.jsx';
 import Categories from '../pages/usuario/Categories.jsx';
 import StoriesByCategory from '../pages/usuario/StoriesByCategory.jsx';
@@ -21,30 +22,31 @@ import Profile from '../pages/usuario/Profile.jsx';
 const PrivateRoutes = () => {
   console.log("Renderizando PrivateRoutes...");
   return (
-    <StoryProvider>
-      <LikeProvider>
+    <LikeProvider> {/* ← Primero LikeProvider */}
+      <StoryProvider> {/* ← Luego StoryProvider (que depende de useLikes) */}
         <RatingsProvider>
           <CommentProvider>
             <UserProvider>
-              <Routes>
-                <Route element={<ProtectedRoute allowedRoles={["User", "Admin"]} />}>
-                  <Route path="home" element={<HomeUsuario />} />
-                  <Route path="popular" element={<Popular />} />
-                  <Route path="explore" element={<Explore />} />
-                  <Route path="createStory" element={<CreateStoryPage />} />
-                  <Route path="stories" element={<StoriesUsuario />} />
-                  <Route path="story/:id" element={<StoryPage />} />
-                  <Route path="categories" element={<Categories />} />
-                  <Route path="category/:id" element={<StoriesByCategory />} />
-                  <Route path="favorite" element={<Favorite />} />
-                  <Route path="profile" element={<Profile />} />
-                </Route>
-              </Routes>
-            </UserProvider>
+                <Routes>
+                  <Route element={<ProtectedRoute allowedRoles={["User"]} />}>
+                    <Route path="home" element={<HomeUsuario />} />
+                    <Route path="popular" element={<Popular />} />
+                    <Route path="explore" element={<Explore />} />
+                    <Route path="createStory" element={<CreateStoryPage />} />
+                    <Route path="userStories" element={<UserStorieslist />} />
+                    <Route path="stories" element={<StoriesUsuario />} />
+                    <Route path="story/:id" element={<StoryPage />} />
+                    <Route path="categories" element={<Categories />} />
+                    <Route path="category/:id" element={<StoriesByCategory />} />
+                    <Route path="favorite" element={<Favorite />} />
+                    <Route path="profile" element={<Profile />} />
+                  </Route>
+                </Routes>
+              </UserProvider>
           </CommentProvider>
         </RatingsProvider>
-      </LikeProvider>
-    </StoryProvider>
+      </StoryProvider>
+    </LikeProvider>
   );
 };
 

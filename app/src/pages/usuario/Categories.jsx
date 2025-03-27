@@ -1,13 +1,19 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import ParticlesBackground from '../../components/ParticlesBackground'
 import DynamicNavbar from '../../components/DynamicNavbar'
 import Footer from '../../components/Footer'
 import { Search } from 'lucide-react'
-import { categories } from '../../data/categories'
+//import { categories } from '../../data/categories'
+import { useStory } from '../../context/StoryContext';
 import '../../assets/css/categories.css'
 import CategoriesAll from '../../components/CategoriesAll'
 
 const Categories = () => {
+  const { categories, fetchCategories } = useStory();
+
+  useEffect(() =>{
+    fetchCategories();
+  }, [fetchCategories])
   return (
     <div>
       <div className="min-h-screen bg-black relative">
@@ -26,8 +32,8 @@ const Categories = () => {
                 </div>
                 <div className='categories-filter'>
                   {categories.map((category) => (
-                    <div key={category.id} className='category'>
-                      <p>{category.title}</p>
+                    <div key={category.id_category} className='category'>
+                      <p>{category.category_name}</p>
                     </div>
                   ))}
                   <p>Dale vida a tus historias. Comparte, inspira y descubre nuevas narrativas en StorySphere.</p>

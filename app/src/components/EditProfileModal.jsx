@@ -44,7 +44,12 @@ const EditProfileModal = ({ user, visible, onClose, onUpdate }) => {
       message.success("Perfil actualizado con éxito");
       onClose();
     } catch (error) {
-      message.error("Error al actualizar el perfil. Inténtalo de nuevo.");
+      if (error.response && error.response.data && error.response.data.message) {
+        message.error(`Error: ${error.response.data.message}`);
+      } else {
+        message.error("Error al actualizar el perfil. Inténtalo de nuevo.");
+      }
+      console.error("Error al actualizar el perfil:", error); 
     }
   };
 

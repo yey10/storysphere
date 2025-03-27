@@ -7,6 +7,7 @@ use App\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 
@@ -26,6 +27,7 @@ class AuthService
             'biography' => $data['biography'] ?? null,
             'profile_photo' => $profile_photo,
             'birthdate' => $data['birthdate'],
+             Auth::user()
         ]);
 
         $roles = $this->getValidRoles($data['roles'] ?? [1]);

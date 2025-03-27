@@ -69,10 +69,12 @@ const StoryPage = () => {
 
   const handleLike = () => {
     handleToggleInteraction(id, "like");
+    console.log(`Like clickeado en historia ${id}, estado actual:`, userInteractions[id]);
   };
 
   const handleFavorite = () => {
     handleToggleInteraction(id, "favorite");
+    console.log(`Favorito clickeado en historia ${id}, estado actual:`, userInteractions[id]);
   };
 
   const handleAddComment = async (e) => {

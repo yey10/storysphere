@@ -60,7 +60,7 @@ const NavbarUsuario = () => {
                 <Pencil className='icon' /><span>Crear</span>
               </button>
               </li>
-              <li><Link to="/user/profile"><NotebookPen className='icon' /><span>Mis historias</span></Link></li>
+              <li><Link to="/user/userStories"><NotebookPen className='icon' /><span>Mis historias</span></Link></li>
               <h4><span>General</span><div className="separator"></div></h4>
               <li><Link to="/user/stories"><BookOpenText className='icon' /><span>Historias</span></Link></li>
               <li><Link to="/authors"><BookUser className='icon' /><span>Autores</span></Link></li>

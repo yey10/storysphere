@@ -39,40 +39,35 @@ export const LikeProvider = ({ children }) => {
     // Alternar like/favorito
     const handleToggleInteraction = useCallback(async (storyId, type) => {
         if (!storyId || !type) return;
-
+    
         try {
-            const currentInteraction  = userInteractions[storyId] || null;
+            const currentInteraction = userInteractions[storyId] || { like: false, favorite: false };
             await toggleInteraction(storyId, type);
-
-            let newLikes = likes[storyId] || 0;
-            let newFavorites = favorites[storyId] || 0;
-            let newUserInteraction = null;
-
-            if (currentInteraction === type) {
-                // Si ya existe la interacción, la eliminamos
-                if (type === "like") newLikes--;
-                if (type === "favorite") newFavorites--;
-            } else if (currentInteraction === 'both') {
-                // Si el usuario tenía ambos y quita uno, deja el otro
-                newUserInteraction = type === "like" ? "favorite" : "like";
-                if (type === "like") newLikes--;
-                if (type === "favorite") newFavorites--;
-            } else {
-                // Si no existe la interacción, la agregamos
-                newUserInteraction = currentInteraction ? "both" : type;
-                if (type === "like") newLikes++;
-                if (type === "favorite") newFavorites++;
-            }
-
-            // Actualizar estados
+    
+            // Nuevo estado basado en el tipo de interacción
+            const newInteraction = {
+                ...currentInteraction,
+                [type]: !currentInteraction[type] // Alternar true/false
+            };
+    
+            // Actualizar los contadores de likes y favoritos
+            const newLikes = type === "like" ? (newInteraction.like ? likes[storyId] + 1 : likes[storyId] - 1) : likes[storyId];
+            const newFavorites = type === "favorite" ? (newInteraction.favorite ? favorites[storyId] + 1 : favorites[storyId] - 1) : favorites[storyId];
+    
+            // Asegurar que los valores no sean negativos
             setLikes(prev => ({ ...prev, [storyId]: Math.max(newLikes, 0) }));
             setFavorites(prev => ({ ...prev, [storyId]: Math.max(newFavorites, 0) }));
-            setUserInteractions(prev => ({ ...prev, [storyId]: newUserInteraction }));
-
+    
+            // Guardar la interacción en el estado
+            setUserInteractions(prev => ({
+                ...prev,
+                [storyId]: newInteraction
+            }));
+    
         } catch (error) {
             console.error(`Error al alternar ${type}:`, error);
         }
-    }, []);
+    }, [likes, favorites, userInteractions]);
 
     // Cargar los likes de todas las historias cuando se monta el componente
     useEffect(() => {

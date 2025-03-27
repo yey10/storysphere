@@ -25,6 +25,8 @@ export const AuthProvider = ({children}) =>{
         setIsLoading(false);//finaliza la carga
     }, []);//  El array vacío asegura que este efecto se ejecute solo una vez al montar el componente
 
+
+
     const handleLogin = async (data) =>{
         try {
 

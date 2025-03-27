@@ -4,32 +4,30 @@ import DynamicNavbar from '../../components/DynamicNavbar'
 import Footer from '../../components/Footer'
 import EditProfileModal from '../../components/EditProfileModal'
 import '../../assets/css/profile.css'
-import { useAuth } from '../../context/AuthContext';
 import { useStory } from '../../context/StoryContext';
 import { useUser } from '../../context/UserContext';
 import { Camera, Edit, Github, Instagram, Linkedin, Mail, MapPin, Twitter } from "lucide-react"
 
 const Profile = () => {
   
-  const { user } = useAuth();
-  const { updateUser } = useUser();
-  const { fetchUserStories } = useStory();
-  const [userStories, setUserStories] = useState([]);
+  const { user, updateUser, isLoading } = useUser();
+  const { fetchUserStories, userStories } = useStory();
+  //const [userStories, setUserStories] = useState([]);
   const [activeTab, setActiveTab] = useState("about")
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     if (user?.id_user) {
-      const fetchStories = async () => {
-        const stories = await fetchUserStories(user.id_user);
-        setUserStories(stories);
-      };
-      fetchStories();
+        fetchUserStories(user.id_user);
     }
-  }, [user, fetchUserStories]);
+}, [user, fetchUserStories]);
 
   const handleTabChange = (tab) => {
     setActiveTab(tab)
+  }
+
+  if (isLoading) {
+    return <p className="text-white text-center">Cargando perfil...</p>;
   }
 
   if (!user) {
@@ -130,58 +128,56 @@ const Profile = () => {
                               <div className="section">
                                 <h2 className="section-title">Historias Destacadas</h2>
                                 <div className="experience-list">
-                                  {[
-                                    { role: "Senior UX/UI Designer", company: "Estudio Digital", period: "2021 - Presente" },
-                                    { role: "Frontend Developer", company: "Tech Solutions", period: "2019 - 2021" },
-                                    { role: "UI Designer", company: "Creative Agency", period: "2018 - 2019" },
-                                  ].map((job, i) => (
-                                    <div key={i} className="experience-item">
-                                      <div>
-                                        <h3 className="job-title"></h3>
-                                        <p className="company-name"></p>
+                                  {userStories.length > 0 ? (
+                                    userStories.map((story) => (
+                                      <div key={story.id_story} className="experience-item">
+                                        <h3 className="job-title">{story.title}</h3>
+                                        <p className="company-name">{story.category}</p>
+                                        <span className="period-badge">{story.created_at}</span>
                                       </div>
-                                      <span className="period-badge"></span>
-                                    </div>
-                                  ))}
+                                    ))
+                                  ) : (
+                                    <p className="text-white">No hay historias disponibles.</p>
+                                  )}
                                 </div>
                               </div>
                             </div>
                           )}
 
-                    {activeTab === "portfolio" && (
-                      <div className="portfolio-section">
-                        <div className="portfolio-grid">
-                          {userStories.length > 0 ? (
-                            userStories.map((story) => (
-                              <div key={story.id_story} className="portfolio-item">
-                                <img
-                                  src={story.image || "/placeholder.svg?height=300&width=400&text=Historia"}
-                                  alt={story.title}
-                                />
-                                <div className="portfolio-overlay">
-                                  <div className="portfolio-info">
-                                    <h3 className="portfolio-title">{story.title}</h3>
-                                    <p className="portfolio-category">{story.category}</p>
-                                  </div>
-                                </div>
+                          {activeTab === "portfolio" && (
+                            <div className="portfolio-section">
+                              <div className="portfolio-grid">
+                                {userStories.length > 0 ? (
+                                  userStories.map((story) => (
+                                    <div key={story.id_story} className="portfolio-item">
+                                      <img
+                                        src={story.image || "/placeholder.svg?height=300&width=400&text=Historia"}
+                                        alt={story.title}
+                                      />
+                                      <div className="portfolio-overlay">
+                                        <div className="portfolio-info">
+                                          <h3 className="portfolio-title">{story.title}</h3>
+                                          <p className="portfolio-category">{story.category}</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  ))
+                                ) : (
+                                  <p className="text-white">No hay historias disponibles.</p>
+                                )}
                               </div>
-                            ))
-                          ) : (
-                            <p className="text-white">No hay historias disponibles.</p>
+                            </div>
                           )}
-                        </div>
-                      </div>
-                    )}
                         </div>
                       </div>
                     </div>
                   </div>
                   <EditProfileModal
                     visible={isModalOpen}
-                    onCancel={() => setIsModalOpen(false)}
+                    onClose={() => setIsModalOpen(false)}
                     onUpdate={updateUser}
+                    user={user}
                   />
-
                   <Footer />
                 </main>
             </div>

@@ -43,38 +43,45 @@ class UserService
      // Obtener el perfil del usuario autenticado
     public function getAuthenticatedUser()
     {
-        if (!Auth::check()) {
-            throw new \Exception('Usuario no autenticado');
-        }
-
-        return Auth::user();
+        $user = Auth::user();
+        return response()->json($user);
     }
  
      // Actualizar perfil de un usuario
-    public function updateUserProfile($authUser, $id, $data)
-    {
+     public function updateUserProfile($authUser, $id, $data)
+     {
          $user = User::findOrFail($id);
- 
+     
+         // Verificar permisos: El usuario puede actualizar su propio perfil o un admin puede actualizar cualquier usuario
          if ($authUser->id_user !== $user->id_user && $authUser->id_rol !== 2) {
              throw new \Exception('No tienes permiso para actualizar este perfil');
          }
- 
-         $validator = Validator::make($data, [
+     
+         // Reglas de validación base
+         $rules = [
              'name' => 'nullable|string|max:255',
              'email' => 'nullable|string|email|max:255|unique:users,email,' . $user->id_user,
              'biography' => 'nullable|string',
              'profile_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-         ]);
-
-        if ($validator->fails()) {
-            throw new \Illuminate\Validation\ValidationException($validator);
-        }
-
-        $user->update($validator->validated());
-
-        return $user;
-
-    }
+         ];
+     
+         // Solo los administradores pueden actualizar el estado de la cuenta
+         if ($authUser->id_rol === 2) {
+             $rules['account_status'] = 'nullable|in:active,inactive';
+         }
+     
+         // Validar los datos recibidos
+         $validator = Validator::make($data, $rules);
+     
+         if ($validator->fails()) {
+             throw new \Illuminate\Validation\ValidationException($validator);
+         }
+     
+         // Actualizar usuario
+         $user->update($validator->validated());
+     
+         return $user;
+     }
  
      // Eliminar cuenta de usuario
     public function deleteUserAccount($authUser, $id)
