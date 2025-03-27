@@ -27,10 +27,15 @@ const EditProfileModal = ({ user, visible, onClose, onUpdate }) => {
   };
 
   const handleUpload = ({ file }) => {
-    setFormData((prev) => ({ ...prev, profile_photo: file }));
+    setFormData((prev) => ({ ...prev, profile_photo: file.originFileObj }));
   };
 
   const handleSubmit = async () => {
+    if (!formData.name.trim() || !formData.email.trim()) {
+      message.error("El nombre y el correo electrónico son obligatorios.");
+      return;
+    }
+  
     const data = new FormData();
     data.append("name", formData.name);
     data.append("email", formData.email);
@@ -38,18 +43,15 @@ const EditProfileModal = ({ user, visible, onClose, onUpdate }) => {
     if (formData.profile_photo) {
       data.append("profile_photo", formData.profile_photo);
     }
-    
+  
     try {
       await onUpdate(user.id_user, data);
       message.success("Perfil actualizado con éxito");
       onClose();
     } catch (error) {
-      if (error.response && error.response.data && error.response.data.message) {
-        message.error(`Error: ${error.response.data.message}`);
-      } else {
-        message.error("Error al actualizar el perfil. Inténtalo de nuevo.");
-      }
-      console.error("Error al actualizar el perfil:", error); 
+      message.error(
+        error.response?.data?.message || "Error al actualizar el perfil."
+      );
     }
   };
 
@@ -88,8 +90,12 @@ const EditProfileModal = ({ user, visible, onClose, onUpdate }) => {
         onChange={handleChange}
         className="mb-2"
       />
-      <Upload beforeUpload={() => false} onChange={handleUpload} maxCount={1}>
-        <Button icon={<UploadOutlined />}>Subir Foto</Button>
+      <Upload beforeUpload={(file) => {
+        handleUpload({ file });
+        return false;
+      }}
+      maxCount={1}>
+      <Button icon={<UploadOutlined />}>Subir Foto</Button>
       </Upload>
     </Modal>
   );

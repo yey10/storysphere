@@ -151,7 +151,7 @@ const Profile = () => {
                                   userStories.map((story) => (
                                     <div key={story.id_story} className="portfolio-item">
                                       <img
-                                        src={story.image || "/placeholder.svg?height=300&width=400&text=Historia"}
+                                        src={story.photo || "/placeholder.svg?height=300&width=400&text=Historia"}
                                         alt={story.title}
                                       />
                                       <div className="portfolio-overlay">

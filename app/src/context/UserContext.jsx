@@ -34,34 +34,6 @@ export const UserProvider = ({ children }) => {
         fetchData();
     }, []);
 
-
-    // Obtener el perfil del usuario actual al montar el componente
-  /*useEffect(() => {
-    const fetchUserProfile = async () => {
-      try {
-        const userData = await getUserProfile();
-        setUser(userData);
-      } catch (error) {
-        console.error("Error al obtener el perfil del usuario:", error);
-      }
-    };
-
-    fetchUserProfile();
-  }, []);
-
-  // Función para obtener todos los usuarios
-  const fetchUsers = async () => {
-    try {
-      const usersData = await getAllUsers();
-      setUsers(usersData); // Actualiza el estado local
-      return usersData; // Devuelve los datos para React Query
-    } catch (error) {
-      console.error("Error al obtener los usuarios:", error);
-      throw error; // Propaga el error para que React Query lo maneje
-    }
-  };*/
-
-
     const fetchUserById = async (id) =>{
         try {
             const userData = await getUserById(id);
@@ -71,9 +43,10 @@ export const UserProvider = ({ children }) => {
         }
     }
 
-    const updateUser = async (id, data) =>{
+    const updateUser = async (user, data) =>{
         try {
-            const updatedUser = await updateUserProfile(id, data);
+            const updatedUser = await updateUserProfile(user, data);
+            setUser(prevUser => ({ ...prevUser, ...updatedUser }));
             return updatedUser;
         } catch (error) {
             throw error;

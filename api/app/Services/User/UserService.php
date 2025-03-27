@@ -2,6 +2,7 @@
 namespace App\Services\User;
 
 use App\Models\User;
+use Cloudinary\Api\Upload\UploadApi;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
@@ -75,6 +76,20 @@ class UserService
      
          if ($validator->fails()) {
              throw new \Illuminate\Validation\ValidationException($validator);
+         }
+
+         //eliminar la imagen de perfil anterior
+         if (isset($data['profile_photo']) && $data['profile_photo']->isValid()) {
+            $cloudinary = new UploadApi();
+
+            if ($user->profile_photo) {
+                // Extraer el public_id de la URL anterior
+                $publicId = pathinfo(parse_url($user->profile_photo, PHP_URL_PATH), PATHINFO_FILENAME);
+                $cloudinary->destroy('user_profile_photos/' . $publicId);
+            }
+
+            $uploaded = $cloudinary->upload($data['profile_photo']->getRealPath(), ['folder' => 'userProfile_photos']);
+            $data['profile_photo'] = $uploaded['secure_url'] ?? null;
          }
      
          // Actualizar usuario

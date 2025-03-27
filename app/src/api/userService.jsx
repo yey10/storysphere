@@ -29,9 +29,9 @@ export const getUserProfile = async () =>{
     }
 }
 
-export const updateUserProfile = async (id, data) =>{
+export const updateUserProfile = async (user, data) =>{
     try {
-        const response = await axios.put(`/profile/${id}`, data, {
+        const response = await axios.put(`/profile/${user}`, data, {
             headers: {
                 'Content-Type': 'multipart/form-data',
               },
