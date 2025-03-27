@@ -51,9 +51,19 @@ export const deleteUserAccount = async (id) =>{
     }
 }
 
+//ADMIN
 export const updateUserRole = async (id, data) =>{
     try {
-        const response = await axios.put(`/users/${id}/role`, data);
+        const response = await axios.put(`/profile/${id}/role`, data);
+        return response.data;
+    } catch (error) {
+        throw error.response ? error.response.data : error;
+    }
+}
+
+export const updateUserStatus = async (id, data) =>{
+    try{
+        const response = await axios.put(`/profile/${id}/status`, data);
         return response.data;
     } catch (error) {
         throw error.response ? error.response.data : error;

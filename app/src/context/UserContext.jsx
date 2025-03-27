@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { getAllUsers, getUserById, getUserProfile, updateUserProfile, deleteUserAccount, updateUserRole } from '../api/userService';
+import { getAllUsers, getUserById, getUserProfile, updateUserProfile, deleteUserAccount, updateUserRole, updateUserStatus } from '../api/userService';
 import { message } from "antd";
 
 
@@ -12,6 +12,7 @@ export const UserProvider = ({ children }) => {
 
 
     useEffect(() =>{
+
         const fetchData = async () => {
             setIsLoading(true);
             try {
@@ -19,6 +20,7 @@ export const UserProvider = ({ children }) => {
                     getAllUsers(),
                     getUserProfile()
                 ]);
+                
                 console.log("Usuarios obtenidos:", usersData);
                 if (!usersData) throw new Error("La respuesta de getAllUsers() está vacía");
                 
@@ -32,6 +34,7 @@ export const UserProvider = ({ children }) => {
         };
 
         fetchData();
+
     }, []);
 
     const fetchUserById = async (id) =>{
@@ -63,6 +66,27 @@ export const UserProvider = ({ children }) => {
     const changeUserRole  = async (id, data) =>{
         try {
             const updatedUser = await updateUserRole(id, data);
+            if (!updatedUser) throw new Error("No se pudo actualizar el rol");
+
+            setUsers(prevUsers =>
+                prevUsers.map(user =>
+                    user.id_user === id ? { ...user, role: data.role } : user
+                )
+            );
+
+            setUser(prevUser => 
+                prevUser?.id_user === id ? { ...prevUser, role: data.role } : prevUser
+            );
+
+        } catch (error) {
+            message.error("Error al actualizar el rol.");
+            throw error;
+        }
+    }
+
+    const changeUserStatus = async (id, data) =>{
+        try {
+            const updatedUser = await updateUserStatus(id, data);
             setUsers(prevUsers =>
                 prevUsers.map(user =>
                     user.id_user === id ? { ...user, ...updatedUser } : user
@@ -70,7 +94,7 @@ export const UserProvider = ({ children }) => {
             );
             setUser(prevUser => (prevUser?.id_user === id ? { ...prevUser, ...updatedUser } : prevUser));
         } catch (error) {
-            message.error("Error al actualizar el rol.");
+            message.error("Error al actualizar el estado.");
             throw error;
         }
     }
@@ -91,6 +115,7 @@ export const UserProvider = ({ children }) => {
             fetchUserById,
             updateUser,
             changeUserRole,
+            changeUserStatus,
             deleteUser,
             isLoading
         }}>

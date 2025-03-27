@@ -39,9 +39,12 @@ Route::prefix('users')->middleware(['auth:sanctum', 'token.expiration'])->contro
     Route::get('/{user}/comments', [CommentController::class, 'getUserComments']); // Comentarios de un usuario
 });
 
-Route::middleware(['auth:sanctum'])->group(function () {
+Route::middleware(['auth:sanctum', 'token.expiration'])->group(function () {
     Route::get('profile', [ProfileController::class, 'show']); // Obtener perfil
     Route::put('profile/{user}', [ProfileController::class, 'update']);
+
+    Route::put('profile/{user}/role', [ProfileController::class, 'updateRole']);
+    Route::put('profile/{user}/status', [ProfileController::class, 'updateStatus']);
 });
 
 //RESETEAR CONTRASEÑA

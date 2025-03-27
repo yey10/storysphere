@@ -66,4 +66,43 @@ class ProfileController extends Controller
             }
         }
 
+        public function updateRole(Request $request, $id)
+        {
+            try {
+                $authUser = Auth::user();
+                $data = $request->all(); // Obtener todos los datos del request
+
+                // Actualizar el rol del usuario
+                $user = $this->userService->updateUserRole($authUser, $id, $data);
+
+                return response()->json(['message' => 'Rol actualizado con éxito', 'user' => $user], 200);
+            } catch (ValidationException $e) {
+                return response()->json(['error' => $e->errors()], 422);
+            } catch (\Exception $e) {
+                return response()->json(['error' => 'Error inesperado: ' . $e->getMessage()], 500);
+            }
+        }
+
+        public function updateStatus(Request $request, $id)
+        {
+            try {
+                $authUser = Auth::user();
+                $data = $request->all(); // Obtener todos los datos del request
+
+                // Validar el estado de la cuenta
+                if (!in_array($data['account_status'], ['active', 'inactive'])) {
+                    return response()->json(['error' => 'Estado de cuenta no válido'], 422);
+                }
+
+                // Actualizar el estado de la cuenta del usuario
+                $user = $this->userService->updateUserStatus($authUser, $id, $data);
+
+                return response()->json(['message' => 'Estado de cuenta actualizado con éxito', 'user' => $user], 200);
+            } catch (ValidationException $e) {
+                return response()->json(['error' => $e->errors()], 422);
+            } catch (\Exception $e) {
+                return response()->json(['error' => 'Error inesperado: ' . $e->getMessage()], 500);
+            }
+        }
+
 }

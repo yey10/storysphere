@@ -2,7 +2,7 @@
 namespace App\Services\User;
 
 use App\Models\User;
-use Cloudinary\Api\Upload\UploadApi;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
@@ -106,9 +106,17 @@ class UserService
      // Actualizar el rol de un usuario
     public function updateUserRole($admin, $id, $data)
     {
-          if ($admin->id_rol !== 2) {
+
+        Log::info('Rol del usuario autenticado:', ['id_rol' => $admin->id_rol]);
+        // Obtener el primer rol del usuario autenticado
+        $adminRole = $admin->roles->first();
+
+    // Verificar si el usuario autenticado tiene un rol asignado y si es administrador (ajusta el ID del rol según tu base de datos)
+        if (!$adminRole || $adminRole->id_rol !== 2) {
             throw new \Exception('No tienes permiso para actualizar roles');
         }
+
+        
 
         $user = User::findOrFail($id);
 
@@ -120,7 +128,32 @@ class UserService
             throw new \Illuminate\Validation\ValidationException($validator);
         }
 
-        $user->update(['id_rol' => $validator->validated()['id_rol']]);
+        $user->roles()->sync([$validator->validated()['id_rol']]);
+
+        return $user;
+    }
+
+    public function updateUserStatus($admin, $id, $data)
+    {
+       // Obtener el primer rol del usuario autenticado
+        $adminRole = $admin->roles->first();
+
+    // Verificar si el usuario autenticado tiene un rol asignado y si es administrador (ajusta el ID del rol según tu BD)
+        if (!$adminRole || $adminRole->id_rol !== 2) {
+            throw new \Exception('No tienes permiso para actualizar el estado de los usuarios');
+        }
+
+        $user = User::findOrFail($id);
+
+        $validator = Validator::make($data, [
+            'account_status' => 'required|in:active,inactive',
+        ]);
+
+        if ($validator->fails()) {
+            throw new \Illuminate\Validation\ValidationException($validator);
+        }
+
+        $user->update(['account_status' => $validator->validated()['account_status']]);
 
         return $user;
     }
