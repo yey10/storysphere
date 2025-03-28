@@ -25,7 +25,10 @@
     .services .box{width: 90%;}
 }
 @media (max-width: 500px) {
-    .services .box{width: 95%;}
-    .services .box .box-content{height: 70vh;}
-    .services .box .box-content:hover{transform: scale(0.9);}
+    .services{margin-top: 50px;}
+    .services h1{font-size: 45px; padding: 0 10px;}
+    .services .box{width: 70%; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));}
+    .services .box .box-content{height: 60vh;}
+    .services .box .box-content:nth-child(3){height: 65vh;}
+    .services .box .box-content:hover{transform: scale(1.01);}
 }

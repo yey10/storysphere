@@ -44,6 +44,17 @@
     .authors .authors-content{ grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));}
     .authors .authors-content .author-box .author-info > div:nth-child(1){top: -12px;}
 }
-@media (max-width: 768px){
-    
+@media (max-width: 500px){
+    .authors h1{font-size: 40px;}
+    .authors .authors-content .author-box:hover{transform: scale(1);}
+
+    .authors .all-authors{width: 95%;}
+    .authors .all-authors h2{font-size: 45px;}
+    .authors .all-authors > p:nth-child(2){font-size: 16px;}
+    .authors .all-authors .authors-general{grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); grid-gap: 10px;}
+    .authors .all-authors .authors-general .author-box{padding: 10px;}
+    .authors .all-authors .authors-general .author-box .author-image{width: 70px; height: 70px;}
+    .authors .all-authors .authors-general .author-box .author-info{padding: 10px;}
+    .authors .all-authors .authors-general .author-box .author-info h3{font-size: 16px;}
+    .authors .all-authors .authors-general .author-box .author-info button{padding: 5px 20px;}
 }

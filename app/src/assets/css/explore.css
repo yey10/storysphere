@@ -76,16 +76,26 @@
 }
 
 @media (max-width: 500px) {
-    .explore-page .explore1 .search{padding: 20px 0;}
+    .explore-page .explore1{width: 90%;}
+    .explore-page .explore1 > h1{font-size: 40px; margin-bottom: 10px;}
+    .explore-page .explore1 > p:nth-child(2){font-size: 16px;}
+    .explore-page .explore1 .search{padding: 20px 10px;}
     .explore-page .explore1 .search form input{width: 80%;}
     .explore-page .explore1 .search form button{width: 20%;}
 
     .explore-page .explore2{width: 95%;}
     .explore-page .explore2 .explore-data{ grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));}
-    .explore-page .explore2 .explore-data .story .story-info{padding: 0; padding-left: 10px;}
-    .explore-page .explore2 .explore-data .story .story-info h2{font-size: 23px;}
-    .explore-page .explore2 .explore-data .story .story-info button{padding: 10px 20px; font-size: 10px;}
+    .explore-page .explore2 .explore-data .story{height: 200px;}
+    .explore-page .explore2 .explore-data .story div:nth-child(1){width: 30%;}
+    .explore-page .explore2 .explore-data .story .story-info{width: 70%; padding: 0; padding-left: 10px;}
+    .explore-page .explore2 .explore-data .story .story-info h2{font-size: 17px;}
+    .explore-page .explore2 .explore-data .story .story-info p:nth-child(2){font-size: 12px; margin-bottom: 5px;}
+    .explore-page .explore2 .explore-data .story .story-info div:nth-child(3){height: 80px;}
+    .explore-page .explore2 .explore-data .story .story-info div:nth-child(3) p{font-size: 14px;}
+    .explore-page .explore2 .explore-data .story .story-info button{padding: 6px 30px; font-size: 10px;}
 
+    .explore-page .explore3 > h2{font-size: 45px;}
+    .explore-page .explore3 > p:nth-child(2){font-size: 18px; letter-spacing: 2px;}
     .explore-page .explore3 .authors-content .author-box:hover{transform: scale(0.9);}
     .explore-page .explore3 .authors-content .author-box .author-info > div:nth-child(1){ top: -10px; right: -32px;}
 

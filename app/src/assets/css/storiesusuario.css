@@ -121,12 +121,27 @@
 }
 
 @media (max-width: 500px){
-  .storiespage .body-3 .movie-slider .swiper-slide{height: 42vh !important;}
+  .storiespage .body-2 .boxslider h3{font-size: 40px;}
+  .storiespage .body-2 .slider-stories1 .slider-content{width: 95%;}
+  .storiespage .body-2 .slider-stories1 .slider-content .swiper .swiper-slide{max-width: 150px; height: 200px;}
+  .storiespage .body-2 .slider-stories1 .slider-content .control{top: 235px;}
 
+  .storiespage .body-3{padding: 30px 10px; margin-top: 100px;}
+  .storiespage .body-3 .swiper{padding: 20px 0px 40px !important;}
+  .storiespage .body-3 .movie-slider .swiper-slide{width: 120px !important; height: 25vh !important;}
+  .storiespage .body-3 .movie-slider .swiper-slide .title h3{font-size: 12px;}
+
+  .storiespage .body-4{width: 95%;}
   .storiespage .body-4 .search{padding: 20px 0;}
   .storiespage .body-4 .search form input{width: 80%;}
   .storiespage .body-4 .search form button{width: 20%;}
-  .storiespage .body-4 .body4-content .story .story-info h2{font-size: 20px;}
-  .storiespage .body-4 .body4-content .story .story-info p:nth-child(2){margin-bottom: 5px;}
-  .storiespage .body-4 .body4-content .story .story-info button{padding: 10px; font-size: 12px;}
+  .storiespage .body-4 .body4-content{ grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));}
+  .storiespage .body-4 .body4-content .story{height: 200px;}
+  .storiespage .body-4 .body4-content .story div:nth-child(1){width: 30%;}
+  .storiespage .body-4 .body4-content .story .story-info{width: 70%; padding: 0; padding-left: 10px;}
+  .storiespage .body-4 .body4-content .story .story-info h2{font-size: 17px;}
+  .storiespage .body-4 .body4-content .story .story-info p:nth-child(2){font-size: 12px; margin-bottom: 5px;}
+  .storiespage .body-4 .body4-content .story .story-info div:nth-child(3){height: 80px;}
+  .storiespage .body-4 .body4-content .story .story-info div:nth-child(3) p{font-size: 14px;}
+  .storiespage .body-4 .body4-content .story .story-info button{padding: 6px 30px; font-size: 10px;}
 }

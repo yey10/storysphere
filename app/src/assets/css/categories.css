@@ -33,6 +33,7 @@
 
 @media (max-width: 500px) {
     .categories-page .categories1{width: 90%;}
+    .categories-page .categories1 h1{font-size: 40px;}
     .categories-page .categories1 .search{padding: 20px 0;}
     .categories-page .categories1 .search form input{width: 80%;}
     .categories-page .categories1 .search form button{width: 20%;}

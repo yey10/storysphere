@@ -2,13 +2,17 @@ import { Link } from 'react-router-dom';
 import ReactImg1 from '../assets/img/logo.jpeg';
 import ReactImg2 from '../assets/img/profile.jpg';
 import ReactImg3 from '../assets/img/StorySphere.png';
-import { House, FileBadge, Phone, LayoutGrid, BookOpenText, BookUser, ChartBarStacked, Users, CircleUser, CircleHelp, Settings, LogIn, Search } from 'lucide-react';
+import { House, FileBadge, Phone, LayoutGrid, BookOpenText, BookUser, ChartBarStacked, Users, CircleUser, CircleHelp, Settings, LogIn, Search, Menu } from 'lucide-react';
 import '../assets/css/navbar.css';
 
 const Navbar = () => {
   return (
     <div>
       <div className="header">
+          {/* Menu responsive */}
+          <input type="checkbox" id='check' />
+          <label htmlFor="check" className='checkbtn'><Menu /></label>
+
           {/* navbar */}
           <div className="navbar">
             <div><img src={ReactImg3} alt="StorySphere" /></div>
@@ -21,6 +25,7 @@ const Navbar = () => {
               <li><Link to="/login">SIGNUP</Link></li>
             </ul>
           </div>
+
           {/* sidebar */}
           <div className="sidebar">
             <div className="sidebar-header">

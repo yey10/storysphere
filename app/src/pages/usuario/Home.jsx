@@ -100,6 +100,7 @@ const Home = () => {
                     <p>Haz crecer tu impacto con un plan premium. Accede a más herramientas y visibilidad</p>
                     <div className='body4-content'>
                       <div className='premium'>
+                        <div><Crown /><p>PREMIUM</p></div>
                         <div><img src={premium} alt="" /></div>
                         <div>
                           <div><Crown /><p>PREMIUM</p></div>
@@ -108,6 +109,7 @@ const Home = () => {
                         </div>
                       </div>
                       <div className='premium'>
+                        <div><Crown /><p>PREMIUM</p></div>
                         <div><img src={premium2} alt="" /></div>
                         <div>
                           <div><Crown /><p>PREMIUM</p></div>
