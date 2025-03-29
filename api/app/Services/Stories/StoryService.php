@@ -6,6 +6,7 @@ use App\Models\Story;
 use App\Models\User;
 use Cloudinary\Api\Upload\UploadApi;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -63,6 +64,26 @@ class StoryService
         }
 
         return $story;
+    }
+
+    public function updateStoryStatus($admin, $id, $data)
+    {
+        $adminRole = $admin->roles->first();
+
+        if (!$adminRole || $adminRole->id_rol !== 2) {
+            throw new \Exception('No tienes permiso para actualizar el estado de los usuarios');
+        }
+
+        $story = Story::findOrFail($id);
+        $validator = Validator::make($data, [
+            'state' => 'required|in:active,inactive',
+        ]);
+        if ($validator->fails()) {
+            throw new \Illuminate\Validation\ValidationException($validator);
+        }
+        $story->update(['state' => $validator->validated()['state']]);
+        return $story;
+
     }
 
     public function deleteStory(Story $story)

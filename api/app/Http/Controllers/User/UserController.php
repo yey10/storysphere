@@ -29,8 +29,8 @@ class UserController extends Controller
     public function index(Request $request){
 
         try {
-           $users = $this->userService->getAllUsers($request);
-           return response()->json(['users' => $users], 200);
+            $response = $this->userService->getAllUsers($request);
+            return response()->json($response, 200);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Error inesperado: ' . $e->getMessage()], 500);
         }

@@ -1,24 +1,22 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from "react";
 import { useUser } from "../../context/UserContext";
 import { Table, Button, Switch, Select, message } from "antd";
-import AdminLayout from './AdminLayout';
+import AdminLayout from "./AdminLayout";
 
 const { Option } = Select;
 
 const UsersList = () => {
-
-  const { users, setUsers, deleteUser, isLoading, changeUserStatus, changeUserRole } = useUser();
+  const { users, deleteUser, isLoading, changeUserStatus, changeUserRole } = useUser();
   const [localUsers, setLocalUsers] = useState([]);
 
   const rolesList = [
-    { id: 1, name: "Administrador" },
-    { id: 2, name: "Usuario" },
+    { id: 1, name: "Usuario" },
+    { id: 2, name: "Administrador" },
   ];
 
+  // Sincroniza localUsers con el contexto solo cuando users cambia
   useEffect(() => {
-    if (users) {
-      setLocalUsers(users);
-    }
+    setLocalUsers(users || []);
   }, [users]);
 
   const toggleUserStatus = async (id, currentStatus) => {
@@ -26,33 +24,46 @@ const UsersList = () => {
       const newStatus = currentStatus === "active" ? "inactive" : "active";
       const updatedUser = await changeUserStatus(id, { account_status: newStatus });
 
-      if (!updatedUser) throw new Error("No se pudo actualizar el estado");
+      if (!updatedUser) {
+        throw new Error("No se pudo actualizar el estado");
+      }
 
       message.success("Estado actualizado correctamente");
 
-      setUsers(prevUsers =>
+      // 🔹 Actualiza solo el usuario afectado en el estado local
+      setLocalUsers(prevUsers =>
         prevUsers.map(user =>
-            user.id_user === id ? { ...user, account_status: newStatus } : user
+          user.id_user === id ? { ...user, account_status: updatedUser.account_status } : user
         )
       );
-      
     } catch (error) {
+      console.error("Error en toggleUserStatus:", error);
       message.error("Error al actualizar el estado");
     }
   };
 
   const handleRoleChange = async (id, newRole) => {
     try {
-      await changeUserRole(id, { id_rol: newRole });
-      message.success("Rol actualizado correctamente");
+        console.log("Nuevo rol seleccionado:", newRole); // 🛠 Depuración
 
-      setLocalUsers((prevUsers) =>
-        prevUsers.map((user) =>
-          user.id_user === id ? { ...user, id_rol: newRole } : user
-        )
-      );
+        const updatedUser = await changeUserRole(id, { id_rol: newRole });
+
+        if (!updatedUser || !updatedUser.user.roles.length) {
+            throw new Error("No se pudo actualizar el rol");
+        }
+
+        const updatedRoleId = updatedUser.user.roles[0].id_rol;
+
+        message.success("Rol actualizado correctamente");
+
+        setLocalUsers(prevUsers =>
+            prevUsers.map(user =>
+                user.id_user === id ? { ...user, id_rol: updatedRoleId } : user
+            )
+        );
     } catch (error) {
-      message.error("Error al actualizar el rol");
+        console.error("Error en handleRoleChange:", error);
+        message.error("Error al actualizar el rol");
     }
   };
 
@@ -61,19 +72,19 @@ const UsersList = () => {
       await deleteUser(id);
       message.success("Usuario eliminado correctamente");
 
-      // Actualiza el estado local
-      setLocalUsers((prevUsers) => prevUsers.filter((user) => user.id_user !== id));
+      // 🔹 Filtra el usuario eliminado
+      setLocalUsers(prevUsers => prevUsers.filter(user => user.id_user !== id));
     } catch (error) {
       message.error("No se pudo eliminar el usuario");
     }
   };
 
   if (isLoading) return <div>Cargando...</div>;
-  
-    return (
+
+  return (
     <AdminLayout>
-          <h2>Usuarios</h2>
-          <Table
+      <h2>Usuarios</h2>
+      <Table
         dataSource={localUsers}
         rowKey="id_user"
         columns={[
@@ -92,14 +103,13 @@ const UsersList = () => {
           },
           {
             title: "Rol",
-            dataIndex: "id_rol",
-            render: (roleId, record) => {
-              // Obtener el nombre del rol actual
-              const currentRole = rolesList.find(role => role.id === roleId)?.name_rol || "Desconocido";
-
+            dataIndex: "roles",
+            render: (roles, record) => {
+              const currentRoleId = roles.length ? roles[0].id_rol : null;
+          
               return (
                 <Select
-                  value={roleId} // Usar el ID del rol actual
+                  value={currentRoleId}
                   onChange={(newRole) => handleRoleChange(record.id_user, newRole)}
                   style={{ width: 150 }}
                 >
@@ -123,8 +133,7 @@ const UsersList = () => {
         ]}
       />
     </AdminLayout>
-        
-    );
-}
+  );
+};
 
-export default UsersList
+export default UsersList;

@@ -69,13 +69,18 @@ class ProfileController extends Controller
         public function updateRole(Request $request, $id)
         {
             try {
+                
                 $authUser = Auth::user();
                 $data = $request->all(); // Obtener todos los datos del request
 
                 // Actualizar el rol del usuario
-                $user = $this->userService->updateUserRole($authUser, $id, $data);
+                $userData = $this->userService->updateUserRole($authUser, $id, $data);
 
-                return response()->json(['message' => 'Rol actualizado con éxito', 'user' => $user], 200);
+                return response()->json([
+                    'message' => 'Rol actualizado con éxito',
+                    'user' => $userData // 👈 Aquí ya pasamos el array correctamente
+                ], 200);
+                
             } catch (ValidationException $e) {
                 return response()->json(['error' => $e->errors()], 422);
             } catch (\Exception $e) {

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('sinopsis'); // sinopsis de la historia
             $table->timestamps(); // Añade los campos created_at y updated_at automáticamente
 
-            $table->string('state', 50)->default('draft'); // Estado de la historia (borrador, publicado, etc.)
+            $table->string('state', 50)->default('active'); // Estado de la historia (borrador, publicado, etc.)
 
             // Clave foránea para la relación con users
             $table->unsignedBigInteger('id_user'); // Relación con la tabla de usuarios

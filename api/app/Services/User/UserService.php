@@ -2,7 +2,7 @@
 namespace App\Services\User;
 
 use App\Models\User;
-
+use App\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
@@ -10,29 +10,29 @@ use Illuminate\Support\Facades\Log;
 
 class UserService
 {
-    public function getAllUsers($request)
+    public function getAllUsers($request): array
     {
-        try {
-            $query = User::query();
+            $users = User::with(['roles:id_rol,name_rol'])
+            ->when($request->filled('name'), fn ($q) => $q->where('name', 'like', "%{$request->name}%"))
+            ->paginate(10);
 
-            if ($request->filled('name')) {
-                $query->where('name', 'like', '%' . $request->name . '%');
-            }
+        $transformedUsers = collect($users->items())->map(function ($user) {
+            return [
+                ...$user->toArray(),
+                'roles' => $user->roles->pluck('name_rol')->toArray() ?: ['Sin rol']
+            ];
+        });
 
-            if ($request->filled('role')) {
-                $query->where('id_rol', $request->role);
-            }
-
-            if ($request->filled('email')) {
-                $query->where('email', 'like', '%' . $request->email . '%');
-            }
-
-            return $query->paginate(10);
-            
-        } catch (\Exception $e) {
-            throw new \Exception('Error inesperado: ' . $e->getMessage());
-        }
+        return [
+            'data' => $transformedUsers,
+            'pagination' => [
+                'current_page' => $users->currentPage(),
+                'last_page' => $users->lastPage(),
+                'total' => $users->total(),
+            ],
+        ];
     }
+
 
 
      // Obtener un usuario por ID
@@ -45,7 +45,18 @@ class UserService
     public function getAuthenticatedUser()
     {
         $user = Auth::user();
-        return response()->json($user);
+
+        if (!$user) {
+            return response()->json(['error' => 'No autenticado'], 401);
+        }
+    
+        // Obtener usuario con los roles
+        $userWithRoles = User::where('id_user', $user->id_user)->with('roles')->first();
+    
+        return response()->json([
+            'user' => $userWithRoles,
+            'roles' => $userWithRoles->roles->pluck('name'), // Solo los nombres de los roles
+        ]);
     }
  
      // Actualizar perfil de un usuario
@@ -107,16 +118,15 @@ class UserService
     public function updateUserRole($admin, $id, $data)
     {
 
-        Log::info('Rol del usuario autenticado:', ['id_rol' => $admin->id_rol]);
+            Log::info('Rol del usuario autenticado:', ['id_rol' => $admin->id_rol]);
+
         // Obtener el primer rol del usuario autenticado
         $adminRole = $admin->roles->first();
 
-    // Verificar si el usuario autenticado tiene un rol asignado y si es administrador (ajusta el ID del rol según tu base de datos)
+        // Verificar si el usuario autenticado tiene un rol asignado y si es administrador
         if (!$adminRole || $adminRole->id_rol !== 2) {
             throw new \Exception('No tienes permiso para actualizar roles');
         }
-
-        
 
         $user = User::findOrFail($id);
 
@@ -128,8 +138,13 @@ class UserService
             throw new \Illuminate\Validation\ValidationException($validator);
         }
 
+        // Actualizar el rol del usuario
         $user->roles()->sync([$validator->validated()['id_rol']]);
 
+        // Recargar la relación roles para asegurarse de que está actualizada
+        $user->load('roles');
+
+        
         return $user;
     }
 

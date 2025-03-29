@@ -4,7 +4,7 @@ export const getAllUsers = async (filters={}) =>{
     try {
         const response = await axios.get('/users', { params: filters });
         console.log("Respuesta completa de la API:", response.data);
-        return response.data.users.data;
+        return response.data.data;
     } catch (error) {
         console.error("Error en getAllUsers():", error);
         throw error.response ? error.response.data : error;

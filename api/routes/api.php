@@ -69,6 +69,11 @@ Route::prefix('stories')->group(function () {
     });
 });
 
+//actualizar estado de una historia
+Route::middleware(['auth:sanctum', 'token.expiration'])->group(function () {
+    Route::put('/stories/{story}/status', [StoryController::class, 'updateStoryStatus']);
+});
+
 //Rutas para los comentarios
 Route::prefix('comments')->group(function(){
     //Rutas públicas
