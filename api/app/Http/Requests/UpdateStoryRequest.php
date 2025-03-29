@@ -24,7 +24,7 @@ class UpdateStoryRequest extends FormRequest
         return [
             'title' => 'nullable|string|max:255',
             'content' => 'nullable|string',
-            'state' => 'nullable|boolean',
+            'state' => 'nullable|string',
             'categories' => 'nullable|array',
             'categories' => 'exists:categories,id_category',
         ];

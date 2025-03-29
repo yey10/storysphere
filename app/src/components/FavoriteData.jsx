@@ -10,11 +10,13 @@ const FavoriteData = () => {
     const { stories, isLoading, fetchStories } = useStory();
 
     useEffect(() => {
-      fetchStories();
-  }, [fetchStories]);
+        if (stories.length === 0) fetchStories();
+    }, [fetchStories, stories]);
 
   useEffect(() => {
-    if (!stories || isLoading) return;
+    console.log("userInteractions:", userInteractions); // 🔍 Ver datos
+    console.log("stories:", stories); // 🔍 Ver historias
+    if (!stories || isLoading || Object.keys(userInteractions).length === 0) return;
 
     const historiasFiltradas = stories.filter(story => {
         const interaction = userInteractions[story.id_story];
@@ -46,20 +48,28 @@ const FavoriteData = () => {
             </div>
 
             <div className="lista">
-                {historias.map(historia => (
-                    <div key={historia.id_story} className="item">
-                        <div className="like-image">
-                            <div>{vista === "meGusta" ? <Heart fill="red" /> : <Bookmark fill="yellow" />}</div>
-                            <img src={historia.photo} alt={historia.title} />
+                {historias.length > 0 ? (
+                    historias.map(historia => (
+                        <div key={historia.id_story} className="item">
+                            <div className="like-image">
+                                {vista === "meGusta" ? (
+                                    <Heart fill="red" />
+                                ) : (
+                                    <Bookmark fill="yellow" />
+                                )}
+                                <img src={historia.photo} alt={historia.title} />
+                            </div>
+                            <div className="like-info">
+                                <h2 className="title">{historia.title}</h2>
+                                <p>{historia.author}</p>
+                                <div><p>{historia.description}</p></div>
+                                <button className="buttonLight">Leer Historia</button>
+                            </div>
                         </div>
-                        <div className="like-info">
-                            <h2 className="title">{historia.title}</h2>
-                            <p>{historia.author}</p>
-                            <div><p>{historia.description}</p></div>
-                            <button className="buttonLight">Leer Historia</button>
-                        </div>
-                    </div>
-                ))}
+                    ))
+                ) : (
+                    <p className="mensaje">No hay historias en esta categoría.</p>
+                )}
             </div>
         </div>
   )

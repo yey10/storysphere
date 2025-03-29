@@ -4,7 +4,7 @@ import { useStory } from '../../context/StoryContext';
 import { Table, Button, Switch, message } from "antd";
 
 const Storieslist = () => {
-  const { stories, isLoading, fetchStories, editStory, changeStoryStatus, removeStory } = useStory();
+  const { stories, isLoading, fetchStories, changeStoryStatus, removeStory } = useStory();
   const [localStories, setLocalStories] = useState([]);
 
   useEffect(() => {
@@ -16,7 +16,7 @@ const Storieslist = () => {
   const toggleStoryStatus = async (id, currentState) => {
     try {
         const newState = currentState === "active" ? "inactive" : "active";
-        const updatedStory = await editStory(id, { state: newState });
+        const updatedStory = await changeStoryStatus(id, { state: newState });
         
         if (!updatedStory) {
           throw new Error("No se pudo actualizar el estado");
@@ -73,7 +73,7 @@ const Storieslist = () => {
             dataIndex: "state",
             render: (state, record) => (
               <Switch
-                checked={state === "published"}
+                checked={state === "active"}
                 onChange={() => toggleStoryStatus(record.id_story, state)}
               />
             ),

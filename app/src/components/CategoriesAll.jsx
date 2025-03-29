@@ -28,161 +28,46 @@ import Drama1 from '../assets/img/Stories/66.webp'
 import Drama2 from '../assets/img/Stories/67.webp'
 import Drama3 from '../assets/img/Stories/68.webp'
 
-const CategoriesAll = () => {
+const categoryImages = {
+    Romance: [Romance1, Romance2, Romance3],
+    Terror: [Terror1, Terror2, Terror3],
+    Acción: [Accion1, Accion2, Accion3],
+    Ficción: [Ficcion1, Ficcion2, Ficcion3],
+    Fantasía: [Fantasia1, Fantasia2, Fantasia3],
+    Comedia: [Comedia1, Comedia2, Comedia3],
+    Aventura: [Aventura1, Aventura2, Aventura3],
+    Misterio: [Misterio1, Misterio2, Misterio3],
+    Drama: [Drama1, Drama2, Drama3]
+};
 
+const CategoriesAll = ({categories}) => {
     const navigate = useNavigate();
-
-    const handleNavigate = (category) => {
-        navigate(`/user/category/${category}`);
-    };
-
-  return (
-    <div className="categories">
-        <div className='categories-content'>
+  
+    return (
+      <div className="categories">
+        {categories.map((category) => (
+          <div key={category.id_category} className="categories-content">
             <div>
-                <h3 className='title'>ROMANCE</h3>
-                <p>Lo mejor en Romance aquí</p>
-                <button className="buttonLight" onClick={() => handleNavigate('Romance')}>¡VAMOS!</button>
+              <h3 className="title">{category.category_name.toUpperCase()}</h3>
+              <p>Lo mejor en {category.category_name} aquí</p>
+              <button className="buttonLight" onClick={() => navigate(`/user/category/${category.id_category}`)}>
+                ¡VAMOS!
+              </button>
             </div>
             <div>
-                <div className='background-image'></div>
-                <div className='image-content'>
-                    <div><img src={Romance1} alt="" /></div>
-                    <div><img src={Romance2} alt="" /></div>
-                    <div><img src={Romance3} alt="" /></div>
+              <div className="background-image"></div>
+                <div className="image-content">
+                        {(categoryImages[category.category_name] || []).map((image, index) => (
+                            <div key={index}>
+                            <img src={image} alt={`${category.category_name} ${index + 1}`} />
+                            </div>
+                        ))}
                 </div>
             </div>
-        </div>
-            
-        <div className='categories-content'>
-            <div>
-                <h3 className='title'>TERROR</h3>
-                <p>Lo mejor en Terror aquí</p>
-                <button className="buttonLight" onClick={() => handleNavigate('Terror')}>¡VAMOS!</button>
-            </div>
-            <div>
-                <div className='background-image'></div>
-                <div className='image-content'>
-                    <div><img src={Terror1} alt="" /></div>
-                    <div><img src={Terror2} alt="" /></div>
-                    <div><img src={Terror3} alt="" /></div>
-                </div>
-            </div>
-        </div>
-            
-        <div className='categories-content'>
-            <div>
-                <h3 className='title'>ACCIÓN</h3>
-                <p>Lo mejor en Acción aquí</p>
-                <button className="buttonLight" onClick={() => handleNavigate('Accion')}>¡VAMOS!</button>
-            </div>
-            <div>
-                <div className='background-image'></div>
-                <div className='image-content'>
-                    <div><img src={Accion1} alt="" /></div>
-                    <div><img src={Accion2} alt="" /></div>
-                    <div><img src={Accion3} alt="" /></div>
-                </div>
-            </div>
-        </div>
-            
-        <div className='categories-content'>
-            <div>
-                <h3 className='title'>FICCIÓN</h3>
-                <p>Lo mejor en Ficción aquí</p>
-                <button className="buttonLight" onClick={() => handleNavigate('Ficcion')}>¡VAMOS!</button>
-            </div>
-            <div>
-                <div className='background-image'></div>
-                <div className='image-content'>
-                    <div><img src={Ficcion1} alt="" /></div>
-                    <div><img src={Ficcion2} alt="" /></div>
-                    <div><img src={Ficcion3} alt="" /></div>
-                </div>
-            </div>
-        </div>
-    
-        <div className='categories-content'>
-            <div>
-                <h3 className='title'>FANTASÍA</h3>
-                <p>Lo mejor en Fantasía aquí</p>
-                <button className="buttonLight" onClick={() => handleNavigate('Fantasia')}>¡VAMOS!</button>
-            </div>
-            <div>
-                <div className='background-image'></div>
-                <div className='image-content'>
-                    <div><img src={Fantasia1} alt="" /></div>
-                    <div><img src={Fantasia2} alt="" /></div>
-                    <div><img src={Fantasia3} alt="" /></div>
-                </div>
-            </div>
-        </div>
-    
-        <div className='categories-content'>
-            <div>
-                <h3 className='title'>COMEDIA</h3>
-                <p>Lo mejor en Comedia aquí</p>
-                <button className="buttonLight" onClick={() => handleNavigate('Comedia')}>¡VAMOS!</button>
-            </div>
-            <div>
-                <div className='background-image'></div>
-                <div className='image-content'>
-                    <div><img src={Comedia1} alt="" /></div>
-                    <div><img src={Comedia2} alt="" /></div>
-                    <div><img src={Comedia3} alt="" /></div>
-                </div>
-            </div>
-        </div>
-            
-        <div className='categories-content'>
-            <div>
-                <h3 className='title'>AVENTURA</h3>
-                <p>Lo mejor en Aventura aquí</p>
-                <button className="buttonLight" onClick={() => handleNavigate('Aventura')}>¡VAMOS!</button>
-            </div>
-            <div>
-                <div className='background-image'></div>
-                <div className='image-content'>
-                    <div><img src={Aventura1} alt="" /></div>
-                    <div><img src={Aventura2} alt="" /></div>
-                    <div><img src={Aventura3} alt="" /></div>
-                </div>
-            </div>
-        </div>
-    
-        <div className='categories-content'>
-            <div>
-                <h3 className='title'>MISTERIO</h3>
-                <p>Lo mejor en Misterio aquí</p>
-                <button className="buttonLight" onClick={() => handleNavigate('Misterio')}>¡VAMOS!</button>
-            </div>
-            <div>
-                <div className='background-image'></div>
-                <div className='image-content'>
-                    <div><img src={Misterio1} alt="" /></div>
-                    <div><img src={Misterio2} alt="" /></div>
-                    <div><img src={Misterio3} alt="" /></div>
-                </div>
-            </div>
-        </div>
-    
-        <div className='categories-content'>
-            <div>
-                <h3 className='title'>DRAMA</h3>
-                <p>Lo mejor en Drama aquí</p>
-                <button className="buttonLight" onClick={() => handleNavigate('Drama')}>¡VAMOS!</button>
-            </div>
-            <div>
-                <div className='background-image'></div>
-                <div className='image-content'>
-                    <div><img src={Drama1} alt="" /></div>
-                    <div><img src={Drama2} alt="" /></div>
-                    <div><img src={Drama3} alt="" /></div>
-                </div>
-            </div>
-        </div>
-    </div>
-  )
-}
+          </div>
+        ))}
+      </div>
+    );
+  };
 
 export default CategoriesAll

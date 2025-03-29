@@ -51,6 +51,8 @@ export const StoryProvider = ({children}) =>{
     }, [fetchStories, fetchCategories, hasFetched]);
 
     const fetchUserStories = useCallback(async (userId) => {
+        if (!userId || userStories.length > 0) return; 
+       
         if (!userId) {
             console.error("Error: userId es undefined o null");
             return;
@@ -69,19 +71,13 @@ export const StoryProvider = ({children}) =>{
         } finally {
             setIsLoading(false);
         }
-    }, []);
+    }, [userStories.length]);
 
-    useEffect(() =>{
-        if (stories.length === 0) fetchStories();
-        if (categories.length === 0) fetchCategories();
-    }, [fetchStories, fetchCategories]);
-
-    const addStory = async (storyData) =>{
+    const addStory = async (storyData) => {
         try {
             const newStory = await createStory(storyData);
-            setStories([...stories, newStory]);
+            setStories((prevStories) => [...prevStories, newStory]);
         } catch (error) {
-            setStories(prevStories);
             console.error("Error al crear la historia:", error);
         }
     };
@@ -122,14 +118,13 @@ export const StoryProvider = ({children}) =>{
 
             setStories((prevStories) =>
                 prevStories.map((story) =>
-                    story.id_story === id ? { ...story, status: updatedStory.status } : story
+                    story.id_story === id ? { ...story, state: updatedStory.state } : story
                 )
             );  
 
-            return updatedUser;
+            return updatedStory;
 
         } catch (error) {
-            message.error("Error al actualizar el estado.");
             throw error;
         }
     } 
@@ -150,6 +145,12 @@ export const StoryProvider = ({children}) =>{
             .slice(0, limit);
     }
 
+    const getStoriesByCategory = (categoryId) => {
+        return stories.filter(story =>
+            story.categories.some(category => category.id_category === categoryId)
+        );
+    };
+
 
     return(
         <StoryContext.Provider value={{
@@ -161,6 +162,7 @@ export const StoryProvider = ({children}) =>{
             fetchCategories,
             fetchUserStories,
             getFeaturedStories,
+            getStoriesByCategory,
             addStory,
             getStory,
             editStory,
