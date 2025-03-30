@@ -61,6 +61,7 @@ const Storieslist = () => {
     <AdminLayout>
       <h2>Historias</h2>
       <Table
+        style={{ background: "#ffffff" }}
         dataSource={localStories}
         rowKey="id_story"
         columns={[

@@ -10,7 +10,7 @@ const AdminHome = () => {
     <AdminLayout>
       <Row gutter={[16, 16]}>
         <Col span={8}>
-          <Card title="Usuarios Registrados">
+          <Card title="Usuarios Registrados" style={{ background: "#1677ff" }}>
             <button
               onClick={() => navigate("/admin/users")}
               style={{
@@ -27,7 +27,7 @@ const AdminHome = () => {
           </Card>
         </Col>
         <Col span={8}>
-          <Card title="Historias Publicadas">
+          <Card title="Historias Publicadas" style={{ background: "#1677ff" }}>
             <button
               onClick={() => navigate("/admin/stories")}
               style={{
@@ -44,8 +44,21 @@ const AdminHome = () => {
           </Card>
         </Col>
         <Col span={8}>
-          <Card title="Comentarios Totales">
-            <p>💬 980 comentarios</p>
+          <Card title="Comentarios Totales" style={{ background: "#1677ff" }}>
+            <button
+              onClick={() => navigate("/admin/comments")}
+              style={{
+                width: "100%",
+                padding: "10px",
+                border: "none",
+                background: "none",
+                cursor: "pointer",
+                fontSize: "16px",
+                color: "#fff",
+              }}
+            >
+              💬 980 comentarios
+            </button>
           </Card>
         </Col>
       </Row>

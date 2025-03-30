@@ -85,6 +85,7 @@ const UsersList = () => {
     <AdminLayout>
       <h2>Usuarios</h2>
       <Table
+        style={{ background: "#ffffff" }}
         dataSource={localUsers}
         rowKey="id_user"
         columns={[

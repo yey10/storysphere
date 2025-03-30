@@ -39,11 +39,11 @@
 .homeusuario .body-2 .slider-stories2{display: flex; flex-direction: column; justify-content: center; align-items: center; row-gap: 20px; min-height: 40vh; overflow: hidden;}
 .homeusuario .body-2 .slider-stories2 img{width: 100%; pointer-events: none; user-select: none;}
 .homeusuario .body-2 .slider-stories2 .slider-content{position: relative; display: flex; flex-direction: column; justify-content: center; align-items: center; width: 80%; overflow: hidden; z-index: 0;}
-.homeusuario .body-2 .slider-stories2 .slider-content .swiper2{width: 100%; height: 100%;}
-.homeusuario .body-2 .slider-stories2 .slider-content .swiper2 .swiper-slide{max-width: 150px; height: 200px; border-radius: 15px; margin: 20px 0 40px; overflow: visible; box-shadow: 0 8px 10px rgba(0, 0, 0, 0.5), inset 0 2px 2px rgba(255, 255, 255, 0.2); cursor: grab;}
-.homeusuario .body-2 .slider-stories2 .slider-content .swiper2 .swiper-slide .content{position: relative; height: 100%; background: rgba(104, 104, 104, 0); color: #fff; user-select: none;}
-.homeusuario .body-2 .slider-stories2 .slider-content .swiper2 .swiper-slide .content img{width: 100%; height: 100%; aspect-ratio: 3/2; border-radius: 10px; object-fit: cover; box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);}
-.homeusuario .body-2 .slider-stories2 .slider-content .swiper2 .swiper-slide p{text-align: center; padding-top: 5px;}
+.homeusuario .body-2 .slider-stories2 .slider-content .swiper{width: 100%; height: 100%;}
+.homeusuario .body-2 .slider-stories2 .slider-content .swiper .swiper-slide{max-width: 150px; height: 200px; border-radius: 15px; margin: 20px 0 40px; overflow: visible; box-shadow: 0 8px 10px rgba(0, 0, 0, 0.5), inset 0 2px 2px rgba(255, 255, 255, 0.2); cursor: grab;}
+.homeusuario .body-2 .slider-stories2 .slider-content .swiper .swiper-slide .content{position: relative; height: 100%; background: rgba(104, 104, 104, 0); color: #fff; user-select: none;}
+.homeusuario .body-2 .slider-stories2 .slider-content .swiper .swiper-slide .content img{width: 100%; height: 100%; aspect-ratio: 3/2; border-radius: 10px; object-fit: cover; box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);}
+.homeusuario .body-2 .slider-stories2 .slider-content .swiper .swiper-slide p{text-align: center; padding-top: 5px;}
 .homeusuario .body-2 .slider-stories2 .slider-content .control{width: 100%; position: absolute; display: flex; flex-direction: row; justify-content: space-between; align-items: center; list-style: none; gap: 14px; z-index: 999999999;}
 .homeusuario .body-2 .slider-stories2 .slider-content .control li{position: relative; display: flex; justify-content: center; align-items: center; background: linear-gradient(to bottom, #b28405, #efb810); box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4), inset 0 4px 4px rgba(255, 255, 255, 0.2); padding: 16px; border-radius: 50%; cursor: pointer; transform: scale(1);}
 .homeusuario .body-2 .slider-stories2 .slider-content .control li:before{position: absolute; content: ""; top: 0; right: 0; bottom: 0; left: 0; background: linear-gradient(to right, #b28405, #efb810); border-radius: 50%; z-index: -1; transition: all 0.5s ease-in; opacity: 0;}
@@ -126,7 +126,15 @@
 @media (max-width: 500px) {
     .homeusuario .body-3 h3{font-size: 40px;}
     .homeusuario .body-3 p{font-size: 20px; padding: 0 10px;}
+    .homeusuario .body-3 .boximage{width: 95%; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px;}
+    .homeusuario .body-3 .boximage div{height: 300px;}
+    .homeusuario .body-3 .boximage div .boximg-content{padding: 10px;}
+    .homeusuario .body-3 .boximage div .boximg-content h3{font-size: 22px;}
+    .homeusuario .body-3 .boximage div .boximg-content p:nth-child(2){font-size: 14px;}
+    .homeusuario .body-3 .boximage div .boximg-content button{padding: 6px 30px;}
+    .homeusuario .body-3 .boximage div .boximg-content button a{font-size: 12px;}
 
+    .homeusuario .body-4 h3{font-size: 45px;}
     .homeusuario .body-4 .body4-content{flex-direction: column;}
     .homeusuario .body-4 .body4-content .premium{width: 95%; margin: 0 auto; position: relative;}
     .homeusuario .body-4 .body4-content .premium:hover{transform: scale(0.9);}

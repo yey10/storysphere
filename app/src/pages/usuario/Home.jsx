@@ -127,7 +127,7 @@ const Home = () => {
                         <h3 className='title'>ROMANCE</h3>
                         <p>Lo mejor en Romance aquí</p>
                         <p>Descubre nuevas categorías y recibe recomendaciones personalizadas</p>
-                        <button className='buttonLight'><Link to="/categories">Ingresa a categorías</Link></button>
+                        <button className='buttonLight'><Link to="/user/categories">Ingresa a categorías</Link></button>
                       </div>
                       <div>
                         <div className='background-image'></div>
@@ -144,7 +144,7 @@ const Home = () => {
                         <h3 className='title'>TERROR</h3>
                         <p>Lo mejor en Terror aquí</p>
                         <p>Descubre nuevas categorías y recibe recomendaciones personalizadas</p>
-                        <button className='buttonLight'><Link to="/categories">Ingresa a categorías</Link></button>
+                        <button className='buttonLight'><Link to="/user/categories">Ingresa a categorías</Link></button>
                       </div>
                       <div>
                         <div className='background-image'></div>
@@ -161,7 +161,7 @@ const Home = () => {
                         <h3 className='title'>ACCIÓN</h3>
                         <p>Lo mejor en Acción aquí</p>
                         <p>Descubre nuevas categorías y recibe recomendaciones personalizadas</p>
-                        <button className='buttonLight'><Link to="/categories">Ingresa a categorías</Link></button>
+                        <button className='buttonLight'><Link to="/user/categories">Ingresa a categorías</Link></button>
                       </div>
                       <div>
                         <div className='background-image'></div>
@@ -178,7 +178,7 @@ const Home = () => {
                         <h3 className='title'>FICCIÓN</h3>
                         <p>Lo mejor en Ficción aquí</p>
                         <p>Descubre nuevas categorías y recibe recomendaciones personalizadas</p>
-                        <button className='buttonLight'><Link to="/categories">Ingresa a categorías</Link></button>
+                        <button className='buttonLight'><Link to="/user/categories">Ingresa a categorías</Link></button>
                       </div>
                       <div>
                         <div className='background-image'></div>

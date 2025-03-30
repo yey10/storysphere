@@ -5,6 +5,7 @@ import Footer from '../components/Footer.jsx'
 import ParticlesBackground from '../components/ParticlesBackground.jsx'
 import '../assets/css/help.css'
 import ManualPdf from '/Manual_de_Usuario_StorySphere.pdf'
+import Loader from '../components/Loader.jsx'
 
 const downloadPdf = () => {
   const pdfUrl = "/Manual_de_Usuario_StorySphere.pdf"; // Asegúrate de que el archivo está en /public

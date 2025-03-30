@@ -11,7 +11,7 @@ import Popular from '../pages/usuario/Popular.jsx';
 import Explore from '../pages/usuario/Explore.jsx';
 import CreateStoryPage from '../pages/usuario/CreateStoryPage.jsx';
 import StoriesUsuario from '../pages/usuario/Stories.jsx';
-import UserStorieslist from '../pages/UserStoriesList.jsx';
+import UserStorieslist from '../pages/usuario/UserStoriesList.jsx';
 import StoryPage from '../pages/usuario/StoryPage.jsx';
 import Categories from '../pages/usuario/Categories.jsx';
 import StoriesByCategory from '../pages/usuario/StoriesByCategory.jsx';
