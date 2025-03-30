@@ -10,6 +10,13 @@
 .help2 p{font-size: 22px; letter-spacing: 2.2px; text-align: center; margin-bottom: 40px;}
 
 @media (max-width: 500px) {
+    .help h1{width: 95%; font-size: 30px;}
     .help .manual-usuario{padding: 30px 10px;}
+    .help .manual-usuario h3{font-size: 25px;}
     .help .manual-usuario iframe{height: 400px;}
+
+    .help2{width: 85%;}
+    .help2 p{font-size: 18px;}
+    .help2 button{padding: 10px 30px;}
+    .help2 button a{font-size: 14px;}
 }

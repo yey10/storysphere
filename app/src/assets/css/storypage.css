@@ -95,6 +95,7 @@
     .storypage .read .read-content .canvas p{font-size: 17px; line-height: 27px;}
 
     .storypage .punctuation{width: 100%;}
+    .storypage .punctuation h3{font-size: 30px;}
     .storypage .comments{width: 100%;}
     .storypage .comments form{width: 90%;}
     .storypage .comments .comments-content{width: 95%;}

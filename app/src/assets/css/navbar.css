@@ -18,9 +18,8 @@
   .header .navbar ul li:nth-child(3) a{background-color: #D4AF37; border: none; color: white;}
   .header .navbar ul li:nth-child(3) a:hover{box-shadow: 0 0 15px 5px #D4AF375d;}
 
-
   /* sidebar */
-  .header .sidebar{position: fixed; top: 0; left: 0; height: 100vh; width: 85px; display: flex; flex-direction: column; overflow-x: hidden; backdrop-filter: blur(10px); background-color: #0505053d; padding: 0px 20px; transition: all 0.5s ease; z-index: 99999999;}
+  .header .sidebar{position: fixed; top: 0; left: 0; height: 100vh; width: 85px; display: flex; flex-direction: column; overflow-x: hidden; backdrop-filter: blur(10px); background-color: #0505053d; padding: 0px 20px; transition: all 0.5s ease; z-index: 999999;}
   .header .sidebar:hover{width: 260px;}
   .header .sidebar .sidebar-header{display: flex; align-items: center; padding-top: 20px;}
   .header .sidebar .sidebar-header img{width: 42px; border-radius: 50%;}
@@ -44,6 +43,9 @@
   .header .sidebar .user-account .user-profile .user-detail span{font-size: 0.85rem; font-weight: 400; display: block; margin-top: 0;}
   .header .sidebar:hover .user-account{background-color: #ffffff2d; border-radius: 5px; }
 
+  .header .checkbtn{width: 50px; height: 80px; position: fixed; top: 0; left: 20px; cursor: pointer; display: none; z-index: 9999999999999999999;}
+  .header .checkbtn svg{width: 40px; height: 40px;}
+  .header #check{display: none;}
 
   /* responsive */
   @media screen and (max-width: 1024px) {
@@ -60,30 +62,27 @@
   }
 
   @media screen and (max-width: 500px) {
-      .header .navbar div:nth-child(1){margin-left: 12vh; position: absolute;}
+      .header .navbar{position: fixed; background-color: #0000005d; z-index: 99999;}
+      .header .navbar div:nth-child(1){width: 120px; height: 50px; margin-left: 10vh; margin-top: 20px;}
       .header .navbar ul{margin-right: 10px;}
-      .header .navbar ul li a{font-size: 16px;}
-      .header .navbar ul li:nth-child(1) input{height: 25px;}
+      .header .navbar ul li a{font-size: 13px;}
+      .header .navbar ul li:nth-child(1){margin-right: 20px;}
+      .header .navbar ul li:nth-child(1) input{height: 25px; top: 2px;}
+      .header .navbar ul li:nth-child(1) svg{width: 35px; height: 35px; top: 23px;}
       .header .navbar ul li:nth-child(1) span{width: 40px; height: 40px; margin: 20px 15px; line-height: 40px;}
       .header .navbar ul li:nth-child(1):hover{background-color: #00000000;}
-      .header .navbar ul li:nth-child(1):hover input{width: 265px;}
+      .header .navbar ul li:nth-child(1):hover input{width: 170px;}
       .header .navbar ul li:nth-child(2){margin-right: 0;}
       .header .navbar ul li:nth-child(3){display: none;}
 
-      .header .sidebar{width: 65px;}
-      .header .sidebar .sidebar-header{position: relative; right: 10px;}
-      .header .sidebar .sidebar-links li a{padding: 15px 0px;}
-      .header .sidebar:hover .sidebar-links li a{padding: 15px 10px;}
-      .header .sidebar .user-account .user-profile{position: relative; right: 10px;}
-  }
+      .header .sidebar{width: 260px; left: -100%;}
+      .header .sidebar .sidebar-header img{display: none;}
+      .header .sidebar .sidebar-header h2{margin-left: 70px; margin-top: 5px;}
+      .header .sidebar .sidebar-links h4 span{opacity: 1; color: #D4AF37;}
+      .header .sidebar .sidebar-links h4 .separator{display: none;}
+      .header .sidebar .sidebar-links li a span{display: block;}
 
-  @media screen and (max-width: 390px) {
-      .header .navbar div:nth-child(1){width: 120px; height: 50px; margin-left: 11vh; margin-top: 20px;}
-      .header .navbar ul{margin-right: 2vh;}
-      .header .navbar ul li a{font-size: 13px;}
-      .header .navbar ul li:nth-child(1){margin-right: 20px;}
-      .header .navbar ul li:nth-child(1) input{top: 2px;}
-      .header .navbar ul li:nth-child(1) svg{width: 35px; height: 35px; top: 23px;}
-      .header .navbar ul li:nth-child(1):hover input{width: 180px;}
+      .header .checkbtn{display: flex; justify-content: center; align-items: center;}
+      #check:checked ~ .sidebar{left: 0;}
   }
 

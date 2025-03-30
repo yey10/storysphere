@@ -1,14 +1,8 @@
 import React, {useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import 'animate.css'
-import {useStory} from '../context/StoryContext'
 
-const CategoriesData = () => {
-  const {categories} = useStory();
-  useEffect(() => {
-    categories()
-  }, [categories])
-  if (!categories || categories.length === 0) return <div>No hay categorías disponibles.</div>;
+const CategoriesData = ({ categories }) => {
   
   return (
     <div className='categories'>

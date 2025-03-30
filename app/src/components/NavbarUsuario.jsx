@@ -3,7 +3,7 @@ import ReactImg1 from '../assets/img/logo.jpeg';
 import ReactImg2 from '../assets/img/profile.jpg';
 import ReactImg3 from '../assets/img/StorySphere.png';
 import ReactImg4 from '../assets/img/persona.png';
-import { House, BookUp2, MessageCircleMore, Pencil, NotebookPen, BookOpenText, BookUser, Heart, ChartBarStacked, Users, CircleUser, CircleHelp, Settings, LogIn, Search, Bell, Crown } from 'lucide-react';
+import { Menu, House, BookUp2, MessageCircleMore, Pencil, NotebookPen, BookOpenText, BookUser, Heart, ChartBarStacked, Users, CircleUser, CircleHelp, Settings, LogIn, Search, Bell, Crown } from 'lucide-react';
 import '../assets/css/navbarUsuario.css';
 import {useAuth} from '../context/AuthContext.jsx';
 import {useNavigate} from 'react-router-dom';
@@ -30,6 +30,10 @@ const NavbarUsuario = () => {
   return (
     <div>
       <div className="headerUsuario">
+          {/* Menu responsive */}
+          <input type="checkbox" id='check' />
+          <label htmlFor="check" className='checkbtn'><Menu /></label>
+
           {/* navbar */}
           <div className="navbar">
             <div><img src={ReactImg3} alt="StorySphere" /></div>

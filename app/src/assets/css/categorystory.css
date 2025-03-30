@@ -33,7 +33,14 @@
     .categoryStory-page .stories-container .story-card .story-info button{padding: 10px 50px; font-size: 15px;}
 }
 @media (max-width: 500px) {
-    .categoryStory-page .stories-container .story-card .story-info h2{font-size: 20px;}
-    .categoryStory-page .stories-container .story-card .story-info p:nth-child(2){margin-bottom: 5px;}
-    .categoryStory-page .stories-container .story-card .story-info button{padding: 10px; font-size: 12px;}
+    .categoryStory-page .stories-container{ grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));}
+    .categoryStory-page .stories-container .story-card{height: 200px;}
+    .categoryStory-page .stories-container .story-card .story-img{width: 30%;}
+    .categoryStory-page .stories-container .story-card .story-info{width: 70%; padding: 0; padding-left: 10px;}
+    .categoryStory-page .stories-container .story-card .story-info h2{font-size: 17px;}
+    .categoryStory-page .stories-container .story-card .story-info p:nth-child(2){font-size: 12px; margin-bottom: 5px;}
+    .categoryStory-page .stories-container .story-card .story-info div:nth-child(3){height: 80px;}
+    .categoryStory-page .stories-container .story-card .story-info div:nth-child(3) p{font-size: 14px;}
+    .categoryStory-page .stories-container .story-card .story-info button{padding: 6px 30px; position: absolute; bottom: 5px;}
+    .categoryStory-page .stories-container .story-card .story-info button a{font-size: 10px;}
 }

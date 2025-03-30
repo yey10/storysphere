@@ -39,7 +39,7 @@ const StoriesByCategory = () => {
                     <div className='story-info'>
                       <h2>{story.title}</h2>
                       <p>{story.author}</p>
-                      <p>{story.content.substring(0, 200)}...</p>
+                      <div><p>{story.content.substring(0, 200)}...</p></div>
                       <button className='buttonLight'>
                         <Link to={`/user/story/${story.id_story}`}>Leer Historia</Link>
                       </button>

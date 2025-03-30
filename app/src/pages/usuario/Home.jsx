@@ -100,6 +100,7 @@ const Home = () => {
                     <p>Haz crecer tu impacto con un plan premium. Accede a más herramientas y visibilidad</p>
                     <div className='body4-content'>
                       <div className='premium'>
+                        <div><Crown /><p>PREMIUM</p></div>
                         <div><img src={premium} alt="" /></div>
                         <div>
                           <div><Crown /><p>PREMIUM</p></div>
@@ -108,6 +109,7 @@ const Home = () => {
                         </div>
                       </div>
                       <div className='premium'>
+                        <div><Crown /><p>PREMIUM</p></div>
                         <div><img src={premium2} alt="" /></div>
                         <div>
                           <div><Crown /><p>PREMIUM</p></div>
@@ -125,7 +127,7 @@ const Home = () => {
                         <h3 className='title'>ROMANCE</h3>
                         <p>Lo mejor en Romance aquí</p>
                         <p>Descubre nuevas categorías y recibe recomendaciones personalizadas</p>
-                        <button className='buttonLight'><Link to="/categories">Ingresa a categorías</Link></button>
+                        <button className='buttonLight'><Link to="/user/categories">Ingresa a categorías</Link></button>
                       </div>
                       <div>
                         <div className='background-image'></div>
@@ -142,7 +144,7 @@ const Home = () => {
                         <h3 className='title'>TERROR</h3>
                         <p>Lo mejor en Terror aquí</p>
                         <p>Descubre nuevas categorías y recibe recomendaciones personalizadas</p>
-                        <button className='buttonLight'><Link to="/categories">Ingresa a categorías</Link></button>
+                        <button className='buttonLight'><Link to="/user/categories">Ingresa a categorías</Link></button>
                       </div>
                       <div>
                         <div className='background-image'></div>
@@ -159,7 +161,7 @@ const Home = () => {
                         <h3 className='title'>ACCIÓN</h3>
                         <p>Lo mejor en Acción aquí</p>
                         <p>Descubre nuevas categorías y recibe recomendaciones personalizadas</p>
-                        <button className='buttonLight'><Link to="/categories">Ingresa a categorías</Link></button>
+                        <button className='buttonLight'><Link to="/user/categories">Ingresa a categorías</Link></button>
                       </div>
                       <div>
                         <div className='background-image'></div>
@@ -176,7 +178,7 @@ const Home = () => {
                         <h3 className='title'>FICCIÓN</h3>
                         <p>Lo mejor en Ficción aquí</p>
                         <p>Descubre nuevas categorías y recibe recomendaciones personalizadas</p>
-                        <button className='buttonLight'><Link to="/categories">Ingresa a categorías</Link></button>
+                        <button className='buttonLight'><Link to="/user/categories">Ingresa a categorías</Link></button>
                       </div>
                       <div>
                         <div className='background-image'></div>

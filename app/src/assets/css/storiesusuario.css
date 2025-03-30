@@ -21,11 +21,11 @@
 .storiespage .body-1 .slider-stories2{display: flex; flex-direction: column; justify-content: center; align-items: center; row-gap: 20px; min-height: 40vh; overflow: hidden;}
 .storiespage .body-1 .slider-stories2 img{width: 100%; pointer-events: none; user-select: none;}
 .storiespage .body-1 .slider-stories2 .slider-content{position: relative; display: flex; flex-direction: column; justify-content: center; align-items: center; width: 80%; overflow: hidden; z-index: 0;}
-.storiespage .body-1 .slider-stories2 .slider-content .swiper2{width: 100%; height: 100%;}
-.storiespage .body-1 .slider-stories2 .slider-content .swiper2 .swiper-slide{max-width: 150px; height: 200px; border-radius: 15px; margin: 20px 0 40px; overflow: visible; box-shadow: 0 8px 10px rgba(0, 0, 0, 0.5), inset 0 2px 2px rgba(255, 255, 255, 0.2); cursor: grab;}
-.storiespage .body-1 .slider-stories2 .slider-content .swiper2 .swiper-slide .content{position: relative; height: 100%; background: rgba(104, 104, 104, 0); color: #fff; user-select: none;}
-.storiespage .body-1 .slider-stories2 .slider-content .swiper2 .swiper-slide .content img{width: 100%; height: 100%; aspect-ratio: 3/2; border-radius: 10px; object-fit: cover; box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);}
-.storiespage .body-1 .slider-stories2 .slider-content .swiper2 .swiper-slide p{text-align: center; padding-top: 5px;}
+.storiespage .body-1 .slider-stories2 .slider-content .swiper{width: 100%; height: 100%;}
+.storiespage .body-1 .slider-stories2 .slider-content .swiper .swiper-slide{max-width: 150px; height: 200px; border-radius: 15px; margin: 20px 0 40px; overflow: visible; box-shadow: 0 8px 10px rgba(0, 0, 0, 0.5), inset 0 2px 2px rgba(255, 255, 255, 0.2); cursor: grab;}
+.storiespage .body-1 .slider-stories2 .slider-content .swiper .swiper-slide .content{position: relative; height: 100%; background: rgba(104, 104, 104, 0); color: #fff; user-select: none;}
+.storiespage .body-1 .slider-stories2 .slider-content .swiper .swiper-slide .content img{width: 100%; height: 100%; aspect-ratio: 3/2; border-radius: 10px; object-fit: cover; box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);}
+.storiespage .body-1 .slider-stories2 .slider-content .swiper .swiper-slide p{text-align: center; padding-top: 5px;}
 .storiespage .body-1 .slider-stories2 .slider-content .control{width: 100%; position: absolute; display: flex; flex-direction: row; justify-content: space-between; align-items: center; list-style: none; gap: 14px; z-index: 999999999;}
 .storiespage .body-1 .slider-stories2 .slider-content .control li{position: relative; display: flex; justify-content: center; align-items: center; background: linear-gradient(to bottom, #b28405, #efb810); box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4), inset 0 4px 4px rgba(255, 255, 255, 0.2); padding: 16px; border-radius: 50%; cursor: pointer; transform: scale(1);}
 .storiespage .body-1 .slider-stories2 .slider-content .control li:before{position: absolute; content: ""; top: 0; right: 0; bottom: 0; left: 0; background: linear-gradient(to right, #b28405, #efb810); border-radius: 50%; z-index: -1; transition: all 0.5s ease-in; opacity: 0;}
@@ -34,7 +34,7 @@
 
 .storiespage .body-2{width: 100%; min-height: 100vh; display: flex; justify-content: center; align-items: center; flex-direction: column;}
 .storiespage .body-2 .boxslider{width: 100%;}
-.storiespage .body-2 .boxslider h3{font-size: 70px; color: #D4AF37; text-align: center;}
+.storiespage .body-2 .boxslider h3{font-size: 70px; color: #d4af37; text-align: center;}
 
 .storiespage .body-2 .slider-stories1{display: flex; flex-direction: column; justify-content: center; align-items: center; row-gap: 20px; min-height: 40vh; overflow: visible;}
 .storiespage .body-2 .slider-stories1 img{width: 100%; pointer-events: none; user-select: none;}
@@ -121,12 +121,27 @@
 }
 
 @media (max-width: 500px){
-  .storiespage .body-3 .movie-slider .swiper-slide{height: 42vh !important;}
+  .storiespage .body-2 .boxslider h3{font-size: 40px;}
+  .storiespage .body-2 .slider-stories1 .slider-content{width: 95%;}
+  .storiespage .body-2 .slider-stories1 .slider-content .swiper .swiper-slide{max-width: 150px; height: 200px;}
+  .storiespage .body-2 .slider-stories1 .slider-content .control{top: 235px;}
 
+  .storiespage .body-3{padding: 30px 10px; margin-top: 100px;}
+  .storiespage .body-3 .swiper{padding: 20px 0px 40px !important;}
+  .storiespage .body-3 .movie-slider .swiper-slide{width: 120px !important; height: 25vh !important;}
+  .storiespage .body-3 .movie-slider .swiper-slide .title h3{font-size: 12px;}
+
+  .storiespage .body-4{width: 95%;}
   .storiespage .body-4 .search{padding: 20px 0;}
   .storiespage .body-4 .search form input{width: 80%;}
   .storiespage .body-4 .search form button{width: 20%;}
-  .storiespage .body-4 .body4-content .story .story-info h2{font-size: 20px;}
-  .storiespage .body-4 .body4-content .story .story-info p:nth-child(2){margin-bottom: 5px;}
-  .storiespage .body-4 .body4-content .story .story-info button{padding: 10px; font-size: 12px;}
+  .storiespage .body-4 .body4-content{ grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));}
+  .storiespage .body-4 .body4-content .story{height: 200px;}
+  .storiespage .body-4 .body4-content .story div:nth-child(1){width: 30%;}
+  .storiespage .body-4 .body4-content .story .story-info{width: 70%; padding: 0; padding-left: 10px;}
+  .storiespage .body-4 .body4-content .story .story-info h2{font-size: 17px;}
+  .storiespage .body-4 .body4-content .story .story-info p:nth-child(2){font-size: 12px; margin-bottom: 5px;}
+  .storiespage .body-4 .body4-content .story .story-info div:nth-child(3){height: 80px;}
+  .storiespage .body-4 .body4-content .story .story-info div:nth-child(3) p{font-size: 14px;}
+  .storiespage .body-4 .body4-content .story .story-info button{padding: 6px 30px; font-size: 10px;}
 }

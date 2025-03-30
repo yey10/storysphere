@@ -52,9 +52,9 @@ const AdminLayout = ({ children }) => {
       </Sider>
 
       {/* Layout Principal */}
-      <Layout>
+      <Layout style={{ background: "#001120" }}>
         {/* Navbar */}
-        <Header style={{ background: "#fff", padding: "0 20px", display: "flex", justifyContent: "space-between" }}>
+        <Header style={{ background: "#002140", color: "white", padding: "0 20px", display: "flex", justifyContent: "space-between" }}>
           <div>
             <h2>Panel de Administración</h2>
           </div>
