@@ -77,13 +77,13 @@ const StoryPage = () => {
     console.log(`Favorito clickeado en historia ${id}, estado actual:`, userInteractions[id]);
   };
 
-  const handleAddComment = async (e) => {
-    e.preventDefault();
-    if (newComment.trim() === "") return;
+  const handleAddComment = async (comment) => { 
+    if (!comment.trim()) return;
   
     try {
-      await addComment(id, { content_comment: newComment });
+      await addComment(id, { content_comment: comment });
       setNewComment("");
+      window.location.reload();
     } catch (error) {
       console.error("Error al agregar el comentario:", error);
       setError("Error al agregar el comentario. Inténtalo de nuevo.");
