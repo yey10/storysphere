@@ -26,9 +26,11 @@ const StoryComments = ({
       {/* Formulario para añadir comentarios */}
       <form
         onSubmit={(e) => {
-          e.preventDefault(); // Evitar recarga de la página
-          handleAddComment(e); // Llamar a la función para añadir comentario
-        }}
+          e.preventDefault();
+          if (!newComment.trim()) return;
+          handleAddComment(newComment); 
+          setNewComment(""); 
+        }}        
       >
         <input
           type="text"
@@ -55,17 +57,19 @@ const StoryComments = ({
                     <p>{comment.created_at}</p>
                   </div>
                   <p>
-                    {comment.pending
+                  {comment.pending
                       ? "Enviando..."
-                      : comment.content_comment?.trim()
-                      ? comment.content_comment
-                      : "Error: No se pudo cargar el contenido"}
+                      : comment.content_comment?.trim() || "Comentario no disponible"}
                   </p>
                   <p>Responder</p>
                 </div>
               </div>
               <div>
-                <button onClick={() => handleRemoveComment(comment.id_comment)}><Trash2 /></button>
+              {comment.user?.id_user === user.id_user && (
+                  <button onClick={() => handleRemoveComment(comment.id_comment)}>
+                    <Trash2 />
+                  </button>
+                )}
                 <Heart />
                 <p>0</p>
               </div>
