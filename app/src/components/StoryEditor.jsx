@@ -53,7 +53,7 @@ const StoryEditor = ({ onSave }) => {
   const [title, setTitle] = useState("");
   const [sinopsis, setSinopsis] = useState("");
   const [photo, setPhoto] = useState("");
-  const [state, setState] = useState("draft");
+  const [state, setState] = useState("active");
   const [selectedCategories, setSelectedCategories] = useState([]);
   const editor = useMemo(() => withHistory(withReact(createEditor())), []);
 

@@ -4,7 +4,7 @@ import { useStory } from '../../context/StoryContext';
 import { Table, Button, Switch, message } from "antd";
 
 const Storieslist = () => {
-  const { stories, isLoading, fetchStories, editStory, removeStory } = useStory();
+  const { stories, isLoading, fetchStories, changeStoryStatus, removeStory } = useStory();
   const [localStories, setLocalStories] = useState([]);
 
   useEffect(() => {
@@ -15,17 +15,24 @@ const Storieslist = () => {
 
   const toggleStoryStatus = async (id, currentState) => {
     try {
-        const newState = currentState === "draft" ? "published" : "draft";
-        const updatedStory = await editStory(id, { state: newState });
-        console.log("Historia actualizada en toggleStoryStatus:", updatedStory); // Registra la historia actualizada
+        const newState = currentState === "active" ? "inactive" : "active";
+        const updatedStory = await changeStoryStatus(id, { state: newState });
+        
+        if (!updatedStory) {
+          throw new Error("No se pudo actualizar el estado");
+        }
+        
+        message.success("Estado de la historia actualizado correctamente");
+        
         setLocalStories((prevStories) =>
             prevStories.map((story) =>
-                story.id_story === id ? updatedStory : story
+                story.id_story === id ? { ...story, state: updatedStory.state } : story
             )
         );
-        message.success("Estado de la historia actualizado correctamente");
+        
     } catch (error) {
-        message.error("Error al actualizar el estado de la historia");
+      console.error("Error en toggleUserStatus:", error);
+      message.error("Error al actualizar el estado de la historia");
     }
 };
 
@@ -66,7 +73,7 @@ const Storieslist = () => {
             dataIndex: "state",
             render: (state, record) => (
               <Switch
-                checked={state === "published"}
+                checked={state === "active"}
                 onChange={() => toggleStoryStatus(record.id_story, state)}
               />
             ),

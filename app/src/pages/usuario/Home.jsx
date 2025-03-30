@@ -86,7 +86,7 @@ const Home = () => {
                                     <p>{story.author}</p>
                                     <p>{story.content.substring(0, 100)}...</p>
                                     <button className="buttonLight">
-                                        <Link to={`/histories/${story.id_story}`}>Leer más</Link>
+                                        <Link to={`/user/story/${story.id_story}`}>Leer más</Link>
                                     </button>
                                 </div>
                             </div>

@@ -41,7 +41,7 @@ const Categories = () => {
               </div>
               
               <div className="categories2">
-                <CategoriesAll />
+                <CategoriesAll  categories={categories}/>
               </div>
             </div>
 

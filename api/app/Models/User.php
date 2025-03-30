@@ -26,7 +26,7 @@ class User extends Authenticatable implements CanResetPassword
     public $timestamps = false; // Deshabilitar manejo de created_at y updated_at
 
     protected $fillable = [
-        'name', 'email', 'password', 'biography', 'profile_photo', 'birthdate',
+        'name', 'email', 'password', 'biography', 'profile_photo', 'birthdate', 'account_status',
     ];
 
     protected $hidden = [

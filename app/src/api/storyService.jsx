@@ -74,3 +74,11 @@ export const getUserStories = async (userId) => {
     }
 };
 
+export const updateStoryStatus = async (id, data) => {
+    try {
+        const response = await axios.put(`/stories/${id}/status`, data);
+        return response.data;
+    } catch (error) {
+        throw error.response ? error.response.data : error;
+    }
+}

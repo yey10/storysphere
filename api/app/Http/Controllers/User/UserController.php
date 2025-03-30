@@ -25,13 +25,12 @@ class UserController extends Controller
 
     }
 
-    
     //metodo para obtener todos los usuarios (filtros)
     public function index(Request $request){
 
         try {
-           $users = $this->userService->getAllUsers($request);
-           return response()->json(['users' => $users], 200);
+            $response = $this->userService->getAllUsers($request);
+            return response()->json($response, 200);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Error inesperado: ' . $e->getMessage()], 500);
         }
@@ -53,15 +52,6 @@ class UserController extends Controller
 
     }
 
-
-   
-    
-
-
-
-
-
-
     //eliminar cuenta
     public function deleteAccount($id){
 
@@ -75,22 +65,5 @@ class UserController extends Controller
             return response()->json(['error' => 'Error inesperado: ' . $e->getMessage()], 500);
         }
     }
-
-
-    //metodo para actualizar rol
-    public function updateRole(Request $request, $id){
-        try {
-            $admin = Auth::user();
-            $user = $this->userService->updateUserRole($admin, $id, $request->all());
-            return response()->json(['message' => 'Rol actualizado con éxito','user' => $user],200);
-        } catch (ValidationException $e) {
-            return response()->json(['error' => $e->errors()], 422);
-        } catch (\Exception $e) {
-            return response()->json(['error' => 'Error inesperado: ' . $e->getMessage()], 500);
-        }
-    }
-
-
-
 
 }

@@ -22,8 +22,8 @@ import Profile from '../pages/usuario/Profile.jsx';
 const PrivateRoutes = () => {
   console.log("Renderizando PrivateRoutes...");
   return (
-    <LikeProvider> {/* ← Primero LikeProvider */}
-      <StoryProvider> {/* ← Luego StoryProvider (que depende de useLikes) */}
+    <LikeProvider>
+      <StoryProvider> 
         <RatingsProvider>
           <CommentProvider>
             <UserProvider>
