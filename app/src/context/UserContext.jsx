@@ -29,7 +29,7 @@ export const UserProvider = ({ children }) => {
     
                 // Acceder correctamente a la lista de usuarios
                 setUsers(usersData || []);
-                setUser(userData);
+                setUser(userData.user);
             } catch (error) {
                 console.error("Error al obtener los datos:", error);
             } finally {

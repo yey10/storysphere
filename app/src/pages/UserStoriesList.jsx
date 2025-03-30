@@ -7,10 +7,11 @@ const UserStoriesList = () => {
   const { user } = useAuth(); // Obtener el usuario autenticado
 
   useEffect(() => {
+    console.log("Usuario autenticado:", user);
     if (user?.id_user) {  
         fetchUserStories(user.id_user);
     }
-}, [user, fetchUserStories]);
+}, [user]);
   if (isLoading) {
     return <p className="text-center text-gold-500">Cargando historias...</p>;
   }

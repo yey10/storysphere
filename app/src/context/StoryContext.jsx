@@ -29,7 +29,7 @@ export const StoryProvider = ({children}) =>{
         } finally {
             setIsLoading(false);
         }
-    }, [stories.length]);
+    }, []);
 
     // Memorizar fetchCategories
     const fetchCategories = useCallback(async () => {
@@ -40,18 +40,33 @@ export const StoryProvider = ({children}) =>{
         } catch (error) {
             console.error("Error al obtener categorías:", error);
         }
-    }, [categories.length]);
+    }, []);
 
     useEffect(() => {
         if (!hasFetched) {
-            fetchStories();
-            fetchCategories();
             setHasFetched(true);
+            const fetchData = async () => {
+                setIsLoading(true);
+                try {
+                    const [storiesData, categoriesData] = await Promise.all([
+                        getAllStories(),
+                        getCategories()
+                    ]);
+                    setStories(storiesData);
+                    setCategories(categoriesData);
+                    setHasFetched(true); // ✅ Marcar como cargado después de obtener los datos
+                } catch (error) {
+                    console.error("Error al obtener historias o categorías:", error);
+                } finally {
+                    setIsLoading(false);
+                }
+            };
+            fetchData();
         }
-    }, [fetchStories, fetchCategories, hasFetched]);
+    }, [hasFetched]);
 
     const fetchUserStories = useCallback(async (userId) => {
-        if (!userId || userStories.length > 0) return; 
+        
        
         if (!userId) {
             console.error("Error: userId es undefined o null");
@@ -71,7 +86,7 @@ export const StoryProvider = ({children}) =>{
         } finally {
             setIsLoading(false);
         }
-    }, [userStories.length]);
+    }, []);
 
     const addStory = async (storyData) => {
         try {
@@ -133,6 +148,7 @@ export const StoryProvider = ({children}) =>{
         try {
             await deleteStory(id);
             setStories(stories.filter(story => story.id_story !== id));
+            setUserStories((prevUserStories) => prevUserStories.filter(story => story.id_story !== id));
         } catch (error) {
             setStories(prevStories);
             console.error("Error al eliminar la historia:", error);
