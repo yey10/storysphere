@@ -20,6 +20,7 @@ const UserStoriesList = () => {
 }, [user]);
 
 const handleEdit = (story) => {
+  
   navigate("/user/createStory", { state: { story } }); 
 };
 

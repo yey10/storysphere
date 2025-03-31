@@ -34,39 +34,31 @@ const StoryPage = () => {
 
   useEffect(() => {
     let isMounted = true;
-    const fetchStory = async () => {
+    
+    const fetchData = async () => {
       try {
-        const story = await getStory(id);
-        if (isMounted) setStory(story);
+        const [storyData, interactionsData, ratingData, commentsData] = await Promise.all([
+          getStory(id),
+          fetchInteractions(id),
+          fetchRating(id),
+          getAllComments(id),
+        ]);
+  
+        if (isMounted) {
+          setStory(storyData);
+        }
       } catch (error) {
-        console.error("Error al obtener la historia:", error);
+        console.error("Error al obtener datos:", error);
         if (isMounted) setError(error);
       } finally {
         if (isMounted) setIsLoading(false);
       }
     };
-    fetchStory();
-    return () => {isMounted = false};
-  }, [id, getStory]);
-
-  useEffect(() => {
-    fetchInteractions(id);
-  }, [id, fetchInteractions]);
-
-  useEffect(() => {
-    fetchRating(id);
-  }, [id, fetchRating]);
-
-  useEffect(() => {
-    const fetchComments = async () => {
-      try {
-        await getAllComments(id);
-      } catch (error) {
-        console.error("Error al obtener comentarios:", error);
-      }
-    };
-    fetchComments();
-  }, [id, getAllComments]);
+  
+    fetchData();
+  
+    return () => { isMounted = false };
+  }, [id, getStory, fetchInteractions, fetchRating, getAllComments]);
 
   const handleLike = () => {
     handleToggleInteraction(id, "like");

@@ -51,7 +51,7 @@ const StoryEditor = ({ onSave}) => {
   ];*/
 
   const location = useLocation();
-  const storyData = location.state?.story || null;
+  const storyData = location.state?.story || {};
 
   const { addStory, editStory, categories } = useStory();
   const isEditing = !!storyData; 
