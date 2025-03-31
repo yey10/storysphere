@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import ParticlesBackground from "../../components/ParticlesBackground";
 import NavbarUsuario from '../../components/NavbarUsuario';
 import Footer from "../../components/Footer";
+import Loader from "../../components/Loader";
 import '../../assets/css/storypage.css';
 import { useStory } from "../../context/StoryContext";
 import { useAuth } from "../../context/AuthContext";
@@ -101,18 +102,7 @@ const StoryPage = () => {
   };
 
   if (isLoading) {
-    return (
-      <div className="min-h-screen bg-black relative">
-        <ParticlesBackground />
-        <div className="relative z-10">
-          <NavbarUsuario />
-          <main className="container mx-auto px-4">
-            <h2 className="text-white text-center py-10">Cargando historia...</h2>
-            <Footer />
-          </main>
-        </div>
-      </div>
-    );
+    return <Loader />;
   }
 
   if (error) {

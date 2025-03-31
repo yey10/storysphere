@@ -1,6 +1,7 @@
 import { useEffect } from "react";
+import {useNavigate} from "react-router-dom";
 import { useStory } from "../../context/StoryContext";
-import { useAuth } from "../../context/AuthContext"; // Asegúrate de tener el contexto de autenticación
+import { useAuth } from "../../context/AuthContext";
 import ParticlesBackground from '../../components/ParticlesBackground'
 import DynamicNavbar from '../../components/DynamicNavbar'
 import Footer from '../../components/Footer'
@@ -8,13 +9,22 @@ import Loader from "../../components/Loader";
 
 const UserStoriesList = () => {
   const { userStories, isLoading, fetchUserStories, removeStory } = useStory();
-  const { user } = useAuth(); // Obtener el usuario autenticado
+  const { user } = useAuth(); 
+  const navigate = useNavigate();
+
 
   useEffect(() => {
-    if (user?.id_user) {  
-        fetchUserStories(user.id_user);
+    if (user?.id) {  
+        fetchUserStories(user.id);
     }
-}, [user, fetchUserStories]);
+}, [user]);
+
+const handleEdit = (story) => {
+  navigate("/user/createStory", { state: { story } }); 
+};
+
+console.log("📖 Historias en userStories:", userStories);
+
   if (isLoading) {
     return <Loader />;
   }
@@ -41,7 +51,7 @@ const UserStoriesList = () => {
                     <p className="text-gray-300 truncate">{story.content}</p>
           
                     <div className="mt-3 flex justify-end space-x-2">
-                      <button className="px-4 py-2 bg-gold-600 hover:bg-gold-500 text-black font-bold rounded-md">
+                      <button onClick={() => handleEdit(story)} className="px-4 py-2 bg-gold-600 hover:bg-gold-500 text-black font-bold rounded-md">
                         Editar
                       </button>
                       <button

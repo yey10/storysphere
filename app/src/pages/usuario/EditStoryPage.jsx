@@ -5,12 +5,12 @@ import ParticlesBackground from '../../components/ParticlesBackground'
 import DynamicNavbar from '../../components/DynamicNavbar'
 import Footer from '../../components/Footer'
 
-const CreateStoryPage = () => {
+const EditStoryPage = () => {
 
   const navigate = useNavigate(); 
 
   const handleSave = () => {
-    console.log('Historia guardada con éxito');
+    console.log('Historia editada con éxito');
     navigate("/user/userStories");
     // Puedes redirigir al usuario o mostrar un mensaje de éxito
   };
@@ -31,4 +31,4 @@ const CreateStoryPage = () => {
   );
 };
 
-export default CreateStoryPage;
+export default EditStoryPage;

@@ -19,7 +19,7 @@ export const StoryProvider = ({children}) =>{
 
      // Memorizar fetchStories
      const fetchStories = useCallback(async (forceReload = false) => {
-        if (stories.length > 0 && !forceReload) return;
+        if (!forceReload && stories.length > 0) return;
         setIsLoading(true);
         try {
             const data = await getAllStories();
@@ -42,29 +42,6 @@ export const StoryProvider = ({children}) =>{
         }
     }, []);
 
-    useEffect(() => {
-        if (!hasFetched) {
-            setHasFetched(true);
-            const fetchData = async () => {
-                setIsLoading(true);
-                try {
-                    const [storiesData, categoriesData] = await Promise.all([
-                        getAllStories(),
-                        getCategories()
-                    ]);
-                    setStories(storiesData);
-                    setCategories(categoriesData);
-                    setHasFetched(true); // ✅ Marcar como cargado después de obtener los datos
-                } catch (error) {
-                    console.error("Error al obtener historias o categorías:", error);
-                } finally {
-                    setIsLoading(false);
-                }
-            };
-            fetchData();
-        }
-    }, [hasFetched]);
-
     const fetchUserStories = useCallback(async (userId) => {
         
        
@@ -78,8 +55,8 @@ export const StoryProvider = ({children}) =>{
         setIsLoading(true);
         try {
             const data = await getUserStories(userId);
-            console.log("📌 Datos recibidos en fetchUserStories:", data); // <-- Agregar log
-            setUserStories(Array.isArray(data.stories) ? data.stories : []);
+            console.log("Datos recibidos en fetchUserStories:", data); 
+            setUserStories(Array.isArray(data) ? data : []);
         } catch (error) {
             console.error("Error al obtener las historias del usuario:", error);
             setUserStories([]);
@@ -88,10 +65,32 @@ export const StoryProvider = ({children}) =>{
         }
     }, []);
 
+    useEffect(() => {
+        if (!hasFetched) {
+            setHasFetched(true);
+            (async () => {
+                setIsLoading(true);
+                try {
+                    const [storiesData, categoriesData] = await Promise.all([
+                        getAllStories(),
+                        getCategories()
+                    ]);
+                    setStories(storiesData);
+                    setCategories(categoriesData);
+                } catch (error) {
+                    console.error("Error al obtener historias o categorías:", error);
+                } finally {
+                    setIsLoading(false);
+                }
+            })();
+        }
+    }, [hasFetched]);
+
+
     const addStory = async (storyData) => {
         try {
             const newStory = await createStory(storyData);
-            setStories((prevStories) => [...prevStories, newStory]);
+            setStories((prev) => [...prev, newStory]);
         } catch (error) {
             console.error("Error al crear la historia:", error);
         }
@@ -110,11 +109,9 @@ export const StoryProvider = ({children}) =>{
     const editStory = async (id, updatedData) =>{
         try {
             const updatedStory = await updateStory(id, updatedData);
-            console.log("Historia actualizada en editStory:", updatedStory); 
-            setStories((prevStories) =>
-                prevStories.map((story) =>
-                    story.id_story === id ? updatedStory : story
-                )
+            //console.log("Historia actualizada en editStory:", updatedStory); 
+            setStories((prev) =>
+                prev.map((story) => (story.id_story === id ? updatedStory : story))
             );
             return updatedStory;
         } catch (error) {
