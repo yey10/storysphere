@@ -7,6 +7,10 @@ import { toast, ToastContainer } from "react-toastify";
 import "../assets/css/form-stories.css";
 import { useStory } from "../context/StoryContext";
 
+const CLOUD_NAME = "dskr3jxir";
+const UPLOAD_PRESET = "storysphere";
+const UPLOAD_URL = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`;
+
 // 🎨 Componente de Botón
 /*const ToolbarButton = ({ format, icon, editor }) => {
   const isActive = isMarkActive(editor, format);
@@ -72,6 +76,27 @@ const StoryEditor = ({ onSave}) => {
       : [{ type: "paragraph", children: [{ text: "" }] }]
   );
 
+
+  const handleUpload = async (file) =>{
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", UPLOAD_PRESET);
+
+    try {
+      const response = await fetch(UPLOAD_URL, {
+        method: "POST",
+        body: formData,
+      });
+      if (!response.ok) throw new Error("Error al subir la imagen");
+
+      const data = await response.json();
+      return data.secure_url;
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      toast.error("Error al subir la imagen.");
+    }
+  }
+
   const handleChange = useCallback((newValue) => {
     setContent(newValue);
   }, []);
@@ -92,23 +117,33 @@ const StoryEditor = ({ onSave}) => {
   //Guardar la historia
   const handleSave = async () => {
     const plainText = content.map((node) => Node.string(node)).join("\n")
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("content", plainText);
-    formData.append("sinopsis", sinopsis);
-    formData.append("state", state);
-
-    selectedCategories.forEach((categoryId, index) => {
-      formData.append(`categories[${index}]`, categoryId);
-    });
+    let imageUrl = storyData?.photo;
 
     if (photo) {
-      formData.append("photo", photo);
+      const uploadedImageUrl = await handleUpload(photo);
+      if (uploadedImageUrl) {
+        imageUrl = uploadedImageUrl;
+      } else {
+        toast.error("Error al subir la imagen.");
+        return;
+      }
     }
+
+    const updatedStory = {
+      title,
+      content: plainText,
+      sinopsis,
+      state,
+      categories: selectedCategories,
+      photo: imageUrl,
+    };
+
+    console.log("Enviando historia editada al backend:", updatedStory);
+
 
     try {
       if (isEditing) {
-        await editStory(storyData.id_story, formData);
+        await editStory(storyData.id_story, updatedStory);
         toast.success("Historia actualizada con éxito");
       } else {
         await addStory(formData);

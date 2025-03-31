@@ -15,10 +15,10 @@ const UserStoriesList = () => {
 
 
   useEffect(() => {
-    if (user?.id) {  
+    if (user?.id && userStories.length === 0) {  
         fetchUserStories(user.id);
     }
-}, [user]);
+}, [user, fetchUserStories]);
 
 const handleEdit = (story) => {
   

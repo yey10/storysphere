@@ -35,7 +35,7 @@ export const updateStory = async (id, storyData) =>{
     try {
         const response = await axios.put(`/stories/${id}`, storyData, {
             headers: {
-              'Content-Type': 'multipart/form-data',
+              'Content-Type': 'Content-Type": "application/json',
             },
           });
           console.log("Respuesta de updateStory:", response.data);

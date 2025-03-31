@@ -109,14 +109,26 @@ export const StoryProvider = ({children}) =>{
     const editStory = async (id, updatedData) =>{
         try {
             const updatedStory = await updateStory(id, updatedData);
-            //console.log("Historia actualizada en editStory:", updatedStory); 
+
+            if (!updatedStory || !updatedStory.id_story) {
+                throw new Error("Respuesta inválida del backend");
+            }
+    
             setStories((prev) =>
-                prev.map((story) => (story.id_story === id ? updatedStory : story))
+                prev.map((story) => 
+                    story.id_story === id ? { ...story, ...updatedStory } : story
+                )
             );
+    
+            setUserStories((prev) =>
+                prev.map((story) => 
+                    story.id_story === id ? { ...story, ...updatedStory } : story
+                )
+            );
+    
             return updatedStory;
         } catch (error) {
             console.error("Error al editar la historia:", error);
-            setStories(prevStories);
             throw error;
         }
     };
