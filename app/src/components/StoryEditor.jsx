@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useCallback } from "react";
+import { useLocation } from "react-router-dom";
 import { createEditor, Transforms, Text, Editor, Node } from "slate";
 import { Slate, Editable, withReact } from "slate-react";
 import { withHistory } from "slate-history";
@@ -7,7 +8,7 @@ import "../assets/css/form-stories.css";
 import { useStory } from "../context/StoryContext";
 
 // 🎨 Componente de Botón
-const ToolbarButton = ({ format, icon, editor }) => {
+/*const ToolbarButton = ({ format, icon, editor }) => {
   const isActive = isMarkActive(editor, format);
   return (
     <button
@@ -39,33 +40,58 @@ const toggleMark = (editor, format) => {
   } else {
     Transforms.setNodes(editor, { [format]: true }, { match: Text.isText, split: true });
   }
-};
+};*/
 
-const StoryEditor = ({ onSave }) => {
-  const initialValue = [
+const StoryEditor = ({ onSave}) => {
+  /*const initialValue = [
     {
       type: "paragraph",
       children: [{ text: "" }],
     },
-  ];
+  ];*/
 
-  const { addStory, categories } = useStory();
-  const [title, setTitle] = useState("");
-  const [sinopsis, setSinopsis] = useState("");
-  const [photo, setPhoto] = useState("");
-  const [state, setState] = useState("active");
-  const [selectedCategories, setSelectedCategories] = useState([]);
+  const location = useLocation();
+  const storyData = location.state?.story || null;
+
+  const { addStory, editStory, categories } = useStory();
+  const isEditing = !!storyData; 
+
+
+  const [title, setTitle] = useState(storyData?.title || "");
+  const [sinopsis, setSinopsis] = useState(storyData?.sinopsis || "");
+  const [photo, setPhoto] = useState(null);
+  const [state, setState] = useState(storyData?.state || "active");
+  const [selectedCategories, setSelectedCategories] = useState(
+    storyData?.categories.map((c) => c.id_category) || []
+  );
   const editor = useMemo(() => withHistory(withReact(createEditor())), []);
 
-  const [content, setContent] = useState(initialValue);
+  const [content, setContent] = useState(
+    storyData?.content
+      ? [{ type: "paragraph", children: [{ text: storyData.content }] }]
+      : [{ type: "paragraph", children: [{ text: "" }] }]
+  );
 
   const handleChange = useCallback((newValue) => {
     setContent(newValue);
   }, []);
 
+  const handlePhotoChange = (e) => {
+    setPhoto(e.target.files[0]);
+  };
+
+  const handleCategoryChange = (e) => {
+    const categoryId = e.target.value;
+    setSelectedCategories((prev) =>
+      prev.includes(categoryId)
+        ? prev.filter((id) => id !== categoryId)
+        : [...prev, categoryId]
+    );
+  };
+
   //Guardar la historia
   const handleSave = async () => {
-    const plainText = content.map(node => Node.string(node)).join("\n")
+    const plainText = content.map((node) => Node.string(node)).join("\n")
     const formData = new FormData();
     formData.append("title", title);
     formData.append("content", plainText);
@@ -81,32 +107,18 @@ const StoryEditor = ({ onSave }) => {
     }
 
     try {
-      await addStory(formData);
+      if (isEditing) {
+        await editStory(storyData.id_story, formData);
+        toast.success("Historia actualizada con éxito");
+      } else {
+        await addStory(formData);
+        toast.success("Historia guardada con éxito");
+      }
       onSave();
-      toast.success("Historia guardada con éxito");
     } catch (error) {
       console.error("Error guardando la historia:", error);
-      toast.error(
-        "Error al guardar la historia. Por favor, verifica los datos."
-      );
+      toast.error("Error al guardar la historia.");
     }
-  };
-
-  // Manejo de foto
-  const handlePhotoChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setPhoto(file);
-    }
-  };
-
-  const handleCategoryChange = (e) => {
-    const categoryId = e.target.value;
-    setSelectedCategories((prev) =>
-      prev.includes(categoryId)
-        ? prev.filter((id) => id !== categoryId) // Deseleccionar
-        : [...prev, categoryId] // Seleccionar
-    );
   };
 
   return (
@@ -155,7 +167,9 @@ const StoryEditor = ({ onSave }) => {
             />
           </Slate>
           <div>
-            <button onClick={handleSave}>Guardar</button>
+          <button onClick={handleSave}>
+              {isEditing ? "Actualizar" : "Guardar"}
+            </button>
           </div>
         </div>
       </div>
