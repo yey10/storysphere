@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useStory } from "../../context/StoryContext";
-import { useAuth } from "../../context/AuthContext"; // Asegúrate de tener el contexto de autenticación
+import { useAuth } from "../../context/AuthContext";
 import ParticlesBackground from '../../components/ParticlesBackground'
 import DynamicNavbar from '../../components/DynamicNavbar'
 import Footer from '../../components/Footer'
@@ -11,10 +11,13 @@ const UserStoriesList = () => {
   const { user } = useAuth(); // Obtener el usuario autenticado
 
   useEffect(() => {
-    if (user?.id_user) {  
-        fetchUserStories(user.id_user);
+    if (user?.id) {  
+        fetchUserStories(user.id);
     }
-}, [user, fetchUserStories]);
+}, [user]);
+
+console.log("📖 Historias en userStories:", userStories);
+
   if (isLoading) {
     return <Loader />;
   }
