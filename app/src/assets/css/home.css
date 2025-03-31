@@ -65,7 +65,12 @@
 .home .home-4 h3{font-size: 50px; color: #D4AF37; text-align: center; padding-top: 30px;}
 .home .home-4 .swiper-home4{width: 85%; height: 32rem; padding: 2rem 0; position: relative;}
 .home .home-4 .swiper-home4 .swiper-slide{width: 17rem; height: 22rem; position: relative;}
-.home .home-4 .swiper-home4 .swiper-slide img{width: 100%; height: 100%; border-radius: 2rem; object-fit: cover;}
+.home .home-4 .swiper-home4 .swiper-slide .category-img{width: 100%; height: 100%; border-radius: 2rem; object-fit: cover;}
+.home .home-4 .swiper-home4 .swiper-slide .category-img img{width: 100%; height: 100%; border-radius: 2rem;}
+.home .home-4 .swiper-home4 .swiper-slide .category-info{position: absolute; bottom: 0; left: 0; width: 100%; height: 40%; background-color: #0000007d; border-radius: 0 0 2rem 2rem; display: flex; justify-content: center; align-items: center; flex-direction: column; opacity: 0; transition: all 0.3s ease 0s;}
+.home .home-4 .swiper-home4 .swiper-slide .category-info h2{font-size: 30px; margin-bottom: 10px;}
+.home .home-4 .swiper-home4 .swiper-slide .category-info button{padding: 5px 40px;}
+.home .home-4 .swiper-home4 .swiper-slide:hover .category-info{opacity: 1; transition: all 0.3s ease 0s;}
 .home .home-4 .swiper-home4 .slider-controller{position: relative; bottom: 2rem; display: flex; align-items: center; justify-content: center;}
 .home .home-4 .swiper-home4 .slider-controller .swiper-button-next{left: 58% !important; transform: translateX(-58%) !important;}
 .home .home-4 .swiper-home4 .slider-controller .slider-arrow{background-color: #D4AF37; width: 2.5rem; height: 2.5rem; border-radius: 50%; left: 42%; transform: translateX(-42%); filter: drop-shadow(0 8px 24px rgba(18, 28, 53, 0.1));}

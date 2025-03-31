@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from "swiper/react";
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
@@ -40,22 +41,58 @@ const SliderHome3 = () => {
                 className='swiper-home4'
             >
                 <SwiperSlide>
-                    <img src={ReactImg4} alt="imagen1" />
+                    <div className='category-img'>
+                        <img src={ReactImg4} alt="imagen1" />
+                    </div>
+                    <div className='category-info'>
+                        <h2 className='title'>ACCIÓN</h2>
+                        <button className="buttonLight"><Link to="login">Ver más</Link></button>
+                    </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src={ReactImg5} alt="imagen2" />
+                    <div className='category-img'>
+                        <img src={ReactImg5} alt="imagen2" />
+                    </div>
+                    <div className='category-info'>
+                        <h2 className='title'>DRAMA</h2>
+                        <button className="buttonLight"><Link to="login">Ver más</Link></button>
+                    </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src={ReactImg6} alt="imagen3" />
+                    <div className='category-img'>
+                        <img src={ReactImg6} alt="imagen3" />
+                    </div>
+                    <div className='category-info'>
+                        <h2 className='title'>FANTASÍA</h2>
+                        <button className="buttonLight"><Link to="login">Ver más</Link></button>
+                    </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src={ReactImg7} alt="imagen4" />
+                    <div className='category-img'>
+                        <img src={ReactImg7} alt="imagen4" />
+                    </div>
+                    <div className='category-info'>
+                        <h2 className='title'>MISTERIO</h2>
+                        <button className="buttonLight"><Link to="login">Ver más</Link></button>
+                    </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src={ReactImg8} alt="imagen5" />
+                    <div className='category-img'>
+                        <img src={ReactImg8} alt="imagen5" />
+                    </div>
+                    <div className='category-info'>
+                        <h2 className='title'>ROMANCE</h2>
+                        <button className="buttonLight"><Link to="login">Ver más</Link></button>
+                    </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src={ReactImg9} alt="imagen6" />
+                    <div className='category-img'>
+                        <img src={ReactImg9} alt="imagen6" />
+                    </div>
+                    <div className='category-info'>
+                        <h2 className='title'>TERROR</h2>
+                        <button className="buttonLight"><Link to="login">Ver más</Link></button>
+                    </div>
                 </SwiperSlide>
 
                 <div className="slider-controller">
