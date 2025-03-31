@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import ParticlesBackground from '../../components/ParticlesBackground'
 import DynamicNavbar from '../../components/DynamicNavbar'
 import Footer from '../../components/Footer'
+import Loader from "../../components/Loader";
 import EditProfileModal from '../../components/EditProfileModal'
 import '../../assets/css/profile.css'
 import { useStory } from '../../context/StoryContext';
@@ -27,11 +28,11 @@ const Profile = () => {
   }
 
   if (isLoading) {
-    return <p className="text-white text-center">Cargando perfil...</p>;
+      return <Loader />;
   }
 
   if (!user) {
-    return <p className="text-white text-center">Cargando perfil...</p>;
+    return <Loader />;
   }
 
   return (
