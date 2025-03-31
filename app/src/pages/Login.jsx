@@ -201,6 +201,7 @@ const Login = () => {
             <input type="password" name='password' value={formData.password} onChange={handleChange} placeholder="Contraseña" required />
             {errors.password && <p className="error">{errors.password[0]}</p>}
             <input type="password" name='password_confirm' value={formData.password_confirm} onChange={handleChange} placeholder="Confirmar contraseña" required />
+            <label forHtml="birthdate">Fecha de nacimiento</label>
             <input type="date" name="birthdate" value={formData.birthdate || ""} onChange={handleChange} required />
             {errors.birthdate && <p className="error">{errors.birthdate[0]}</p>}
             

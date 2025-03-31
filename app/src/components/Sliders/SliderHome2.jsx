@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import ReactImg from '../../assets/img/persona.png';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -44,7 +45,7 @@ const sliderHome2 = () => {
                 <img src={ReactImg} alt="User 1" />
                 <h2>Fox</h2>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque, numquam.</p>
-                <button>Más</button>
+                <button><Link to="login">Más</Link></button>
               </div>
             </SwiperSlide>
 
@@ -53,7 +54,7 @@ const sliderHome2 = () => {
                 <img src={ReactImg} alt="User 2" />
                 <h2>Fox</h2>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque, numquam.</p>
-                <button>Más</button>
+                <button><Link to="login">Más</Link></button>
               </div>
             </SwiperSlide>
 
@@ -62,7 +63,7 @@ const sliderHome2 = () => {
                 <img src={ReactImg} alt="User 3" />
                 <h2>Fox</h2>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque, numquam.</p>
-                <button>Más</button>
+                <button><Link to="login">Más</Link></button>
               </div>
             </SwiperSlide>
 
@@ -71,7 +72,7 @@ const sliderHome2 = () => {
                 <img src={ReactImg} alt="User 4" />
                 <h2>Fox</h2>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque, numquam.</p>
-                <button>Más</button>
+                <button><Link to="login">Más</Link></button>
               </div>
             </SwiperSlide>
 
@@ -80,7 +81,7 @@ const sliderHome2 = () => {
                 <img src={ReactImg} alt="User 5" />
                 <h2>Fox</h2>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque, numquam.</p>
-                <button>Más</button>
+                <button><Link to="login">Más</Link></button>
               </div>
             </SwiperSlide>
 
@@ -89,7 +90,7 @@ const sliderHome2 = () => {
                 <img src={ReactImg} alt="User 6" />
                 <h2>Fox</h2>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque, numquam.</p>
-                <button>Más</button>
+                <button><Link to="login">Más</Link></button>
               </div>
             </SwiperSlide>
           </Swiper>

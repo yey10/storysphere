@@ -75,6 +75,9 @@
     position: absolute;
     border-radius: 20px;
   }
+  .container-login .form-register{
+    padding: 40px 20px;
+  }
   .container-login form > div:nth-child(1){
     position: absolute;
     top: 0;
@@ -135,6 +138,11 @@
   }
   .container-login form input:hover {
     border: 1px solid #d4af37;
+  }
+  .container-login .form-register label{
+    font-size: 16px;
+    padding-left: 10px;
+    color: #909090;
   }
   .container-login form button {
     padding: 10px 40px;
