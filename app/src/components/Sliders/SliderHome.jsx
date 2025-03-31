@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -27,27 +28,32 @@ const SliderHome = () => {
         >
           <SwiperSlide className="swiper-slide slide-1 slide-item img-1">
             <div>
-              <h4>History 1</h4>
+              <h4>La Mansión de la Luna Rota</h4>
+              <button className="buttonLight"><Link to="login">Ver más</Link></button>
             </div>
           </SwiperSlide>
           <SwiperSlide className="swiper-slide slide-2 slide-item img-2">
             <div>
-              <h4>History 2</h4>
+              <h4>Los Susurros de la Biblioteca Eterna</h4>
+              <button className="buttonLight"><Link to="login">Ver más</Link></button>
             </div>
           </SwiperSlide>
           <SwiperSlide className="swiper-slide slide-3 slide-item img-3">
             <div>
-              <h4>History 3</h4>
+              <h4>Cartas Bajo la Lluvia</h4>
+              <button className="buttonLight"><Link to="login">Ver más</Link></button>
             </div>
           </SwiperSlide>
           <SwiperSlide className="swiper-slide slide-4 slide-item img-4">
             <div>
-              <h4>History 4</h4>
+              <h4>Ecos del Pasado</h4>
+              <button className="buttonLight"><Link to="login">Ver más</Link></button>
             </div>
           </SwiperSlide>
           <SwiperSlide className="swiper-slide slide-5 slide-item img-5">
             <div>
-              <h4>History 5</h4>
+              <h4>Cartas al Olvido</h4>
+              <button className="buttonLight"><Link to="login">Ver más</Link></button>
             </div>
           </SwiperSlide>
         </Swiper>

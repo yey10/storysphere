@@ -4,14 +4,32 @@
 .homeusuario .body-1 .slider p:nth-child(2){font-size: 25px; text-align: center;}
 .homeusuario .body-1 .slider .swiper{width: 80%; height: 60vh; margin-top: 20px; overflow: hidden;}
 .homeusuario .body-1 .slider .swiper .swiper-wrapper{width: 100%; height: 100%;}
-.homeusuario .body-1 .slider .swiper .swiper-wrapper .img-1{background-color: #303030; border-radius: 20px;}
-.homeusuario .body-1 .slider .swiper .swiper-wrapper .img-2{background-color: #303030; border-radius: 20px;}
-.homeusuario .body-1 .slider .swiper .swiper-wrapper .img-3{background-color: #303030; border-radius: 20px;}
-.homeusuario .body-1 .slider .swiper .swiper-wrapper .img-4{background-color: #303030; border-radius: 20px;}
-.homeusuario .body-1 .slider .swiper .swiper-wrapper .img-5{background-color: #303030; border-radius: 20px;}
-.homeusuario .body-1 .slider .swiper .swiper-wrapper .swiper-slide{background-size: cover; background-position: center center;}
-.homeusuario .body-1 .slider .swiper .swiper-wrapper .swiper-slide div:first-child{height: 100%; display: flex; justify-content: center; align-items: center; color: white; text-shadow: 1px 1px 5px rgba(0,0,0,0.5);}
-.homeusuario .body-1 .slider .swiper .swiper-wrapper .swiper-slide div:first-child h4{font-size: 30px; animation: fadeInUp 1s;}
+.homeusuario .body-1 .slider .swiper .swiper-wrapper .img-1{background-color: #000000; border-radius: 20px; border: 1px solid #D4AF37;}
+.homeusuario .body-1 .slider .swiper .swiper-wrapper .img-1 img{width: 100%; position: absolute; z-index: -1;}
+.homeusuario .body-1 .slider .swiper .swiper-wrapper .img-2{background-color: #000000; border-radius: 20px; border: 1px solid #D4AF37;}
+.homeusuario .body-1 .slider .swiper .swiper-wrapper .img-2 img{width: 100%; position: absolute; z-index: -1;}
+.homeusuario .body-1 .slider .swiper .swiper-wrapper .img-3{background: linear-gradient(0.25turn, #000000, #101010); border-radius: 20px; border: 1px solid #D4AF37;}
+.homeusuario .body-1 .slider .swiper .swiper-wrapper .img-3 img{height: 70%; position: absolute; z-index: 9999; left: 100px;}
+.homeusuario .body-1 .slider .swiper .swiper-wrapper .img-4{background-color: #000000; border-radius: 20px; border: 1px solid #D4AF37;}
+.homeusuario .body-1 .slider .swiper .swiper-wrapper .img-5{background-color: #000000; border-radius: 20px; border: 1px solid #D4AF37;}
+.homeusuario .body-1 .slider .swiper .swiper-wrapper .swiper-slide{background-size: cover; background-position: center center; overflow: hidden;}
+.homeusuario .body-1 .slider .swiper .swiper-wrapper .swiper-slide div:first-child{height: 100%; display: flex; justify-content: center; align-items: center; color: white; text-shadow: 1px 1px 5px rgba(0,0,0,0.5); position: relative;}
+.homeusuario .body-1 .slider .swiper .swiper-wrapper .swiper-slide div:first-child .bg-img2{width: 100%; height: 100%; background: linear-gradient(0.25turn, #0000009d, #0000004d, #0000009d); display: flex; justify-content: center; align-items: center; flex-direction: column;}
+.homeusuario .body-1 .slider .swiper .swiper-wrapper .swiper-slide div:first-child .bg-img2 h4{font-size: 50px; animation: fadeInUp 1s; color: #D4AF37; margin-bottom: 20px;}
+.homeusuario .body-1 .slider .swiper .swiper-wrapper .swiper-slide div:first-child .bg-img2 h4 svg{width: 40px; height: 40px;}
+.homeusuario .body-1 .slider .swiper .swiper-wrapper .swiper-slide div:first-child .bg-img2 p:nth-child(2){font-size: 25px; text-align: center; width: 50%; margin-bottom: 20px;}
+.homeusuario .body-1 .slider .swiper .swiper-wrapper .swiper-slide div:first-child .bg-img2 p:nth-child(3){margin-bottom: 30px;}
+.homeusuario .body-1 .slider .swiper .swiper-wrapper .swiper-slide div:first-child .img-info{width: 50%; height: 100%; position: absolute; top: 0; right: 50px; display: flex; justify-content: flex-start; align-items: center; flex-direction: column; padding: 50px 0;}
+.homeusuario .body-1 .slider .swiper .swiper-wrapper .swiper-slide div:first-child .img-info h4{font-size: 40px; color: #D4AF37; margin-bottom: 20px; text-align: center;}
+.homeusuario .body-1 .slider .swiper .swiper-wrapper .swiper-slide div:first-child .img-info p:nth-child(2){font-size: 25px; padding: 0 20px; margin-bottom: 20px; text-align: center;}
+.homeusuario .body-1 .slider .swiper .swiper-wrapper .swiper-slide div:first-child .img-info p:nth-child(3){font-size: 22px; padding: 0 20px; margin-bottom: 30px; text-align: center;}
+.homeusuario .body-1 .slider .swiper .swiper-wrapper .swiper-slide div:first-child .circles div:nth-child(1){width: 200px; height: 100px; background: #D4AF37; border-radius: 70px; position: absolute; top: -50px; left: 40px; transform: rotate(45deg); border-right: 5px solid #fff;}
+.homeusuario .body-1 .slider .swiper .swiper-wrapper .swiper-slide div:first-child .circles div:nth-child(2){width: 300px; height: 120px; background: #D4AF37; border-radius: 120px; position: absolute; top: 30px; left: -50px; transform: rotate(45deg); border-right: 5px solid #fff;}
+.homeusuario .body-1 .slider .swiper .swiper-wrapper .swiper-slide div:first-child .circles div:nth-child(3){width: 200px; height: 100px; background: #D4AF37; border-radius: 70px; position: absolute; top: 80px; left: -100px; transform: rotate(45deg); border-right: 5px solid #fff;}
+.homeusuario .body-1 .slider .swiper .swiper-wrapper .swiper-slide div:first-child .circle0{position: absolute; top: 170px; left: 200px;}
+.homeusuario .body-1 .slider .swiper .swiper-wrapper .swiper-slide div:first-child .circle01{position: absolute; top: 230px; left: 290px; transform: rotate(180deg);}
+.homeusuario .body-1 .slider .swiper .swiper-wrapper .swiper-slide div:first-child .circle1{position: absolute; top: 0; left: 0;}
+.homeusuario .body-1 .slider .swiper .swiper-wrapper .swiper-slide div:first-child .circle2{position: absolute; bottom: 0px; right: 0px; transform: rotate(180deg);}
 .homeusuario .body-1 .slider .swiper-button-next, .container .swiper-button-prev{color: #D4AF37; text-shadow: 1px 1px 5px rgba(255, 255, 255, 1);}
 .homeusuario .body-1 .slider .swiper-pagination-bullet{background-color: #D4AF37; width: 15px; height: 15px;}
 @media (max-width: 500px){
