@@ -5,6 +5,7 @@ use App\Http\Controllers\User\AuthController;
 use App\Http\Controllers\Stories\StoryController;
 use App\Http\Controllers\Stories\CategoryController;
 use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\Interactions\CommentController;
 use App\Http\Controllers\Interactions\FollowerController;
 use App\Http\Controllers\Interactions\LikeController;
@@ -12,7 +13,14 @@ use App\Http\Controllers\Interactions\RatingController;
 use App\Http\Controllers\Payment\InvoiceController;
 use App\Http\Controllers\Payment\MercadoPagoController;
 use App\Http\Controllers\Payment\SubscriptionController;
+use App\Http\Controllers\User\PasswordResetController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use App\Models\User;
+
+
 
 // Rutas para autenticación
 Route::controller(AuthController::class)->group(function () {
@@ -24,14 +32,24 @@ Route::controller(AuthController::class)->group(function () {
 // Rutas para usuarios
 Route::prefix('users')->middleware(['auth:sanctum', 'token.expiration'])->controller(UserController::class)->group(function () {
     Route::get('/', 'index'); // Obtener todos los usuarios
-    Route::get('/{id}', 'show'); // Obtener datos del usuario
-    Route::get('/profile', 'profile'); // Obtener perfil
-    Route::put('/{id}/profile', 'updateProfile'); // Actualizar perfil
+    Route::get('{id}', 'show'); // Obtener todos los usuarios
     Route::delete('/{id}', 'deleteAccount'); // Eliminar cuenta
     Route::put('/{id}/role', 'updateRole'); // Actualizar rol
     Route::get('/{user}/stories', [StoryController::class, 'getUserStories']); // Historias de un usuario
     Route::get('/{user}/comments', [CommentController::class, 'getUserComments']); // Comentarios de un usuario
 });
+
+Route::middleware(['auth:sanctum', 'token.expiration'])->group(function () {
+    Route::get('profile', [ProfileController::class, 'show']); // Obtener perfil
+    Route::put('profile/{user}', [ProfileController::class, 'update']);
+
+    Route::put('profile/{user}/role', [ProfileController::class, 'updateRole']);
+    Route::put('profile/{user}/status', [ProfileController::class, 'updateStatus']);
+});
+
+//RESETEAR CONTRASEÑA
+Route::post('/forgot-password', [PasswordResetController::class, 'sendResetLink']);
+Route::post('/reset-password', [PasswordResetController::class, 'resetPassword']);
 
 // Rutas para historias
 Route::prefix('stories')->group(function () {
@@ -49,6 +67,11 @@ Route::prefix('stories')->group(function () {
         Route::get('{id}/owner', [StoryController::class, 'getStoryOwner']); // Obtener dueño de una historia
         Route::post('/{story}/comments', [CommentController::class, 'store']); // Crear comentario
     });
+});
+
+//actualizar estado de una historia
+Route::middleware(['auth:sanctum', 'token.expiration'])->group(function () {
+    Route::put('/stories/{story}/status', [StoryController::class, 'updateStatus']);
 });
 
 //Rutas para los comentarios
@@ -110,3 +133,8 @@ Route::prefix('mercado-pago')->middleware(['auth:sanctum', 'token.expiration'])-
     Route::post('/create-payment', [MercadoPagoController::class, 'createPayment']);
     Route::post('/create-subscription', [MercadoPagoController::class, 'createSubscriptionPayment']);
 });
+
+
+
+
+

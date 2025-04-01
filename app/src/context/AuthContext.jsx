@@ -15,7 +15,7 @@ export const AuthProvider = ({children}) =>{
         const userData = sessionStorage.getItem('user');
         console.log('Token encontrado en sessionStorage:', token);
 
-        if (token) {
+        if (token && userData) {
             setIsAuthenticated(true);
             setUser(JSON.parse(userData));
         }else{
@@ -25,17 +25,24 @@ export const AuthProvider = ({children}) =>{
         setIsLoading(false);//finaliza la carga
     }, []);//  El array vacío asegura que este efecto se ejecute solo una vez al montar el componente
 
+
+
     const handleLogin = async (data) =>{
         try {
+
             const response = await login(data);
-            if (response.access_token) {
+
+            if (response?.access_token) {
                 sessionStorage.setItem('token', response.access_token);
                 //guardar informacion del usuario en la sesión
                 const userData = {
-                    id: response.user.id,
-                    role: response.user.role,
+                    id: response.user.id_user,
                     name: response.user.name,
-                    profile_photo: response.user.profile_photo
+                    email: response.user.email,
+                    profile_photo: response.user.profile_photo,
+                    birthdate: response.user.birthdate,
+                    account_status: response.user.account_status,
+                    role: response.user.roles.length > 0 ? response.user.roles[0].name_rol : 'user'
                 };
                 sessionStorage.setItem('user', JSON.stringify(userData));
                 setIsAuthenticated(true);
@@ -43,17 +50,20 @@ export const AuthProvider = ({children}) =>{
             }
             
         } catch (error) {
+            console.error("Error en el login:", error);
+            setIsAuthenticated(false);
+            setUser(null);
             throw error;
         }
     }
 
-    const handleRegister = async (data) =>{
+    const handleRegister = async (data) => {
         try {
-            await register(data);
+          await register(data);
         } catch (error) {
-            throw error;
+          throw error;
         }
-    }
+      };
 
     const handleLogout = () =>{
         sessionStorage.removeItem('token');

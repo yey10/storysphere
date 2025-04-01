@@ -51,36 +51,46 @@
   .headerUsuario .sidebar .user-account .user-profile .user-detail span{font-size: 0.775rem; font-weight: 600; display: block; margin-top: 0;}
   .headerUsuario .sidebar:hover .user-account{background-color: #ffffff2d; border-radius: 5px; }
 
+  .headerUsuario .checkbtn{width: 50px; height: 80px; position: fixed; top: 0; left: 20px; cursor: pointer; display: none; z-index: 9999999999999999999;}
+  .headerUsuario .checkbtn svg{width: 40px; height: 40px;}
+  .headerUsuario #check{display: none;}
 
-  /* responsive */
-  @media screen and (max-width: 1024px) {
-      .headerUsuario .navbar ul{margin-right: 5vh;}
-      .headerUsuario .navbar ul li:first-child{margin-right: 40px;}
-      .headerUsuario .navbar ul li:nth-child(2):hover input{width: 300px;}
-  }
+ /* responsive */
+ @media screen and (max-width: 1024px) {
+    .headerUsuario .navbar ul{margin-right: 5vh;}
+    .headerUsuario .navbar ul li:first-child{margin-right: 40px;}
+    .headerUsuario .navbar ul li:nth-child(1):hover input{width: 300px;}
+}
 
-  @media screen and (max-width: 768px) {
-      .headerUsuario .navbar div:nth-child(1){width: 150px; height: 50px; margin: 15px 0; margin-left: 15vh;}
-      .headerUsuario .navbar ul{margin-right: 5vh;}
-      .headerUsuario .navbar ul li{margin-right: 20px;}
-      .headerUsuario .navbar ul li:nth-child(2):hover input{width: 250px;}
-  }
+@media screen and (max-width: 768px) {
+    .headerUsuario .navbar div:nth-child(1){width: 150px; height: 50px; margin: 15px 0; margin-left: 15vh;}
+    .headerUsuario .navbar ul{margin-right: 0;}
+    .headerUsuario .navbar ul li{margin-right: 20px;}
+    .headerUsuario .navbar ul li:nth-child(1):hover input{width: 230px;}
+}
 
-  @media screen and (max-width: 500px) {
-      .headerUsuario .navbar div:nth-child(1){margin-left: 12vh; position: absolute;}
-      .headerUsuario .navbar ul li a{font-size: 16px;}
-      .headerUsuario .navbar ul li:first-child{position: absolute; right: 60px;}
-      .headerUsuario .navbar ul li:nth-child(2) input{height: 25px;}
-      .headerUsuario .navbar ul li:nth-child(2) span{width: 40px; height: 40px; margin: 20px 15px; line-height: 40px;}
-      .headerUsuario .navbar ul li:nth-child(2):hover{background-color: #050505;}
-      .headerUsuario .navbar ul li:nth-child(2):hover input{width: 365px;}
-  }
+@media screen and (max-width: 500px) {
+    .headerUsuario .navbar{position: fixed; background-color: #0000005d; z-index: 99999;}
+    .headerUsuario .navbar div:nth-child(1){width: 120px; height: 50px; margin-left: 10vh; margin-top: 20px;}
+    .headerUsuario .navbar ul{margin-right: 10px;}
+    .headerUsuario .navbar ul li a{font-size: 13px;}
+    .headerUsuario .navbar ul li:nth-child(1){margin-right: 20px;}
+    .headerUsuario .navbar ul li:nth-child(1) input{height: 25px; top: 2px;}
+    .headerUsuario .navbar ul li:nth-child(1) svg{width: 35px; height: 35px; top: 23px;}
+    .headerUsuario .navbar ul li:nth-child(1) span{width: 40px; height: 40px; margin: 20px 15px; line-height: 40px;}
+    .headerUsuario .navbar ul li:nth-child(1):hover{background-color: #00000000;}
+    .headerUsuario .navbar ul li:nth-child(1):hover input{width: 170px;}
+    .headerUsuario .navbar ul li:nth-child(2){display: none;}
+    .headerUsuario .navbar ul li:nth-child(3){margin-right: 10px;}
+    .headerUsuario .navbar ul li:nth-child(4){margin: 0;}
 
-  @media screen and (max-width: 375px) {
-      .headerUsuario .navbar div:nth-child(1){width: 100px; height: 50px; margin-left: 10vh;}
-      .headerUsuario .navbar ul{margin-right: 2vh;}
-      .headerUsuario .navbar ul li a{font-size: 13px;}
-      .headerUsuario .navbar ul li:first-child{position: absolute; right: 40px;}
-      .headerUsuario .navbar ul li:nth-child(2):hover input{width: 258px;}
-  }
+    .headerUsuario .sidebar{width: 260px; left: -100%;}
+    .headerUsuario .sidebar .sidebar-header img{display: none;}
+    .headerUsuario .sidebar .sidebar-header h2{margin-left: 70px; margin-top: 5px;}
+    .headerUsuario .sidebar .sidebar-links h4 span{opacity: 1; color: #D4AF37;}
+    .headerUsuario .sidebar .sidebar-links h4 .separator{display: none;}
+    .headerUsuario .sidebar .sidebar-links li a span{display: block;}
 
+    .headerUsuario .checkbtn{display: flex; justify-content: center; align-items: center;}
+    #check:checked ~ .sidebar{left: 0;}
+}

@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Star, Plus } from "lucide-react";
+import '../assets/css/modal.css';
 
 const Modal = ({ story, isOpen, onClose }) => {
   const navigate = useNavigate();
@@ -19,14 +20,16 @@ const Modal = ({ story, isOpen, onClose }) => {
           <img src={story.photo} alt={story.title} /> {/* Usar story.photo */}
         </div>
         <div className="modal-info">
-          <h2 className="title">{story.title}</h2>
-          <p>By {story.user.name}</p> {/* Usar story.user.name */}
           <div>
-            <Star /><Star /><Star /><Star /><Star />
-            <p>{story.opinions} opiniones</p> {/* Si tienes un campo para opiniones */}
-            <div><Plus /></div>
+            <h2 className="title">{story.title}</h2>
+            <p>By {story.user.name}</p> {/* Usar story.user.name */}
+            <div>
+              <Star /><Star /><Star /><Star /><Star />
+              <p>{story.opinions} opiniones</p> {/* Si tienes un campo para opiniones */}
+              <div><Plus /></div>
+            </div>
           </div>
-          <p>{story.sinopsis}</p>
+          <div><p>{story.sinopsis}</p></div>
           <div>
             {story.categories.map((category) => (
               <p key={category.id_category}>{category.name}</p> 

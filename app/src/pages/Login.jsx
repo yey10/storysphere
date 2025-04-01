@@ -3,14 +3,15 @@ import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import '../assets/css/login.css';
 import { useAuth } from '../context/AuthContext.jsx';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, Link} from 'react-router-dom';
+import { X } from 'lucide-react';
 
 const Login = () => {
   
   const navigate = useNavigate();
   const [isRegister, setIsRegister] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const {handleRegister, handleLogin} = useAuth(); 
+  const {handleRegister, handleLogin, user} = useAuth(); 
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
@@ -21,6 +22,7 @@ const Login = () => {
     password_confirm: '',
     biography: '',
     profile_photo:null,
+    birthdate: '',
   });//Datos del formulario
 
   useEffect(() => {
@@ -44,15 +46,25 @@ const Login = () => {
       password_confirm: '',
       biography: '',
       profile_photo:null,
+      birthdate: '',
     });
     setErrors({});
   };
 
+
+
+ 
+
+  
   //manejar los cambios en los inputs
   const handleChange = (e) => {
-    const {name, value, files} = e.target;
-    setFormData({...formData, [name]: files ? files[0] : value});
-  }
+    const { name, value, files } = e.target;
+  
+    setFormData({
+      ...formData,
+      [name]: files ? files[0] : value, // Asigna el valor directamente
+    });
+  };
 
   //manejar el submit del formulario
   const handleSubmit = async (e) =>{
@@ -70,7 +82,7 @@ const Login = () => {
          toast.error('Por favor, completa ambos campos de contraseña');
           return;
         }
-        if(formData.password.lenght < 8){
+        if(formData.password.length < 8){
           toast.error('La contraseña debe tener al menos 8 caracteres');
           return;
         }
@@ -80,7 +92,7 @@ const Login = () => {
         }
         if (formData.profile_photo && formData.profile_photo.size > 2 * 1024 * 1024) {
           throw new Error('El tamaño del archivo no debe exceder 2MB');
-          return;
+          
         }
 
         const data = new FormData();
@@ -88,6 +100,7 @@ const Login = () => {
         data.append('email', formData.email);
         data.append('password', formData.password);
         data.append('biography', formData.biography);
+        data.append('birthdate', formData.birthdate); 
         if (formData.profile_photo) {
           data.append('profile_photo', formData.profile_photo);
         }
@@ -109,8 +122,13 @@ const Login = () => {
           password: formData.password,
         }, {signal: controller.signal});
         toast.success('Inicio de sesión exitoso');
-        console.log("Redirigiendo a /user/home"); 
-        navigate('/user/home');
+        
+        if (user && user.role === "Admin") {
+          navigate('/admin/home');
+        }else{
+          navigate('/user/home');
+        }
+        
       }
     } catch (error) {
       if (error.name === 'AbortError') {
@@ -158,11 +176,15 @@ const Login = () => {
         <div className="form" style={{ left: isRegister && windowWidth > 850 ? '410px' : '10px' }}>
           {/* Formulario de Login */}
           <form className={`form-login ${isRegister ? 'hidden' : ''}`} onSubmit={handleSubmit}>
+            <div><Link to="/"><p>Volver al inicio</p><X /></Link></div>
             <h2>Iniciar Sesión</h2>
             <input type="email" name='email' value={formData.email} onChange={handleChange} placeholder="Correo electrónico" required />
             {errors.email && <p className="error">{errors.email[0]}</p>}
             <input type="password" name='password' value={formData.password} onChange={handleChange} placeholder="Contraseña" required />
             {errors.password && <p className="error">{errors.password[0]}</p>}
+            <p className="forgot-password">
+              <Link to="/forgot-password">¿Olvidaste tu contraseña?</Link>
+            </p>
             <button type="submit" disabled={isLoading}>
               {isLoading ? 'Cargando...' : 'Iniciar Sesión'}
             </button>
@@ -170,6 +192,7 @@ const Login = () => {
 
           {/* Formulario de Registro */}
           <form className={`form-register ${!isRegister ? 'hidden' : ''}`} onSubmit={handleSubmit} encType='multipart/form-data'>
+            <div><Link to="/"><p>Volver al inicio</p><X /></Link></div>
             <h2>Registrarse</h2>
             <input type="text" name='name' value={formData.name} onChange={handleChange} placeholder="Nombre de Usuario" required />
             {errors.name && <p className="error">{errors.name[0]}</p>}
@@ -178,6 +201,10 @@ const Login = () => {
             <input type="password" name='password' value={formData.password} onChange={handleChange} placeholder="Contraseña" required />
             {errors.password && <p className="error">{errors.password[0]}</p>}
             <input type="password" name='password_confirm' value={formData.password_confirm} onChange={handleChange} placeholder="Confirmar contraseña" required />
+            <label forHtml="birthdate">Fecha de nacimiento</label>
+            <input type="date" name="birthdate" value={formData.birthdate || ""} onChange={handleChange} required />
+            {errors.birthdate && <p className="error">{errors.birthdate[0]}</p>}
+            
             <button type="submit" disabled={isLoading}>
               {isLoading ? 'Cargando...' : 'Registrarse'}
             </button>

@@ -68,10 +68,6 @@ export default function ParticlesBackground() {
               onHover: {
                 enable: true,
                 mode: "grab"
-              },
-              onClick: {
-                enable: true,
-                mode: "push"
               }
             },
             modes: {
@@ -80,9 +76,6 @@ export default function ParticlesBackground() {
                 links: {
                   opacity: 0.4
                 }
-              },
-              push: {
-                quantity: 4
               }
             }
           },

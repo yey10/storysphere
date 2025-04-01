@@ -5,8 +5,10 @@ namespace App\Services\User;
 use App\Models\User;
 use App\Models\Role;
 use Illuminate\Support\Facades\Hash;
+use Cloudinary\Api\Upload\UploadApi;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 
@@ -25,6 +27,8 @@ class AuthService
             'password' => Hash::make($data['password']),
             'biography' => $data['biography'] ?? null,
             'profile_photo' => $profile_photo,
+            'birthdate' => $data['birthdate'],
+             Auth::user()
         ]);
 
         $roles = $this->getValidRoles($data['roles'] ?? [1]);
@@ -52,9 +56,11 @@ class AuthService
         if (!$file || !$file->isValid()) {
             return null;
         }
-        $file_name = Str::random(10) . '.' . $file->getClientOriginalExtension();
-        $path = Storage::disk('public')->putFileAs('profile_photos', $file, $file_name);
-        return $path;
+
+        $cloudinary = new UploadApi();
+        $uploaded = $cloudinary->upload($file->getRealPath(), ['folder' => 'user_profile_photos']);
+
+        return $uploaded['secure_url'] ?? null;
     }
 
     private function getValidRoles(array $roles): array

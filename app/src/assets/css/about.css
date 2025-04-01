@@ -10,16 +10,16 @@
     .about-1 .about1-content{width: 90%; margin: 0 auto;}
     .about-1 .about1-content .logo-content{width: 100%;}
 }
-@media (max-width: 600px) {
-    .about-1 .about1-content{width: 100%; margin: 0 auto; padding-left: 65px;}
+@media (max-width: 500px) {
+    .about-1 .about1-content{width: 100%; margin: 0 auto; padding-left: 0px;}
     .about-1 .about1-content .logo-content{width: 100%; height: 50%;}
-    .about-1 .about1-content h1{font-size: 40px;}
+    .about-1 .about1-content h1{font-size: 40px; padding: 0 10px;}
 }
 
 .about{width: 100%; display: flex; justify-content: center; align-items: center; flex-direction: column;}
 
 .about-2{width: 60%; min-height: 50vh; display: flex; justify-content: center; align-items: center; flex-direction: column;}
-.about-2 h2{font-size: 50px; color: #D4AF37; text-align: center; padding-top: 15px;}
+.about-2 h2{font-size: 50px; color: #D4AF37; text-align: center; padding-top: 15px; margin-bottom: 20px;}
 .about-2 p{font-size: 20px; color: white; text-align: center;}
 
 .about-3{width: 100%; min-height: 110vh; display: flex; justify-content: center; align-items: center; flex-direction: column;}
@@ -48,8 +48,19 @@
 .about .slider .swiper .swiper-wrapper .img-2{background: black;}
 .about .slider .swiper .swiper-wrapper .img-3{background: black;}
 .about .slider .swiper .swiper-wrapper .swiper-slide{background-size: cover; background-position: center center;}
-.about .slider .swiper .swiper-wrapper .swiper-slide div:first-child{height: 100%; display: flex; justify-content: center; align-items: center; color: white; text-shadow: 1px 1px 5px rgba(0,0,0,0.5);}
-.about .slider .swiper .swiper-wrapper .swiper-slide div:first-child h4{font-size: 30px; animation: fadeInUp 1s;}
+.about .slider .swiper .swiper-wrapper .swiper-slide div:first-child{height: 100%; display: flex; justify-content: center; align-items: center; flex-direction: column; color: white; text-shadow: 1px 1px 5px rgba(0,0,0,0.5);}
+.about .slider .swiper .swiper-wrapper .swiper-slide div:first-child h4{font-size: 30px; animation: fadeInUp 1s; text-align: center; margin-bottom: 10px;}
+.about .slider .swiper .swiper-wrapper .swiper-slide div:first-child .team-box{width: 90%; display: flex; margin: 0 auto;}
+.about .slider .swiper .swiper-wrapper .swiper-slide div:first-child .team-box .team-img{width: 40%; height: auto;}
+.about .slider .swiper .swiper-wrapper .swiper-slide div:first-child .team-box .team-img img{width: 100%; height: 100%; border-radius: 50%;}
+.about .slider .swiper .swiper-wrapper .swiper-slide div:first-child .team-box .team-info{width: 60%; height: 100%; display: flex; justify-content: center; align-items: flex-start; flex-direction: column; padding-left: 30px;}
+.about .slider .swiper .swiper-wrapper .swiper-slide div:first-child .team-box .team-info p:nth-child(1){font-size: 35px; margin-bottom: 20px;}
+.about .slider .swiper .swiper-wrapper .swiper-slide div:first-child .team-box .team-info p:nth-child(2){font-size: 25px; margin-bottom: 30px;}
+.about .slider .swiper .swiper-wrapper .swiper-slide div:first-child .team-box .team-info div:nth-child(3){width: 70%; display: flex; justify-content: space-between;}
+.about .slider .swiper .swiper-wrapper .swiper-slide div:first-child .team-box .team-info div:nth-child(3) a:nth-child(1){padding: 15px 15px 10px 15px; border-radius: 50%; background-color: #3b5998; text-decoration: none; color: #fff;}
+.about .slider .swiper .swiper-wrapper .swiper-slide div:first-child .team-box .team-info div:nth-child(3) a:nth-child(2){padding: 15px 15px 10px 15px; border-radius: 50%; background: linear-gradient(#833ab4, #c13584, #fd1d1d, #f56040, #f77737, #ffdc80); text-decoration: none; color: #fff;}
+.about .slider .swiper .swiper-wrapper .swiper-slide div:first-child .team-box .team-info div:nth-child(3) a:nth-child(3){padding: 15px 15px 10px 15px; border-radius: 50%; background-color: #0e76a8; text-decoration: none; color: #fff;}
+.about .slider .swiper .swiper-wrapper .swiper-slide div:first-child .team-box .team-info div:nth-child(3) a:nth-child(4){padding: 15px 15px 10px 15px; border-radius: 50%; background-color: #171515; text-decoration: none; color: #fff;}
 .about .slider .swiper-button-next, .about .slider .swiper-button-prev{color: #D4AF37; text-shadow: 1px 1px 5px rgba(255, 255, 255, 1);}
 .about .slider .swiper-pagination-bullet{background-color: #D4AF37; width: 15px; height: 15px;}
 
@@ -61,12 +72,27 @@
     .about-5{min-height: 30vh; padding: 50px 0; width: 80%;}
     .about .slider .swiper{width: 80%;}
 }
-@media (max-width: 600px) {
+@media (max-width: 500px) {
     .about-2{min-height: 30vh; padding: 50px 0; width: 90%;}
     .about-3{min-height: 60vh; padding: 50px 0;}
-    .about-3 .mision, .about-3 .vision{width: 90%;}
+    .about-3 .mision, .about-3 .vision{width: 90%; padding: 40px 20px;}
+    .about-3 .mision p, .about-3 .vision p{font-size: 17px;}
+    .about-3 .mision:hover, .about-3 .vision:hover{transform: scale(0.9);}
     .about-4{min-height: 30vh; padding: 50px 0; width: 90%;}
+    .about-4 p{font-size: 18px;}
     .about-5{min-height: 30vh; padding: 50px 0; width: 90%;}
+    .about-5 h2{font-size: 40px;}
+    .about-5 p{font-size: 18px;}
     .about .slider .swiper{width: 90%;}
+    .about .slider .swiper .swiper-wrapper .swiper-slide div:first-child .team-box .team-info{padding-left: 10px;}
+    .about .slider .swiper .swiper-wrapper .swiper-slide div:first-child .team-box .team-info p:nth-child(1){font-size: 25px;}
+    .about .slider .swiper .swiper-wrapper .swiper-slide div:first-child .team-box .team-info p:nth-child(2){font-size: 20px;}
+    .about .slider .swiper .swiper-wrapper .swiper-slide div:first-child .team-box .team-info div:nth-child(3){width: 100%;}
+    .about .slider .swiper .swiper-wrapper .swiper-slide div:first-child .team-box .team-info div:nth-child(3) a:nth-child(1){padding: 10px 10px 5px 10px;}
+    .about .slider .swiper .swiper-wrapper .swiper-slide div:first-child .team-box .team-info div:nth-child(3) a:nth-child(2){padding: 10px 10px 5px 10px;}
+    .about .slider .swiper .swiper-wrapper .swiper-slide div:first-child .team-box .team-info div:nth-child(3) a:nth-child(3){padding: 10px 10px 5px 10px;}
+    .about .slider .swiper .swiper-wrapper .swiper-slide div:first-child .team-box .team-info div:nth-child(3) a:nth-child(4){padding: 10px 10px 5px 10px;}
+    .about .slider .swiper .swiper-wrapper .swiper-slide div:first-child .team-box .team-info div:nth-child(3) a svg{width: 20px; height: 20px;}
     .about .slider .swiper-button-next, .about .slider .swiper-button-prev{display: none;}
+    
 }

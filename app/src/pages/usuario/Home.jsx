@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {useAuth} from '../../context/AuthContext.jsx';
+import {useStory} from '../../context/StoryContext.jsx';
 import { Link } from 'react-router-dom';
 import ParticlesBackground from '../../components/ParticlesBackground';
 import NavbarUsuario from  '../../components/NavbarUsuario';
@@ -27,6 +28,20 @@ import '../../assets/css/homeusuario.css';
 import { Crown } from 'lucide-react';
 
 const Home = () => {
+
+    const {getFeaturedStories} = useStory();
+    const [highlightedStories, setHighlightedStories] = useState([]);
+
+    useEffect(() => {
+      const fetchStories = async () => {
+
+        const featured = await getFeaturedStories(4);
+        setHighlightedStories(featured);
+      };
+    
+      fetchStories();
+
+    }, []);
 
     const {isAuthenticated, isLoading} = useAuth();
     console.log('Estado de autenticación:', isAuthenticated)
@@ -61,44 +76,21 @@ const Home = () => {
                   </div>
 
                   <div className="body-3">
-                    <h3 className='title'>¡Lo más destacado de StorySphere!</h3>
-                    <div className='boximage'>
-                      <div>
-                        <img src={Descatado1} alt="" />
-                        <div className='boximg-content'>
-                          <span className='title'>Un Asilo olvidado</span>
-                          <p>Autor</p>
-                          <p>En lo más profundo del bosque, un antiguo monasterio emana una luz inquietante cada noche. Se dice que quien cruce sus puertas jamás regresa, atrapado por los susurros de un secreto olvidado...</p>
-                          <button className='buttonLight'><Link to="/histories">Leer más</Link></button>
-                        </div>
-                      </div>
-                      <div>
-                        <img src={Descatado2} alt="" />
-                        <div className='boximg-content'>
-                          <span className='title'>Los susurros de la biblioteca eterna</span>
-                          <p>Autor</p>
-                          <p>En lo más profundo de la biblioteca eterna, donde el tiempo no transcurre y el conocimiento es infinito, un jover erudito descubre un libro prohibido, que emana un extraño resplandor...</p>
-                          <button className='buttonLight'><Link to="/histories">Leer más</Link></button> {/** historia por id */}
-                        </div>
-                      </div>
-                      <div>
-                        <img src={Descatado3} alt="" />
-                        <div className='boximg-content'>
-                          <span className='title'>Cartas bajo la lluvia</span>
-                          <p>Autor</p>
-                          <p>Sofía y Andrés solían dejarse cartas en un viejo buzón abandonado. Años después, una carta perdida llega a las manos de Sofía en medio de una tormenta. Cuando la abre, descubre una confesión de amor nunca entregada…</p>
-                          <button className='buttonLight'><Link to="/histories">Leer más</Link></button>
-                        </div>
-                      </div>
-                      <div>
-                        <img src={Descatado4} alt="" />
-                        <div className='boximg-content'>
-                          <span className='title'>Hacia el Horizonte del Infinito</span>
-                          <p>Autor</p>
-                          <p>Desde la estación orbital, el comandante observa la última nave partir hacia lo desconocido. Más allá del portal estelar, un nuevo destino aguarda, donde el tiempo y el espacio dejan de tener sentido...</p>
-                          <button className='buttonLight'><Link to="/histories">Leer más</Link></button>
-                        </div>
-                      </div>
+                    <h3 className="title">¡Lo más destacado de StorySphere!</h3>
+                    <div className="boximage">
+                        {highlightedStories.map((story) => (
+                            <div key={story.id_story}>
+                                <img src={story.photo} alt={story.title} />
+                                <div className="boximg-content">
+                                    <h3 className="title">{story.title}</h3>
+                                    <p>{story.author}</p>
+                                    <p>{story.content.substring(0, 100)}...</p>
+                                    <button className="buttonLight">
+                                        <Link to={`/user/story/${story.id_story}`}>Leer más</Link>
+                                    </button>
+                                </div>
+                            </div>
+                        ))}
                     </div>
                     <p>Las mejores historias comienzan con una idea. ¿Listo para escribir la tuya?</p>
                   </div>
@@ -108,18 +100,20 @@ const Home = () => {
                     <p>Haz crecer tu impacto con un plan premium. Accede a más herramientas y visibilidad</p>
                     <div className='body4-content'>
                       <div className='premium'>
+                        <div><Crown /><p>PREMIUM</p></div>
                         <div><img src={premium} alt="" /></div>
                         <div>
                           <div><Crown /><p>PREMIUM</p></div>
-                          <span className='title'>Ecos del pasado</span>
+                          <h4 className='title'>Ecos del pasado</h4>
                           <p>Lucía encuentra un antiguo diario que revela un amor prohibido y un misterio sin resolver en su familia. A medida que lee, extraños sucesos comienzan a rodearla. Ahora, deberá descubrir la verdad antes de que el pasado la alcance.</p>
                         </div>
                       </div>
                       <div className='premium'>
+                        <div><Crown /><p>PREMIUM</p></div>
                         <div><img src={premium2} alt="" /></div>
                         <div>
                           <div><Crown /><p>PREMIUM</p></div>
-                          <span className='title'>El Último Tren</span>
+                          <h4 className='title'>El Último Tren</h4>
                           <p>Daniel toma el tren nocturno como cada día, pero esta vez algo es diferente: los pasajeros parecen inmóviles, el paisaje nunca cambia y el reloj no avanza. Pronto descubre que está atrapado en un viaje sin final, donde cada estación es un eco de su pasado.</p>
                         </div>
                       </div>
@@ -133,7 +127,7 @@ const Home = () => {
                         <h3 className='title'>ROMANCE</h3>
                         <p>Lo mejor en Romance aquí</p>
                         <p>Descubre nuevas categorías y recibe recomendaciones personalizadas</p>
-                        <button className='buttonLight'><Link to="/categories">Ingresa a categorías</Link></button>
+                        <button className='buttonLight'><Link to="/user/categories">Ingresa a categorías</Link></button>
                       </div>
                       <div>
                         <div className='background-image'></div>
@@ -150,7 +144,7 @@ const Home = () => {
                         <h3 className='title'>TERROR</h3>
                         <p>Lo mejor en Terror aquí</p>
                         <p>Descubre nuevas categorías y recibe recomendaciones personalizadas</p>
-                        <button className='buttonLight'><Link to="/categories">Ingresa a categorías</Link></button>
+                        <button className='buttonLight'><Link to="/user/categories">Ingresa a categorías</Link></button>
                       </div>
                       <div>
                         <div className='background-image'></div>
@@ -167,7 +161,7 @@ const Home = () => {
                         <h3 className='title'>ACCIÓN</h3>
                         <p>Lo mejor en Acción aquí</p>
                         <p>Descubre nuevas categorías y recibe recomendaciones personalizadas</p>
-                        <button className='buttonLight'><Link to="/categories">Ingresa a categorías</Link></button>
+                        <button className='buttonLight'><Link to="/user/categories">Ingresa a categorías</Link></button>
                       </div>
                       <div>
                         <div className='background-image'></div>
@@ -184,7 +178,7 @@ const Home = () => {
                         <h3 className='title'>FICCIÓN</h3>
                         <p>Lo mejor en Ficción aquí</p>
                         <p>Descubre nuevas categorías y recibe recomendaciones personalizadas</p>
-                        <button className='buttonLight'><Link to="/categories">Ingresa a categorías</Link></button>
+                        <button className='buttonLight'><Link to="/user/categories">Ingresa a categorías</Link></button>
                       </div>
                       <div>
                         <div className='background-image'></div>

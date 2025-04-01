@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useCallback } from "react";
-import { getCommentById, updateComment, deleteComment, getCommentOwner, createComment, getAllCommentsByStory } from "../api/commentService";
+import { updateComment, deleteComment, getCommentOwner, createComment, getAllCommentsByStory } from "../api/commentService";
 
 //crear el contexto
 const CommentContext = createContext();
@@ -10,6 +10,7 @@ export const CommentProvider = ({children}) =>{
 
 
     const getAllComments = useCallback(async (storyId) => {
+        setIsLoading(true);
         try {
             const comments = await getAllCommentsByStory(storyId);
             console.log("Comentarios obtenidos:", comments); // Depuración
@@ -22,31 +23,39 @@ export const CommentProvider = ({children}) =>{
     }, []);
 
     const addComment = useCallback(async (storyId, commentData) => {
+        const tempId = Date.now(); // ID temporal único
+    
+        // Crear y agregar comentario temporal
+        const tempComment = {
+            id_comment: tempId,
+            content_comment: commentData.content_comment,
+            pending: true, // Marcar como "en espera"
+            created_at: new Date().toISOString(), // Fecha local para mostrarlo de inmediato
+        };
+    
+        setComments((prev) => [...prev, tempComment]);
+    
         try {
-            //crear comentario temporal
-            const tempComment = {
-                id_comment: Date.now(),
-                content_comment: commentData.content_comment,
-            };
-
-            setComments((prevComments) => [...prevComments, tempComment]);
+            // Enviar el comentario al backend
             const newComment = await createComment(storyId, commentData);
-
-            //reemplazar el comentario temporal por el comentario real
-            setComments((prevComments) =>
-                prevComments.map((comment) =>
-                    comment.id_comment === tempComment.id_comment ? newComment : comment
+    
+            // Reemplazar el comentario temporal con el real
+            setComments((prev) =>
+                prev.map((comment) =>
+                    comment.id_comment === tempId
+                        ? { ...newComment, pending: false } // Reemplazo
+                        : comment
                 )
             );
         } catch (error) {
             console.error("Error al agregar comentario:", error);
-      
-            // Revertir el cambio en el estado local si la API falla
-            setComments((prevComments) =>
-              prevComments.filter((comment) => comment.id_comment !== tempComment.id_comment)
-            );
-          }
+    
+            // Eliminar el comentario temporal si falla la API
+            setComments((prev) => prev.filter((comment) => comment.id_comment !== tempId));
+        }
     }, []);
+    
+    
 
     const editComment = useCallback(async (id, updatedData) => {
         try {

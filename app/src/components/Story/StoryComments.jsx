@@ -1,6 +1,7 @@
 import React from "react";
 import commentImg from '../../assets/img/comentario.jpg';
-import { Send, Ellipsis, Heart } from "lucide-react";
+import { Send, Trash2, Heart } from "lucide-react";
+import {useUser} from '../../context/UserContext';
 
 const StoryComments = ({
   storyComments,
@@ -8,9 +9,9 @@ const StoryComments = ({
   setNewComment,
   handleAddComment,
   handleRemoveComment,
-  currentUserId,
-  isAdmin,
 }) => {
+
+  const { user } = useUser();
   console.log("Comentarios en StoryComments:", storyComments);
 
   
@@ -25,9 +26,11 @@ const StoryComments = ({
       {/* Formulario para añadir comentarios */}
       <form
         onSubmit={(e) => {
-          e.preventDefault(); // Evitar recarga de la página
-          handleAddComment(e); // Llamar a la función para añadir comentario
-        }}
+          e.preventDefault();
+          if (!newComment.trim()) return;
+          handleAddComment(newComment); 
+          setNewComment(""); 
+        }}        
       >
         <input
           type="text"
@@ -40,45 +43,44 @@ const StoryComments = ({
         </button>
       </form>
 
-      {/* Lista de comentarios */}
-      <div className="box-comment">
-        <div>
-          <div>
-            <img src={commentImg} alt="" />
-          </div>
-          <div>
-            <ul>
-              {storyComments.length > 0 ? (
-                storyComments.map((comment) => {
-                  const isOwner = comment.id_user === currentUserId; // Verificar si el usuario es el dueño
-                  const canEditOrDelete = isOwner || isAdmin; // Permitir editar/eliminar si es dueño o admin
+      <div className="comments-content">
+        {storyComments.length > 0 ? (
+          storyComments.map((comment) => (
+            <div key={comment.id_comment} className="box-comment">
+              <div>
+                <div>
+                  <img src={commentImg} alt="" />
+                </div>
+                <div>
+                  <div>
+                    <h4>{comment.user?.name}</h4>
+                    <p>{comment.created_at}</p>
+                  </div>
+                  <p>
+                  {comment.pending
+                      ? "Enviando..."
+                      : comment.content_comment?.trim() || "Comentario no disponible"}
+                  </p>
+                  <p>Responder</p>
+                </div>
+              </div>
+              <div>
+              {comment.user?.id_user === user.id_user && (
+                  <button onClick={() => handleRemoveComment(comment.id_comment)}>
+                    <Trash2 />
+                  </button>
+                )}
+                <Heart />
+                <p>0</p>
+              </div>
+            </div>
+          ))
+        ) : (
+          <p>No hay comentarios aún</p>
+        )}
 
-                  return (
-                    <li key={comment.id_comment}>
-                      {comment.content_comment || "Comentario sin contenido"}
 
-                      {/* Mostrar botones de editar y eliminar si tiene permisos */}
-                      {canEditOrDelete && (
-                        <div>
-                          <button onClick={() => handleRemoveComment(comment.id_comment)}>
-                            Eliminar
-                          </button>
-                        </div>
-                      )}
-                    </li>
-                  );
-                })
-              ) : (
-                <p>No hay comentarios aún</p>
-              )}
-            </ul>
-          </div>
-        </div>
-        <div>
-          <Ellipsis />
-          <Heart />
-          <p>0</p>
-        </div>
+     
       </div>
     </div>
   );

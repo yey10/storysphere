@@ -22,9 +22,9 @@ class UpdateStoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|string|max:255',
-            'content' => 'required|string',
-            'state' => 'nullable|boolean',
+            'title' => 'nullable|string|max:255',
+            'content' => 'nullable|string',
+            'state' => 'nullable|string',
             'categories' => 'nullable|array',
             'categories' => 'exists:categories,id_category',
         ];

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Contracts\Auth\CanResetPassword;
 use App\Models\Role;
 use App\Models\Story;
 use App\Models\Comment;
@@ -16,7 +17,7 @@ use App\Models\Subscription;
 use App\Models\Invoice;
 
 
-class User extends Authenticatable
+class User extends Authenticatable implements CanResetPassword
 {
     use HasFactory, HasApiTokens, Notifiable; 
 
@@ -25,7 +26,7 @@ class User extends Authenticatable
     public $timestamps = false; // Deshabilitar manejo de created_at y updated_at
 
     protected $fillable = [
-        'name', 'email', 'password', 'biography', 'profile_photo',
+        'name', 'email', 'password', 'biography', 'profile_photo', 'birthdate', 'account_status',
     ];
 
     protected $hidden = [

@@ -1,7 +1,10 @@
 import axios from  'axios';
 
 axios.defaults.withCredentials = true;
-axios.defaults.baseURL = 'http://localhost:8000/api';
+const API_URL = window.location.hostname === 'localhost'
+    ? 'http://localhost:8000/api'
+    : 'https://inspiring-laughter-production.up.railway.app/api';
+axios.defaults.baseURL = API_URL;
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 axios.defaults.headers.common['Accept'] = 'application/json';
 

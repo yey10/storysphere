@@ -3,7 +3,7 @@ import ReactImg1 from '../assets/img/logo.jpeg';
 import ReactImg2 from '../assets/img/profile.jpg';
 import ReactImg3 from '../assets/img/StorySphere.png';
 import ReactImg4 from '../assets/img/persona.png';
-import { House, BookUp2, MessageCircleMore, Pencil, NotebookPen, BookOpenText, BookUser, Heart, ChartBarStacked, Users, CircleUser, CircleHelp, Settings, LogIn, Search, Bell, Crown } from 'lucide-react';
+import { Menu, House, BookUp2, MessageCircleMore, Pencil, NotebookPen, BookOpenText, BookUser, Heart, ChartBarStacked, Users, CircleUser, CircleHelp, Settings, LogIn, Search, Bell, Crown } from 'lucide-react';
 import '../assets/css/navbarUsuario.css';
 import {useAuth} from '../context/AuthContext.jsx';
 import {useNavigate} from 'react-router-dom';
@@ -30,6 +30,10 @@ const NavbarUsuario = () => {
   return (
     <div>
       <div className="headerUsuario">
+          {/* Menu responsive */}
+          <input type="checkbox" id='check' />
+          <label htmlFor="check" className='checkbtn'><Menu /></label>
+
           {/* navbar */}
           <div className="navbar">
             <div><img src={ReactImg3} alt="StorySphere" /></div>
@@ -60,16 +64,15 @@ const NavbarUsuario = () => {
                 <Pencil className='icon' /><span>Crear</span>
               </button>
               </li>
-              <li><Link to="/user/profile"><NotebookPen className='icon' /><span>Mis historias</span></Link></li>
+              <li><Link to="/user/userStories"><NotebookPen className='icon' /><span>Mis historias</span></Link></li>
               <h4><span>General</span><div className="separator"></div></h4>
               <li><Link to="/user/stories"><BookOpenText className='icon' /><span>Historias</span></Link></li>
-              <li><Link to="/user/authors"><BookUser className='icon' /><span>Autores</span></Link></li>
+              <li><Link to="/authors"><BookUser className='icon' /><span>Autores</span></Link></li>
               <li><Link to="/user/favorite"><Heart className='icon' /><span>Favoritos</span></Link></li>
               <li><Link to="/user/categories"><ChartBarStacked className='icon' /><span>Categorías</span></Link></li>
               <h4><span>Account</span><div className="separator"></div></h4>
               <li><Link to="/user/profile"><CircleUser className='icon' /><span>Perfil</span></Link></li>
-              <li><Link to="/user/help"><CircleHelp className='icon' /><span>Ayuda</span></Link></li>
-              <li><Link to="/user/settings"><Settings className='icon' /><span>Opciones</span></Link></li>
+              <li><Link to="/help"><CircleHelp className='icon' /><span>Ayuda</span></Link></li>
               <li>
                
                 <button onClick={handleLogoutClick} >

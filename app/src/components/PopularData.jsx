@@ -5,12 +5,14 @@ const PopularData = ({ ranks }) => {
     <div className="popular-data">
         {ranks.map((rank) => (
             <div key={rank.id} className='popular-storie'>
+                <div><p>RANK #{rank.rank}</p></div>
                 <div><img src={rank.image} alt={rank.title} /></div>
                 <div>
                     <div><p>RANK #{rank.rank}</p></div>
-                    <span className='title'>{rank.title}</span>
+                    <h4 className='title'>{rank.title}</h4>
                     <p>By {rank.author}</p>
                     <p>{rank.sinopsis}</p>
+                    <button className='buttonLight'>Ver info</button>
                 </div>
             </div>
         ))}

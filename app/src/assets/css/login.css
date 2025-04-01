@@ -75,6 +75,46 @@
     position: absolute;
     border-radius: 20px;
   }
+  .container-login .form-register{
+    padding: 40px 20px;
+  }
+  .container-login form > div:nth-child(1){
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 20px 15px;
+    padding: 0px 5px;
+    border-radius: 50px;
+    transition: all 1s ease;
+    width: 40px;
+    height: 30px;
+    overflow: hidden;
+  }
+  .container-login form > div:nth-child(1) a{
+    color: white;
+    text-decoration: none;
+    display: flex;
+  }
+  .container-login form > div:nth-child(1) a p{
+    padding: 5px;
+    display: none;
+    
+  }
+  .container-login form > div:nth-child(1) a svg{
+    width: 30px;
+    height: 30px;
+    transition: all 1s ease;
+  }
+  .container-login form > div:nth-child(1):hover{
+    background-color: #ffffff2d;
+    width: 140px;
+  }
+  .container-login form > div:nth-child(1):hover a p{
+    display: block;
+  }
+  .container-login form > div:nth-child(1):hover a svg{
+    transform: rotate(180deg);
+  }
   .container-login form h2 {
     font-size: 30px;
     text-align: center;
@@ -88,7 +128,6 @@
     border: none;
     color: white;
     background: #151515;
-    color: white;
     font-size: 16px;
     outline: none;
     border-radius: 5px;
@@ -100,6 +139,11 @@
   .container-login form input:hover {
     border: 1px solid #d4af37;
   }
+  .container-login .form-register label{
+    font-size: 16px;
+    padding-left: 10px;
+    color: #909090;
+  }
   .container-login form button {
     padding: 10px 40px;
     margin-top: 40px;
@@ -109,6 +153,12 @@
     color: white;
     cursor: pointer;
     outline: none;
+  }
+  .container-login .forgot-password{
+    margin-top: 20px;
+  }
+  .container-login .forgot-password a{
+    color: #d4af37;
   }
   
   /* Estilos adicionales */

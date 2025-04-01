@@ -1,0 +1,403 @@
+.profile-container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 120px auto;
+    padding: 1rem;
+    position: relative;
+    background-color: #121212;
+    color: #E0E0E0;
+    border-radius: 10px;
+  }
+
+  .decorative-blob {
+    position: absolute;
+    width: 33%;
+    height: 33%;
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: -1;
+  }
+
+  .decorative-blob.top {
+    top: 0;
+    right: 0;
+    background: linear-gradient(to bottom right, rgba(255, 215, 0, 0.15), rgba(218, 165, 32, 0.15));
+  }
+
+  .decorative-blob.bottom {
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(to top right, rgba(255, 215, 0, 0.15), rgba(184, 134, 11, 0.15));
+  }
+
+  .profile-wrapper {
+    position: relative;
+    min-height: 100px;
+  }
+
+  .avatar-container {
+    position: absolute;
+    bottom: -80px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .avatar-wrapper {
+    position: relative;
+  }
+
+  .avatar-gradient {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    background: linear-gradient(to right, #FFD700, #DAA520);
+    padding: 4px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+  }
+
+  .avatar-image-container {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: #1E1E1E;
+  }
+
+  .avatar-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .camera-button {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #1E1E1E;
+    border: 2px solid #FFD700;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #FFD700;
+  }
+
+  .profile-card {
+    margin-top: 96px;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    background-color: #1E1E1E;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+    border: 1px solid #333333;
+  }
+
+  .profile-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .profile-name {
+    font-size: 1.875rem;
+    font-weight: 700;
+    margin-top: 0.5rem;
+    margin-bottom: 0.25rem;
+    color: #FFD700;
+  }
+
+  .profile-location {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #B0B0B0;
+    margin-top: 0.25rem;
+  }
+
+  .profile-title {
+    font-size: 1.125rem;
+    color: #B0B0B0;
+    margin-top: 0.5rem;
+  }
+
+  .action-buttons {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+  }
+
+  .button.outline {
+    background-color: transparent;
+    border: 1px solid #FFD700;
+    color: #FFD700;
+  }
+
+  .button.primary {
+    background-color: #FFD700;
+    color: #121212;
+  }
+
+  .social-links {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+
+  .social-button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #2D2D2D;
+    border: 1px solid #444444;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: #FFD700;
+  }
+
+  .social-button:hover {
+    background-color: #333333;
+    border-color: #FFD700;
+  }
+
+  .icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .icon-small {
+    width: 16px;
+    height: 16px;
+  }
+
+  .tabs-container {
+    width: 100%;
+  }
+
+  .tabs-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .tab-button {
+    padding: 0.75rem;
+    text-align: center;
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid #333333;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: #B0B0B0;
+  }
+
+  .tab-button.active {
+    border-color: #FFD700;
+    color: #FFD700;
+  }
+
+  .tab-content {
+    margin-top: 1rem;
+  }
+
+  .section {
+    margin-bottom: 1.5rem;
+  }
+
+  .section-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: #FFD700;
+  }
+
+  .section-text {
+    color: #B0B0B0;
+  }
+
+  .experience-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .experience-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .job-title {
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+    color: #E0E0E0;
+  }
+
+  .company-name {
+    font-size: 0.875rem;
+    color: #B0B0B0;
+  }
+
+  .period-badge {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 9999px;
+    background-color: #2D2D2D;
+    border: 1px solid #444444;
+    color: #FFD700;
+  }
+
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .portfolio-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .portfolio-item {
+    position: relative;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid #333333;
+  }
+
+  .portfolio-item img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .portfolio-item:hover img {
+    transform: scale(1.05);
+  }
+
+  .portfolio-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .portfolio-item:hover .portfolio-overlay {
+    opacity: 1;
+  }
+
+  .portfolio-info {
+    padding: 1rem;
+    color: white;
+  }
+
+  .portfolio-title {
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+    color: #FFD700;
+  }
+
+  .portfolio-category {
+    font-size: 0.875rem;
+    opacity: 0.8;
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .skills-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .skills-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .skill-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .skill-header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .skill-percentage {
+    color: #FFD700;
+    font-size: 0.875rem;
+  }
+
+  .skill-bar {
+    height: 8px;
+    width: 100%;
+    background-color: #2D2D2D;
+    border-radius: 9999px;
+    overflow: hidden;
+  }
+
+  .skill-progress {
+    height: 100%;
+    border-radius: 9999px;
+  }
+
+  .skill-progress.design {
+    background: linear-gradient(to right, #FFD700, #DAA520);
+  }
+
+  .skill-progress.dev {
+    background: linear-gradient(to right, #DAA520, #B8860B);
+  }
+
+  .languages-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .language-badge {
+    font-size: 0.875rem;
+    padding: 0.375rem 0.75rem;
+    border-radius: 9999px;
+    background-color: #2D2D2D;
+    color: #E0E0E0;
+    border: 1px solid #444444;
+  }

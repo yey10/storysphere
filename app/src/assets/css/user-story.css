@@ -1,0 +1,43 @@
+.UserStories-page{width: 100%; min-height: 100vh; margin-top: 120px; display: flex; justify-content: center; align-items: center; flex-direction: column;}
+.UserStories-page h1{font-size: 60px; color: #D4AF37; text-align: center; margin-bottom: 20px;}
+
+.UserStories-page .Stories-list{width: 80%; height: auto; padding: 20px 0; margin: 0 auto; margin-bottom: 50px; display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); grid-gap: 20px; justify-items: center; align-items: center;}
+.UserStories-page .Stories-list .story{position: relative; width: 100%; height: 300px; background-color: #000000ad; border: 1px solid #D4AF379d; border-radius: 20px; padding: 10px; display: flex;}
+.UserStories-page .Stories-list .story div:nth-child(1){width: 40%; height: 100%;}
+.UserStories-page .Stories-list .story div:nth-child(1) img{width: 100%; height: 100%; border-radius: 10px;}
+.UserStories-page .Stories-list .story .story-info{width: 60%; height: 100%; padding: 0 20px;}
+.UserStories-page .Stories-list .story .story-info h3{font-size: 25px; color: #D4AF37;}
+.UserStories-page .Stories-list .story .story-info p:nth-child(2){font-size: 15px; margin-bottom: 20px;}
+.UserStories-page .Stories-list .story .story-info div:nth-child(3){height: 130px; overflow-y: auto; margin-bottom: 10px;}
+.UserStories-page .Stories-list .story .story-info div:nth-child(3):hover{padding-right: 10px;}
+.UserStories-page .Stories-list .story .story-info div:nth-child(3)::-webkit-scrollbar{display: none;}
+.UserStories-page .Stories-list .story .story-info div:nth-child(3):hover::-webkit-scrollbar{width: 5px; background-color: #00000000; display: block;}
+.UserStories-page .Stories-list .story .story-info div:nth-child(3):hover::-webkit-scrollbar-thumb{background-color: #ffffff3d; border: 1px solid #ffffff7d; border-radius: 10px;}
+.UserStories-page .Stories-list .story .story-info div:nth-child(3) p{font-size: 17px; margin-bottom: 20px;}
+.UserStories-page .Stories-list .story .story-info .botones{width: 100%; display: flex; justify-content: space-around;}
+.UserStories-page .Stories-list .story .story-info .botones .btn-editar{padding: 5px 30px; border-radius: 5px; border: none; background-color: #D4AF37; color: #fff;}
+.UserStories-page .Stories-list .story .story-info .botones .btn-eliminar{padding: 5px 30px; border-radius: 5px; border: none; background-color: #d43737; color: #fff;}
+
+@media (max-width: 900px){
+    .UserStories-page .Stories-list{width: 90%; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));}
+    .UserStories-page .Stories-list .story .story-info h3{font-size: 20px;}
+    .UserStories-page .Stories-list .story .story-info .botones .btn-editar{padding: 5px 20px; font-size: 14px;}
+    .UserStories-page .Stories-list .story .story-info .botones .btn-eliminar{padding: 5px 20px; font-size: 14px;}
+}
+
+@media (max-width: 800px){
+    .UserStories-page .Stories-list{width: 95%;}
+}
+
+@media (max-width: 500px){
+    .UserStories-page .Stories-list{grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));}
+    .UserStories-page .Stories-list .story{height: 200px;}
+    .UserStories-page .Stories-list .story div:nth-child(1){width: 30%;}
+    .UserStories-page .Stories-list .story .story-info{width: 70%; padding: 0; padding-left: 10px;}
+    .UserStories-page .Stories-list .story .story-info h3{font-size: 17px;}
+    .UserStories-page .Stories-list .story .story-info p:nth-child(2){font-size: 12px; margin-bottom: 5px;}
+    .UserStories-page .Stories-list .story .story-info div:nth-child(3){height: 80px;}
+    .UserStories-page .Stories-list .story .story-info div:nth-child(3) p{font-size: 14px;}
+    .UserStories-page .Stories-list .story .story-info .botones .btn-editar{padding: 6px 40px; font-size: 10px;}
+    .UserStories-page .Stories-list .story .story-info .botones .btn-eliminar{padding: 6px 40px; font-size: 10px;}
+}

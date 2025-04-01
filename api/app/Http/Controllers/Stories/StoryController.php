@@ -8,8 +8,10 @@ use App\Http\Requests\StoreStoryRequest;
 use App\Http\Requests\UpdateStoryRequest;
 use App\Services\Stories\StoryService;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+
 
 
 
@@ -66,6 +68,25 @@ class StoryController extends Controller
         try {
             $story = $this->storyService->updateStory($story, $request->validated());
             return response()->json(['message' => 'Historia actualizada con éxito', 'story' => $story], 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Error inesperado: ' . $e->getMessage()], 500);
+        }
+    }
+
+    public function updateStatus(Request $request, $id)
+    {
+        try {
+            $authUser = Auth::user();
+            $data = $request->all();
+
+            if (!in_array($data['state'], ['active', 'inactive'])) {
+                return response()->json(['error' => 'Estado de cuenta no válido'], 422);
+            }
+            // Actualizar el estado de la cuenta del usuario
+            $story = $this->storyService->updateStoryStatus($authUser, $id, $data);
+            return response()->json(['message' => 'Estado de cuenta actualizado con éxito', 'story' => $story], 200);
+        } catch (ValidationException $e) {
+            return response()->json(['error' => $e->errors()], 422);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Error inesperado: ' . $e->getMessage()], 500);
         }
