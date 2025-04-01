@@ -2,15 +2,16 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Card, Row, Col } from "antd";
 import AdminLayout from "./AdminLayout";
+import '../../assets/css/admin.css'
 
 const AdminHome = () => {
   const navigate = useNavigate();
 
   return (
     <AdminLayout>
-      <Row gutter={[16, 16]}>
-        <Col span={8}>
-          <Card title="Usuarios Registrados" style={{ background: "#1677ff" }}>
+      <Row gutter={[16, 16]} className="cards-grid">
+        <Col className="card-content">
+          <Card title="Usuarios Registrados" className="Card-admin">
             <button
               onClick={() => navigate("/admin/users")}
               style={{
@@ -20,14 +21,15 @@ const AdminHome = () => {
                 background: "none",
                 cursor: "pointer",
                 fontSize: "16px",
+                color: "#fff",
               }}
             >
               📊 120 usuarios
             </button>
           </Card>
         </Col>
-        <Col span={8}>
-          <Card title="Historias Publicadas" style={{ background: "#1677ff" }}>
+        <Col className="card-content">
+          <Card title="Historias Publicadas" className="Card-admin">
             <button
               onClick={() => navigate("/admin/stories")}
               style={{
@@ -37,14 +39,15 @@ const AdminHome = () => {
                 background: "none",
                 cursor: "pointer",
                 fontSize: "16px",
+                color: "#fff",
               }}
             >
               📖 450 historias
             </button>
           </Card>
         </Col>
-        <Col span={8}>
-          <Card title="Comentarios Totales" style={{ background: "#1677ff" }}>
+        <Col className="card-content">
+          <Card title="Comentarios Totales" className="Card-admin">
             <button
               onClick={() => navigate("/admin/comments")}
               style={{

@@ -42,34 +42,36 @@ const AdminLayout = ({ children }) => {
   ];
 
   return (
-    <Layout style={{ minHeight: "100vh" }}>
-      {/* Sidebar */}
-      <Sider collapsible>
-        <div className="logo" style={{ color: "white", textAlign: "center", padding: "20px", fontSize: "18px" }}>
-          Admin Panel
-        </div>
-        <Menu theme="dark" mode="inline" defaultSelectedKeys={["dashboard"]} items={menuItems} />
-      </Sider>
-
-      {/* Layout Principal */}
-      <Layout style={{ background: "#001120" }}>
-        {/* Navbar */}
-        <Header style={{ background: "#002140", color: "white", padding: "0 20px", display: "flex", justifyContent: "space-between" }}>
-          <div>
-            <h2>Panel de Administración</h2>
+    <div className="Admin-page">
+      <Layout style={{ minHeight: "100vh" }}>
+        {/* Sidebar */}
+        <Sider collapsible className="sidebar-admin">
+          <div className="logo" style={{ color: "white", textAlign: "center", padding: "20px", fontSize: "18px" }}>
+            Admin Panel
           </div>
-          <div style={{ display: "flex", alignItems: "center", gap: "15px" }}>
-            <BellOutlined style={{ fontSize: "20px" }} />
-            <Dropdown menu={{ items: userMenu }} placement="bottomRight">
-              <Button icon={<Avatar icon={<UserOutlined />} />} />
-            </Dropdown>
-          </div>
-        </Header>
-
-        {/* Contenido dinámico */}
-        <Content style={{ margin: "20px" }}>{children}</Content>
+          <Menu theme="dark" mode="inline" defaultSelectedKeys={["dashboard"]} items={menuItems} className="menu-sidebar-admin" />
+        </Sider>
+      
+        {/* Layout Principal */}
+        <Layout style={{ background: "#101010" }}>
+          {/* Navbar */}
+          <Header style={{ background: "#050505", color: "white", padding: "0 20px", borderBottom: "1px solid #D4AF37", display: "flex", justifyContent: "space-between" }}>
+            <div>
+              <h2>Panel de Administración</h2>
+            </div>
+            <div style={{ display: "flex", alignItems: "center", gap: "15px" }}>
+              <BellOutlined style={{ fontSize: "20px" }} />
+              <Dropdown menu={{ items: userMenu }} placement="bottomRight">
+                <Button icon={<Avatar icon={<UserOutlined />} />} />
+              </Dropdown>
+            </div>
+          </Header>
+      
+          {/* Contenido dinámico */}
+          <Content style={{ margin: "20px" }}>{children}</Content>
+        </Layout>
       </Layout>
-    </Layout>
+    </div>
   );
 };
 
