@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useUser } from "../../context/UserContext";
 import { Table, Button, Switch, Select, message } from "antd";
 import AdminLayout from "./AdminLayout";
+import '../../assets/css/admin.css'
 
 const { Option } = Select;
 
@@ -83,9 +84,9 @@ const UsersList = () => {
 
   return (
     <AdminLayout>
-      <h2>Usuarios</h2>
+      <h1 className="title">Usuarios</h1>
       <Table
-        style={{ background: "#ffffff" }}
+        className="table-admin"
         dataSource={localUsers}
         rowKey="id_user"
         columns={[
@@ -110,6 +111,7 @@ const UsersList = () => {
           
               return (
                 <Select
+                  className="roles-select"
                   value={currentRoleId}
                   onChange={(newRole) => handleRoleChange(record.id_user, newRole)}
                   style={{ width: 150 }}

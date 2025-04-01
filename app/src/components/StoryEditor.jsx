@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback } from "react";
+import React, { useState, useRef, useMemo, useCallback } from "react";
 import { useLocation } from "react-router-dom";
 import { createEditor, Transforms, Text, Editor, Node } from "slate";
 import { Slate, Editable, withReact } from "slate-react";
@@ -6,6 +6,7 @@ import { withHistory } from "slate-history";
 import { toast, ToastContainer } from "react-toastify";
 import "../assets/css/form-stories.css";
 import { useStory } from "../context/StoryContext";
+import { ImageDown } from 'lucide-react';
 
 const CLOUD_NAME = "dskr3jxir";
 const UPLOAD_PRESET = "storysphere";
@@ -102,7 +103,8 @@ const StoryEditor = ({ onSave}) => {
   }, []);
 
   const handlePhotoChange = (e) => {
-    setPhoto(e.target.files[0]);
+    const file = e.target.files[0];
+    if (file) processFile(file);
   };
 
   const handleCategoryChange = (e) => {
@@ -156,12 +158,84 @@ const StoryEditor = ({ onSave}) => {
     }
   };
 
+  //file
+  const inputRef = useRef(null);
+  const dropAreaRef = useRef(null);
+
+  const handleButtonClick = () => {
+    inputRef.current.click();
+  };
+
+  const handleFileChange = (event) => {
+    const selectedFile = event.target.files[0];
+    if (selectedFile) {
+      processFile(selectedFile);
+    }
+  };
+
+  const handleDragOver = (event) => {
+    event.preventDefault();
+    if (dropAreaRef.current) {
+      dropAreaRef.current.classList.add("active");
+    }
+  };
+
+  const handleDragLeave = () => {
+    if (dropAreaRef.current) {
+      dropAreaRef.current.classList.remove("active");
+    }
+  };
+
+  const handleDrop = (event) => {
+    event.preventDefault();
+    const droppedFile = event.dataTransfer.files[0];
+    if (droppedFile) {
+      processFile(droppedFile);
+    }
+  };
+
+  const processFile = (file) => {
+    const validExtensions = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
+    if (validExtensions.includes(file.type)) {
+      setPhoto(file); // Guardar el archivo en su estado original
+    } else {
+      alert("This is not an Image File!");
+      if (dropAreaRef.current) {
+        dropAreaRef.current.classList.remove("active");
+      }
+    }
+  };
+
+
   return (
     <div>
       <div className="create-storie">
+        <h1 className="title">Crea Tu Historia</h1>
         <div className="form-container">
-          <div className="form-image">
-            <input type="file" accept="image/*" onChange={handlePhotoChange} />
+          <div
+            className="drag-area"
+            ref={dropAreaRef}
+            onDragOver={handleDragOver}
+            onDragLeave={handleDragLeave}
+            onDrop={handleDrop}
+          >
+            {photo ? (
+              <img src={photo} alt="Uploaded" />
+            ) : (
+              <>
+                <ImageDown />
+                <h3>Arrastra y suelta una imagen o selecciona una</h3>
+                <p>Agrega una portada a tu historia</p>
+                <button onClick={handleButtonClick}>Importar</button>
+                <input
+                  type="file"
+                  accept="image/*"
+                  hidden
+                  ref={inputRef}
+                  onChange={handlePhotoChange}
+                />
+              </>
+            )}
           </div>
           <div className="form-info">
             <input

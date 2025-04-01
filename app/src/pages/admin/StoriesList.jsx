@@ -59,9 +59,9 @@ const Storieslist = () => {
   
   return (
     <AdminLayout>
-      <h2>Historias</h2>
+      <h1 className='title'>Historias</h1>
       <Table
-        style={{ background: "#ffffff" }}
+        className='table-admin'
         dataSource={localStories}
         rowKey="id_story"
         columns={[

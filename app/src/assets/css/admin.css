@@ -1,0 +1,22 @@
+.Admin-page{width: 100%; min-height: 100vh;}
+
+.Admin-page .sidebar-admin{background: #050505; border-right: 1px solid #D4AF37;}
+.Admin-page .sidebar-admin .menu-sidebar-admin{background-color: #050505;}
+.Admin-page .sidebar-admin .menu-sidebar-admin .ant-menu-item-selected{background-color: #D4AF37;}
+.Admin-page .sidebar-admin .ant-layout-sider-trigger{background-color: #151515; border-right: 1px solid #D4AF37; border-top: 1px solid #D4AF37;}
+
+.Admin-page .cards-grid{width: 100%; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;}
+.Admin-page .cards-grid .card-content .Card-admin{background-color: #050505; border: 1px solid #D4AF37;}
+.Admin-page .cards-grid .card-content .Card-admin > .ant-card-head{border-bottom: 1px solid #D4AF37;}
+.Admin-page .cards-grid .card-content .Card-admin > .ant-card-head .ant-card-head-title{color: #fff;}
+
+.Admin-page .title{font-size: 50px; margin-bottom: 30px; color: #fff; text-align: center; padding: 10px 50px; background-color: #050505; border-radius: 10px; border: 1px solid #D4AF37;}
+.Admin-page .table-admin{background-color: #050505; border-radius: 10px; border: 1px solid #D4AF37;}
+.Admin-page .table-admin .ant-table-thead > tr > th{background: #050505; color: #fff;}
+.Admin-page .table-admin .ant-table-tbody > tr {background-color: #101010; color: #fff;}
+:where(.css-dev-only-do-not-override-tjsggz).ant-table-wrapper .ant-table-tbody .ant-table-row >.ant-table-cell-row-hover{background: #202020;}
+:where(.css-dev-only-do-not-override-tjsggz).ant-select-outlined:not(.ant-select-customize-input) .ant-select-selector{border: 1px solid #D4AF37; background-color: #101010;}
+:where(.css-dev-only-do-not-override-tjsggz).ant-select .ant-select-arrow {color: #fff;}
+:where(.css-dev-only-do-not-override-tjsggz).ant-btn-color-dangerous.ant-btn-variant-outlined, :where(.css-dev-only-do-not-override-tjsggz).ant-btn-color-dangerous.ant-btn-variant-dashed{background: #101010;}
+:where(.css-dev-only-do-not-override-tjsggz).ant-btn-color-dangerous.ant-btn-variant-outlined:not(:disabled):not(.ant-btn-disabled):hover, :where(.css-dev-only-do-not-override-tjsggz).ant-btn-color-dangerous.ant-btn-variant-dashed:not(:disabled):not(.ant-btn-disabled):hover{background: #ff4d4f; color: #fff; border: 1px solid #fff;}
+
