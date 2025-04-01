@@ -4,26 +4,34 @@ namespace App\Services\Payment;
 
 use App\Models\Invoice;
 use App\Models\Subscription;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
 
 class InvoiceService
 {
-    public function generateInvoice(Subscription $subscription)
+    public function createInvoice($userId, $subscriptionId, $totalAmount, $paymentMethod)
     {
-        Invoice::create([
-            'id_user' => $subscription->id_user,
-            'id_subscription' => $subscription->id_subscription,
-            'issue_date' => now(),
-            'total_amount' => $subscription->plan->transaction_amount, // Monto del plan
-            'payment_method' => 'Mercado Pago',
-            'payment_status' => 'approved',
-            'invoice_detail' => json_encode([
-                'plan' => $subscription->subscription_type,
-                'description' => 'Pago de suscripción',
-            ]),
-            'mercado_pago_payment_id' => $subscription->mercado_pago_subscription_id,
-            'mercado_pago_status' => $subscription->mercado_pago_status,
-            'mercado_pago_response' => $subscription->mercado_pago_response,
-        ]);
+        return DB::transaction(function () use ($userId, $subscriptionId, $totalAmount, $paymentMethod){
+            return Invoice::create([
+                'id_user' => $userId,
+                'id_subscription' => $subscriptionId,
+                'issue_date' => Carbon::now(),
+                'total_amount' => $totalAmount,
+                'payment_method' => $paymentMethod,
+                'payment_status' => 'pending', 
+                'invoice_detail' => json_encode(['message' => 'Pago por suscripción']),
+            ]);
+        });
+    }
+
+    public function generateInvoicePDF($invoiceId)
+    {
+        $invoice = Invoice::with(['user', 'subscription'])->findOrFail($invoiceId);
+        
+        $pdf = Pdf::loadView('pdf.invoice', compact('invoice'));
+        
+        return $pdf->stream("factura_{$invoice->id_invoice}.pdf");
     }
 
     /**
@@ -56,14 +64,4 @@ class InvoiceService
         return $invoice;
     }
 
-    /**
-     * Eliminar una factura
-     */
-
-    public function deleteInvoice($id)
-    {
-        $invoice = Invoice::findOrFail($id);
-        $invoice->delete();
-        return true;
-    }
 }

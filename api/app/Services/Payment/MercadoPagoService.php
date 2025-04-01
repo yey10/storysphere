@@ -20,7 +20,7 @@ class MercadoPagoService
 
     public function __construct(InvoiceService $invoiceService)
     {
-        MercadoPagoConfig::setAccessToken(config('services.mercadopago.token'));
+        MercadoPagoConfig::setAccessToken(config('services.mercadopago.access_token'));
 
         //inicializar los clientes
         $this->paymentClient = new PaymentClient();
@@ -111,10 +111,6 @@ class MercadoPagoService
 
         return $appSubscription;
     }
-
-    /**
-     * Generar una factura a partir de una suscripción.
-     */
    
 
 

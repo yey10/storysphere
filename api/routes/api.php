@@ -11,7 +11,6 @@ use App\Http\Controllers\Interactions\FollowerController;
 use App\Http\Controllers\Interactions\LikeController;
 use App\Http\Controllers\Interactions\RatingController;
 use App\Http\Controllers\Payment\InvoiceController;
-use App\Http\Controllers\Payment\MercadoPagoController;
 use App\Http\Controllers\Payment\SubscriptionController;
 use App\Http\Controllers\User\PasswordResetController;
 use Illuminate\Http\Request;
@@ -112,27 +111,23 @@ Route::prefix('ratings')->middleware(['auth:sanctum', 'token.expiration'])->grou
     Route::delete('/{id_story}', [RatingController::class, 'destroy']);
 });
 
+
+
 // Rutas para suscripciones
 Route::prefix('subscriptions')->middleware(['auth:sanctum', 'token.expiration'])->group(function () {
     Route::post('/', [SubscriptionController::class, 'createSubscription']);
     Route::get('/', [SubscriptionController::class, 'getUserSubscriptions']);
-    Route::delete('/{subscriptionId}', [SubscriptionController::class, 'cancelSubscription']);
 });
 
 // Rutas para facturas
 Route::prefix('invoices')->middleware(['auth:sanctum', 'token.expiration'])->group(function () {
+    Route::post('/', [InvoiceController::class, 'store']);
     Route::get('/', [InvoiceController::class, 'index']);
     Route::get('/{id}', [InvoiceController::class, 'show']);
-    Route::post('/', [InvoiceController::class, 'store']);
-    Route::put('/{id}/status', [InvoiceController::class, 'updateStatus']);
-    Route::delete('/{id}', [InvoiceController::class, 'destroy']);
+    Route::get('/invoices/{id}/pdf', [InvoiceController::class, 'generateInvoicePDF']);
+    Route::patch('/invoices/{id}/status', [InvoiceController::class, 'updateInvoiceStatus']); 
 });
 
-// Rutas para MercadoPago
-Route::prefix('mercado-pago')->middleware(['auth:sanctum', 'token.expiration'])->group(function () {
-    Route::post('/create-payment', [MercadoPagoController::class, 'createPayment']);
-    Route::post('/create-subscription', [MercadoPagoController::class, 'createSubscriptionPayment']);
-});
 
 
 

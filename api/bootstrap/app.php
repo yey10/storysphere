@@ -10,7 +10,7 @@ use App\Providers\AuthServiceProvider;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withProviders([
-        AuthServiceProvider::class, // Agrega aquí tu provider
+        AuthServiceProvider::class, 
     ])
     ->withRouting(
         web: __DIR__.'/../routes/web.php',

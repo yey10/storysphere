@@ -3,22 +3,28 @@
 namespace App\Services\Payment;
 
 use App\Models\Subscription;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
+
 
 class SubscriptionService
 {
     /**
      * Crear una suscripción.
      */
-    public function createSubscription($userId, $subscriptionType, $mercadoPagoSubscriptionId, $status)
+    public function createSubscription($userId, $subscriptionType, $durationInMonths = 1)
     {
-        return Subscription::create([
-            'id_user' => $userId,
-            'subscription_type' => $subscriptionType,
-            'start_date' => now(),
-            'end_date' => now()->addMonth(),
-            'mercado_pago_subscription_id' => $mercadoPagoSubscriptionId,
-            'mercado_pago_status' => $status,
-        ]);
+        return DB::transaction(function () use ($userId, $subscriptionType, $durationInMonths) {
+            $startDate = Carbon::now();
+            $endDate = $startDate->copy()->addMonths($durationInMonths);
+
+            return Subscription::create([
+                'id_user' => $userId,
+                'subscription_type' => $subscriptionType,
+                'start_date' => $startDate,
+                'end_date' => $endDate,
+            ]);
+        });
     }
 
     /**
@@ -29,23 +35,5 @@ class SubscriptionService
     {
          return Subscription::where('id_user', $userId)->get();
     }
-
-     /**
-      * Cancelar una suscripción.
-      */
-    public function cancelSubscription(Subscription $subscription)
-    {
-        $subscription->update([
-            'end_date' => now(),
-            'mercado_pago_status' => 'cancelled',
-        ]);
-
-        return $subscription;
-    }
-
-
-
-
-
 
 }
