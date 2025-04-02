@@ -11,6 +11,7 @@
 .homeusuario .body-1 .slider .swiper .swiper-wrapper .img-3{background: linear-gradient(0.25turn, #000000, #101010); border-radius: 20px; border: 1px solid #D4AF37;}
 .homeusuario .body-1 .slider .swiper .swiper-wrapper .img-3 img{height: 70%; position: absolute; z-index: 9999; left: 100px;}
 .homeusuario .body-1 .slider .swiper .swiper-wrapper .img-4{background-color: #000000; border-radius: 20px; border: 1px solid #D4AF37;}
+.homeusuario .body-1 .slider .swiper .swiper-wrapper .img-4 > div:first-child > img{width: 100%; position: absolute; z-index: -1; background-position: center center; opacity: 0.4;}
 .homeusuario .body-1 .slider .swiper .swiper-wrapper .img-5{background-color: #000000; border-radius: 20px; border: 1px solid #D4AF37;}
 .homeusuario .body-1 .slider .swiper .swiper-wrapper .swiper-slide{background-size: cover; background-position: center center; overflow: hidden;}
 .homeusuario .body-1 .slider .swiper .swiper-wrapper .swiper-slide div:first-child{height: 100%; display: flex; justify-content: center; align-items: center; color: white; text-shadow: 1px 1px 5px rgba(0,0,0,0.5); position: relative;}
@@ -23,6 +24,14 @@
 .homeusuario .body-1 .slider .swiper .swiper-wrapper .swiper-slide div:first-child .img-info h4{font-size: 40px; color: #D4AF37; margin-bottom: 20px; text-align: center;}
 .homeusuario .body-1 .slider .swiper .swiper-wrapper .swiper-slide div:first-child .img-info p:nth-child(2){font-size: 25px; padding: 0 20px; margin-bottom: 20px; text-align: center;}
 .homeusuario .body-1 .slider .swiper .swiper-wrapper .swiper-slide div:first-child .img-info p:nth-child(3){font-size: 22px; padding: 0 20px; margin-bottom: 30px; text-align: center;}
+.homeusuario .body-1 .slider .swiper .swiper-wrapper .swiper-slide div:first-child .img4-info{width: 100%; height: 100%; display: flex; justify-content: space-between;}
+.homeusuario .body-1 .slider .swiper .swiper-wrapper .swiper-slide div:first-child .img4-info div:nth-child(1){width: 50%; height: 100%; display: flex; justify-content: center; align-items: center; flex-direction: column;}
+.homeusuario .body-1 .slider .swiper .swiper-wrapper .swiper-slide div:first-child .img4-info div:nth-child(1) h4{font-size: 35px; margin-bottom: 20px; text-align: center; text-shadow: 5px 5px 10px #000;}
+.homeusuario .body-1 .slider .swiper .swiper-wrapper .swiper-slide div:first-child .img4-info div:nth-child(1) p:nth-child(2){font-size: 22px; margin-bottom: 10px; text-align: center; text-shadow: 5px 5px 10px #000;}
+.homeusuario .body-1 .slider .swiper .swiper-wrapper .swiper-slide div:first-child .img4-info div:nth-child(1) p:nth-child(3){font-size: 18px; margin-bottom: 30px; text-align: center; text-shadow: 5px 5px 10px #000;}
+.homeusuario .body-1 .slider .swiper .swiper-wrapper .swiper-slide div:first-child .img4-info div:nth-child(1) button{padding: 5px 40px;}
+.homeusuario .body-1 .slider .swiper .swiper-wrapper .swiper-slide div:first-child .img4-info div:nth-child(2){width: 50%; height: 100%; padding: 70px 100px;}
+.homeusuario .body-1 .slider .swiper .swiper-wrapper .swiper-slide div:first-child .img4-info div:nth-child(2) img{width: 100%; height: 100%; border-radius: 10px; box-shadow: 5 10px 15px 5px #0000005d;}
 .homeusuario .body-1 .slider .swiper .swiper-wrapper .swiper-slide div:first-child .circles div:nth-child(1){width: 200px; height: 100px; background: #D4AF37; border-radius: 70px; position: absolute; top: -50px; left: 40px; transform: rotate(45deg); border-right: 5px solid #fff;}
 .homeusuario .body-1 .slider .swiper .swiper-wrapper .swiper-slide div:first-child .circles div:nth-child(2){width: 300px; height: 120px; background: #D4AF37; border-radius: 120px; position: absolute; top: 30px; left: -50px; transform: rotate(45deg); border-right: 5px solid #fff;}
 .homeusuario .body-1 .slider .swiper .swiper-wrapper .swiper-slide div:first-child .circles div:nth-child(3){width: 200px; height: 100px; background: #D4AF37; border-radius: 70px; position: absolute; top: 80px; left: -100px; transform: rotate(45deg); border-right: 5px solid #fff;}
