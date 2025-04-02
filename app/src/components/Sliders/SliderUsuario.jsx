@@ -12,6 +12,8 @@ import { Crown } from 'lucide-react'
 import Bienvenida1 from '../../assets/img/portada.jpeg'
 import Bienvenida2 from '../../assets/img/bienvenida2.png'
 import Premium from '../../assets/img/portadaPremium.png'
+import Fantasia1 from '../../assets/img/Stories/fantasia.webp'
+import Fantasia2 from '../../assets/img/Ficcion.jpeg'
 
 const SliderUsuario = () => {
   return (
@@ -79,12 +81,18 @@ const SliderUsuario = () => {
           </SwiperSlide>
           <SwiperSlide className="swiper-slide slide-4 slide-item img-4">
             <div>
-              <h4>History 4</h4>
-            </div>
-          </SwiperSlide>
-          <SwiperSlide className="swiper-slide slide-5 slide-item img-5">
-            <div>
-              <h4>History 5</h4>
+              <img src={Fantasia1} alt="" />
+              <div className='img4-info'>
+                <div>
+                  <h4>Categorías fascinantes</h4>
+                  <p>Lo mejor para tí en StorySphere</p>
+                  <p>Ingresa a categorías</p>
+                  <button className="buttonLight"><Link to="user/categories">Categorías</Link></button>
+                </div>
+                <div>
+                  <img src={Fantasia2} alt="" />
+                </div>
+              </div>
             </div>
           </SwiperSlide>
         </Swiper>
