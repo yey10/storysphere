@@ -2,9 +2,12 @@
 
 return [
 
+/*
+    'providers' => [
+    Barryvdh\DomPDF\ServiceProvider::class,
+    ],
 
-    
-
+*/
     /*
     |--------------------------------------------------------------------------
     | Application Name

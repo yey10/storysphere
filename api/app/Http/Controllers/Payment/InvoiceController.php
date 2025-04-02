@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Payment;
 
-use Illuminate\Http\Request;
-use App\Http\Requests\CreateInvoiceRequest;
-use App\Http\Requests\UpdateInvoiceStatusRequest;
 use App\Http\Controllers\Controller;
 use App\Services\Payment\InvoiceService;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Validation\ValidationException;
 use Exception;
 
 
@@ -22,86 +22,84 @@ class InvoiceController extends Controller
     }
     
 
-     /**
-     * Obtener todas las facturas del usuario autenticado.
-     */
-
-    public function index()
+    public function createInvoice(Request $request)
     {
         try {
+            $request->validate([
+                'id_subscription' => 'required|exists:subscriptions,id_subscription',
+                'total_amount' => 'required|numeric|min:0',
+                'payment_method' => 'required|string|max:50',
+            ]);
 
             $userId = Auth::id();
-            $invoices = $this->invoiceService->getInvoicesByUser($userId);
-            return response()->json($invoices, 200);
 
-        } catch (\Exception $e) {
-            Log::error('Error al listar facturas: ' . $e->getMessage());
-            return response()->json(['error' => 'No se pudieron obtener las facturas'], 500);
+            $invoice = $this->invoiceService->createInvoice(
+                $userId,
+                $request->id_subscription,
+                $request->total_amount,
+                $request->payment_method
+            );
+
+            return response()->json(['message' => 'Factura creada exitosamente', 'invoice' => $invoice], 201);
+
+        } catch (ValidationException $e) {
+            return response()->json(['error' => 'Datos no válidos', 'details' => $e->errors()], 422);
+        } catch (Exception $e) {
+            return response()->json(['error' => 'No se pudo crear la factura', 'details' => $e->getMessage()], 500);
         }
-        
     }
 
-    /**
-     * Obtener una factura por su ID.
-     */
-
-    public function show($id)
+    public function generateInvoicePDF($invoiceId)
     {
         try {
-            $invoice = $this->invoiceService->getInvoiceById($id);
-            return response()->json($invoice, 200);
-        } catch (\Exception $e) {
-            Log::error('Error al obtener la factura: ' . $e->getMessage());
+            return $this->invoiceService->generateInvoicePDF($invoiceId);
+        } catch (ModelNotFoundException $e) {
             return response()->json(['error' => 'Factura no encontrada'], 404);
+        } catch (Exception $e) {
+            return response()->json(['error' => 'No se pudo generar el PDF', 'details' => $e->getMessage()], 500);
         }
-       
     }
 
-    /**
-     * Crear una factura
-     */
-    public function store(CreateInvoiceRequest $request)
+    public function getInvoicesByUser()
     {
         try {
-            $data = $request->validated();
-            $this->invoiceService->generateInvoice($data);
-            return response()->json(['message' => 'Factura creada con éxito'], 201);
-        } catch (\Exception $e) {
-            Log::error('Error al crear la factura: ' . $e->getMessage());
-            return response()->json(['error' => 'No se pudo crear la factura'], 500);
+            $userId = Auth::id();
+            $invoices = $this->invoiceService->getInvoicesByUser($userId);
+            return response()->json($invoices);
+        } catch (Exception $e) {
+            return response()->json(['error' => 'No se pudieron obtener las facturas', 'details' => $e->getMessage()], 500);
         }
-        
     }
 
-    /**
-     * Actualizar una factura
-     */
-
-    public function updateStatus(Request $request, $id)
+    public function getInvoiceById($invoiceId)
     {
         try {
-            $data = $request->validated();
-            $this->invoiceService->updateInvoiceStatus($id, $data);
-            return response()->json(['message' => 'Factura actualizada con éxito'], 200);
-        } catch (\Exception $e) {
-            Log::error('Error al actualizar la factura: ' . $e->getMessage());
-            return response()->json(['error' => 'No se pudo actualizar la factura'], 500);
+            $invoice = $this->invoiceService->getInvoiceById($invoiceId);
+            return response()->json($invoice);
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['error' => 'Factura no encontrada'], 404);
+        } catch (Exception $e) {
+            return response()->json(['error' => 'No se pudo obtener la factura', 'details' => $e->getMessage()], 500);
         }
     }
 
-    /**
-     * Eliminar una factura
-     */
-
-    public function destroy($id)
+    public function updateInvoiceStatus(Request $request, $invoiceId)
     {
         try {
-            $this->invoiceService->deleteInvoice($id);
-            return response()->json(['message' => 'Invoice deleted successfully'], 200);
-        } catch (\Exception $e) {
-            Log::error('Error al eliminar la factura: ' . $e->getMessage());
-            return response()->json(['error' => 'No se pudo eliminar la factura'], 500);
+            $request->validate([
+                'payment_status' => 'required|string|in:pending,paid,canceled,failed',
+            ]);
+
+            $invoice = $this->invoiceService->updateInvoiceStatus($invoiceId, $request->payment_status);
+            return response()->json(['message' => 'Estado de la factura actualizado', 'invoice' => $invoice]);
+        } catch (ValidationException $e) {
+            return response()->json(['error' => 'Datos no válidos', 'details' => $e->errors()], 422);
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['error' => 'Factura no encontrada'], 404);
+        } catch (Exception $e) {
+            return response()->json(['error' => 'No se pudo actualizar el estado', 'details' => $e->getMessage()], 500);
         }
     }
+   
 
 }

@@ -48,12 +48,6 @@ const toggleMark = (editor, format) => {
 };*/
 
 const StoryEditor = ({ onSave}) => {
-  /*const initialValue = [
-    {
-      type: "paragraph",
-      children: [{ text: "" }],
-    },
-  ];*/
 
   const location = useLocation();
   const storyData = location.state?.story || {};
@@ -67,7 +61,7 @@ const StoryEditor = ({ onSave}) => {
   const [photo, setPhoto] = useState(null);
   const [state, setState] = useState(storyData?.state || "active");
   const [selectedCategories, setSelectedCategories] = useState(
-    storyData?.categories.map((c) => c.id_category) || []
+    storyData?.categories ? storyData.categories.map((c) => c.id_category) : []
   );
   const editor = useMemo(() => withHistory(withReact(createEditor())), []);
 
@@ -116,8 +110,36 @@ const StoryEditor = ({ onSave}) => {
     );
   };
 
+
+  //validar formulario
+  const validateForm = () =>{
+    const errors = {};
+
+    if (!title.trim() || title.length < 5) {
+      errors.title = "El título debe tener al menos 5 caracteres.";
+    }
+    if (!sinopsis.trim() || sinopsis.length < 10) {
+      errors.sinopsis = "La sinopsis debe tener al menos 10 caracteres.";
+    }
+    if (!content || content.length === 0 || Node.string(content[0]).trim() === "") {
+      errors.content = "El contenido de la historia no puede estar vacío.";
+    }
+    if (selectedCategories.length === 0) {
+      errors.categories = "Debes seleccionar al menos una categoría.";
+    }
+    if (photo && !photo.type.startsWith("image/")) {
+      errors.photo = "El archivo seleccionado no es una imagen válida.";
+    }
+
+    Object.values(errors).forEach((error) => toast.error(error));
+    return Object.keys(errors).length === 0;
+  }
+
   //Guardar la historia
   const handleSave = async () => {
+    
+    if (!validateForm()) return;
+
     const plainText = content.map((node) => Node.string(node)).join("\n")
     let imageUrl = storyData?.photo;
 
@@ -252,11 +274,15 @@ const StoryEditor = ({ onSave}) => {
             <div className="categories-container">
               <h3>Selecciona categorías:</h3>
               <select multiple value={selectedCategories} onChange={handleCategoryChange}>
-                {categories.map((category) => (
-                  <option key={category.id_category} value={category.id_category}>
-                    {category.category_name}
-                  </option>
-                ))}
+              {categories?.length > 0 ? (
+              categories.map((category) => (
+                <option key={category.id_category} value={category.id_category}>
+                  {category.category_name}
+                </option>
+              ))
+              ) : (
+                <option disabled>Cargando categorías...</option>
+              )}
               </select>
             </div>
           </div>

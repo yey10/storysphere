@@ -22,20 +22,11 @@ class Invoice extends Model
         'payment_method',
         'payment_status',
         'invoice_detail',
-        'mercado_pago_payment_id',
-        'mercado_pago_status',
-        'mercado_pago_preference_id',
-        'mercado_pago_created_at',
-        'mercado_pago_updated_at',
-        'mercado_pago_response',
     ];
 
     protected $casts = [
         'issue_date' => 'date',
-        'mercado_pago_created_at' => 'datetime',
-        'mercado_pago_updated_at' => 'datetime',
         'invoice_detail' => 'array',
-        'mercado_pago_response' => 'array',
     ];
 
     public function user()

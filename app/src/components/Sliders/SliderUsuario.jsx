@@ -52,7 +52,7 @@ const SliderUsuario = () => {
                 <h4 className='title'>PREMIUM <Crown /></h4>
                 <p>Haz crecer tu impacto con un plan premium. Accede a más herramientas y visibilidad.</p>
                 <p>Sé parte de la élite literaria. Destaca tus historias y accede a contenido exclusivo.</p>
-                <button className="buttonLight"><Link to="services">PREMIUM</Link></button>
+                <button className="buttonLight"><Link to="/services">PREMIUM</Link></button>
               </div>
             </div>
           </SwiperSlide>
@@ -73,7 +73,7 @@ const SliderUsuario = () => {
                 <h4 className='title'>EMPIEZA HOY MISMO</h4>
                 <p>Cada historia merece ser contada. Aquí encontrarás una audiencia para la tuya.</p>
                 <p>Escribe sin miedo. Lee sin límites. Únete a la comunidad de StorySphere.</p>
-                <button className='buttonLight'><Link to="user/stories">Ver Historias</Link></button>
+                <button className='buttonLight'><Link to="/user/stories">Ver Historias</Link></button>
               </div>
             </div>
           </SwiperSlide>

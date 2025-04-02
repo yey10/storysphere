@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Subscription extends Model
 {
-    protected $table = 'suscriptions';
+    protected $table = 'subscriptions';
     protected $primaryKey = 'id_subscription';
     public $timestamps = true;
     protected $fillable = [
@@ -14,19 +14,10 @@ class Subscription extends Model
         'start_date',
         'end_date',
         'subscription_type',
-        'mercado_pago_subscription_id',
-        'mercado_pago_plan_id',
-        'mercado_pago_status',
-        'mercado_pago_created_at',
-        'mercado_pago_updated_at',
-        'mercado_pago_response',
     ];
     protected $casts = [
         'start_date' => 'date',
         'end_date' => 'date',
-        'mercado_pago_created_at' => 'datetime',
-        'mercado_pago_updated_at' => 'datetime',
-        'mercado_pago_response' => 'array',
     ];
 
     public function user()
