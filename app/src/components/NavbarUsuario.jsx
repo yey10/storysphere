@@ -42,7 +42,7 @@ const NavbarUsuario = () => {
                 <input type="text" placeholder="Buscar" id="search" />
                 <Search />
               </li>
-              <li><Link to="/services"><Crown /> PREMIUM</Link></li>
+              <li><Link to="/user/subscription"><Crown /> PREMIUM</Link></li>
               <li><Bell /></li>
               <li><Link to="/user/profile"><img src={ReactImg4} alt="persona" /></Link></li>
             </ul>

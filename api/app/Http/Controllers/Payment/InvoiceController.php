@@ -71,6 +71,18 @@ class InvoiceController extends Controller
         }
     }
 
+    public function getInvoiceById($invoiceId)
+    {
+        try {
+            $invoice = $this->invoiceService->getInvoiceById($invoiceId);
+            return response()->json($invoice);
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['error' => 'Factura no encontrada'], 404);
+        } catch (Exception $e) {
+            return response()->json(['error' => 'No se pudo obtener la factura', 'details' => $e->getMessage()], 500);
+        }
+    }
+
     public function updateInvoiceStatus(Request $request, $invoiceId)
     {
         try {
