@@ -105,12 +105,18 @@ class StoryService
 
     private function uploadStoryPhoto($file): ?string
     {
-        if (!$file || !$file->isValid()) {
-            return null;
-        }
+    // Si la imagen ya es una URL, devolverla directamente
+    if (is_string($file) && Str::startsWith($file, ['http', 'https'])) {
+        return $file;
+    }
+
+    // Si es un archivo subido, procesarlo en Cloudinary
+    if ($file instanceof \Illuminate\Http\UploadedFile && $file->isValid()) {
         $cloudinary = new UploadApi();
         $uploaded = $cloudinary->upload($file->getRealPath(), ['folder' => 'stories_photos']);
-
         return $uploaded['secure_url'] ?? null;
-    }   
+    }
+
+    return null; // Si no es ni un archivo válido ni una URL, retorna null
+    }
 }

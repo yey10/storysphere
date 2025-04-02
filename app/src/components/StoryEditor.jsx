@@ -53,7 +53,7 @@ const StoryEditor = ({ onSave}) => {
   const storyData = location.state?.story || {};
 
   const { addStory, editStory, categories } = useStory();
-  const isEditing = !!storyData; 
+  const isEditing = storyData && storyData.id_story ? true : false;
 
 
   const [title, setTitle] = useState(storyData?.title || "");
@@ -166,11 +166,11 @@ const StoryEditor = ({ onSave}) => {
 
 
     try {
-      if (isEditing) {
+      if (isEditing && storyData.id_story) {
         await editStory(storyData.id_story, updatedStory);
         toast.success("Historia actualizada con éxito");
       } else {
-        await addStory(formData);
+        await addStory(updatedStory);
         toast.success("Historia guardada con éxito");
       }
       onSave();
