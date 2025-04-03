@@ -13,11 +13,9 @@ const SliderUsuario2 = () => {
 
     const { stories, isLoading, fetchStories } = useStory();
 
-    console.log("Historias obtenidas: ", stories);
-
     useEffect(() => {
         fetchStories();
-    }, [fetchStories]);
+    }, []);
 
   return (
     <div>
