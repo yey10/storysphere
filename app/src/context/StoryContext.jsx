@@ -11,7 +11,6 @@ export const StoryProvider = ({children}) =>{
     const [userStories, setUserStories] = useState([]);
     const [categories, setCategories] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [hasFetched, setHasFetched] = useState(false);
     const { likes } = useLikes();
 
 
@@ -43,19 +42,15 @@ export const StoryProvider = ({children}) =>{
     }, []);
 
     const fetchUserStories = useCallback(async (userId) => {
-        
-       
+         
         if (!userId) {
             console.error("Error: userId es undefined o null");
             return;
         }
     
-        console.log(`Fetching user stories for userId: ${userId}`);
-    
         setIsLoading(true);
         try {
             const data = await getUserStories(userId);
-            console.log("Datos recibidos en fetchUserStories:", data); 
             setUserStories(Array.isArray(data) ? data : []);
         } catch (error) {
             console.error("Error al obtener las historias del usuario:", error);
@@ -66,25 +61,22 @@ export const StoryProvider = ({children}) =>{
     }, []);
 
     useEffect(() => {
-        if (!hasFetched) {
-            setHasFetched(true);
-            (async () => {
-                setIsLoading(true);
-                try {
-                    const [storiesData, categoriesData] = await Promise.all([
-                        getAllStories(),
-                        getCategories()
-                    ]);
-                    setStories(storiesData);
-                    setCategories(categoriesData);
-                } catch (error) {
-                    console.error("Error al obtener historias o categorías:", error);
-                } finally {
-                    setIsLoading(false);
-                }
-            })();
-        }
-    }, [hasFetched]);
+        (async () => {
+            setIsLoading(true);
+            try {
+                const [storiesData, categoriesData] = await Promise.all([
+                    getAllStories(),
+                    getCategories()
+                ]);
+                setStories(storiesData);
+                setCategories(categoriesData);
+            } catch (error) {
+                console.error("Error al obtener historias o categorías:", error);
+            } finally {
+                setIsLoading(false);
+            }
+        })();
+    }, []);
 
 
     const addStory = async (storyData) => {
@@ -156,7 +148,7 @@ export const StoryProvider = ({children}) =>{
     const removeStory = async (id) =>{
         try {
             await deleteStory(id);
-            setStories(stories.filter(story => story.id_story !== id));
+            setStories((prevStories) => prevStories.filter(story => story.id_story !== id));
             setUserStories((prevUserStories) => prevUserStories.filter(story => story.id_story !== id));
         } catch (error) {
             setStories(prevStories);

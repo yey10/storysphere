@@ -24,6 +24,7 @@ const StoryPage = () => {
   const { ratings, userRatings, handleRateStory, fetchRating, handleRemoveRating } = useRatings();
   const { comments, addComment, removeComment, getAllComments } = useComment();
   const [newComment, setNewComment] = useState("");
+  const [storyComments, setStoryComments] = useState([]);
   const [story, setStory] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -34,39 +35,29 @@ const StoryPage = () => {
 
   useEffect(() => {
     let isMounted = true;
-    const fetchStory = async () => {
+    
+    const fetchData = async () => {
       try {
-        const story = await getStory(id);
-        if (isMounted) setStory(story);
+        const [storyData] = await Promise.all([
+          getStory(id),
+          fetchInteractions(id),
+          fetchRating(id),
+          getAllComments(id),
+        ]);
+  
+        if (isMounted) setStory(storyData);
       } catch (error) {
-        console.error("Error al obtener la historia:", error);
+        console.error("Error al obtener los datos de la historia:", error);
         if (isMounted) setError(error);
       } finally {
         if (isMounted) setIsLoading(false);
       }
     };
-    fetchStory();
-    return () => {isMounted = false};
-  }, [id, getStory]);
-
-  useEffect(() => {
-    fetchInteractions(id);
-  }, [id, fetchInteractions]);
-
-  useEffect(() => {
-    fetchRating(id);
-  }, [id, fetchRating]);
-
-  useEffect(() => {
-    const fetchComments = async () => {
-      try {
-        await getAllComments(id);
-      } catch (error) {
-        console.error("Error al obtener comentarios:", error);
-      }
-    };
-    fetchComments();
-  }, [id, getAllComments]);
+  
+    fetchData();
+  
+    return () => { isMounted = false };
+  }, [/*id, getStory, fetchInteractions, fetchRating, getAllComments*/]);
 
   const handleLike = () => {
     handleToggleInteraction(id, "like");
@@ -77,19 +68,18 @@ const StoryPage = () => {
     handleToggleInteraction(id, "favorite");
     console.log(`Favorito clickeado en historia ${id}, estado actual:`, userInteractions[id]);
   };
-
   const handleAddComment = async (comment) => { 
     if (!comment.trim()) return;
-  
+
     try {
-      await addComment(id, { content_comment: comment });
-      setNewComment("");
-      window.location.reload();
+        await addComment(id, { content_comment: comment });
+        setStoryComments([...comments]); 
+        setNewComment(""); 
     } catch (error) {
-      console.error("Error al agregar el comentario:", error);
-      setError("Error al agregar el comentario. Inténtalo de nuevo.");
+        console.error("Error al agregar el comentario:", error);
+        setError("Error al agregar el comentario. Inténtalo de nuevo.");
     }
-  };
+};
 
 
   const handleRemoveComment = async (commentId) => {

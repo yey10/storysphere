@@ -22,7 +22,7 @@ const StoryHeader = ({ story, likes, favorites, handleLike, handleFavorite, user
             <div>
               <img src={autorImg} alt="" />
             </div>
-            <p>By {story.author}</p>
+            <p>By {story.user.name}</p>
             <div>
               <ReactStars
                 count={5}

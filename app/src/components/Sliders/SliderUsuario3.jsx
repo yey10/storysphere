@@ -14,7 +14,7 @@ const SliderUsuario3 = () => {
 
     useEffect(() => {
       fetchStories();
-    }, [fetchStories]);
+    }, []);
 
 
   return (
