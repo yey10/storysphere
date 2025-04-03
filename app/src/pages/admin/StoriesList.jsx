@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import AdminLayout from './AdminLayout';
 import { useStory } from '../../context/StoryContext';
 import { Table, Button, Switch, message } from "antd";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
 
 const Storieslist = () => {
   const { stories, isLoading, fetchStories, changeStoryStatus, removeStory } = useStory();
@@ -54,12 +56,47 @@ const Storieslist = () => {
     }
   }, [fetchStories, localStories.length]);
 
+
+  const exportToPDF = () => {
+    const doc = new jsPDF();
+
+    // Título del documento
+    doc.setFontSize(18);
+    doc.text("Lista de Historias", 14, 15);
+
+    // Definir las columnas y los datos
+    const columns = ["ID", "Título", "Sinopsis", "Autor", "Estado", "Fecha de Creación"];
+    const data = localStories.map(story => [
+      story.id_story,
+      story.title,
+      story.sinopsis,
+      story.user ? story.user.name : "Desconocido",
+      story.state === "active" ? "Activo" : "Inactivo",
+      new Date(story.created_at).toLocaleDateString()
+    ]);
+
+    // Generar la tabla en el PDF
+    autoTable(doc, {
+      head: [columns],
+      body: data,
+      startY: 25,
+    });
+
+    // Guardar el PDF
+    doc.save("Historias.pdf");
+
+    message.success("Archivo PDF generado correctamente");
+  };
+
   if (isLoading) return <div>Cargando historias...</div>;
   //if (!localStories || localStories.length === 0) return <div>No hay historias disponibles.</div>;
   
   return (
     <AdminLayout>
       <h1 className='title'>Historias</h1>
+      <Button type="primary" onClick={exportToPDF} style={{ marginBottom: 16 }}>
+        Generar PDF
+      </Button>
       <Table
         className='table-admin'
         dataSource={localStories}
