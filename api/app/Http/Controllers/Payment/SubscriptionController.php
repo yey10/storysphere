@@ -28,19 +28,30 @@ class SubscriptionController extends Controller
         try {
             $request->validate([
                 'subscription_type' => 'required|string|max:50',
+                'price' => 'required|numeric|min:0',  
+                'payment_method' => 'required|string|in:credit_card,debit_card,paypal,cash',  // Métodos válidos
                 'duration_in_months' => 'nullable|integer|min:1|max:12',
             ]);
 
             $userId = Auth::id();
+            $subscriptionType = $request->subscription_type;
+            $price = $request->price;
+            $paymentMethod = $request->payment_method;
             $duration = $request->input('duration_in_months', 1);
 
-            $subscription = $this->subscriptionService->createSubscription(
+            $result = $this->subscriptionService->createSubscriptionWithInvoice(
                 $userId,
-                $request->subscription_type,
+                $subscriptionType,
+                $price,
+                $paymentMethod,
                 $duration
             );
 
-            return response()->json(['message' => 'Suscripción creada exitosamente', 'subscription' => $subscription], 201);
+            return response()->json([
+                'message' => 'Suscripción y factura creadas exitosamente',
+                'subscription' => $result['subscription'],
+                'invoice' => $result['invoice']
+            ], 201);
         } catch (ValidationException $e) {
             return response()->json(['error' => 'Datos no válidos', 'details' => $e->errors()], 422);
         } catch (Exception $e) {
