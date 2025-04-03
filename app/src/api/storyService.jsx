@@ -65,10 +65,8 @@ export const getCategories = async () => {
 };
 
 export const getUserStories = async (userId) => {
-    console.log("📢 Ejecutando getUserStories con userId:", userId); // <-- Agregado para depuración
     try {
         const response = await axios.get(`/users/${userId}/stories`);
-        console.log("✅ Respuesta del backend:", response); // <-- Agregado para ver respuesta
         return response.data.stories; 
     } catch (error) {
         console.error('❌ Error fetching user stories:', error);

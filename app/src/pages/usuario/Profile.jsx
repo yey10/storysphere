@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import ParticlesBackground from '../../components/ParticlesBackground'
 import DynamicNavbar from '../../components/DynamicNavbar'
 import Footer from '../../components/Footer'
@@ -17,21 +17,17 @@ const Profile = () => {
   const [activeTab, setActiveTab] = useState("about")
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  useEffect(() => {
+  const fetchStories = useCallback(() => {
     if (user?.id_user) {
-        fetchUserStories(user.id_user);
+      fetchUserStories(user.id_user);
     }
-}, [user, fetchUserStories]);
+  }, [user, fetchUserStories]);
 
   const handleTabChange = (tab) => {
     setActiveTab(tab)
   }
 
-  if (isLoading) {
-      return <Loader />;
-  }
-
-  if (!user) {
+  if (isLoading || !user) {
     return <Loader />;
   }
 

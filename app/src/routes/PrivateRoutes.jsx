@@ -24,7 +24,7 @@ import SubscriptionForm from '../pages/usuario/SubscriptionForm.jsx';
 
 
 const PrivateRoutes = () => {
-  console.log("Renderizando PrivateRoutes...");
+
   return (
     <SubscriptionProvider>
       <LikeProvider>
