@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useUser } from "../../context/UserContext";
 import { Table, Button, Switch, Select, message } from "antd";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
 import AdminLayout from "./AdminLayout";
 import '../../assets/css/admin.css'
 
@@ -19,6 +21,38 @@ const UsersList = () => {
   useEffect(() => {
     setLocalUsers(users || []);
   }, [users]);
+
+
+  const exportToPDF = () => {
+    const doc = new jsPDF();
+
+    // Agregar título al PDF
+    doc.setFontSize(18);
+    doc.text("Lista de Usuarios", 14, 15);
+
+    // Definir las columnas y los datos
+    const columns = ["ID", "Nombre", "Email", "Estado", "Rol"];
+    const data = localUsers.map(user => [
+      user.id_user,
+      user.name,
+      user.email,
+      user.account_status === "active" ? "Activo" : "Inactivo",
+      user.roles.length ? user.roles[0].name : "Desconocido"
+    ]);
+
+    // Agregar la tabla al PDF
+    autoTable(doc, {
+      head: [columns],
+      body: data,
+      startY: 25, // Posición inicial de la tabla en el PDF
+    });
+
+    // Guardar y descargar el PDF
+    doc.save("Usuarios.pdf");
+
+    message.success("Archivo PDF generado correctamente");
+  };
+
 
   const toggleUserStatus = async (id, currentStatus) => {
     try {
@@ -85,6 +119,9 @@ const UsersList = () => {
   return (
     <AdminLayout>
       <h1 className="title">Usuarios</h1>
+      <Button type="primary" onClick={exportToPDF} style={{ marginBottom: 16, marginRight: 10 }}>
+        Generar PDF
+      </Button>
       <Table
         className="table-admin"
         dataSource={localUsers}
