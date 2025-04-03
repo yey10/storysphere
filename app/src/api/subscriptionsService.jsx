@@ -5,7 +5,7 @@ import axios from './api.js';
 export const getUserSubscriptions = async () => {
     try {
         const response = await axios.get("/subscriptions");
-        return response.data.subscriptions;
+        return response.data;
     } catch (error) {
         throw error.response ? error.response.data : error;
     }
@@ -20,4 +20,6 @@ export const createSubscription = async (data) =>{
         throw error.response ? error.response.data : error;
     }
 }
+
+
 

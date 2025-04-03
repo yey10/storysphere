@@ -1,57 +1,57 @@
 import { useState } from "react";
-import { Form, Input, Button, Select, DatePicker, Spin, message } from "antd";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useSubscription } from "../../context/SubscriptionContext.jsx";
+import { message } from "antd";
 import dayjs from "dayjs";
 import ParticlesBackground from '../../components/ParticlesBackground'
 import DynamicNavbar from '../../components/DynamicNavbar'
 import Footer from '../../components/Footer'
 import '../../assets/css/form-suscription.css'
 
-const { Option } = Select;
+//const { Option } = Select;
 
 const SubscriptionForm = () => {
-
-    /*
+    const location = useLocation();
+    const navigate = useNavigate();
     const { addSubscription, isLoading } = useSubscription();
-    const [form] = Form.useForm();
 
-    const onFinish = async (values) => {
+    // Obtener datos enviados desde la página anterior
+    const {planName, price} = location.state || {planName: "estandar", price: "4.99"}
+
+    // Estado del formulario
+    const [subscriptionType, setSubscriptionType] = useState(planName);
+    const [startDate, setStartDate] = useState(dayjs().format("YYYY-MM-DD"));
+    const [paymentMethod, setPaymentMethod] = useState("card");
+    const [processing, setProcessing] = useState(false);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        if (!paymentMethod) {
+            message.warning("Selecciona un método de pago antes de continuar.");
+            return;
+        }
+
+        const endDate = dayjs(startDate).add(1, 'month').format("YYYY-MM-DD");
+
+        const formattedData = {
+            subscription_type: subscriptionType,
+            price: price,
+            start_date: startDate,
+            end_date: endDate,
+            payment_method: paymentMethod,
+        }
+
+        setProcessing(true);
         try {
-            // Calcular fecha de finalización
-            const endDate = dayjs(values.start_date).add(1, 'month').format("YYYY-MM-DD");
-
-            const formattedData = {
-                subscription_type: values.subscription_type,
-                start_date: dayjs(values.start_date).format("YYYY-MM-DD"),
-                end_date: endDate,
-            };
-
             await addSubscription(formattedData);
-            message.success("¡Suscripción creada exitosamente!");
-            form.resetFields();
+            message.success(`¡Suscripción ${subscriptionType} creada exitosamente por ${price}!`);
+            navigate("/user/profile");
         } catch (error) {
             message.error(`Error al crear la suscripción: ${error.message || "Error desconocido"}`);
+        } finally{
+            setProcessing(false);
         }
-    };
-
-    */
-
-    const [paymentMethod, setPaymentMethod] = useState("card");
-    const [formData, setFormData] = useState({
-        cardNumber: "",
-        cardHolder: "",
-        expiration: "",
-        cvv: "",
-        email: "",
-    });
-
-    const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        alert("Pago procesado correctamente");
     };
 
     return (
@@ -63,8 +63,9 @@ const SubscriptionForm = () => {
                     <main className="container mx-auto px-4">
                         <div className="payment-container">
                             <h2 className='title'>Formulario de Pago</h2>
+                            <p>Estás suscribiéndote al plan <strong>{subscriptionType}</strong> por <strong>{price}</strong>.</p>
                             <form onSubmit={handleSubmit} className="payment-form">
-                                <div className='payment-usuario'>
+                                {/*<div className='payment-usuario'>
                                     <div>
                                         <label>
                                             Nombre
@@ -85,23 +86,23 @@ const SubscriptionForm = () => {
                                             <input type="text" placeholder='Dirección Completa' />
                                         </label>
                                     </div>
-                                </div>
+                                </div>*/}
                                 <div className="payment-subscription">
                                     <label>
-                                        Seleccione su plan de suscripción
-                                        <select name="" id="">
-                                            <option value="basic">Basic</option>
-                                            <option value="premium">Premium</option>
-                                            <option value="pro">VIP</option>
-                                        </select>
+                                        Plan de Suscripción
+                                        <input type="text" value={subscriptionType} disabled />
+                                    </label>
+                                    <label>
+                                        Precio
+                                        <input type="text" value={price} disabled />
                                     </label>
                                     <label>
                                         Fecha Inicio
-                                        <input type="date" />
+                                        <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)}/>
                                     </label>
                                     <label>
-                                        Fecha Final
-                                        <input type="date" />
+                                        Fecha Final Automática
+                                        <input type="date" value={dayjs(startDate).add(1, "month").format("YYYY-MM-DD")} disabled/>
                                     </label>
                                 </div>
                                 <div className='payment-method'>
@@ -129,7 +130,7 @@ const SubscriptionForm = () => {
                                     </div>
 
                                     
-                                    {paymentMethod === "card" && (
+                                    {/*paymentMethod === "card" && (
                                     <div className="card-details">
                                         <label>Número de Tarjeta</label>
                                         <input
@@ -176,9 +177,9 @@ const SubscriptionForm = () => {
                                         </div>
                                         </div>
                                     </div>
-                                    )}
+                                    )*/}
                                     
-                                    {paymentMethod === "paypal" && (
+                                    {/*paymentMethod === "paypal" && (
                                     <div>
                                         <label>Correo Electrónico de PayPal</label>
                                         <input
@@ -190,7 +191,7 @@ const SubscriptionForm = () => {
                                         required
                                         />
                                     </div>
-                                    )}
+                                    )*/}
                                 </div>
 
                                 <button type="submit" className="pay-button">Pagar</button>
@@ -198,39 +199,6 @@ const SubscriptionForm = () => {
                         </div>
                     </main>
                 </div>
-
-                {/**
-                 
-                <Form form={form} layout="vertical" onFinish={onFinish}>
-                    <Form.Item
-                        label="Tipo de Suscripción"
-                        name="subscription_type"
-                        rules={[{ required: true, message: "Seleccione un tipo de suscripción" }]}
-                    >
-                        <Select placeholder="Selecciona un tipo">
-                            <Option value="basic">Básico</Option>
-                            <Option value="premium">Premium</Option>
-                            <Option value="pro">VIP</Option>
-                        </Select>
-                    </Form.Item>
-                
-                    <Form.Item
-                        label="Fecha de Inicio"
-                        name="start_date"
-                        rules={[{ required: true, message: "Seleccione la fecha de inicio" }]}
-                    >
-                        <DatePicker style={{ width: "100%" }} />
-                    </Form.Item>
-                
-                    <Form.Item>
-                        <Button type="primary" htmlType="submit" disabled={isLoading}>
-                            {isLoading ? <Spin /> : "Crear Suscripción"}
-                        </Button>
-                    </Form.Item>
-                </Form>
-
-                 */}
-                
             </div>
         </div>
     );
