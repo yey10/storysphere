@@ -171,6 +171,14 @@
     align-items: center;
   }
 
+  .create-storie .form-content .story-content{
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    padding: 5px;
+  }
+
   .create-storie .form-content > div:nth-child(2) button {
     padding: 12px 24px;
     background-color: #D4AF37;
@@ -184,4 +192,44 @@
   
   .create-storie .form-content > div:nth-child(2) button:hover {
     background-color: #927926;
+  }
+
+  @media (max-width: 900px){
+    .create-storie .form-container{
+      width: 700px;
+    }
+    .create-storie .form-content{
+      width: 700px;
+    }
+  }
+
+  @media (max-width: 768px){
+    .create-storie .form-container .form-info{
+      padding: 0 20px; padding-right: 0;
+    }
+  }
+
+  @media (max-width: 500px){
+    .create-storie .form-container{
+      width: 350px;
+      height: 800px;
+      margin: auto 10px;
+      margin-bottom: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+    .create-storie .form-container .drag-area{
+      width: 100%;
+    }
+    .create-storie .form-container .form-info{
+      width: 100%;
+      padding: 0;
+      padding-top: 30px;
+    }
+
+    .create-storie .form-content{
+      width: 350px;
+    }
   }

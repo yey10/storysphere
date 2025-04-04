@@ -291,14 +291,8 @@ const StoryEditor = ({ onSave}) => {
           <Slate editor={editor} initialValue={content} onChange={handleChange}>
             <Editable
               placeholder="Escribe tu historia aquí..."
-              style={{
-                Width: "100%",
-                border: "1px solid #ccc",
-                padding: "10px",
-                minHeight: "400px",
-                borderRadius: "4px",
-                marginBottom: "20px",
-              }}
+              style={{ minHeight: "400px" }}
+              className="story-content"
             />
           </Slate>
           <div>
