@@ -19,13 +19,9 @@ export const UserProvider = ({ children }) => {
                     getUserProfile()
                 ]);
     
-                console.log("Respuesta completa de la API:", usersData);
-    
                 if (!Array.isArray(usersData)) {  // 🔹 Validar si es un array
                     throw new Error("La respuesta de getAllUsers() no es un array válido");
                 }
-    
-                console.log("Cantidad de usuarios obtenidos:", usersData.length);
     
                 // Acceder correctamente a la lista de usuarios
                 setUsers(usersData || []);
@@ -68,7 +64,6 @@ export const UserProvider = ({ children }) => {
 
     const changeUserRole  = async (id, data) => {
         try {
-            console.log("Nuevo rol recibido en context:", data.id_rol);
 
             const updatedUser = await updateUserRole(id, data);
 
@@ -122,6 +117,11 @@ export const UserProvider = ({ children }) => {
     const deleteUser = async (id) =>{
         try {
             await deleteUserAccount(id);
+            setUser(prev => ({
+                ...prev,
+                users: prev.users.filter(user => user.id_user !== id),
+                user: prev.user?.id_user === id ? null : prev.user
+            }));
             return id;
         } catch (error) {
             throw error;

@@ -13,7 +13,6 @@ export const toggleInteraction = async (storyId, interactionType) => {
 export const getStoryInteractions = async (storyId) => {
     try {
         const response = await axios.get(`/interactions/${storyId}/count`);
-        console.log(`Datos de la API para story ${storyId}:`, response.data);
         return response.data.interactions;
     }catch (error){
         console.error("Error al obtener interacciones de la historia:", error);

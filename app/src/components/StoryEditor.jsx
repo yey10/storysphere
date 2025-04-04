@@ -1,4 +1,4 @@
-import React, { useState, useRef, useMemo, useCallback } from "react";
+import React, { useState, useRef, useMemo, useCallback, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { createEditor, Transforms, Text, Editor, Node } from "slate";
 import { Slate, Editable, withReact } from "slate-react";
@@ -51,6 +51,10 @@ const StoryEditor = ({ onSave}) => {
 
   const location = useLocation();
   const storyData = location.state?.story || {};
+
+  const [photoPreview, setPhotoPreview] = useState(storyData?.photo || null); 
+  const inputRef = useRef(null);
+  const dropAreaRef = useRef(null);
 
   const { addStory, editStory, categories } = useStory();
   const isEditing = storyData && storyData.id_story ? true : false;
@@ -181,8 +185,17 @@ const StoryEditor = ({ onSave}) => {
   };
 
   //file
-  const inputRef = useRef(null);
-  const dropAreaRef = useRef(null);
+
+  const processFile = (file) => {
+    const validExtensions = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
+    if (validExtensions.includes(file.type)) {
+      setPhoto(file); 
+      setPhotoPreview(URL.createObjectURL(file));
+    } else {
+      toast.error("Este archivo no es una imagen válida.");
+    }
+  };
+
 
   const handleButtonClick = () => {
     inputRef.current.click();
@@ -197,36 +210,26 @@ const StoryEditor = ({ onSave}) => {
 
   const handleDragOver = (event) => {
     event.preventDefault();
-    if (dropAreaRef.current) {
-      dropAreaRef.current.classList.add("active");
-    }
+     dropAreaRef.current.classList.add("drag-over");
   };
 
   const handleDragLeave = () => {
-    if (dropAreaRef.current) {
-      dropAreaRef.current.classList.remove("active");
-    }
+    dropAreaRef.current.classList.remove("drag-over");
   };
 
   const handleDrop = (event) => {
     event.preventDefault();
-    const droppedFile = event.dataTransfer.files[0];
-    if (droppedFile) {
-      processFile(droppedFile);
-    }
+    dropAreaRef.current.classList.remove("drag-over");
+    const file = e.dataTransfer.files[0];
+    if (file) processFile(file);
   };
 
-  const processFile = (file) => {
-    const validExtensions = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
-    if (validExtensions.includes(file.type)) {
-      setPhoto(file); // Guardar el archivo en su estado original
-    } else {
-      alert("This is not an Image File!");
-      if (dropAreaRef.current) {
-        dropAreaRef.current.classList.remove("active");
-      }
+  useEffect(() => {
+    if (storyData?.photo) {
+      setPhotoPreview(storyData.photo);  // Establecer la imagen existente al editar
     }
-  };
+  }, [storyData]);
+
 
 
   return (
@@ -241,8 +244,11 @@ const StoryEditor = ({ onSave}) => {
             onDragLeave={handleDragLeave}
             onDrop={handleDrop}
           >
-            {photo ? (
-              <img src={photo} alt="Uploaded" />
+            {photoPreview  ? (
+              <img src={photoPreview }
+               alt="Uploaded"
+               style={{ maxWidth: "100%", maxHeight: "300px", objectFit: "cover" }}
+               />
             ) : (
               <>
                 <ImageDown />

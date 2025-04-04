@@ -18,8 +18,6 @@ export const LikeProvider = ({ children }) => {
         try {
             const interactions  = await getStoryInteractions(storyId);
 
-            console.log(`Interacciones para historia ${storyId}:`, interactions);
-
             // Contar cuántos son likes y cuántos son favoritos
             const likeCount = interactions.filter(i => i.interaction_type === "like").length;
             const favoriteCount = interactions.filter(i => i.interaction_type === "favorite").length;
@@ -57,8 +55,11 @@ export const LikeProvider = ({ children }) => {
                 newInteraction = type; // Si no había interacción, asignamos el nuevo tipo
             } else if (currentInteraction === type) {
                 newInteraction = null; // Si ya tenía esta interacción, la eliminamos
+            } else if (currentInteraction === "both") {
+                // Si tenía ambas interacciones y desactiva una, debe quedar la otra activa
+                newInteraction = type === "like" ? "favorite" : "like";
             } else {
-                newInteraction = "both"; // Si tenía "like" y ahora agrega "favorite", es "both"
+                newInteraction = "both"; // Si tenía una y activa la otra, ahora tiene ambas
             }
     
             // Actualizar los contadores de likes y favoritos
