@@ -3,6 +3,8 @@ import { Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import Placeholder from '../../assets/img/logo.jpeg';
 
 const SliderStories = ({ populares }) => {
   return (
@@ -37,7 +39,7 @@ const SliderStories = ({ populares }) => {
           <SwiperSlide key={popular.id}>
             <div className="popular-content">
               <div className='popular-img'>
-                <img src={popular.image} alt={popular.title} />
+                <LazyLoadImage src={popular.image} placeholderSrc={Placeholder} effect='blur' wrapperClassName='placeholder-img' />
               </div>
               <div className="popular-info">
                 <h3 className="title">{popular.title}</h3>

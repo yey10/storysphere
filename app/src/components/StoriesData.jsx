@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import Modal from './Modal';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import Placeholder from '../assets/img/logo.jpeg';
 
 const StoriesData = ({ stories }) => {
     const [selectedStory, setSelectedStory] = useState(null);
@@ -10,7 +12,7 @@ const StoriesData = ({ stories }) => {
                 {stories.map((story) => (
                     <div key={story.id_story} className="story">
                         <div>
-                            <img src={story.photo} alt={story.title} />
+                            <LazyLoadImage src={story.photo} placeholderSrc={Placeholder} effect='blur' wrapperClassName='placeholder-img' />
                         </div>
                         <div className="story-info">
                             <h2 className='title'>{story.title}</h2>

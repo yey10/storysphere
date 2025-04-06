@@ -1,4 +1,6 @@
 import React from 'react'
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import Placeholder from '../assets/img/logo.jpeg';
 
 const ExploreData = ({ stories }) => {
   return (
@@ -6,7 +8,7 @@ const ExploreData = ({ stories }) => {
         {stories.map((story) => (
             <div key={story.id} className="story">
                 <div>
-                    <img src={story.image} alt={story.title} />
+                    <LazyLoadImage src={story.image} placeholderSrc={Placeholder} effect='blur' wrapperClassName='placeholder-img' />
                 </div>
                 <div className="story-info">
                     <h2 className='title'>{story.title}</h2>

@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import DynamicNavbar from '../components/DynamicNavbar.jsx';
 import ParticlesBackground from '../components/ParticlesBackground';
+import Footer from '../components/Footer';
 import '../assets/css/home.css';
 import SliderHome from '../components/Sliders/SliderHome';
 import SliderHome2 from '../components/Sliders/SliderHome2';
@@ -9,7 +10,8 @@ import SliderHome3 from '../components/Sliders/SliderHome3';
 import ReactImg1 from '../assets/img/leyendo.jpeg';
 import ReactImg2 from '../assets/img/escribiendo.jpeg';
 import ReactImg3 from '../assets/img/interactuar.jpeg';
-import Footer from '../components/Footer';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import Placeholder from '../assets/img/logo.jpeg';
 
 const Home = () => {
   return (
@@ -33,17 +35,17 @@ const Home = () => {
                 <h3 className='title'>¿CÓMO FUNCIONA?</h3>
                 <div className="home3-content">
                   <div>
-                    <div className='image'><img src={ReactImg1} alt="Escribir" /></div>
+                    <div className='image'><LazyLoadImage src={ReactImg1} placeholderSrc={Placeholder} effect='blur' wrapperClassName='placeholder-img' /></div>
                     <span>Puedes Leer</span>
                     <p>Ofrecemos una galería de historias creadas por otros usuarios que puedes leer y disfrutar tanto como quieras.</p>
                   </div>
                   <div>
-                    <div className='image'><img src={ReactImg2} alt="Leer" /></div>
+                    <div className='image'><LazyLoadImage src={ReactImg2} placeholderSrc={Placeholder} effect='blur' wrapperClassName='placeholder-img' /></div>
                     <span>Puedes Escribir</span>
                     <p>Ofrecemos una amplia gama de herramientas de escritura que puedes aprovechar sin importar tu nivel de escritura.</p>
                   </div>
                   <div>
-                    <div className='image'><img src={ReactImg3} alt="Interactuar" /></div>
+                    <div className='image'><LazyLoadImage src={ReactImg3} placeholderSrc={Placeholder} effect='blur' wrapperClassName='placeholder-img' /></div>
                     <span>Puedes Interactuar</span>
                     <p>También puedes contactar con otros usuarios de tus mismos gustos e incluso hablar con tus autores favoritos.</p>
                   </div>

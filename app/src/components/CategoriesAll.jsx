@@ -28,6 +28,9 @@ import Drama1 from '../assets/img/Stories/66.webp'
 import Drama2 from '../assets/img/Stories/67.webp'
 import Drama3 from '../assets/img/Stories/68.webp'
 
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import Placeholder from '../assets/img/logo.jpeg';
+
 const categoryImages = {
     Romance: [Romance1, Romance2, Romance3],
     Terror: [Terror1, Terror2, Terror3],
@@ -59,7 +62,7 @@ const CategoriesAll = ({categories}) => {
                 <div className="image-content">
                         {(categoryImages[category.category_name] || []).map((image, index) => (
                             <div key={index}>
-                            <img src={image} alt={`${category.category_name} ${index + 1}`} />
+                            <LazyLoadImage src={image} alt={`${category.category_name} ${index + 1}`} placeholderSrc={Placeholder} effect='blur' wrapperClassName='placeholder-img' />
                             </div>
                         ))}
                 </div>

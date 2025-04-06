@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react'
 import { Heart, Bookmark } from 'lucide-react';
 import {useLikes} from '../context/LikeContext';
 import {useStory} from '../context/StoryContext';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import Placeholder from '../assets/img/logo.jpeg';
 
 const FavoriteData = () => {
     const [vista, setVista] = useState("meGusta");
@@ -57,7 +59,7 @@ const FavoriteData = () => {
                                 ) : (
                                     <div><Bookmark fill="yellow" /></div>
                                 )}
-                                <img src={historia.photo} alt={historia.title} />
+                                <LazyLoadImage src={historia.photo} placeholderSrc={Placeholder} effect='blur' wrapperClassName='placeholder-img' />
                             </div>
                             <div className="like-info">
                                 <h2 className="title">{historia.title}</h2>
