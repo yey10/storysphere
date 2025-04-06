@@ -1,11 +1,17 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import DynamicNavbar from '../components/DynamicNavbar';
 import Footer from '../components/Footer';
 import '../assets/css/services.css';
 import { Check } from 'lucide-react';
 
 const Services = () => {
+
+  const navigate = useNavigate();
+
+  const handleSubscribe = (planName, price) =>{
+    navigate('/user/subscription', {state : {planName, price} });
+  }
   return (
     <>
       <div className="services-bg"></div>
@@ -25,11 +31,11 @@ const Services = () => {
                   <li><Check />Mejor espacio de creación</li>
                   <li><Check />Icono especial</li>
                 </ul>
-                <button><Link to="/login">Suscribirse</Link></button>
+                <button onClick={() => handleSubscribe("estandar", 4.99)}>Suscribirse</button>
               </div>
 
               <div className="box-content">
-                <h2>Medium</h2>
+                <h2>Pro</h2>
                 <p>Ideal para los creadores</p>
                 <p>9.99$<small>/mes</small></p>
                 <ul>
@@ -39,12 +45,12 @@ const Services = () => {
                   <li><Check />Acceso a descargas</li>
                   <li><Check />Icono especial</li>
                 </ul>
-                <button><Link to="/login">Suscribirse</Link></button>
+                <button onClick={() => handleSubscribe("pro", 9.99)}>Suscribirse</button>
               </div>
 
               <div className="box-content">
                 <h2>Premium</h2>
-                <p>Exelente Para los profesionales</p>
+                <p>Excelente Para los profesionales</p>
                 <p>14.99$<small>/mes</small></p>
                 <ul>
                   <li><Check />Más recursos de creación</li>
@@ -54,7 +60,7 @@ const Services = () => {
                   <li><Check />Gran espacio de creación</li>
                   <li><Check />Icono super especial</li>
                 </ul>
-                <button><Link to="/login">Suscribirse</Link></button>
+                <button onClick={() => handleSubscribe("premium")}>Suscribirse</button>
               </div>
             </div>
           </div>

@@ -6,13 +6,18 @@ import Loader from "../../components/Loader";
 import EditProfileModal from '../../components/EditProfileModal'
 import '../../assets/css/profile.css'
 import { useStory } from '../../context/StoryContext';
+import { useInvoice } from '../../context/InvoiceContext';
 import { useUser } from '../../context/UserContext';
-import { Camera, Edit, Github, Instagram, Linkedin, Mail, MapPin, Twitter } from "lucide-react"
+import { Camera, Edit, Github, Instagram, Linkedin, Mail, MapPin, Twitter, FileText } from "lucide-react"
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
+import { message } from "antd";
 
 const Profile = () => {
   
   const { user, updateUser, isLoading } = useUser();
   const { fetchUserStories, userStories } = useStory();
+  const { invoices, isLoading: invoicesLoading, fetchInvoices, downloadInvoice } = useInvoice();
   //const [userStories, setUserStories] = useState([]);
   const [activeTab, setActiveTab] = useState("about")
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -23,8 +28,41 @@ const Profile = () => {
     }
   }, [user, fetchUserStories]);
 
+  useEffect(() => {
+     if (activeTab === "invoices") {
+    fetchInvoices();
+  }
+  }, [activeTab, fetchInvoices]);
+
   const handleTabChange = (tab) => {
     setActiveTab(tab)
+  }
+
+  const exportToPDF = () => {
+    const doc = new jsPDF();
+
+    // Título del documento
+    doc.setFontSize(18);
+    doc.text("Factura", 14, 15);
+
+    const columns = ["ID", "Monto", "Estado", "Fecha"];
+    const data = invoices.map(invoice => [
+      invoice.id_invoice,
+      invoice.total_amount,
+      invoice.state === "paid" ? "Pagada" : "pending",
+      new Date(invoice.created_at).toLocaleDateString()
+    ]);
+
+
+    autoTable(doc, {
+      head: [columns],
+      body: data,
+      startY: 25,
+    });
+
+    doc.save("Factura.pdf");
+
+    message.success("Archivo PDF generado correctamente");
   }
 
   if (isLoading || !user) {
@@ -110,6 +148,12 @@ const Profile = () => {
                           >
                             Portfolio
                           </button>
+                          <button
+                              className={`tab-button ${activeTab === "invoices" ? "active" : ""}`}
+                              onClick={() => handleTabChange("invoices")}
+                          >
+                              Facturas <FileText className="icon-small" />
+                          </button>
                         </div>
 
                         <div className="tab-content">
@@ -163,6 +207,49 @@ const Profile = () => {
                                   <p className="text-white">No hay historias disponibles.</p>
                                 )}
                               </div>
+                            </div>
+                          )}
+
+                          {activeTab === "invoices" && (
+                            <div className="invoice-section">
+                              <h2 className="section-title">Mis Facturas</h2>
+                              {invoicesLoading ? (
+                                <p className="text-white">Cargando facturas...</p>
+                              ) : invoices.length > 0 ? (
+                                <table className="invoice-table">
+                                  <thead>
+                                    <tr>
+                                      <th>ID</th>
+                                      <th>Monto</th>
+                                      <th>Estado</th>
+                                      <th>Fecha</th>
+                                      <th>Acciones</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    {invoices.map((invoice) => (
+                                      <tr key={invoice.id_invoice}>
+                                        <td>{invoice.id_invoice}</td>
+                                        <td>${invoice.total_amount}</td>
+                                        <td className={invoice.status === "paid" ? "text-green-500" : "text-red-500"}>
+                                          {invoice.status === "paid" ? "Pagado" : "Pendiente"}
+                                        </td>
+                                        <td>{new Date(invoice.created_at).toLocaleDateString()}</td>
+                                        <td>
+                                          <button
+                                            className="button small primary"
+                                            onClick={exportToPDF}
+                                          >
+                                            Descargar PDF
+                                          </button>
+                                        </td>
+                                      </tr>
+                                    ))}
+                                  </tbody>
+                                </table>
+                              ) : (
+                                <p className="text-white">No tienes facturas disponibles.</p>
+                              )}
                             </div>
                           )}
                         </div>
