@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useCallback } from "react";
-import { updateComment, deleteComment, getCommentOwner, createComment, getAllCommentsByStory } from "../api/commentService";
+import { updateComment, deleteComment, getCommentOwner, createComment, getAllCommentsByStory, getAllCommentsAdmin } from "../api/commentService";
 
 //crear el contexto
 const CommentContext = createContext();
@@ -16,6 +16,19 @@ export const CommentProvider = ({children}) =>{
             const comments = await getAllCommentsByStory(storyId);
             setComments(Array.isArray(comments) ? comments : []);
         } catch (error) {
+            console.error("Error al obtener los comentarios:", error);
+        } finally {
+            setIsLoading(false);
+        }
+    }, []);
+
+    const getAllCommentsAdmins = useCallback(async () => {
+        setIsLoading(true);
+        try {
+            const comments = await getAllCommentsAdmin();
+            setComments(Array.isArray(comments) ? comments : []);
+        }
+        catch (error) {
             console.error("Error al obtener los comentarios:", error);
         } finally {
             setIsLoading(false);
@@ -80,6 +93,7 @@ export const CommentProvider = ({children}) =>{
             comments,
             isLoading,
             getAllComments,
+            getAllCommentsAdmins,
             editComment,
             addComment,
             removeComment,

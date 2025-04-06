@@ -6,13 +6,11 @@ import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 
 const Storieslist = () => {
-  const { stories, isLoading, fetchStories, changeStoryStatus, removeStory } = useStory();
+  const { stories, isLoading, changeStoryStatus, removeStory } = useStory();
   const [localStories, setLocalStories] = useState([]);
 
   useEffect(() => {
-    if (stories) {
-      setLocalStories(stories);
-    }
+    setLocalStories(stories || []);
   }, [stories]);
 
   const toggleStoryStatus = async (id, currentState) => {
@@ -49,13 +47,6 @@ const Storieslist = () => {
       message.error("No se pudo eliminar la historia");
     }
   };
-
-  useEffect(() => {
-    if (localStories.length === 0) {
-      fetchStories();
-    }
-  }, [fetchStories, localStories.length]);
-
 
   const exportToPDF = () => {
     const doc = new jsPDF();

@@ -1,0 +1,40 @@
+
+   PASS  Tests\Unit\CategoryTest
+  ✓ category can have many stories                                                                              75.57s  
+  ✓ category name is stored correctly                                                                            0.18s  
+
+   PASS  Tests\Unit\CommentTest
+  ✓ comment belongs to user and story                                                                            0.42s  
+  ✓ comment content is stored correctly                                                                          0.14s  
+
+   PASS  Tests\Unit\ExampleTest
+  ✓ that true is true                                                                                            0.01s  
+
+   PASS  Tests\Unit\LikeTest
+  ✓ like belongs to user and story                                                                               0.26s  
+
+   PASS  Tests\Unit\RatingTest
+  ✓ rating belongs to user and story                                                                             0.38s  
+  ✓ rating value is valid                                                                                        0.28s  
+
+   PASS  Tests\Unit\StoryTest
+  ✓ story belongs to a user                                                                                      0.11s  
+  ✓ story attributes are stored correctly                                                                        0.13s  
+  ✓ story can be updated                                                                                         0.27s  
+  ✓ story cannot be created without user                                                                         0.20s  
+  ✓ story user relationship is loaded correctly                                                                  0.29s  
+  ✓ story title and content must not be empty                                                                    0.17s  
+
+   PASS  Tests\Unit\SubscriptionTest
+  ✓ subscription belongs to user                                                                                 0.65s  
+  ✓ subscription dates are stored correctly                                                                      0.14s  
+
+   PASS  Tests\Unit\UserTest
+  ✓ user can have many stories                                                                                   0.30s  
+  ✓ user can create story                                                                                        8.92s  
+  ✓ user can update own story                                                                                    0.12s  
+  ✓ user story relationship returns correct model                                                                0.21s  
+
+  Tests:    20 passed (41 assertions)
+  Duration: 89.53s
+

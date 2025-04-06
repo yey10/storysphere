@@ -3,9 +3,13 @@ namespace App\Services\User;
 
 use App\Models\User;
 use App\Models\Role;
+use App\Models\Story;
+use App\Models\Comment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
+
+
 
 
 class UserService
@@ -32,6 +36,20 @@ class UserService
             ],
         ];
     }
+
+    public function getUserStats()
+    {
+        $totalUsers = User::count();
+        $totalStories = Story::count();
+        $totalComments = Comment::count();
+
+        return response()->json([
+            'total_users' => $totalUsers,
+            'total_stories' => $totalStories,
+            'total_comments' => $totalComments
+        ]);
+    }
+
 
 
 

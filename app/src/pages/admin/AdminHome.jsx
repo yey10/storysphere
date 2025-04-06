@@ -1,12 +1,13 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import { Card, Row, Col } from "antd";
 import AdminLayout from "./AdminLayout";
+import axios from "axios";
 import '../../assets/css/admin.css'
 
 const AdminHome = () => {
   const navigate = useNavigate();
-
+  
   return (
     <AdminLayout>
       <Row gutter={[16, 16]} className="cards-grid">
@@ -24,7 +25,7 @@ const AdminHome = () => {
                 color: "#fff",
               }}
             >
-              📊 120 usuarios
+              📊 usuarios
             </button>
           </Card>
         </Col>
@@ -42,7 +43,7 @@ const AdminHome = () => {
                 color: "#fff",
               }}
             >
-              📖 450 historias
+              📖 historias
             </button>
           </Card>
         </Col>
@@ -60,7 +61,7 @@ const AdminHome = () => {
                 color: "#fff",
               }}
             >
-              💬 980 comentarios
+              💬 comentarios
             </button>
           </Card>
         </Col>
