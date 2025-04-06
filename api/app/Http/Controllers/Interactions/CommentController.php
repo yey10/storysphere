@@ -21,6 +21,15 @@ class CommentController extends Controller
         $this->commentService = $commentService;
     }
 
+    public function getAll()
+    {
+        try {
+            $comments = $this->commentService->getAllComments();
+            return response()->json($comments, 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Error inesperado: ' . $e->getMessage()], 500);
+        }
+    }
 
     //Obtener todos los comentarios
     public function index($storyId)
@@ -63,7 +72,7 @@ class CommentController extends Controller
             $comment = $this->commentService->getCommentById($id);
 
             //verificar permisos
-            if (Auth::user()->id_rol !== 'admin' && Auth::id() !== $comment->id_user) {
+            if (Auth::user()->id_rol !== 2 && Auth::id() !== $comment->id_user) {
                 return response()->json(['error' => 'No tienes permisos para realizar esta acción'], 403);
             }
 
@@ -81,7 +90,7 @@ class CommentController extends Controller
             $comment = $this->commentService->getCommentById($id);
 
             //verificar permisos
-            if (Auth::user()->id_rol !== 'admin' && Auth::id() !== $comment->id_user) {
+            if (Auth::user()->id_rol !== 2 && Auth::id() !== $comment->id_user) {
                 return response()->json(['error' => 'No tienes permisos para realizar esta acción'],403);
             }
      

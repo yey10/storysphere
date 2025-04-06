@@ -9,6 +9,15 @@ export const getAllCommentsByStory = async (storyId) =>{
     }
 }
 
+export const getAllCommentsAdmin = async () =>{
+    try {
+        const response = await axios.get('/comments');
+        return response.data;
+    } catch (error) {
+        throw error.response ? error.response.data : error;
+    }
+}
+
 export const getCommentById= async (storyId) =>{
     try {
         const response = await axios.get(`/comments/${storyId}`);

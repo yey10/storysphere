@@ -45,6 +45,7 @@ Route::middleware(['auth:sanctum', 'token.expiration'])->group(function () {
     Route::put('profile/{user}/role', [ProfileController::class, 'updateRole']);
     Route::put('profile/{user}/status', [ProfileController::class, 'updateStatus']);
 });
+Route::middleware(['auth:sanctum', 'token.expiration'])->get('/admin/stats', [UserController::class, 'stats']);
 
 //RESETEAR CONTRASEÑA
 Route::post('/forgot-password', [PasswordResetController::class, 'sendResetLink']);
@@ -82,6 +83,7 @@ Route::prefix('comments')->group(function(){
 
     Route::middleware(['auth:sanctum', 'token.expiration'])->group(function(){
         //Rutas protegidas
+        Route::get('/', [CommentController::class, 'getAll']); //Obtener todos los comentarios
         Route::post('/{storyId}', [CommentController::class, 'store']);
         Route::put('/{comment}', [CommentController::class, 'update']); //Actualizar un comentario
         Route::delete('/{comment}', [CommentController::class, 'destroy']); //Eliminar un comentario

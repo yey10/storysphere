@@ -7,6 +7,12 @@ use Illuminate\Support\Facades\Auth;
 
 class CommentService
 {
+
+    public function getAllComments()
+    {
+        return Comment::with('user:id_user,name', 'story:id_story,title')->get();
+    }
+
     public function getAllCommentsForStory($storyId)
     {
         return Comment::with('user:id_user,name')->where('id_story', $storyId)->get();

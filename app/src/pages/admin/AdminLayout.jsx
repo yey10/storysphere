@@ -17,7 +17,7 @@ const menuItems = [
   { key: "dashboard", icon: <DashboardOutlined />, label: <Link to="/admin/home">Dashboard</Link> },
   { key: "users", icon: <UserOutlined />, label: <Link to="/admin/users">Usuarios</Link> },
   { key: "stories", icon: <FileTextOutlined />, label: <Link to="/admin/stories">Historias</Link> },
-  { key: "settings", icon: <SettingOutlined />, label: <Link to="/admin/settings">Configuración</Link> },
+  { key: "comments", icon: <FileTextOutlined />, label: <Link to="/admin/comments">Comentarios</Link> }
 ];
 
 

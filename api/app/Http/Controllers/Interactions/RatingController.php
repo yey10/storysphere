@@ -37,7 +37,7 @@ class RatingController extends Controller
 
         try{
             $rating = $this->ratingService->addOrUpdateRating($user->id_user, $request->id_story, $request->rating);
-            return response()->json(['message' => 'calificación guardada', 'data' => $rating], 200);
+            return response()->json(['message' => 'calificación guardada', 'data' => $rating], 201);
         }catch(\Exception $e){
             return response()->json(['error' => 'Error al guardar la calificación:'. $e->getMessage()], 500);
         }

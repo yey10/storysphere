@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Log;
-use App\Models\User;
+
 
 
 
@@ -36,6 +36,18 @@ class UserController extends Controller
         }
 
     }
+
+    public function stats (Request $request){
+
+        try {
+            $response = $this->userService->getUserStats($request);
+            return response()->json($response, 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Error inesperado: ' . $e->getMessage()], 500);
+        }
+
+    }
+
 
     //obtener por id 
     public function show(Request $request){

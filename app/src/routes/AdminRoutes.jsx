@@ -7,6 +7,7 @@ import { LikeProvider } from '../context/LikeContext';
 import AdminHome from "../pages/admin/AdminHome";
 import UsersList from "../pages/admin/UsersList";
 import StoriesList from "../pages/admin/StoriesList";
+import CommentList from "../pages/admin/CommentList";
 import ProtectedRoute from "../ProtectedRoute";
 
 const AdminRoutes = () => {
@@ -21,6 +22,7 @@ const AdminRoutes = () => {
                                         <Route path="home" element={<AdminHome />} />
                                         <Route path="users" element={<UsersList />} />
                                         <Route path="stories" element={<StoriesList />} />
+                                        <Route path="comments" element={<CommentList />} />
                                     </Route>
                                 </Routes>
                         </RatingsProvider>
