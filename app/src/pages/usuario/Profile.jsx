@@ -17,8 +17,7 @@ const Profile = () => {
   
   const { user, updateUser, isLoading } = useUser();
   const { fetchUserStories, userStories } = useStory();
-  const { invoices, isLoading: invoicesLoading, fetchInvoices, downloadInvoice } = useInvoice();
-  //const [userStories, setUserStories] = useState([]);
+  const { invoices, isLoading: invoicesLoading, fetchInvoices } = useInvoice();
   const [activeTab, setActiveTab] = useState("about")
   const [isModalOpen, setIsModalOpen] = useState(false);
 
