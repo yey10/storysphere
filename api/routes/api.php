@@ -121,10 +121,8 @@ Route::prefix('subscriptions')->middleware(['auth:sanctum', 'token.expiration'])
 
 // Rutas para facturas
 Route::prefix('invoices')->middleware(['auth:sanctum', 'token.expiration'])->group(function () {
-    Route::post('/', [InvoiceController::class, 'createInvoice']);
     Route::get('/', [InvoiceController::class, 'getInvoicesByUser']);
     Route::get('/{id}', [InvoiceController::class, 'getInvoiceById']);
-    Route::get('/invoices/{id}/pdf', [InvoiceController::class, 'generateInvoicePDF']);
     Route::patch('/invoices/{id}/status', [InvoiceController::class, 'updateInvoiceStatus']); 
 });
 

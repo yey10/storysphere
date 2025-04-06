@@ -6,6 +6,7 @@ import { RatingsProvider } from '../context/RatingsContext.jsx';
 import { CommentProvider } from '../context/CommentContext.jsx';
 import { UserProvider } from '../context/UserContext.jsx';
 import { SubscriptionProvider } from '../context/SubscriptionContext.jsx';
+import { InvoiceProvider } from '../context/InvoiceContext.jsx';
 import ProtectedRoute from "../ProtectedRoute";
 import HomeUsuario from '../pages/usuario/Home.jsx';
 import Popular from '../pages/usuario/Popular.jsx';
@@ -26,35 +27,37 @@ import SubscriptionForm from '../pages/usuario/SubscriptionForm.jsx';
 const PrivateRoutes = () => {
 
   return (
-    <SubscriptionProvider>
-      <LikeProvider>
-        <StoryProvider> 
-          <RatingsProvider>
-            <CommentProvider>
-              <UserProvider>
-                  <Routes>
-                    <Route element={<ProtectedRoute allowedRoles={["User"]} />}>
-                      <Route path="home" element={<HomeUsuario />} />
-                      <Route path="popular" element={<Popular />} />
-                      <Route path="explore" element={<Explore />} />
-                      <Route path="createStory" element={<CreateStoryPage />} />
-                      <Route path="editStory" element={<EditStoryPage/>}/>
-                      <Route path="userStories" element={<UserStorieslist />} />
-                      <Route path="stories" element={<StoriesUsuario />} />
-                      <Route path="story/:id" element={<StoryPage />} />
-                      <Route path="categories" element={<Categories />} />
-                      <Route path="category/:id" element={<StoriesByCategory />} />
-                      <Route path="favorite" element={<Favorite />} />
-                      <Route path="profile" element={<Profile />} />
-                      <Route path="subscription" element={<SubscriptionForm />} />
-                    </Route>
-                  </Routes>
-                </UserProvider>
-            </CommentProvider>
-          </RatingsProvider>
-        </StoryProvider>
-      </LikeProvider>
-    </SubscriptionProvider>
+    <InvoiceProvider>
+      <SubscriptionProvider>
+        <LikeProvider>
+          <StoryProvider> 
+            <RatingsProvider>
+              <CommentProvider>
+                <UserProvider>
+                    <Routes>
+                      <Route element={<ProtectedRoute allowedRoles={["User"]} />}>
+                        <Route path="home" element={<HomeUsuario />} />
+                        <Route path="popular" element={<Popular />} />
+                        <Route path="explore" element={<Explore />} />
+                        <Route path="createStory" element={<CreateStoryPage />} />
+                        <Route path="editStory" element={<EditStoryPage/>}/>
+                        <Route path="userStories" element={<UserStorieslist />} />
+                        <Route path="stories" element={<StoriesUsuario />} />
+                        <Route path="story/:id" element={<StoryPage />} />
+                        <Route path="categories" element={<Categories />} />
+                        <Route path="category/:id" element={<StoriesByCategory />} />
+                        <Route path="favorite" element={<Favorite />} />
+                        <Route path="profile" element={<Profile />} />
+                        <Route path="subscription" element={<SubscriptionForm />} />
+                      </Route>
+                    </Routes>
+                  </UserProvider>
+              </CommentProvider>
+            </RatingsProvider>
+          </StoryProvider>
+        </LikeProvider>
+      </SubscriptionProvider>
+    </InvoiceProvider>
   );
 };
 

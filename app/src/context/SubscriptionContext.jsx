@@ -10,7 +10,7 @@ export const SubscriptionProvider = ({children}) =>{
 
 
     const fetchSubscriptions = useCallback(async (forceReload = false) => {
-        if (!forceReload && subscriptions.length > 0) return;
+        if (!forceReload && hasFetched) return;
         setIsLoading(true);
         try {
             const data = await getUserSubscriptions();
@@ -19,20 +19,20 @@ export const SubscriptionProvider = ({children}) =>{
             console.error("Error al obtener suscripciones:", error);
         } finally {
             setIsLoading(false);
+            setHasFetched(true);
         }
-    }, [subscriptions]);
+    }, [hasFetched]);
 
     useEffect(() => {
-        if (!hasFetched) {
-            setHasFetched(true);
-            fetchSubscriptions();
-        }
-    }, [hasFetched, fetchSubscriptions]);
+            fetchSubscriptions(); 
+    }, [fetchSubscriptions]);
 
     const addSubscription = async (data) => {
         try {
-            const newSubscription = await createSubscription(data);
-            setSubscriptions((prev) => [...prev, newSubscription]);
+            const response = await createSubscription(data);
+            if (response.subscription) {
+                setSubscriptions((prev) => [...prev, response.subscription]);
+            }
         } catch (error) {
             console.error("Error al crear la suscripción:", error);
         }
