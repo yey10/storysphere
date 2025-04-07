@@ -26,6 +26,8 @@ import Categoria9 from '../../assets/img/Stories/30.webp';
 import Categoria10 from '../../assets/img/Stories/48.webp';
 import '../../assets/css/homeusuario.css';
 import { Crown } from 'lucide-react';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import Placeholder from '../../assets/img/logo.jpeg';
 
 const Home = () => {
 
@@ -80,7 +82,7 @@ const Home = () => {
                     <div className="boximage">
                         {highlightedStories.map((story) => (
                             <div key={story.id_story}>
-                                <img src={story.photo} alt={story.title} />
+                                <LazyLoadImage src={story.photo} placeholderSrc={Placeholder} effect='blur' wrapperClassName='placeholder-img' />
                                 <div className="boximg-content">
                                     <h3 className="title">{story.title}</h3>
                                     <p>{story.author}</p>
@@ -101,7 +103,7 @@ const Home = () => {
                     <div className='body4-content'>
                       <div className='premium'>
                         <div><Crown /><p>PREMIUM</p></div>
-                        <div><img src={premium} alt="" /></div>
+                        <div><LazyLoadImage src={premium} placeholderSrc={Placeholder} effect='blur' wrapperClassName='placeholder-img' /></div>
                         <div>
                           <div><Crown /><p>PREMIUM</p></div>
                           <h4 className='title'>Ecos del pasado</h4>
@@ -110,7 +112,7 @@ const Home = () => {
                       </div>
                       <div className='premium'>
                         <div><Crown /><p>PREMIUM</p></div>
-                        <div><img src={premium2} alt="" /></div>
+                        <div><LazyLoadImage src={premium2} placeholderSrc={Placeholder} effect='blur' wrapperClassName='placeholder-img' /></div>
                         <div>
                           <div><Crown /><p>PREMIUM</p></div>
                           <h4 className='title'>El Último Tren</h4>
@@ -132,9 +134,9 @@ const Home = () => {
                       <div>
                         <div className='background-image'></div>
                         <div className='image-content'>
-                          <div><img src={Descatado3} alt="" /></div>
-                          <div><img src={Categoria1} alt="" /></div>
-                          <div><img src={Categoria2} alt="" /></div>
+                          <div><LazyLoadImage src={Descatado3} placeholderSrc={Placeholder} effect='blur' wrapperClassName='placeholder-img' /></div>
+                          <div><LazyLoadImage src={Categoria1} placeholderSrc={Placeholder} effect='blur' wrapperClassName='placeholder-img' /></div>
+                          <div><LazyLoadImage src={Categoria2} placeholderSrc={Placeholder} effect='blur' wrapperClassName='placeholder-img' /></div>
                         </div>
                       </div>
                     </div>
@@ -149,9 +151,9 @@ const Home = () => {
                       <div>
                         <div className='background-image'></div>
                         <div className='image-content'>
-                          <div><img src={Categoria3} alt="" /></div>
-                          <div><img src={Categoria4} alt="" /></div>
-                          <div><img src={Categoria5} alt="" /></div>
+                          <div><LazyLoadImage src={Categoria3} placeholderSrc={Placeholder} effect='blur' wrapperClassName='placeholder-img' /></div>
+                          <div><LazyLoadImage src={Categoria4} placeholderSrc={Placeholder} effect='blur' wrapperClassName='placeholder-img' /></div>
+                          <div><LazyLoadImage src={Categoria5} placeholderSrc={Placeholder} effect='blur' wrapperClassName='placeholder-img' /></div>
                         </div>
                       </div>
                     </div>
@@ -166,9 +168,9 @@ const Home = () => {
                       <div>
                         <div className='background-image'></div>
                         <div className='image-content'>
-                          <div><img src={Categoria6} alt="" /></div>
-                          <div><img src={Categoria7} alt="" /></div>
-                          <div><img src={Categoria8} alt="" /></div>
+                          <div><LazyLoadImage src={Categoria6} placeholderSrc={Placeholder} effect='blur' wrapperClassName='placeholder-img' /></div>
+                          <div><LazyLoadImage src={Categoria7} placeholderSrc={Placeholder} effect='blur' wrapperClassName='placeholder-img' /></div>
+                          <div><LazyLoadImage src={Categoria8} placeholderSrc={Placeholder} effect='blur' wrapperClassName='placeholder-img' /></div>
                         </div>
                       </div>
                     </div>
@@ -183,9 +185,9 @@ const Home = () => {
                       <div>
                         <div className='background-image'></div>
                         <div className='image-content'>
-                          <div><img src={Categoria9} alt="" /></div>
-                          <div><img src={Descatado4} alt="" /></div>
-                          <div><img src={Categoria10} alt="" /></div>
+                          <div><LazyLoadImage src={Categoria9} placeholderSrc={Placeholder} effect='blur' wrapperClassName='placeholder-img' /></div>
+                          <div><LazyLoadImage src={Descatado4} placeholderSrc={Placeholder} effect='blur' wrapperClassName='placeholder-img' /></div>
+                          <div><LazyLoadImage src={Categoria10} placeholderSrc={Placeholder} effect='blur' wrapperClassName='placeholder-img' /></div>
                         </div>
                       </div>
                     </div>

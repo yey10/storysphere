@@ -2,6 +2,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import Placeholder from '../../assets/img/logo.jpeg';
 
 const SliderStories = ({ authors }) => {
   return (
@@ -35,7 +37,7 @@ const SliderStories = ({ authors }) => {
           <SwiperSlide key={author.id}>
             <div className="popular-content">
               <div className='popular-img'>
-                <img src={author.image} alt={author.name} />
+                <LazyLoadImage src={author.image} placeholderSrc={Placeholder} effect='blur' wrapperClassName='placeholder-img' />
               </div>
               <div className="popular-info">
                 <p>{author.name}</p>

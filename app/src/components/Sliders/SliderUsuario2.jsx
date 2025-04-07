@@ -8,6 +8,8 @@ import SwiperCore from 'swiper/core';
 SwiperCore.use([ Navigation ]);
 import { Navigation } from 'swiper/modules';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import Placeholder from '../../assets/img/logo.jpeg';
 
 const SliderUsuario2 = () => {
 
@@ -44,9 +46,11 @@ const SliderUsuario2 = () => {
                 stories.map((story) => (
                   <SwiperSlide key={story.id_story}>
                     <div className="content">
-                      <img
+                      <LazyLoadImage
                         src={story.photo}
-                        alt={story.title}
+                        placeholderSrc={Placeholder} 
+                        effect='blur' 
+                        wrapperClassName='placeholder-img'
                       />
                     </div>
                     <p>{story.title}</p>

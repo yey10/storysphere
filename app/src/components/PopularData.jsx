@@ -1,4 +1,6 @@
 import React from 'react'
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import Placeholder from '../assets/img/logo.jpeg';
 
 const PopularData = ({ ranks }) => {
   return (
@@ -6,7 +8,7 @@ const PopularData = ({ ranks }) => {
         {ranks.map((rank) => (
             <div key={rank.id} className='popular-storie'>
                 <div><p>RANK #{rank.rank}</p></div>
-                <div><img src={rank.image} alt={rank.title} /></div>
+                <div><LazyLoadImage src={rank.image} placeholderSrc={Placeholder} effect='blur' wrapperClassName='placeholder-img' /></div>
                 <div>
                     <div><p>RANK #{rank.rank}</p></div>
                     <h4 className='title'>{rank.title}</h4>

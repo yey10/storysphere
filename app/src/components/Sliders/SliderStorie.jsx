@@ -38,6 +38,8 @@ import SwiperCore from 'swiper/core';
 SwiperCore.use([ Navigation ]);
 import { Navigation } from 'swiper/modules';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import Placeholder from '../../assets/img/logo.jpeg';
 
 const SliderStorie = () => {
   return (
@@ -71,7 +73,7 @@ const SliderStorie = () => {
             >
                 <SwiperSlide>
                     <div className="content">
-                        <img src={storyImg1} alt="User 1" />
+                        <LazyLoadImage src={storyImg1} placeholderSrc={Placeholder} effect='blur' wrapperClassName='placeholder-img' />
                         <div>
                             <h4>titulo</h4>
                             <button className='buttonLight'><Link to="/stories">Leer más</Link></button> {/** historia por id */}
@@ -81,7 +83,7 @@ const SliderStorie = () => {
         
                 <SwiperSlide>
                     <div className="content">
-                        <img src={storyImg2} alt="User 2" />
+                        <LazyLoadImage src={storyImg2} placeholderSrc={Placeholder} effect='blur' wrapperClassName='placeholder-img' />
                         <div>
                             <h4>titulo</h4>
                             <button className='buttonLight'><Link to="/stories">Leer más</Link></button> {/** historia por id */}
@@ -91,7 +93,7 @@ const SliderStorie = () => {
         
                 <SwiperSlide>
                     <div className="content">
-                        <img src={storyImg21} alt="User 3" />
+                        <LazyLoadImage src={storyImg21} placeholderSrc={Placeholder} effect='blur' wrapperClassName='placeholder-img' />
                         <div>
                             <h4>titulo</h4>
                             <button className='buttonLight'><Link to="/stories">Leer más</Link></button> {/** historia por id */}
@@ -101,7 +103,7 @@ const SliderStorie = () => {
         
                 <SwiperSlide>
                     <div className="content">
-                        <img src={storyImg24} alt="User 4" />
+                        <LazyLoadImage src={storyImg24} placeholderSrc={Placeholder} effect='blur' wrapperClassName='placeholder-img'/>
                         <div>
                             <h4>titulo</h4>
                             <button className='buttonLight'><Link to="/stories">Leer más</Link></button> {/** historia por id */}
@@ -111,7 +113,7 @@ const SliderStorie = () => {
         
                 <SwiperSlide>
                     <div className="content">
-                        <img src={storyImg15} alt="User 5" />
+                        <LazyLoadImage src={storyImg15} placeholderSrc={Placeholder} effect='blur' wrapperClassName='placeholder-img' />
                         <div>
                             <h4>titulo</h4>
                             <button className='buttonLight'><Link to="/stories">Leer más</Link></button> {/** historia por id */}
@@ -121,7 +123,7 @@ const SliderStorie = () => {
         
                 <SwiperSlide className="swiper-no-swiping">
                     <div className="content">
-                        <img src={storyImg6} alt="User 6" />
+                        <LazyLoadImage src={storyImg6} placeholderSrc={Placeholder} effect='blur' wrapperClassName='placeholder-img' />
                         <div>
                             <h4>titulo</h4>
                             <button className='buttonLight'><Link to="/stories">Leer más</Link></button> {/** historia por id */}
@@ -131,7 +133,7 @@ const SliderStorie = () => {
 
                 <SwiperSlide className="swiper-no-swiping">
                     <div className="content">
-                        <img src={storyImg17} alt="User 7" />
+                        <LazyLoadImage src={storyImg17} placeholderSrc={Placeholder} effect='blur' wrapperClassName='placeholder-img' />
                         <div>
                             <h4>titulo</h4>
                             <button className='buttonLight'><Link to="/stories">Leer más</Link></button> {/** historia por id */}
@@ -141,7 +143,7 @@ const SliderStorie = () => {
 
                 <SwiperSlide className="swiper-no-swiping">
                     <div className="content">
-                        <img src={storyImg8} alt="User 8" />
+                        <LazyLoadImage src={storyImg8}  placeholderSrc={Placeholder} effect='blur' wrapperClassName='placeholder-img' />
                         <div>
                             <h4>titulo</h4>
                             <button className='buttonLight'><Link to="/stories">Leer más</Link></button> {/** historia por id */}
@@ -151,7 +153,7 @@ const SliderStorie = () => {
 
                 <SwiperSlide className="swiper-no-swiping">
                     <div className="content">
-                        <img src={storyImg11} alt="User 9" />
+                        <LazyLoadImage src={storyImg11} placeholderSrc={Placeholder} effect='blur' wrapperClassName='placeholder-img' />
                         <div>
                             <h4>titulo</h4>
                             <button className='buttonLight'><Link to="/stories">Leer más</Link></button> {/** historia por id */}
@@ -161,7 +163,7 @@ const SliderStorie = () => {
 
                 <SwiperSlide className="swiper-no-swiping">
                     <div className="content">
-                        <img src={storyImg20} alt="User 10" />
+                        <LazyLoadImage src={storyImg20} placeholderSrc={Placeholder} effect='blur' wrapperClassName='placeholder-img' />
                         <div>
                             <h4>titulo</h4>
                             <button className='buttonLight'><Link to="/stories">Leer más</Link></button> {/** historia por id */}
@@ -171,7 +173,7 @@ const SliderStorie = () => {
 
                 <SwiperSlide className="swiper-no-swiping">
                     <div className="content">
-                        <img src={storyImg19} alt="User 11" />
+                        <LazyLoadImage src={storyImg19} placeholderSrc={Placeholder} effect='blur' wrapperClassName='placeholder-img' />
                         <div>
                             <h4>titulo</h4>
                             <button className='buttonLight'><Link to="/stories">Leer más</Link></button> {/** historia por id */}
@@ -181,7 +183,7 @@ const SliderStorie = () => {
 
                 <SwiperSlide className="swiper-no-swiping">
                     <div className="content">
-                        <img src={storyImg29} alt="User 12" />
+                        <LazyLoadImage src={storyImg29} placeholderSrc={Placeholder} effect='blur' wrapperClassName='placeholder-img' />
                         <div>
                             <h4>titulo</h4>
                             <button className='buttonLight'><Link to="/stories">Leer más</Link></button> {/** historia por id */}
@@ -191,7 +193,7 @@ const SliderStorie = () => {
 
                 <SwiperSlide className="swiper-no-swiping">
                     <div className="content">
-                        <img src={storyImg28} alt="User 13" />
+                        <LazyLoadImage src={storyImg28} placeholderSrc={Placeholder} effect='blur' wrapperClassName='placeholder-img' />
                         <div>
                             <h4>titulo</h4>
                             <button className='buttonLight'><Link to="/stories">Leer más</Link></button> {/** historia por id */}
@@ -201,7 +203,7 @@ const SliderStorie = () => {
 
                 <SwiperSlide className="swiper-no-swiping">
                     <div className="content">
-                        <img src={storyImg25} alt="User 14" />
+                        <LazyLoadImage src={storyImg25} placeholderSrc={Placeholder} effect='blur' wrapperClassName='placeholder-img' />
                         <div>
                             <h4>titulo</h4>
                             <button className='buttonLight'><Link to="/stories">Leer más</Link></button> {/** historia por id */}
@@ -211,7 +213,7 @@ const SliderStorie = () => {
 
                 <SwiperSlide className="swiper-no-swiping">
                     <div className="content">
-                        <img src={storyImg3} alt="User 15" />
+                        <LazyLoadImage src={storyImg3} placeholderSrc={Placeholder} effect='blur' wrapperClassName='placeholder-img'/>
                         <div>
                             <h4>titulo</h4>
                             <button className='buttonLight'><Link to="/stories">Leer más</Link></button> {/** historia por id */}
@@ -256,7 +258,7 @@ const SliderStorie = () => {
             >
                 <SwiperSlide>
                     <div className="content">
-                        <img src={storyImg16} alt="User 1" />
+                        <LazyLoadImage src={storyImg16} placeholderSrc={Placeholder} effect='blur' wrapperClassName='placeholder-img' />
                         <div>
                             <h4>titulo</h4>
                             <button className='buttonLight'><Link to="/stories">Leer más</Link></button> {/** historia por id */}
@@ -266,7 +268,7 @@ const SliderStorie = () => {
         
                 <SwiperSlide>
                     <div className="content">
-                        <img src={storyImg4} alt="User 2" />
+                        <LazyLoadImage src={storyImg4} placeholderSrc={Placeholder} effect='blur' wrapperClassName='placeholder-img' />
                         <div>
                             <h4>titulo</h4>
                             <button className='buttonLight'><Link to="/stories">Leer más</Link></button> {/** historia por id */}
@@ -276,7 +278,7 @@ const SliderStorie = () => {
         
                 <SwiperSlide>
                     <div className="content">
-                        <img src={storyImg9} alt="User 3" />
+                        <LazyLoadImage src={storyImg9} placeholderSrc={Placeholder} effect='blur' wrapperClassName='placeholder-img' />
                         <div>
                             <h4>titulo</h4>
                             <button className='buttonLight'><Link to="/stories">Leer más</Link></button> {/** historia por id */}
@@ -286,7 +288,7 @@ const SliderStorie = () => {
         
                 <SwiperSlide>
                     <div className="content">
-                        <img src={storyImg5} alt="User 4" />
+                        <LazyLoadImage src={storyImg5} placeholderSrc={Placeholder} effect='blur' wrapperClassName='placeholder-img' />
                         <div>
                             <h4>titulo</h4>
                             <button className='buttonLight'><Link to="/stories">Leer más</Link></button> {/** historia por id */}
@@ -296,7 +298,7 @@ const SliderStorie = () => {
         
                 <SwiperSlide>
                     <div className="content">
-                        <img src={storyImg10} alt="User 5" />
+                        <LazyLoadImage src={storyImg10} placeholderSrc={Placeholder} effect='blur' wrapperClassName='placeholder-img' />
                         <div>
                             <h4>titulo</h4>
                             <button className='buttonLight'><Link to="/stories">Leer más</Link></button> {/** historia por id */}
@@ -306,7 +308,7 @@ const SliderStorie = () => {
         
                 <SwiperSlide className="swiper-no-swiping">
                     <div className="content">
-                        <img src={storyImg7} alt="User 6" />
+                        <LazyLoadImage src={storyImg7} placeholderSrc={Placeholder} effect='blur' wrapperClassName='placeholder-img' />
                         <div>
                             <h4>titulo</h4>
                             <button className='buttonLight'><Link to="/stories">Leer más</Link></button> {/** historia por id */}
@@ -316,7 +318,7 @@ const SliderStorie = () => {
 
                 <SwiperSlide className="swiper-no-swiping">
                     <div className="content">
-                        <img src={storyImg12} alt="User 7" />
+                        <LazyLoadImage src={storyImg12} placeholderSrc={Placeholder} effect='blur' wrapperClassName='placeholder-img' />
                         <div>
                             <h4>titulo</h4>
                             <button className='buttonLight'><Link to="/stories">Leer más</Link></button> {/** historia por id */}
@@ -326,7 +328,7 @@ const SliderStorie = () => {
 
                 <SwiperSlide className="swiper-no-swiping">
                     <div className="content">
-                        <img src={storyImg18} alt="User 8" />
+                        <LazyLoadImage src={storyImg18} placeholderSrc={Placeholder} effect='blur' wrapperClassName='placeholder-img' />
                         <div>
                             <h4>titulo</h4>
                             <button className='buttonLight'><Link to="/stories">Leer más</Link></button> {/** historia por id */}
@@ -336,7 +338,7 @@ const SliderStorie = () => {
 
                 <SwiperSlide className="swiper-no-swiping">
                     <div className="content">
-                        <img src={storyImg22} alt="User 9" />
+                        <LazyLoadImage src={storyImg22} placeholderSrc={Placeholder} effect='blur' wrapperClassName='placeholder-img' />
                         <div>
                             <h4>titulo</h4>
                             <button className='buttonLight'><Link to="/stories">Leer más</Link></button> {/** historia por id */}
@@ -346,7 +348,7 @@ const SliderStorie = () => {
 
                 <SwiperSlide className="swiper-no-swiping">
                     <div className="content">
-                        <img src={storyImg14} alt="User 10" />
+                        <LazyLoadImage src={storyImg14} placeholderSrc={Placeholder} effect='blur' wrapperClassName='placeholder-img' />
                         <div>
                             <h4>titulo</h4>
                             <button className='buttonLight'><Link to="/stories">Leer más</Link></button> {/** historia por id */}
@@ -356,7 +358,7 @@ const SliderStorie = () => {
 
                 <SwiperSlide className="swiper-no-swiping">
                     <div className="content">
-                        <img src={storyImg23} alt="User 11" />
+                        <LazyLoadImage src={storyImg23} placeholderSrc={Placeholder} effect='blur' wrapperClassName='placeholder-img' />
                         <div>
                             <h4>titulo</h4>
                             <button className='buttonLight'><Link to="/stories">Leer más</Link></button> {/** historia por id */}
@@ -366,7 +368,7 @@ const SliderStorie = () => {
 
                 <SwiperSlide className="swiper-no-swiping">
                     <div className="content">
-                        <img src={storyImg13} alt="User 12" />
+                        <LazyLoadImage src={storyImg13} placeholderSrc={Placeholder} effect='blur' wrapperClassName='placeholder-img' />
                         <div>
                             <h4>titulo</h4>
                             <button className='buttonLight'><Link to="/stories">Leer más</Link></button> {/** historia por id */}
@@ -376,7 +378,7 @@ const SliderStorie = () => {
 
                 <SwiperSlide className="swiper-no-swiping">
                     <div className="content">
-                        <img src={storyImg30} alt="User 13" />
+                        <LazyLoadImage src={storyImg30} placeholderSrc={Placeholder} effect='blur' wrapperClassName='placeholder-img' />
                         <div>
                             <h4>titulo</h4>
                             <button className='buttonLight'><Link to="/stories">Leer más</Link></button> {/** historia por id */}
@@ -386,7 +388,7 @@ const SliderStorie = () => {
 
                 <SwiperSlide className="swiper-no-swiping">
                     <div className="content">
-                        <img src={storyImg26} alt="User 14" />
+                        <LazyLoadImage src={storyImg26} placeholderSrc={Placeholder} effect='blur' wrapperClassName='placeholder-img' />
                         <div>
                             <h4>titulo</h4>
                             <button className='buttonLight'><Link to="/stories">Leer más</Link></button> {/** historia por id */}
@@ -396,7 +398,7 @@ const SliderStorie = () => {
 
                 <SwiperSlide className="swiper-no-swiping">
                     <div className="content">
-                        <img src={storyImg27} alt="User 15" />
+                        <LazyLoadImage src={storyImg27} placeholderSrc={Placeholder} effect='blur' wrapperClassName='placeholder-img' />
                         <div>
                             <h4>titulo</h4>
                             <button className='buttonLight'><Link to="/stories">Leer más</Link></button> {/** historia por id */}
