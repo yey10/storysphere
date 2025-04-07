@@ -1,76 +1,73 @@
 import axios from './api.js';
 
-export const getAllStories = async () =>{
+const handleError = (error) => {
+    throw error.response ? error.response.data : error;
+};
+
+export const getAllStories = async () => {
     try {
         const response = await axios.get('/stories');
         return response.data;
     } catch (error) {
-        throw error.response ? error.response.data : error;
+        handleError(error);
     }
 };
 
-export const getStoryById = async (id) =>{
+export const getStoryById = async (id) => {
     try {
         const response = await axios.get(`/stories/${id}`);
         return response.data;
     } catch (error) {
-        throw error.response ? error.response.data : error;
+        handleError(error);
     }
 };
 
-export const createStory = async (storyData) =>{
-    try{
+export const createStory = async (storyData) => {
+    try {
         const response = await axios.post('/stories', storyData, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
+            headers: { 'Content-Type': 'multipart/form-data' },
         });
         return response.data;
-    }catch (error) {
-        throw error.response ? error.response.data : error;
+    } catch (error) {
+        handleError(error);
     }
 };
 
-export const updateStory = async (id, storyData) =>{
+export const updateStory = async (id, storyData) => {
     try {
         const response = await axios.put(`/stories/${id}`, storyData, {
-            headers: {
-              'Content-Type': 'Content-Type": "application/json',
-            },
-          });
-          console.log("Respuesta de updateStory:", response.data);
+            headers: { 'Content-Type': 'application/json' },
+        });
         return response.data.story;
     } catch (error) {
-        throw error.response ? error.response.data : error;
+        handleError(error);
     }
 };
 
-export const deleteStory = async (id) =>{
+export const deleteStory = async (id) => {
     try {
         const response = await axios.delete(`/stories/${id}`);
         return response.data;
     } catch (error) {
-        throw error.response ? error.response.data : error;
+        handleError(error);
     }
-}
+};
 
 export const getCategories = async () => {
     try {
         const response = await axios.get('/stories/categories');
         return response.data;
     } catch (error) {
-        console.error('Error fetching categories:', error);
-        throw error.response ? error.response.data : error;
+        handleError(error);
     }
 };
 
 export const getUserStories = async (userId) => {
     try {
         const response = await axios.get(`/users/${userId}/stories`);
-        return response.data.stories; 
+        return response.data.stories;
     } catch (error) {
-        console.error('❌ Error fetching user stories:', error);
-        throw error.response ? error.response.data : error;
+        handleError(error);
     }
 };
 
@@ -79,6 +76,6 @@ export const updateStoryStatus = async (id, data) => {
         const response = await axios.put(`/stories/${id}/status`, data);
         return response.data;
     } catch (error) {
-        throw error.response ? error.response.data : error;
+        handleError(error);
     }
-}
+};

@@ -17,57 +17,59 @@ class RatingController extends Controller
         $this->ratingService = $ratingService;
     }
 
-
-    public function getUserRating($id_story)
+    public function getUserRating(Request $request, $id_story): JsonResponse
     {
-        $rating = $this->ratingService->getUserRating($id_story);
-        return response()->json([
-            'data' => $rating
-        ]);
+        $userId = $request->user()->id_user;
+
+        try {
+            $rating = $this->ratingService->getUserRating($userId, $id_story);
+            return response()->json(['data' => $rating], 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Error al obtener la calificación del usuario: ' . $e->getMessage()], 500);
+        }
     }
 
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse
     {
         $request->validate([
             'id_story' => 'required|exists:stories,id_story',
             'rating' => 'required|numeric|min:1|max:5',
         ]);
 
-        $user = Auth::user();
-
-        try{
-            $rating = $this->ratingService->addOrUpdateRating($user->id_user, $request->id_story, $request->rating);
-            return response()->json(['message' => 'calificación guardada', 'data' => $rating], 201);
-        }catch(\Exception $e){
-            return response()->json(['error' => 'Error al guardar la calificación:'. $e->getMessage()], 500);
-        }
-    }
-
-    public function getAverageRating($id_story)
-    {
-        try{
-            $average = $this->ratingService->getAverageRating($id_story);
-            return response()->json(['message' => 'calificación promedio', 'data' => $average], 200);
-        }catch(\Exception $e){
-            return response()->json(['error' => 'Error al obtener la calificación promedio:'. $e->getMessage()], 500);
-        }
-    }
-
-    public function destroy($id_story)
-    {
-        $user = Auth::user();
+        $userId = $request->user()->id_user;
 
         try {
-            $deleted = $this->ratingService->deleteRating($user->id_user, $id_story);
-
-            if (!$deleted) {
-                return response()->json(['message' => 'No se encontró la calificación'], 404);
-            }
-
-            return response()->json(['message' => 'calificación eliminada', 'data' => $deleted], 200);
+            $rating = $this->ratingService->addOrUpdateRating($userId, $request->id_story, $request->rating);
+            return response()->json(['message' => 'Calificación guardada.', 'data' => $rating], 201);
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Error al eliminar la calificación:'. $e->getMessage()], 500);
+            return response()->json(['error' => 'Error al guardar la calificación: ' . $e->getMessage()], 500);
         }
     }
-   
+
+    public function getAverageRating($id_story): JsonResponse
+    {
+        try {
+            $average = $this->ratingService->getAverageRating($id_story);
+            return response()->json(['message' => 'Calificación promedio.', 'data' => $average], 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Error al obtener la calificación promedio: ' . $e->getMessage()], 500);
+        }
+    }
+
+    public function destroy(Request $request, $id_story): JsonResponse
+    {
+        $userId = $request->user()->id_user;
+
+        try {
+            $deleted = $this->ratingService->deleteRating($userId, $id_story);
+
+            if (!$deleted) {
+                return response()->json(['message' => 'No se encontró la calificación.'], 404);
+            }
+
+            return response()->json(['message' => 'Calificación eliminada.'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Error al eliminar la calificación: ' . $e->getMessage()], 500);
+        }
+    }
 }

@@ -8,49 +8,62 @@ use Cloudinary\Api\Upload\UploadApi;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class StoryService
 {
     public function getAllStories()
     {
-        $stories = Story::with('user', 'categories')->get();
-        return $stories;
+        return Story::with([
+            'user:id_user,name',
+            'categories:id_category,category_name'
+        ])
+        ->select('id_story', 'title', 'sinopsis', 'photo', 'state', 'id_user')
+        ->latest('id_story')
+        ->get();
+    }
+
+    public function getStorySummaries($limit = 10)
+    {
+        return Story::with('user:id_user,name')
+            ->select('id_story', 'title', 'sinopsis', 'photo', 'id_user')
+            ->latest('id_story')
+            ->limit($limit)
+            ->get();
     }
 
     public function createStory($data)
     {
-        $user = Auth::user(); 
+        $user = Auth::user();
         if (!$user) {
             throw new \Exception('Debes estar autenticado para crear una historia');
         }
 
-        $photo = isset($data['photo']) ? $this->uploadStoryPhoto($data['photo']) : null;
+        return DB::transaction(function () use ($data, $user) {
+            $photo = isset($data['photo']) ? $this->uploadStoryPhoto($data['photo']) : null;
 
-        $story = Story::create([
-            'title' => $data['title'],
-            'content' => $data['content'],
-            'sinopsis' => $data['sinopsis'],
-            'photo' => $photo,
-            'state' => $data['state'],
-            'id_user' => $user->id_user,
-        ]);
+            $story = Story::create([
+                'title' => $data['title'],
+                'content' => $data['content'],
+                'sinopsis' => $data['sinopsis'],
+                'photo' => $photo,
+                'state' => $data['state'],
+                'id_user' => $user->id_user,
+            ]);
 
-        $story->categories()->sync($data['categories']);
-        return $story;
+            $story->categories()->sync($data['categories'] ?? []);
 
+            return $story->load('user:id_user,name', 'categories:id_category,name');
+        });
     }
 
     public function getById($id)
     {
-        $story = Story::with('user', 'categories')->findOrFail($id);
-
-        
-        if ($story->photo && !Str::startsWith($story->photo, ['http', 'https'])) {
-            $story->photo = url(Storage::url($story->photo)); 
-        }
-    
-        return $story;
+        return Story::with([
+            'user:id_user,name',
+            'categories:id_category,category_name'
+        ])->findOrFail($id);
     }
 
     public function updateStory(Story $story, $data)
@@ -59,11 +72,11 @@ class StoryService
 
         if (isset($data['categories'])) {
             $story->categories()->sync($data['categories']);
-        }else{
+        } else {
             $story->categories()->detach();
         }
 
-        return $story;
+        return $story->load('user:id_user,name', 'categories:id_category,name');
     }
 
     public function updateStoryStatus($admin, $id, $data)
@@ -74,49 +87,78 @@ class StoryService
             throw new \Exception('No tienes permiso para actualizar el estado de los usuarios');
         }
 
-        $story = Story::findOrFail($id);
         $validator = Validator::make($data, [
             'state' => 'required|in:active,inactive',
         ]);
+
         if ($validator->fails()) {
             throw new \Illuminate\Validation\ValidationException($validator);
         }
-        $story->update(['state' => $validator->validated()['state']]);
-        return $story;
 
+        $story = Story::findOrFail($id);
+        $story->update(['state' => $validator->validated()['state']]);
+
+        return $story;
     }
 
     public function deleteStory(Story $story)
     {
+        // Opcional: eliminar imagen local si la tienes guardada en disco
+        if ($story->photo && !Str::startsWith($story->photo, ['http', 'https'])) {
+            Storage::delete($story->photo);
+        }
+
+        // Opcional: eliminar imagen de Cloudinary si quieres
+        // $this->deleteFromCloudinary($story->photo);
+
         $story->delete();
         return $story;
     }
 
     public function getUserStories(User $user)
     {
-        return $user->stories()->with('categories')->get();
+        return $user->stories()
+            ->select('id_story', 'title', 'sinopsis', 'photo', 'state')
+            ->with('categories:id_category,name')
+            ->latest('id_story')
+            ->get();
     }
 
     public function getStoryOwner($id)
     {
-        $story = Story::with('user')->findOrFail($id);
+        $story = Story::with('user:id_user,name')->findOrFail($id);
         return $story->user;
     }
 
     private function uploadStoryPhoto($file): ?string
     {
-    // Si la imagen ya es una URL, devolverla directamente
-    if (is_string($file) && Str::startsWith($file, ['http', 'https'])) {
-        return $file;
+        if (is_string($file) && Str::startsWith($file, ['http', 'https'])) {
+            return $file;
+        }
+
+        if ($file instanceof \Illuminate\Http\UploadedFile && $file->isValid()) {
+            $cloudinary = new UploadApi();
+            $uploaded = $cloudinary->upload($file->getRealPath(), ['folder' => 'stories_photos']);
+            return $uploaded['secure_url'] ?? null;
+        }
+
+        return null;
     }
 
-    // Si es un archivo subido, procesarlo en Cloudinary
-    if ($file instanceof \Illuminate\Http\UploadedFile && $file->isValid()) {
-        $cloudinary = new UploadApi();
-        $uploaded = $cloudinary->upload($file->getRealPath(), ['folder' => 'stories_photos']);
-        return $uploaded['secure_url'] ?? null;
+    // (Opcional) Si deseas borrar también la imagen en Cloudinary
+    /*
+    private function deleteFromCloudinary(string $url)
+    {
+        $publicId = $this->extractPublicIdFromCloudinaryUrl($url);
+        if ($publicId) {
+            (new UploadApi())->destroy($publicId);
+        }
     }
 
-    return null; // Si no es ni un archivo válido ni una URL, retorna null
+    private function extractPublicIdFromCloudinaryUrl(string $url): ?string
+    {
+        // lógica para extraer el public_id desde la URL si necesitas borrarla
+        return null;
     }
+    */
 }

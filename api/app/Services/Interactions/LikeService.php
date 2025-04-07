@@ -8,46 +8,45 @@ class LikeService
 {
     public function toggleInteraction($idUser, $idStory, $type)
     {
-        // Verificar si ya existe el like
-        $existingInteraction = Like::where('id_user', $idUser)
-            ->where('id_story', $idStory)
-            ->first();
-
-        
-            if ($existingInteraction) {
-                if ($existingInteraction->interaction_type === $type) {
-                    // Si el usuario ya tiene esta interacción, eliminarla
-                    $existingInteraction->delete();
-                    return ['status' => 'removed', 'message' => ucfirst($type) . ' removed'];
-                }
-    
-                if ($existingInteraction->interaction_type === 'like' && $type === 'favorite' ||
-                    $existingInteraction->interaction_type === 'favorite' && $type === 'like') {
-                    // Si tiene una interacción y se agrega la otra, cambiar a "both"
-                    $existingInteraction->update(['interaction_type' => 'both']);
-                    return ['status' => 'updated', 'message' => 'Now both Like and Favorite'];
-                }
-    
-                // Si ya tiene "both" y quiere cambiarlo a solo un tipo de interacción
-                $existingInteraction->update(['interaction_type' => $type]);
-                return ['status' => 'updated', 'message' => ucfirst($type) . ' updated'];
-            }
-
-        Like::create([
+        $interaction = Like::firstOrNew([
             'id_user' => $idUser,
-            'id_story' => $idStory,
-            'interaction_type' => $type
+            'id_story' => $idStory
         ]);
 
-        return ['status' => 'added', 'message' => ucfirst($type) . ' added'];
+        if ($interaction->exists) {
+            // Si ya tiene la misma interacción => eliminarla
+            if ($interaction->interaction_type === $type) {
+                $interaction->delete();
+                return ['status' => 'removed', 'message' => "$type removed"];
+            }
 
+            // Si tiene like y quiere favorite, o viceversa => both
+            if (
+                in_array($interaction->interaction_type, ['like', 'favorite']) &&
+                $interaction->interaction_type !== $type
+            ) {
+                $interaction->interaction_type = 'both';
+                $interaction->save();
+                return ['status' => 'updated', 'message' => 'Now both like and favorite'];
+            }
+
+            // Si tiene both y quiere cambiarlo a solo uno
+            $interaction->interaction_type = $type;
+            $interaction->save();
+            return ['status' => 'updated', 'message' => "$type updated"];
+        }
+
+        // Si no existía, creamos una nueva
+        $interaction->interaction_type = $type;
+        $interaction->save();
+
+        return ['status' => 'added', 'message' => "$type added"];
     }
 
     public function getStoryInteractions($idStory)
     {
-        return Like::where('id_story', $idStory)->get();
+        return Like::select('id_user', 'interaction_type')
+            ->where('id_story', $idStory)
+            ->get();
     }
 }
-
-
-

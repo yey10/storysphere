@@ -3,22 +3,15 @@
 namespace App\Services\Interactions;
 
 use App\Models\Rating;
-use Illuminate\Support\Facades\Auth;
 
 class RatingService
 {
-
-
-    public function getUserRating($storyId)
+    public function getUserRating($userId, $storyId)
     {
-        $userId = Auth::id();
-        $rating = Rating::where('id_user', $userId)
-                        ->where('id_story', $storyId)
-                        ->first();    
-        return $rating ? $rating->rating : null;
+        return Rating::where('id_user', $userId)
+                     ->where('id_story', $storyId)
+                     ->value('rating'); // Solo trae el valor directamente
     }
-
-
 
     public function addOrUpdateRating($userId, $storyId, $ratingValue)
     {
@@ -30,17 +23,14 @@ class RatingService
 
     public function getAverageRating($storyId)
     {
-        return round(Rating::where('id_story', $storyId)->avg('rating'), 2);
+        $avg = Rating::where('id_story', $storyId)->avg('rating');
+        return $avg ? round($avg, 2) : null;
     }
 
     public function deleteRating($userId, $storyId)
     {
-        return Rating::where('id_user', $userId)->where('id_story', $storyId)->delete();
+        return Rating::where('id_user', $userId)
+                     ->where('id_story', $storyId)
+                     ->delete();
     }
-
-
-
-
-
-
 }

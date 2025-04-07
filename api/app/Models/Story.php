@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 use App\Models\User;
 use App\Models\Comment;
 use App\Models\Category;
@@ -29,6 +31,19 @@ class Story extends Model
         'content' => 'string',
     ];
     
+
+    
+
+    public function getPhotoAttribute($value)
+    {
+        
+        if (Str::startsWith($value, ['http', 'https'])) {
+            return $value;
+        }
+
+        
+        return url(Storage::url($value));
+    }
 
     public function user()
     {
